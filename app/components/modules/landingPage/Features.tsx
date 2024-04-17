@@ -11,14 +11,13 @@ const Features = () => {
                 <h1 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center'>Efficiency Unleashed: Explore Our Tools</h1>
                 <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center'>Explore the robust features of CHKR designed to streamline employee check-ins, task assignments, and management with ease and efficiency.</p>
             </div>
-            <div className='grid lg:grid-cols-2 md:grid-cols-1 xl:mx-24 md:mx-10 mt-20 md:gap-6'>
-                <div style={{ position: 'relative', backgroundImage: 'linear-gradient(to right, #FF2600, #FBEB97)' }} className="w-[85%] h-full rounded-tr-[12rem] rounded-bl-[12rem] overflow-hidden">
-                    <div className=" w-[14rem] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className='grid lg:grid-cols-2 md:grid-cols-1 xl:mx-24 md:mx-10 mt-20 md:gap-6 lg:gap-14'>
+                <div style={{ backgroundImage: 'linear-gradient(to right, #FF2600, #FBEB97)' }} className="xl:w-[90%] lg:w-[95%] h-full rounded-tr-[12rem] rounded-bl-[12rem] overflow-visible">
+                    <div className="relative xl:w-[420px] lg:w-[300px] border border-white border-4 rounded-xl top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <Image src={featuresImg} alt="Center Image" />
-                    </div>
-                    {/* Image starting from center and extending outwards to the right */}
-                    <div className="absolute w-[30rem] top-1/2 left-1/2 transform -translate-y-1/2">
-                        <Image src={featuresImg} alt="Right Image" />
+                        <div className="absolute xl:w-[500px] lg:w-[360px] border border-white border-4 rounded-xl top-full left-[16%] transform -translate-y-1/2">
+                            <Image src={featuresImg1} alt="Right Image" />
+                        </div>
                     </div>
                 </div>
 
