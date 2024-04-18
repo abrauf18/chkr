@@ -5,7 +5,7 @@ import PlanCard from './PlanCard';
 const Subscriptions = () => {
     return (
         <div>
-            <div className='flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-20'>
+            <div className='flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-32'>
                 <h1 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center'>Our Subscriptions</h1>
                 <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center'>Empower your business with seamless employee management and tracking.</p>
                 <div className="flex gap-2 bg-gray-200	mb-4 p-2  rounded-3xl">
