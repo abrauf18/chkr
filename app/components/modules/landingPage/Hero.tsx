@@ -1,12 +1,18 @@
 import React from 'react';
 import { Button } from "@/app/components/ui/button";
+import bg from "@/app/assets/images/background.png";
 import Image from 'next/image';
 import heroImage from '@/app/assets/images/HeroImg.png';
 
 const Hero = () => {
     return (
         <div className='relative h-full'>
-            <div className="h-screen w-screen md:w-full sm:w-full bg-black rounded-2xl overflow-hidden">
+            <div className="h-screen w-screen md:w-full sm:w-full bg-black rounded-2xl overflow-hidden"
+                style={{
+                    backgroundImage: `url(${bg.src})`,
+                    backgroundSize: 'cover',
+                    height: '500px',
+                }}>
                 {/* Hero content */}
                 <div className="flex flex-col  text-center items-center h-full mt-20 gap-10">
                     <h1 className="xl:font-normal xl:text-5xl md:text-5xl md:font-extralight uppercase text-white text-xl font-bold">
