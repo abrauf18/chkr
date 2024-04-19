@@ -36,7 +36,7 @@ const Testimonials = () => {
                             <Image src={user} alt="user icon" className='h-14 w-14' />
                         </div>
                     </div>
-                    <div className='md:w-[40%] xl:w-[75%] xl:h-[20rem]  bg-white rounded-2xl p-8 md:ml-40 xl:ml-[10rem] xl:mt-20 md:mt-[35rem]' >
+                    <div className='md:w-[40%] xl:w-[75%] xl:h-[20rem]  bg-white rounded-2xl p-8 md:ml-40 xl:ml-[10rem] xl:mt-20 md:mt-[5rem]' >
                         <p className='font-normal text-2xl'>“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”</p>
                         <div className='flex mt-4 justify-between items-center'>
                             <div >

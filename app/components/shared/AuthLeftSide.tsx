@@ -7,12 +7,14 @@ interface AuthLeftSideProps {
   heading1: string;
   heading2: string;
   heading3: string;
+  url: any;
 }
 
 const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
   heading1,
   heading2,
   heading3,
+  url,
 }) => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -37,8 +39,8 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
       </div>
       <Image
         className="rounded-2xl mt-20 hidden xl:block"
-        src={authImg}
-        alt="login Page banner "
+        src={url}
+        alt="auth Page banner "
         layout="responsive"
         width={800}
         height={500}
