@@ -8,7 +8,7 @@ import AboutUsImg1 from "@/app/assets/images/AboutUsImg1.png"
 const AboutUs = () => {
   return (
     <div>
-      <div className='flex flex-col w-1/2 md:w-3/4 xl:mx-24 md:mx-10 justify-start gap-4 border border-red'>
+      <div className='flex flex-col w-1/2 md:w-3/4 xl:mx-24 md:mx-10 justify-start gap-4'>
         <h2 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl'>Why Choose Us <br />
           for best service experience</h2>
         <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium'>We're dedicated to revolutionizing how businesses handle home service tasks and employee check-ins. Our team brings expertise in software development, data analytics, and customer service to create a seamless solution for tracking activities and managing schedules</p>
