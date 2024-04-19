@@ -45,6 +45,7 @@ const Subscriptions = () => {
                     buttonText="Buy Yearly Subscription plan"
                 />
             </div>
+
         </div>
     )
 }
