@@ -6,7 +6,7 @@ import Link from "next/link";
 const LandingPageNavbar: React.FC = () => {
   return (
     <div className="flex justify-center items-center w-full">
-      <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">
+      <nav className="w-[95%] flex  md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">
         {/* Left side content */}
         <div className="flex items-center text-black">
           <Image
@@ -17,19 +17,19 @@ const LandingPageNavbar: React.FC = () => {
             priority
           />
           <div className="flex gap-10 ml-4">
-            <a href="#" className="text-lg">
+            <a href="#" className="md:text-lg sm:text-base">
               Home
             </a>
-            <a href="#" className="text-lg">
+            <a href="#" className="md:text-lg sm:text-base">
               <span>AboutUs</span>
             </a>
-            <a href="#" className="text-lg">
+            <a href="#" className="md:text-lg sm:text-base">
               Features
             </a>
-            <a href="#" className="text-lg">
+            <a href="#" className="md:text-lg sm:text-base">
               Testimonials
             </a>
-            <a href="#" className="text-lg">
+            <a href="#" className="md:text-lg sm:text-base">
               Subscription
             </a>
           </div>

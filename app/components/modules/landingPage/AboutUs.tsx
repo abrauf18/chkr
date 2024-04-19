@@ -40,13 +40,13 @@ const AboutUs = () => {
       <div className='flex mt-20 md:mx-10 xl:mx-24 gap-4'>
         <Image
           src={AboutUsImg}
-          alt="AboutIcon"
-          className="lg:w-2/3"
+          alt="About"
+          className="w-2/3"
         />
         <Image
           src={AboutUsImg1}
-          alt="AboutIcon"
-          className="md:w-1/3"
+          alt="About"
+          className="w-1/3"
         />
       </div>
     </div>

@@ -14,22 +14,22 @@ const Partners = () => {
             <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center text-gray-400'>Trusted by top industry partners for seamless employee management.</p>
             <div className='flex gap-x-8'>
                 <Image src={icon1} alt="Partner 1"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
                 <Image src={icon2} alt="Partner 2"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
                 <Image src={icon3} alt="Partner 3"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
                 <Image src={icon4} alt="Partner 4"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
                 <Image src={icon5} alt="Partner 5"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
                 <Image src={icon6} alt="Partner 6"
-                    className="xl:w-[9rem] xl:h-[9rem] md:w-[7rem] md:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
+                    className="xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] sm:w-[5rem] sm:h-[5rem] w-[1rem] h-[1rem]"
                 />
             </div>
         </div>
