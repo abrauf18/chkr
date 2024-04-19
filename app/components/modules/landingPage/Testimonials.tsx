@@ -1,17 +1,21 @@
 import React from 'react'
 import bg from "@/app/assets/images/Testimonials.svg";
-import { Button } from "@/app/components/ui/button";
 import Image from 'next/image';
 import user from "@/app/assets/icons/testUser.svg";
 import user1 from "@/app/assets/icons/testUser1.svg";
-import dots from "@/app/assets/icons/dots.svg";
-import star from "@/app/assets/icons/stars.svg";
 import TestimonialsCard from './TestimonialsCard';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/app/components/ui/carousel"
 
 const Testimonials = () => {
     return (
 
-        <div className=" mt-10 mx-10 rounded-2xl border border-black ">
+        <div className=" mt-10 mx-10 rounded-2xl h-full ">
             <div
                 className="bg-no-repeat h-screen bg-cover flex flex-col items-center  py-10 "
                 style={{
@@ -28,15 +32,32 @@ const Testimonials = () => {
                         satisfied customers.
                     </p>
                 </div>
-                <TestimonialsCard
-                    review="CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability."
-                    authorName="Emiley Johnson"
-                    companyName="ABC company"
-                />
 
-                <div className='mt-[10rem] '>
-                    <Image src={dots} alt="user icon" className='h-16 w-16' />
-                </div>
+                <Carousel className="w-3/4">
+                    <CarouselContent>
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <CarouselItem key={index}>
+                                <div className="p-1">
+                                    <TestimonialsCard
+                                        review="CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability."
+                                        authorName="Emiley Johnson"
+                                        companyName="ABC company"
+                                    />
+                                    <div className='ml-[20rem]'>
+                                        <TestimonialsCard
+                                            review="CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability."
+                                            authorName="Emiley Johnson"
+                                            companyName="ABC company"
+                                        />
+                                    </div>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                </Carousel>
+
             </div>
         </div >
 
