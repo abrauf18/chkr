@@ -4,8 +4,7 @@ import bg from "@/app/assets/images/background.png";
 import img1 from "@/app/assets/images/jobs.svg";
 import img2 from "@/app/assets/images/Dashboard.svg";
 import img3 from "@/app/assets/images/feedback.svg";
-import Pros from "./Pros"
-
+import Pros from "./Pros";
 
 const Benefits = () => {
   return (
@@ -52,7 +51,6 @@ const Benefits = () => {
             className="object-contain w-full md:h-1/2 lg:h-[70%] self-end hidden sm:block"
           />
         </div>
-
       </div>
       <Pros />
     </div>
