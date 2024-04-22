@@ -8,15 +8,15 @@ import { Button } from "@/app/components/ui/button";
 const Footer = () => {
     return (
         <div className=" mb-20">
-            <div className="flex flex-col md:w-full mt-6 w-screen justify-center bg-cover bg-no-repeat md:bg-center"
+            <div className="flex flex-col w-full h-full  md:mt-6 w-screen justify-center bg-cover bg-no-repeat md:bg-center"
                 style={{
                     backgroundImage: `url(${bg.src})`,
                     backgroundSize: 'cover',
-                    height: '500px',
-                    overflow: 'hidden', // Hide overflow content
+                    // height: '500px',
+                    overflow: 'hidden',
                 }}
             >
-                <nav className="w-[95%] flex  md:items-center justify-between md:flex-wrap  md:mx-10 mx-4 my-6 py-2 px-10 rounded-3xl">
+                <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap md:mx-10 mx-4 my-6 md:py-2 md:px-10 rounded-3xl">
                     {/* Left side content */}
                     <div className="flex items-center ">
                         <Image
@@ -31,20 +31,20 @@ const Footer = () => {
 
                     {/* Right side content */}
                     < div className="flex items-center" >
-                        <div className="flex gap-10 ml-4 text-white">
-                            <a href="#" className="md:text-lg sm:text-base">
+                        <div className="flex gap-2 md:gap-10 ml-4 text-white">
+                            <a href="#" className="md:text-lg text-xs">
                                 Home
                             </a>
-                            <a href="#" className="md:text-lg sm:text-base">
+                            <a href="#" className="md:text-lg text-xs">
                                 <span>AboutUs</span>
                             </a>
-                            <a href="#" className="md:text-lg sm:text-base">
+                            <a href="#" className="md:text-lg text-xs">
                                 Features
                             </a>
-                            <a href="#" className="md:text-lg sm:text-base">
+                            <a href="#" className="md:text-lg text-xs">
                                 Testimonials
                             </a>
-                            <a href="#" className="md:text-lg sm:text-base">
+                            <a href="#" className="md:text-lg text-xs ">
                                 Subscription
                             </a>
                         </div>
@@ -52,7 +52,7 @@ const Footer = () => {
                 </nav >
                 <div className='flex flex-col xl:mx-24 lg:py-10 md:mx-16 items-center gap-4 text-white'>
                     <div className="h-[1px] w-full bg-white rounded-full my-4"></div>
-                    <h1 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-[40px] lg:px-20 xl:px-40 lg:leading-[50px] xl:leading-[60px] uppercase text-center'>Revolutionizing Workforce Management, One Click at a Time; WITH CHKR</h1>
+                    <h1 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-[40px] text-[15px] lg:px-20 xl:px-40 lg:leading-[50px] xl:leading-[60px] uppercase text-center'>Revolutionizing Workforce Management, One Click at a Time; WITH CHKR</h1>
                     <div className="flex gap-2 mt-6 ">
                         <Button className="w-[136px] py-6 border border-white hover:border-primary text-white bg-transparent hover:bg-primary hover:text-black rounded-3xl">
                             Sign in

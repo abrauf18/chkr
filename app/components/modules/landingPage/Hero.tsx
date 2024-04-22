@@ -6,8 +6,8 @@ import heroImage from '@/app/assets/images/HeroBanner.svg';
 
 const Hero = () => {
     return (
-        <div className='relative h-full mb-[28rem]'>
-            <div className="h-screen w-screen md:w-full sm:w-full bg-black rounded-2xl overflow-hidden"
+        <div className='relative md:h-full mb-28 md:mb-[28rem] lg:mb-[32rem] '>
+            <div className="h-[35rem]  md:h-[150%] w-screen md:w-full sm:w-full bg-black rounded-2xl overflow-hidden"
                 style={{
                     backgroundImage: `url(${bg.src})`,
                     backgroundSize: 'cover',
@@ -32,7 +32,7 @@ const Hero = () => {
                 </div>
 
                 {/* Hero image */}
-                <div className="absolute w-3/4 md:w-[70%] xl:top-[110%] lg:top-[105%] md:top-[95%] top-[85%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
+                <div className="absolute w-3/4 md:w-[70%] xl:top-[110%] lg:top-[160%] md:top-[150%] top-[95%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
                     <Image src={heroImage} alt="Hero Image" width={800} height={600} />
                 </div>
             </div>

@@ -8,12 +8,12 @@ import AboutUsImg1 from "@/app/assets/images/AboutUsImg1.png"
 const AboutUs = () => {
   return (
     <div className='bg-white pt-10'>
-      <div className='flex flex-col w-1/2 md:w-3/4 xl:mx-24 md:mx-10 justify-start gap-4'>
-        <h2 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl'>Why Choose Us <br />
+      <div className='flex flex-col w-1/2 md:w-3/4 xl:mx-24 mx-4 md:mx-10 justify-start gap-4'>
+        <h2 className='xl:font-semibold xl:text-4xl font-semibold md:text-3xl'>Why Choose Us <br />
           for best service experience</h2>
-        <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium'>We're dedicated to revolutionizing how businesses handle home service tasks and employee check-ins. Our team brings expertise in software development, data analytics, and customer service to create a seamless solution for tracking activities and managing schedules</p>
+        <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium text-sm'>We're dedicated to revolutionizing how businesses handle home service tasks and employee check-ins. Our team brings expertise in software development, data analytics, and customer service to create a seamless solution for tracking activities and managing schedules</p>
       </div>
-      <div className='grid lg:grid-cols-2 md:grid-cols-1 xl:mx-24 md:mx-10 mt-20 md:gap-6'>
+      <div className='grid lg:grid-cols-2 md:grid-cols-1 xl:mx-24 md:mx-10 mx-4 mt-20 gap-6'>
         <div className='flex md:w-[80%]'>
           <Image
             src={AboutIcon}
@@ -22,7 +22,7 @@ const AboutUs = () => {
           />
           <div className='flex flex-col md:ml-4'>
             <h2 className='xl:text-3xl md:text-2xl md:font-bold'>Our Mission</h2>
-            <p className='xl:text-2xl md:text-lg mt-2'>Revolutionizing home service task management and employee check-ins for streamlined operations and enhanced productivity.</p>
+            <p className='xl:text-2xl text-sm md:text-lg mt-2'>Revolutionizing home service task management and employee check-ins for streamlined operations and enhanced productivity.</p>
           </div>
         </div>
         <div className='flex md:w-[80%]'>
@@ -33,11 +33,11 @@ const AboutUs = () => {
           />
           <div className='flex flex-col md:ml-4'>
             <h2 className='xl:text-3xl md:text-2xl md:font-bold'>Our Team</h2>
-            <p className='xl:text-2xl md:text-lg mt-2'>A dedicated group of professionals with expertise in software development, data analytics, and customer service, committed to ensuring CHKRR remains intuitive, reliable, and responsive to user needs.</p>
+            <p className='xl:text-2xl text-sm md:text-lg mt-2'>A dedicated group of professionals with expertise in software development, data analytics, and customer service, committed to ensuring CHKRR remains intuitive, reliable, and responsive to user needs.</p>
           </div>
         </div>
       </div>
-      <div className='flex mt-20 md:mx-10 xl:mx-24 gap-4'>
+      <div className='flex mt-20 md:mx-10 xl:mx-24 mx-4 gap-4'>
         <Image
           src={AboutUsImg}
           alt="About"

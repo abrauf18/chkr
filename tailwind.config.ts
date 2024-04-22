@@ -7,6 +7,9 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/flowbite-react/lib/**/*.js",
+    "./node_modules/flowbite/**/*.js",
+    "./public/**/*.html",
   ],
   prefix: "",
   theme: {
@@ -16,6 +19,7 @@ const config = {
       screens: {
         "2xl": "1400px",
         "md-max": { max: "767px" },
+        "sm-max": { max: "640px" },
       },
     },
     extend: {
@@ -74,7 +78,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+  require('flowbite/plugin'),
+  require("daisyui"),
+  ]
 } satisfies Config;
 
 export default config;

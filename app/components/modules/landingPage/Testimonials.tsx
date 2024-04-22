@@ -4,20 +4,21 @@ import Image from 'next/image';
 import user from "@/app/assets/icons/testUser.svg";
 import user1 from "@/app/assets/icons/testUser1.svg";
 import TestimonialsCard from './TestimonialsCard';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/app/components/ui/carousel"
+// import {
+//     Carousel,
+//     CarouselContent,
+//     CarouselItem,
+//     CarouselNext,
+//     CarouselPrevious,
+// } from "@/app/components/ui/carousel"
+import Carousel from './Carousel';
 
 const Testimonials = () => {
     return (
 
-        <div className=" mt-10 mx-10 rounded-2xl h-full ">
+        <div className=" mt-10 mx-10 rounded-2xl h-full border border-black ">
             <div
-                className="bg-no-repeat h-screen bg-cover flex flex-col items-center  py-10 "
+                className="bg-no-repeat h-screen md:h-[70rem] flex flex-col items-center  py-10 "
                 style={{
                     backgroundImage: `url(${bg.src})`,
                 }}
@@ -32,32 +33,10 @@ const Testimonials = () => {
                         satisfied customers.
                     </p>
                 </div>
+                <Carousel />
 
-                <Carousel className="w-3/4">
-                    <CarouselContent>
-                        {Array.from({ length: 5 }).map((_, index) => (
-                            <CarouselItem key={index}>
-                                <div className="p-1">
-                                    <TestimonialsCard
-                                        review="CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability."
-                                        authorName="Emiley Johnson"
-                                        companyName="ABC company"
-                                    />
-                                    <div className='ml-[20rem]'>
-                                        <TestimonialsCard
-                                            review="CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability."
-                                            authorName="Emiley Johnson"
-                                            companyName="ABC company"
-                                        />
-                                    </div>
-                                </div>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
-
+                {/*                     
+                </Carousel> */}
             </div>
         </div >
 

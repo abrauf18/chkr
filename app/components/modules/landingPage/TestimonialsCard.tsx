@@ -12,7 +12,7 @@ interface TestimonialsCardProps {
 const TestimonialsCard: React.FC<TestimonialsCardProps> = ({ review, authorName, companyName }) => {
     return (
         <div>
-            <div className='md:w-3/4 lg:w-[65%] xl:1/2 xl:h-[15rem] lg:h-[15rem] md:h-[13rem] bg-white rounded-2xl p-8 mb-5 '>
+            <div className='md:w-full  bg-white rounded-2xl p-8 mb-5 '>
                 <p className='font-normal lg:text-2xl  md:text-lg'>{review}</p>
                 <div className='flex mt-4 justify-between items-center'>
                     <div className='flex flex-col justify-start' >
