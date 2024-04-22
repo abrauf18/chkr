@@ -4,26 +4,15 @@ import Image from 'next/image';
 import user from "@/app/assets/icons/testUser.svg";
 import user1 from "@/app/assets/icons/testUser1.svg";
 import TestimonialsCard from './TestimonialsCard';
-// import {
-//     Carousel,
-//     CarouselContent,
-//     CarouselItem,
-//     CarouselNext,
-//     CarouselPrevious,
-// } from "@/app/components/ui/carousel"
 import Carousel from './Carousel';
 
 const Testimonials = () => {
+
     return (
 
-        <div className=" mt-10 mx-10 rounded-2xl h-full border border-black ">
-            <div
-                className="bg-no-repeat h-screen md:h-[70rem] flex flex-col items-center  py-10 "
-                style={{
-                    backgroundImage: `url(${bg.src})`,
-                }}
-            >
+        <div className=" mt-10 mx-10 rounded-2xl h-full md:h-[80rem] border border-black ">
 
+            <div className="w-full md:h-[40vh] py-2 rounded-2xl" style={{ background: "linear-gradient(to bottom, #FF4115 0%, #FBEB97 30%, #F9F8F8 50%, #FFFFFF 100%)" }}>
                 <div className="flex flex-col pt-2 pb-10 xl:mx-24 md:mx-10 justify-center items-center gap-4 text-white">
                     <h1 className="xl:font-semibold xl:text-4xl capitalize md:font-semibold md:text-3xl text-center">
                         See What our users says
@@ -33,10 +22,7 @@ const Testimonials = () => {
                         satisfied customers.
                     </p>
                 </div>
-                <Carousel />
-
-                {/*                     
-                </Carousel> */}
+                {/* <Carousel /> */}
             </div>
         </div >
 
