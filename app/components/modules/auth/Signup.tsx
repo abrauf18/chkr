@@ -15,13 +15,13 @@ export default function Signup() {
                 backgroundImage: `url(${loginImg.src})`,
             }}
         >
-            <div className="flex sm:w-[85%] md:w-full py-6 justify-center items-center">
-                <form className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4">
+            <div className="flex lg:w-[95%] sm:w-[85%] md:w-full py-6 justify-center items-center">
+                <form className="bg-white lg:[70%] xl:w-3/4 shadow-md rounded-3xl px-8 pt-6 pb-8 my-10">
                     <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">Create an account</h2>
                     <p className="md:w-full text-center mb-6 text-sm ">
                         Continue with one of the following services:
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex justify-center gap-2">
                         <Button className="xl:w-[90%] bg-gray-100 rounded-2xl">
                             <Image
                                 src={google}

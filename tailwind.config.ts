@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 const config = {
   darkMode: ["class"],
@@ -7,16 +8,19 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/flowbite-react/lib/**/*.js",
+    "./node_modules/flowbite/**/*.js",
+    "./public/**/*.html",
   ],
   prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-        "md-max": { max: "767px" },
-      },
+    },
+    screens: {
+      xs: "400px",
+      ...defaultTheme.screens,
     },
     extend: {
       height: {
@@ -74,7 +78,11 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // require('flowbite/plugin'),
+    // require("daisyui"),
+  ],
 } satisfies Config;
 
 export default config;
