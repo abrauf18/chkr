@@ -10,7 +10,7 @@ import Footer from "./Footer";
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen gap-20">
       <Navbar />
       <Hero />
       <Partners />

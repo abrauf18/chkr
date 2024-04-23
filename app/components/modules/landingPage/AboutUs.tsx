@@ -7,7 +7,7 @@ import AboutUsImg1 from "@/app/assets/images/AboutUsImg1.png"
 
 const AboutUs = () => {
   return (
-    <div className='bg-white pt-10'>
+    <div id='aboutUs' className='bg-white pt-10'>
       <div className='flex flex-col w-1/2 md:w-3/4 xl:mx-24 mx-4 md:mx-10 justify-start gap-4'>
         <h2 className='xl:font-semibold xl:text-4xl font-semibold md:text-3xl'>Why Choose Us <br />
           for best service experience</h2>

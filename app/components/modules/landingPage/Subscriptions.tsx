@@ -10,7 +10,7 @@ const Subscriptions = () => {
         setActiveButton(buttonName);
     };
     return (
-        <div className='bg-white'>
+        <div id='subscription' className='bg-white'>
             <div className='flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-32'>
                 <h1 className='xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center'>Our Subscriptions</h1>
                 <p className='xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center mb-4'>Empower your business with seamless employee management and tracking.</p>

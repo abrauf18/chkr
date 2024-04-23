@@ -3,7 +3,7 @@ import Carousel from "./Carousel";
 
 const Testimonials = () => {
   return (
-    <div className=" mt-10 mx-10 rounded-2xl h-full md:h-screen ">
+    <div id="testimonials" className=" mt-10 mx-10 rounded-2xl h-full md:h-screen ">
       <div
         className="w-full h-screen py-2 rounded-2xl "
         style={{

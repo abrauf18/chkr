@@ -6,7 +6,7 @@ import featuresImg1 from "@/app/assets/images/featuresImg1.png";
 
 const Features = () => {
   return (
-    <div className="bg-white pt-10">
+    <div id="features" className="bg-white pt-10">
       <div className="flex flex-col xl:mx-24 md:mx-10 mx-6 justify-center items-center gap-4">
         <h1 className="xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center">
           Efficiency Unleashed: Explore Our Tools
