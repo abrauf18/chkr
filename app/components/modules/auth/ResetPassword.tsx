@@ -1,5 +1,5 @@
 import React from "react";
-import loginImg from "@/app/assets/images/login.png";
+import ResetPasswordImg from "@/app/assets/images/SignupRightside.svg"
 import { Input } from "@/app/components/ui/input"
 import { Label } from "@/app/components/ui/label"
 
@@ -7,9 +7,9 @@ import { Label } from "@/app/components/ui/label"
 export default function ResetPassword() {
   return (
     <div
-      className="flex  md:ml-4 md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
+      className="flex md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
       style={{
-        backgroundImage: `url(${loginImg.src})`,
+        backgroundImage: `url(${ResetPasswordImg.src})`,
       }}
     >
       <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
@@ -18,7 +18,6 @@ export default function ResetPassword() {
           <p className="md:w-full text-center mb-6 text-sm ">
             Enter your new password and remember it for future.
           </p>
-          <hr className="my-6" />
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor="password"
               className="md:text-lg text-sm font-semibold	"
@@ -30,10 +29,10 @@ export default function ResetPassword() {
               placeholder="**************"
             />
           </div>
-          <div className="grid w-full  items-center gap-1.5">
+          <div className="grid w-full items-center gap-1.5 mt-4">
             <Label htmlFor="password"
               className="md:text-lg text-sm font-semibold	"
-            >Password</Label>
+            >Re-Type Password</Label>
             <Input
               className="bg-[#F9F8F8]"
               id="password"
@@ -43,10 +42,10 @@ export default function ResetPassword() {
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
-              className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-2xl"
+              className="w-full bg-primary text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-              Continue to Login
+              Reset Password
             </button>
           </div>
         </form>
