@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import loginImg from "@/app/assets/images/login.png";
+import SignupImg from "@/app/assets/images/SignupRightside.svg";
 import google from "@/app/assets/icons/google.svg"
 import microsoft from "@/app/assets/icons/microsoft.svg"
 import { Input } from "@/app/components/ui/input"
@@ -10,9 +10,9 @@ import { Button } from "@/app/components/ui/button"
 export default function Signup() {
     return (
         <div
-            className="flex md:ml-4 md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
+            className="flex md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
             style={{
-                backgroundImage: `url(${loginImg.src})`,
+                backgroundImage: `url(${SignupImg.src})`,
             }}
         >
             <div className="flex lg:w-[95%] sm:w-[85%] md:w-full py-6 justify-center items-center">
