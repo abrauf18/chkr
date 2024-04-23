@@ -23,35 +23,40 @@ function Carousel() {
     },
     {
       id: 2,
-      feedback: "CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      feedback:
+        "CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
     },
     {
       id: 3,
-      feedback: " “CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      feedback:
+        " “CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
     },
     {
       id: 4,
-      feedback: "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      feedback:
+        "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
     },
     {
       id: 5,
-      feedback: "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      feedback:
+        "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
     },
     {
       id: 6,
-      feedback: "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      feedback:
+        "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
@@ -89,7 +94,7 @@ function Carousel() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex top-4 justify-center py-2 mt-5">
-        <div className="lg:flex lg:h-[50vh] gap-12 items-center justify-center lg:mx-2 mx-5">
+        <div className="lg:flex lg:h-[50vh] gap-12 items-center justify-center lg:mx-2 mx-5 testimonial-container">
           {shuffledSlides
             .slice(currentIndex, currentIndex + 2)
             .map((slide, index) => (
@@ -114,8 +119,9 @@ function Carousel() {
         {dots.map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-gray-300"
-              }`}
+            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${
+              currentIndex === index ? "bg-primary" : "bg-gray-300"
+            }`}
             onClick={() => goToSlide(index)}
           ></div>
         ))}
