@@ -52,48 +52,47 @@ const LandingPageNavbar: React.FC = () => {
           </button>
         </div>
         <div
-          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
-            sidebarOpen ? "block" : "hidden"
-          }`}
+          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${sidebarOpen ? "block" : "hidden"
+            }`}
           id="navbar-cta"
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-primary "
+                href="#home"
+                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
               >
                 Home
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-primary"
+                href="#aboutUs"
+                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
               >
                 About Us
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent "
+                href="#features"
+                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
               >
                 Features
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700"
+                href="#testimonials"
+                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
               >
                 Testimonials
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700"
+                href="#subscription"
+                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
               >
                 Subscription
               </a>
