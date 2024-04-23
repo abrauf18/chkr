@@ -16,44 +16,44 @@ function Carousel() {
     {
       id: 1,
       feedback:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      authorName: "john doe",
+        "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      authorName: "John Smith",
       companyName: "XYZ Company",
       rating: "4",
     },
     {
       id: 2,
-      feedback: "lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      feedback: "CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
-      companyName: "XYZ Company",
+      companyName: "abc Company",
       rating: "4",
     },
     {
       id: 3,
-      feedback: " lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      feedback: " “CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
     },
     {
       id: 4,
-      feedback: "23123",
+      feedback: "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
-      companyName: "XYZ Company",
+      companyName: "abc Company",
       rating: "4",
     },
     {
       id: 5,
-      feedback: "1231",
+      feedback: "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
     },
     {
       id: 6,
-      feedback: "23123",
+      feedback: "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
       authorName: "john doe",
-      companyName: "XYZ Company",
+      companyName: "abc Company",
       rating: "4",
     },
   ];
@@ -114,9 +114,8 @@ function Carousel() {
         {dots.map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-primary" : "bg-gray-300"
-            }`}
+            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-gray-300"
+              }`}
             onClick={() => goToSlide(index)}
           ></div>
         ))}
