@@ -3,40 +3,71 @@
 import React, { useEffect, useState } from "react";
 import TestimonialsCard from "./TestimonialsCard";
 
+interface Slide {
+  id: number;
+  feedback: string;
+  authorName: string;
+  companyName: string;
+  rating: string;
+}
+
 function Carousel() {
-  const slides = [
+  const slides: Slide[] = [
     {
       id: 1,
-      feedback: "lorrum ips",
+      feedback:
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       authorName: "john doe",
       companyName: "XYZ Company",
-      Rating: "4",
+      rating: "4",
     },
     {
       id: 2,
-      feedback: "sfsd",
+      feedback: "lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
       authorName: "john doe",
       companyName: "XYZ Company",
-      Rating: "4",
+      rating: "4",
     },
     {
       id: 3,
-      feedback: "1231",
+      feedback: " lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       authorName: "john doe",
       companyName: "XYZ Company",
-      Rating: "4",
+      rating: "4",
     },
     {
       id: 4,
       feedback: "23123",
       authorName: "john doe",
       companyName: "XYZ Company",
-      Rating: "4",
+      rating: "4",
+    },
+    {
+      id: 5,
+      feedback: "1231",
+      authorName: "john doe",
+      companyName: "XYZ Company",
+      rating: "4",
+    },
+    {
+      id: 6,
+      feedback: "23123",
+      authorName: "john doe",
+      companyName: "XYZ Company",
+      rating: "4",
     },
   ];
 
+  const totalSlides = 3; // Total number of slides
+  const dots = Array.from({ length: 3 }); // Array of dots
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = Math.ceil(slides.length / 2); // Calculate total number of slides
+  const [shuffledSlides, setShuffledSlides] = useState<Slide[]>([]);
+
+  useEffect(() => {
+    // Shuffle the slides array to get random testimonials
+    setShuffledSlides(slides.sort(() => Math.random() - 0.5));
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((currentIndex + 1) % totalSlides);
@@ -58,25 +89,36 @@ function Carousel() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex top-4 justify-center py-2 mt-5">
-        {Array.from({ length: totalSlides }).map((_, index) => (
+        <div className="lg:flex lg:h-[50vh] gap-12 items-center justify-center lg:mx-2 mx-5">
+          {shuffledSlides
+            .slice(currentIndex, currentIndex + 2)
+            .map((slide, index) => (
+              <div
+                key={index}
+                className={
+                  index === 0
+                    ? "lg:self-start lg:ml-2"
+                    : "lg:self-center lg:mr-2"
+                }
+              >
+                <TestimonialsCard
+                  authorName={slide.authorName}
+                  feedback={slide.feedback}
+                  companyName={slide.companyName}
+                />
+              </div>
+            ))}
+        </div>
+      </div>
+      <div className="flex mt">
+        {dots.map((_, index) => (
           <div
             key={index}
-            className={`mx-2 ${
-              currentIndex === index ? "opacity-100" : "opacity-0"
+            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${
+              currentIndex === index ? "bg-primary" : "bg-gray-300"
             }`}
-          >
-            <div className="flex">
-              {slides.slice(index * 2, index * 2 + 2).map((slide) => (
-                <div key={slide.id} className="mx-2">
-                  <TestimonialsCard
-                    authorName={slide.authorName}
-                    feedback={slide.feedback}
-                    companyName={slide.companyName}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+            onClick={() => goToSlide(index)}
+          ></div>
         ))}
       </div>
     </div>
