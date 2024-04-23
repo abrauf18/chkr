@@ -1,5 +1,5 @@
 import React from 'react'
-import CompanyInformation from '../components/modules/onboarding/companyInformation'
+import CompanyInformation from '../components/modules/onboarding/CompanyInformation'
 import Navbar from '../components/shared/Navbar';
 
 export default function page() {
