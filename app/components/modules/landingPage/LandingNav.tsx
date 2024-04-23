@@ -52,12 +52,12 @@ const LandingPageNavbar: React.FC = () => {
           </button>
         </div>
         <div
-          className={`sm-max:z-10 md-max:top-10 absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
             sidebarOpen ? "block" : "hidden"
           }`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 md-max:w-32 md-max:float-right mr-10">
+          <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
             <li>
               <a
                 href="#"
