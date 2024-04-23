@@ -118,11 +118,16 @@ label {
   }
 }
 
-/* @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
-  } */
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: 1s ease-out 0s 1 slideInFromTop;
+}
