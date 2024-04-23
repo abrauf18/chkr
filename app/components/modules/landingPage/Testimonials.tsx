@@ -5,7 +5,7 @@ const Testimonials = () => {
   return (
     <div id="testimonials" className=" mt-10 mx-10 rounded-2xl h-full md:h-screen ">
       <div
-        className="w-full h-screen py-2 rounded-2xl "
+        className="w-full h-full py-2 rounded-2xl "
         style={{
           background:
             "linear-gradient(to bottom, #FF4115 0%, #FBEB97 40%, #F9F8F8 100%, #FFFFFF 60%)",
