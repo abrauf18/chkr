@@ -1,7 +1,7 @@
-import Signup from "@/app/components/modules/auth/Signup";
-import Navbar from "@/app/components/shared/Navbar";
-import AuthLeftSide from "@/app/components/shared/AuthLeftSide";
-import leftSideImg from "@/app/assets/images/SignUpLeftSide.svg";
+import Signup from "@/components/modules/auth/signup";
+import Navbar from "@/components/shared/navbar";
+import AuthLeftSide from "@/components/shared/auth-left-side";
+import leftSideImg from "@/assets/images/SignUpLeftSide.svg";
 
 export default function SignupPage() {
   return (
@@ -19,3 +19,4 @@ export default function SignupPage() {
     </>
   );
 }
+

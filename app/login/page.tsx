@@ -1,7 +1,7 @@
-import Login from "@/app/components/modules/auth/Login";
-import Navbar from "@/app/components/shared/Navbar";
-import AuthLeftSide from "@/app/components/shared/AuthLeftSide";
-import leftSideImg from "@/app/assets/images/loginLeftSide.jpg";
+import Login from "@/components/modules/auth/login";
+import Navbar from "@/components/shared/navbar";
+import AuthLeftSide from "@/components/shared/auth-left-side";
+import leftSideImg from "@/assets/images/loginLeftSide.jpg";
 
 export default function LoginPage() {
   return (
@@ -22,3 +22,4 @@ export default function LoginPage() {
     </>
   );
 }
+

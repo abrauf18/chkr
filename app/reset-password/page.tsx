@@ -1,7 +1,7 @@
-import ResetPassword from "../components/modules/auth/ResetPassword";
-import Navbar from "@/app/components/shared/Navbar";
-import AuthLeftSide from "@/app/components/shared/AuthLeftSide";
-import leftSideImg from "@/app/assets/images/SignUpLeftSide.svg";
+import ResetPassword from "../../components/modules/auth/reset-password";
+import Navbar from "@/components/shared/navbar";
+import AuthLeftSide from "@/components/shared/auth-left-side";
+import leftSideImg from "@/assets/images/SignUpLeftSide.svg";
 
 export default function page() {
   return (
@@ -22,3 +22,4 @@ export default function page() {
     </>
   );
 }
+

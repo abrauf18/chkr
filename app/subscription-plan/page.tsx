@@ -1,15 +1,13 @@
-import React from 'react'
-import SubscriptionPlan from '../components/modules/onboarding/SubscriptionPlan'
-import Navbar from '../components/shared/Navbar';
+import React from "react";
+import SubscriptionPlan from "../../components/modules/onboarding/subscription-plan";
+import Navbar from "../../components/shared/navbar";
 
 export default function page() {
   return (
     <>
-      <Navbar
-        buttonText="Login "
-        textBeforeButton="Already have an account"
-      />
+      <Navbar buttonText="Login " textBeforeButton="Already have an account" />
       <SubscriptionPlan />
     </>
   );
 }
+

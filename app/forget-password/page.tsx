@@ -1,7 +1,7 @@
-import ForgetPassword from "../components/modules/auth/ForgetPassword";
-import Navbar from "@/app/components/shared/Navbar";
-import AuthLeftSide from "@/app/components/shared/AuthLeftSide";
-import leftSideImg from "@/app/assets/images/loginLeftSide.jpg";
+import ForgetPassword from "../../components/modules/auth/forget-password";
+import Navbar from "@/components/shared/navbar";
+import AuthLeftSide from "@/components/shared/auth-left-side";
+import leftSideImg from "@/assets/images/loginLeftSide.jpg";
 
 export default function page() {
   return (
@@ -22,3 +22,4 @@ export default function page() {
     </>
   );
 }
+

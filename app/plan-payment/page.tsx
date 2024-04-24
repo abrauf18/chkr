@@ -1,12 +1,12 @@
 import React from "react";
-import CompanyInformation from "../../components/modules/onboarding/company-information";
+import SubscriptionPlanPayment from "../../components/modules/onboarding/plan-payment";
 import Navbar from "../../components/shared/navbar";
 
 export default function page() {
   return (
     <>
       <Navbar buttonText="Login " textBeforeButton="Already have an account" />
-      <CompanyInformation />
+      <SubscriptionPlanPayment />
     </>
   );
 }
