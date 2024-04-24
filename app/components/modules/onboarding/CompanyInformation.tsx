@@ -39,7 +39,7 @@ const CompanyInformation = () => {
               Upload Logo
             </Label>
             <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center">
-              <Image src={uploadIcon} alt="Upload Logo" className="w-8 h-8" />
+              <Button className='bg-transparent'><Image src={uploadIcon} alt="Upload Logo" className="w-8 h-8" /></Button>
               <h5 className="text-lg font-medium mt-3 text-gray-700">Upload Logo</h5>
             </div>
           </div>

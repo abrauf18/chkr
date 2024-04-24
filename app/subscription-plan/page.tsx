@@ -1,5 +1,5 @@
 import React from 'react'
-import CompanyInformation from '../components/modules/onboarding/CompanyInformation'
+import SubscriptionPlan from '../components/modules/onboarding/SubscriptionPlan'
 import Navbar from '../components/shared/Navbar';
 
 export default function page() {
@@ -9,7 +9,7 @@ export default function page() {
         buttonText="Login "
         textBeforeButton="Already have an account"
       />
-      <CompanyInformation />
+      <SubscriptionPlan />
     </>
   );
 }
