@@ -2,7 +2,6 @@ import React from "react";
 import cardCheck from "@/assets/icons/cardcheck.svg";
 import card from "@/assets/icons/card.svg";
 import Image from "next/image";
-import e from "express";
 
 interface RegisteredCard {
   cardType: string;

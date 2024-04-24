@@ -4,7 +4,7 @@ import bg from "@/assets/images/background.png";
 import img1 from "@/assets/images/jobs.svg";
 import img2 from "@/assets/images/Dashboard.svg";
 import img3 from "@/assets/images/feedback.svg";
-import Pros from "./Pros";
+import Pros from "./pros";
 
 const Benefits = () => {
   return (
