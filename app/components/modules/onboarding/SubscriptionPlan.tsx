@@ -2,9 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import subscriptionIcon from "@/app/assets/icons/subPlanOrange.svg"
 import companyIcon from "@/app/assets/icons/CompanyInfoWhite.svg"
-import { Input } from "@/app/components/ui/input"
-import { Label } from "@/app/components/ui/label"
-import { Button } from "@/app/components/ui/button"
+import Link from 'next/link';
 import PlanCard from './PlanCard'
 
 const SubscriptionPlan = () => {
@@ -55,12 +53,14 @@ const SubscriptionPlan = () => {
           >
             Cancel
           </button>
-          <button
-            className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
-            type="submit"
-          >
-            Next
-          </button>
+          <Link href="/subscription-plan-payment">
+            <button
+              className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+              type="submit"
+            >
+              Next
+            </button>
+          </Link>
         </div>
       </div>
 
