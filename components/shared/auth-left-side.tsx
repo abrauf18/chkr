@@ -1,14 +1,14 @@
-import React from "react";
-import Image from "next/image";
-import authImg from "@/assets/images/auth.jpg";
-import Eclipse from "@/assets/icons/eclipse";
-
 interface AuthLeftSideProps {
   heading1: string;
   heading2: string;
   heading3: string;
   url: any;
 }
+
+import React from "react";
+import Image from "next/image";
+import authImg from "@/assets/images/auth.jpg";
+import Eclipse from "@/assets/icons/eclipse";
 
 const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
   heading1,

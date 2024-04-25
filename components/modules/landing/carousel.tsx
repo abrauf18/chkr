@@ -1,8 +1,4 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import TestimonialsCard from "./testimonials-card";
-
 interface Slide {
   id: number;
   feedback: string;
@@ -10,6 +6,9 @@ interface Slide {
   companyName: string;
   rating: string;
 }
+
+import React, { useEffect, useState } from "react";
+import TestimonialsCard from "./testimonials-card";
 
 function Carousel() {
   const slides: Slide[] = [
@@ -119,9 +118,8 @@ function Carousel() {
         {dots.map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-primary" : "bg-gray-300"
-            }`}
+            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-gray-300"
+              }`}
             onClick={() => goToSlide(index)}
           ></div>
         ))}

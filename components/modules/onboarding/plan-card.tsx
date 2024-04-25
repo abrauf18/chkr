@@ -1,13 +1,12 @@
-import React from "react";
-import CheckmarkCircle from "@/assets/icons/CheckmarkCircle";
-import Image from "next/image";
-
 interface PlanCardProps {
   title: string;
   price: number;
   features: string[];
   timePeriod: string;
 }
+
+import React from "react";
+import CheckmarkCircle from "@/assets/icons/CheckmarkCircle";
 
 const PlanCard: React.FC<PlanCardProps> = ({
   title,

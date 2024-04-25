@@ -1,14 +1,13 @@
-import React from "react";
-import CardCheck from "@/assets/icons/Cardcheck"
-import Card from "@/assets/icons/Card";
-import Image from "next/image";
-
 interface RegisteredCard {
   cardType: string;
   cvv: string;
   cardOwner: string;
   expiryDate: string;
 }
+
+import React from "react";
+import CardCheck from "@/assets/icons/Cardcheck"
+import Card from "@/assets/icons/Card";
 
 const RegisteredCards: React.FC<RegisteredCard> = ({
   cardType,

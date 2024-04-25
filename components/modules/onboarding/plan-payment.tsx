@@ -3,6 +3,7 @@ import SubscriptionIcon from "@/assets/icons/subPlanOrange";
 import CompanyInfoWhite from "@/assets/icons/CompanyInfoWhite";
 import RegisteredCards from "./registered-card";
 import NewCard from "./new-card";
+
 const PlanPayment = () => {
   return (
     <div className="flex flex-col justify-center items-center my-20 md:mx-10">

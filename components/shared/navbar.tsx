@@ -1,10 +1,10 @@
-import React from "react";
-import ChkrLogo from "@/assets/icons/ChkrLogo";
-
 interface NavbarProps {
   buttonText: string;
   textBeforeButton: string;
 }
+
+import React from "react";
+import ChkrLogo from "@/assets/icons/ChkrLogo";
 
 const Navbar: React.FC<NavbarProps> = ({ buttonText, textBeforeButton }) => {
   return (

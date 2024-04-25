@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "next/image";
-import Star from "@/assets/icons/stars";
-import user1 from "@/assets/icons/testUser1.svg";
-
 interface TestimonialsCardProps {
   feedback: string;
   authorName: string;
   companyName: string;
 }
+
+import React from "react";
+import Image from "next/image";
+import Star from "@/assets/icons/stars";
+import user1 from "@/assets/icons/testUser1.svg";
 
 const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
   feedback,

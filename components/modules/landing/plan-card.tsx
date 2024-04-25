@@ -1,11 +1,18 @@
-import React from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Checkmark from "@/assets/icons/Checkmark";
-
 interface IconTextProps {
   text: string;
 }
+
+
+interface PlanCardProps {
+  monthlyHeading: string;
+  monthlyPrice: string;
+  buttonText: string;
+}
+
+import React from "react";
+import { Button } from "@/components/ui/button";
+import Checkmark from "@/assets/icons/Checkmark";
+
 
 const IconText: React.FC<IconTextProps> = ({ text }) => {
   return (
@@ -15,12 +22,6 @@ const IconText: React.FC<IconTextProps> = ({ text }) => {
     </div>
   );
 };
-
-interface PlanCardProps {
-  monthlyHeading: string;
-  monthlyPrice: string;
-  buttonText: string;
-}
 
 const PlanCard: React.FC<PlanCardProps> = ({
   monthlyHeading,
