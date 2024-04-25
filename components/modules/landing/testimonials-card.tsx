@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import star from "@/assets/icons/stars.svg";
+import Star from "@/assets/icons/stars";
 import user1 from "@/assets/icons/testUser1.svg";
 
 interface TestimonialsCardProps {
@@ -28,7 +28,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
                 ({companyName})
               </span>
             </div>
-            <Image src={star} alt="stars" className="ml-4 h-[2rem] w-[6rem]" />
+            <Star className="ml-4 h-[2rem] w-[6rem]" />
           </div>
           <Image src={user1} alt="user icon" className=" h-14 w-14" />
         </div>

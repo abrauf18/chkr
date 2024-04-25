@@ -1,8 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import bg from "@/assets/images/background.png";
+import bg from "@/public/images/background.png";
 import Image from "next/image";
-import heroImage from "@/assets/images/HeroBanner.svg";
 
 const Hero = () => {
   return (
@@ -46,7 +45,7 @@ const Hero = () => {
 
         {/* Hero image */}
         <div className="absolute w-3/4 md:w-[70%] xl:top-[210%] lg:top-[160%] md:top-[150%] top-[95%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-          <Image src={heroImage} alt="Hero Image" width={800} height={600} />
+          <Image src="/images/HeroBanner.svg" alt="Hero Image" width={800} height={600} />
         </div>
       </div>
     </div>

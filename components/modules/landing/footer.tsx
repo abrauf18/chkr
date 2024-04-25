@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import chkrLogo from "@/assets/icons/LogoFooter.svg";
-import bg from "@/assets/images/background.png";
+import ChkrLogo from "@/assets/icons/LogoFooter";
+import bg from "@/public/images/background.png";
 import { Button } from "@/components/ui/button";
 
 const Footer = () => {
@@ -19,13 +19,7 @@ const Footer = () => {
         <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap md:mx-10 mx-4 my-6 md:py-2 md:px-10 rounded-3xl">
           {/* Left side content */}
           <div className="flex items-center ">
-            <Image
-              src={chkrLogo}
-              alt="CHKR Logo"
-              width={116}
-              className="h-auto"
-              priority
-            />
+            <ChkrLogo className="h-auto" />
           </div>
 
           {/* Right side content */}

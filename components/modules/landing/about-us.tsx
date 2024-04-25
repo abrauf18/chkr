@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import AboutIcon from "@/assets/icons/about-icon.svg";
-import team from "@/assets/icons/team.svg";
-import AboutUsImg from "@/assets/images/AboutUsImg.png";
+import AboutIcon from "@/assets/icons/AboutIcon";
+import Team from "@/assets/icons/team";
 import AboutUsImg1 from "@/assets/images/AboutUsImg1.png";
 
 const AboutUs = () => {
@@ -22,10 +21,8 @@ const AboutUs = () => {
       </div>
       <div className="grid lg:grid-cols-2 md:grid-cols-1 xl:mx-24 md:mx-10 mx-4 mt-20 gap-6">
         <div className="flex md:w-[80%]">
-          <Image
-            src={AboutIcon}
-            alt="AboutIcon"
-            className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] sm:w-[1rem] sm:h-[1rem] w-[1rem] h-[1rem]"
+          <AboutIcon
+            className="xl:w-[5rem] xl:h-[5rem] mr-2 md:w-[3.5rem] md:h-[3rem] sm:w-[1rem] sm:h-[1rem] w-[1rem] h-[1rem]"
           />
           <div className="flex flex-col md:ml-4">
             <h2 className="xl:text-3xl md:text-2xl md:font-bold">
@@ -38,10 +35,8 @@ const AboutUs = () => {
           </div>
         </div>
         <div className="flex md:w-[80%]">
-          <Image
-            src={team}
-            alt="AboutIcon"
-            className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] sm:w-[1rem] sm:h-[1rem] w-[1rem] h-[1rem]"
+          <Team
+            className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[1rem] h-[1rem]"
           />
           <div className="flex flex-col md:ml-4">
             <h2 className="xl:text-3xl md:text-2xl md:font-bold">Our Team</h2>
@@ -55,8 +50,8 @@ const AboutUs = () => {
         </div>
       </div>
       <div className="flex mt-20 md:mx-10 xl:mx-24 mx-4 gap-4">
-        <Image src={AboutUsImg} alt="About" className="w-2/3" />
-        <Image src={AboutUsImg1} alt="About" className="w-1/3" />
+        <Image src="/images/AboutUsImg.png" width={500} height={500} alt="About" className="w-2/3" />
+        <Image src="/images/AboutUsImg1.png" width={500} height={500} alt="About" className="w-1/3" />
       </div>
     </div>
   );

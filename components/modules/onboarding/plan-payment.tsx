@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import subscriptionIcon from "@/assets/icons/subPlanOrange.svg";
-import companyIcon from "@/assets/icons/CompanyInfoWhite.svg";
+import SubscriptionIcon from "@/assets/icons/subPlanOrange";
+import CompanyInfoWhite from "@/assets/icons/CompanyInfoWhite";
 import RegisteredCards from "./registered-card";
 import NewCard from "./new-card";
 const PlanPayment = () => {
@@ -15,19 +15,11 @@ const PlanPayment = () => {
       </p>
       <div className="flex flex-col md:flex-row mt-10 gap-6 text-lg">
         <div className="flex items-center ">
-          <Image
-            src={companyIcon}
-            alt="Company Icon"
-            className="w-[4rem] h-[4rem]"
-          />
+          <CompanyInfoWhite className="w-[4rem] h-[4rem]" />
           <span>Company Information</span>
         </div>
         <div className="flex items-center ">
-          <Image
-            src={subscriptionIcon}
-            alt="subscription icon"
-            className="w-[4rem] h-[4rem]"
-          />
+          <SubscriptionIcon className="w-[4rem] h-[4rem]" />
           <span className="text-gray-400">Subscription Plan</span>
         </div>
       </div>

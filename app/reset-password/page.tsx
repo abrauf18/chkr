@@ -1,7 +1,6 @@
 import ResetPassword from "../../components/modules/auth/reset-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
-import leftSideImg from "@/assets/images/SignUpLeftSide.svg";
 
 export default function page() {
   return (
@@ -15,7 +14,7 @@ export default function page() {
           heading1="YOUR HUB"
           heading2="FOR FINDING THE BEST"
           heading3="SERVICE PROVIDERS"
-          url={leftSideImg}
+          url="/images/SignUpLeftSide.svg"
         />
         <ResetPassword />
       </div>

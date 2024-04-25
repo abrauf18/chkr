@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import success from "@/assets/icons/Success.svg";
-import cardlogo from "@/assets/icons/CardLogo's.svg";
-import cardCheck from "@/assets/icons/cardcheck.svg";
-import card from "@/assets/icons/card.svg";
+import Success from "@/assets/icons/Success";
+import Cardlogos from "@/assets/icons/CardLogos";
+import CardCheck from "@/assets/icons/Cardcheck";
+import Card from "@/assets/icons/Card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -12,12 +12,12 @@ const NewCard = () => {
     <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-6 pb-8 my-10 gap-6">
       <div className="flex justify-between align-items">
         <div className="flex items-center">
-          <Image src={success} alt="success" className="h-6 w-6 mr-2"></Image>
+          <Success className="h-6 w-6 mr-2" />
           <span className="font-semibold text-base md:text-lg">
             Add new card
           </span>
         </div>
-        <Image src={cardlogo} alt="cardlogos" className="md:w-40 w-32"></Image>
+        <Cardlogos className="md:w-40 w-32" />
       </div>
       <div className="flex flex-col md:flex-row mt-4 gap-4">
         <div className="flex flex-col md:w-[65%] w-full">
@@ -30,12 +30,12 @@ const NewCard = () => {
           <div className="w-full relative">
             <div className="relative flex items-center">
               <span className="absolute left-3 top-[55%] transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={card} alt="user" />
+                <Card />
               </span>
               <Input className="pl-10 h-12" id="card number" type="text" />
             </div>
           </div>
-          <Image src={cardCheck} alt="cardcheck" className="w-10" />
+          <CardCheck className="w-10" />
         </div>
       </div>
       <div className="flex flex-col md:flex-row mt-4 gap-4 ">

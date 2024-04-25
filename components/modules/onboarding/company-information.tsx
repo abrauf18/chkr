@@ -1,15 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import subscriptionIcon from "@/assets/icons/subscription-plan.svg";
-import companyIcon from "@/assets/icons/company.svg";
+import SubscriptionIcon from "@/assets/icons/subscriptionPlan";
+import Company from "@/assets/icons/Company";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import uploadIcon from "@/assets/icons/upload.svg";
-import user from "@/assets/icons/user.svg";
-import building from "@/assets/icons/building.svg";
-import phone from "@/assets/icons/phone.svg";
-import location from "@/assets/icons/location.svg";
+import UploadIcon from "@/assets/icons/upload";
+import User from "@/assets/icons/user";
+import BuildingIcon from "@/assets/icons/BuildingIcon";
+import Phone from "@/assets/icons/phone";
+import Location from "@/assets/icons/location";
 
 const CompanyInformation = () => {
   return (
@@ -22,19 +22,11 @@ const CompanyInformation = () => {
       </p>
       <div className="flex flex-col md:flex-row mt-10 gap-6 text-lg">
         <div className="flex items-center ">
-          <Image
-            src={companyIcon}
-            alt="Company Icon"
-            className="w-[4rem] h-[4rem]"
-          />
+          <Company className="w-[4rem] h-[4rem]" />
           <span>Company Information</span>
         </div>
         <div className="flex items-center ">
-          <Image
-            src={subscriptionIcon}
-            alt="subscription icon"
-            className="w-[4rem] h-[4rem]"
-          />
+          <SubscriptionIcon className="w-[4rem] h-[4rem]" />
           <span className="text-gray-400">Subscription Plan</span>
         </div>
       </div>
@@ -49,7 +41,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center">
               <Button className="bg-transparent">
-                <Image src={uploadIcon} alt="Upload Logo" className="w-8 h-8" />
+                <UploadIcon className="w-8 h-8" />
               </Button>
               <h5 className="text-lg font-medium mt-3 text-gray-700">
                 Upload Logo
@@ -65,7 +57,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={user} alt="user" />
+                <User />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -84,7 +76,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={building} alt="building" />
+                <BuildingIcon />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -100,7 +92,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={phone} alt="phone" />
+                <Phone />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -119,7 +111,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={location} alt="location" />
+                <Location />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -138,7 +130,7 @@ const CompanyInformation = () => {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-                <Image src={location} alt="country" />
+                <Location />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"

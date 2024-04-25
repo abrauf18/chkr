@@ -1,7 +1,6 @@
 import Signup from "@/components/modules/auth/signup";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
-import leftSideImg from "@/assets/images/SignUpLeftSide.svg";
 
 export default function SignupPage() {
   return (
@@ -12,7 +11,7 @@ export default function SignupPage() {
           heading1="YOUR GATEWAY"
           heading2="TO EXCEPTIONAL"
           heading3="SERVICE PROVIDERS"
-          url={leftSideImg}
+          url="/images/SignUpLeftSide.svg"
         />
         <Signup />
       </div>

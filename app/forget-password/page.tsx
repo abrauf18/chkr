@@ -1,7 +1,6 @@
 import ForgetPassword from "../../components/modules/auth/forget-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
-import leftSideImg from "@/assets/images/loginLeftSide.jpg";
 
 export default function page() {
   return (
@@ -15,7 +14,7 @@ export default function page() {
           heading1="YOUR HUB"
           heading2="FOR FINDING THE BEST"
           heading3="SERVICE PROVIDERS"
-          url={leftSideImg}
+          url="/images/loginLeftSide.jpg"
         />
         <ForgetPassword />
       </div>

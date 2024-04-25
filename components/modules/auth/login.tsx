@@ -1,5 +1,5 @@
 import React from "react";
-import loginImg from "@/assets/images/login.png";
+import loginImg from "@/public/images/login.png";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 

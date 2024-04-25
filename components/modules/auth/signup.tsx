@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import SignupImg from "@/assets/images/SignupRightside.svg";
-import google from "@/assets/icons/google.svg";
-import microsoft from "@/assets/icons/microsoft.svg";
+import SignupImg from "@/public/images/SignupRightside.svg";
+import Google from "@/assets/icons/Google";
+import Microsoft from "@/assets/icons/microsoft";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -25,18 +25,13 @@ export default function Signup() {
           </p>
           <div className="flex justify-center gap-2">
             <Button className="xl:w-[90%] bg-gray-100 rounded-2xl">
-              <Image
-                src={google}
-                alt="googleLogo"
-                className="xl:w-[1rem] xl:h-[1rem] mr-2 md:w-[1rem] md:h-[1rem] sm:w-[1rem] sm:h-[1rem] w-[1rem] h-[1rem]"
+              <Google className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]"
               />
               Google
             </Button>
             <Button className=" xl:w-[90%] bg-gray-100 rounded-2xl">
-              <Image
-                src={microsoft}
-                alt="microsoftLogo"
-                className="xl:w-[1rem] xl:h-[1rem] mr-2 md:w-[1rem] md:h-[1rem] sm:w-[1rem] sm:h-[1rem] w-[1rem] h-[1rem]"
+              <Microsoft
+                className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]"
               />
               Microsoft
             </Button>

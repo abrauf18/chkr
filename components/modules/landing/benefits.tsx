@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import bg from "@/assets/images/background.png";
+import bg from "@/public/images/background.png";
 import img1 from "@/assets/images/jobs.svg";
-import img2 from "@/assets/images/Dashboard.svg";
 import img3 from "@/assets/images/feedback.svg";
 import Pros from "./pros";
 
@@ -30,22 +29,22 @@ const Benefits = () => {
         </div>
         <div className="flex gap-x-14 justify-center overflow-hidden w-full h-full md:h-[120%] absolute lg:top-56 sm:top-48 top-48">
           <Image
-            src={img1}
+            src="/images/jobs.svg"
             alt="left img"
             width={696}
             height={450}
             className="object-contain w-full h-1/4 md:h-1/2 lg:h-[70%] self-start hidden sm:block"
           />
           <Image
-            src={img2}
-            alt="left img"
+            src="/images/Dashboard.svg"
+            alt="center img"
             width={696}
             height={450}
             className="object-contain w-full md:h-1/2 lg:h-[70%] self-center"
           />
           <Image
-            src={img3}
-            alt="left img"
+            src="/images/feedback.svg"
+            alt="right img"
             width={696}
             height={450}
             className="object-contain w-full md:h-1/2 lg:h-[70%] self-end hidden sm:block"

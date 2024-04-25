@@ -1,5 +1,5 @@
 import React from "react";
-import ResetPasswordImg from "@/assets/images/SignupRightside.svg";
+import ResetPasswordImg from "@/public/images/SignupRightside.svg";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 

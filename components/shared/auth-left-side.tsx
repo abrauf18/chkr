@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import authImg from "@/assets/images/auth.jpg";
-import eclipse from "@/assets/icons/eclipse.svg";
+import Eclipse from "@/assets/icons/eclipse";
 
 interface AuthLeftSideProps {
   heading1: string;
@@ -30,9 +30,7 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
           <h1 className="xl:text-5xl md:text-4xl sm:text-4xl text-xl font-semibold mr-4">
             {heading3}
           </h1>
-          <Image
-            src={eclipse}
-            alt="eclipse"
+          <Eclipse
             className="xl:w-[10rem] xl:h-[6rem] md:w-[6rem] md:h-[4rem] sm:w-[5rem] sm:h-[3rem] w-[5rem] h-[3rem]"
           />
         </div>

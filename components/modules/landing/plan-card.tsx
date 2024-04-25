@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import check from "@/assets/icons/checkmark.svg";
+import Checkmark from "@/assets/icons/Checkmark";
 
 interface IconTextProps {
   text: string;
@@ -10,13 +10,7 @@ interface IconTextProps {
 const IconText: React.FC<IconTextProps> = ({ text }) => {
   return (
     <div className="flex justify-center items-center mb-2">
-      <Image
-        src={check}
-        alt="Checkmark"
-        width={12}
-        height={12}
-        className="w-3 h-3 mr-2"
-      />
+      <Checkmark className="w-3 h-3 mr-2" />
       <span className="font-medium text-base">{text}</span>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import chkrLogo from "@/assets/icons/chkrLogo.svg";
+import ChkrLogo from "@/assets/icons/ChkrLogo";
 
 interface NavbarProps {
   buttonText: string;
@@ -13,15 +13,8 @@ const Navbar: React.FC<NavbarProps> = ({ buttonText, textBeforeButton }) => {
       <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">
         {/* Left side content */}
         <div className="flex items-center flex-shrink-0 text-black">
-          <Image
-            src={chkrLogo}
-            alt="CHKR Logo"
-            width={116}
-            className="h-auto"
-            priority
-          />
+          <ChkrLogo className="h-auto" />
         </div>
-
         {/* Right side content */}
         <div className="flex items-center">
           <div className="hidden md:block text-black mr-4">

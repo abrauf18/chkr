@@ -1,5 +1,5 @@
 import React from "react";
-import checkIcon from "@/assets/icons/checkmark-circle.svg";
+import CheckmarkCircle from "@/assets/icons/CheckmarkCircle";
 import Image from "next/image";
 
 interface PlanCardProps {
@@ -35,7 +35,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
       <ul className="list-disc space-y-2 text-gray-700 p-4">
         {features.map((feature, index) => (
           <li key={index} className="flex items-center">
-            <Image src={checkIcon} alt="Check Icon" className="w-4 h-4 mr-2" />
+            <CheckmarkCircle className="w-4 h-4 mr-2" />
             <span className="text-gray-400 text-sm">
               Feature {index + 1}: {feature}
             </span>
