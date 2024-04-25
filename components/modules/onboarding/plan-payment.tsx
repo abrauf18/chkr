@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import SubscriptionIcon from "@/assets/icons/subPlanOrange";
 import CompanyInfoWhite from "@/assets/icons/CompanyInfoWhite";
 import RegisteredCards from "./registered-card";

@@ -1,4 +1,4 @@
-import ResetPassword from "../../components/modules/auth/reset-password";
+import ResetPassword from "@/components/modules/auth/reset-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 

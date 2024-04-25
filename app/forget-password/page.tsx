@@ -1,4 +1,4 @@
-import ForgetPassword from "../../components/modules/auth/forget-password";
+import ForgetPassword from "@/components/modules/auth/forget-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 

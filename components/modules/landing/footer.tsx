@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import ChkrLogo from "@/assets/icons/LogoFooter";
 import bg from "@/public/images/background.png";
 import { Button } from "@/components/ui/button";
