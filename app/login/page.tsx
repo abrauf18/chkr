@@ -8,6 +8,7 @@ export default function LoginPage() {
       <Navbar
         buttonText="Register Now"
         textBeforeButton="Don't have an account?"
+        Link="signup"
       />
       <div className="grid xl:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 md:mx-6 md:p-4">
         <AuthLeftSide

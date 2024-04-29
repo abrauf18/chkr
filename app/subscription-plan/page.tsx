@@ -5,7 +5,7 @@ import Navbar from "../../components/shared/navbar";
 export default function page() {
   return (
     <>
-      <Navbar buttonText="Login " textBeforeButton="Already have an account" />
+      <Navbar buttonText="Login " textBeforeButton="Already have an account" Link="login" />
       <SubscriptionPlan />
     </>
   );
