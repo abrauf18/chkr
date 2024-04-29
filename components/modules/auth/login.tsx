@@ -61,7 +61,7 @@ export default function Login() {
               type="password"
               placeholder="**************"
             />
-            {errors?.password && <span>{errors.password.message}</span>}
+            {typeof errors.password?.message === 'string' && <p className="text-red-600 mt-2">{errors.password?.message}</p>}
           </div>
 
           <div className="flex flex-col md:flex-row mt-4 md:items-center justify-between">
