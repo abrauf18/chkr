@@ -16,7 +16,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
 }) => {
   return (
     <div>
-      <div className="md:w-full  bg-white rounded-2xl p-8 mb-5 ">
+      <div className="md:w-full bg-white rounded-2xl p-8 mb-5">
         <p className="font-normal lg:text-2xl  md:text-lg">{feedback}</p>
         <div className="flex mt-4 justify-between items-center">
           <div className="flex flex-col justify-start">

@@ -64,6 +64,7 @@ function Carousel() {
 
   const totalSlides = 3; // Total number of slides
   const dots = Array.from({ length: 3 }); // Array of dots
+  const [transitioning, setTransitioning] = useState(false); // State to control transition
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shuffledSlides, setShuffledSlides] = useState<Slide[]>([]);
@@ -74,19 +75,29 @@ function Carousel() {
   }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((currentIndex + 1) % totalSlides);
+    if (!transitioning) {
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex((currentIndex + 1) % totalSlides);
+        setTransitioning(false);
+      }, 1000);
+    }
   };
 
   const goToSlide = (slideIndex: number) => {
-    setCurrentIndex(slideIndex);
+    if (!transitioning) {
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex(slideIndex);
+        setTransitioning(false);
+      }, 1000);
+    }
   };
 
-  // Automatically move to the next slide every 5 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
       nextSlide();
     }, 5000);
-    // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, [currentIndex]);
 
@@ -99,11 +110,13 @@ function Carousel() {
             .map((slide, index) => (
               <div
                 key={index}
-                className={
-                  index === 0
-                    ? "lg:self-start lg:ml-2"
-                    : "lg:self-center lg:mr-2"
-                }
+                className={`lg:self-${index === 0 ? "start" : "center"} 
+                lg:ml-${index === 0 ? "2" : "0"} 
+                ${transitioning ? "opacity-0" : "opacity-100"
+                  }`}
+                style={{
+                  transition: "opacity 1s ease-in",
+                }}
               >
                 <TestimonialsCard
                   authorName={slide.authorName}
