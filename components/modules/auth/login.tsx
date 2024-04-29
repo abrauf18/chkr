@@ -1,9 +1,34 @@
+"use client"
 import React from "react";
 import loginImg from "@/public/images/login.png";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoginSchema } from "@/lib/schema";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
+
+  const form = useForm<FormValues>({
+    defaultValues: {
+      password: "",
+      email: "",
+    },
+    resolver: zodResolver(LoginSchema),
+  });
+
+  const { register, handleSubmit, formState } = form;
+  const { errors } = formState;
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
+
   return (
     <div
       className="flex  md:ml-4 md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
@@ -12,7 +37,8 @@ export default function Login() {
       }}
     >
       <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
-        <form className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4">
+        <form className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit(onSubmit)} noValidate>
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Login To Your Account
           </h2>
@@ -25,11 +51,14 @@ export default function Login() {
               Email Address
             </Label>
             <Input
+              {...register("email")}
               className="bg-[#F9F8F8]"
               type="email"
               id="email"
               placeholder="Email"
             />
+            <p className="error">{errors.email?.message}</p>
+
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Label
@@ -39,11 +68,14 @@ export default function Login() {
               Password
             </Label>
             <Input
+              {...register("password")}
               className="bg-[#F9F8F8]"
               id="password"
               type="password"
               placeholder="**************"
             />
+            <p className="error">{errors.password?.message}</p>
+
           </div>
           <div className="flex flex-col md:flex-row mt-4 md:items-center justify-between">
             <label className="inline-flex items-center">
