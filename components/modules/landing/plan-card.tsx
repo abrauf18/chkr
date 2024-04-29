@@ -2,7 +2,6 @@ interface IconTextProps {
   text: string;
 }
 
-
 interface PlanCardProps {
   monthlyHeading: string;
   monthlyPrice: string;
@@ -28,9 +27,6 @@ const PlanCard: React.FC<PlanCardProps> = ({
   monthlyPrice,
   buttonText,
 }) => {
-  // Define the array of length 5 to map over
-  const data = Array.from({ length: 5 });
-
   return (
     <div className="flex flex-col p-2 rounded-2xl w-full text-center bg-gray-200 hover:text-white hover:bg-[#212123]">
       <div>
@@ -40,7 +36,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         <h1 className="font-bold text-2xl mt-4 mb-6 xl:mb-8">{monthlyPrice}</h1>
         <hr className="my-10 border-t-2 border-gray-400 w-[90%] ml-6" />
       </div>
-      {data.map((_, index) => (
+      {Array.from({ length: 5 }).map((_, index) => (
         <IconText key={index} text="Unlimited Collaboration Project Team" />
       ))}
       <div className="flex justify-center items-center">
@@ -53,4 +49,3 @@ const PlanCard: React.FC<PlanCardProps> = ({
 };
 
 export default PlanCard;
-

@@ -7,7 +7,6 @@ interface AuthLeftSideProps {
 
 import React from "react";
 import Image from "next/image";
-import authImg from "@/assets/images/auth.jpg";
 import Eclipse from "@/assets/icons/eclipse";
 
 const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
@@ -42,6 +41,7 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
         layout="responsive"
         width={800}
         height={500}
+        priority
       />
     </div>
   );

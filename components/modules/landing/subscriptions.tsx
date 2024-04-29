@@ -2,13 +2,21 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import PlanCard from "./plan-card";
+import clsx from "clsx";
+
+// Define enum for plans
+enum Plan {
+  Monthly = "Monthly",
+  Annually = "Annually",
+}
 
 const Subscriptions = () => {
-  const [activeButton, setActiveButton] = useState("Monthly");
+  const [activeButton, setActiveButton] = useState<Plan>(Plan.Monthly); // Update state type
 
-  const handleButtonClick = (buttonName: string) => {
+  const handleButtonClick = (buttonName: Plan) => { // Update argument type
     setActiveButton(buttonName);
   };
+
   return (
     <div id="subscription" className="bg-white">
       <div className="flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-32">
@@ -18,24 +26,26 @@ const Subscriptions = () => {
         <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center mb-4">
           Empower your business with seamless employee management and tracking.
         </p>
-        <div className="flex gap-2 bg-gray-200  p-2 rounded-3xl">
+        <div className="flex gap-2 bg-gray-200 p-2 rounded-3xl">
           <Button
-            className={`w-[7rem] py-4 ${
-              activeButton === "Monthly"
-                ? "bg-primary text-white"
-                : "bg-transparent text-black"
-            } hover:bg-primary hover:text-white rounded-3xl`}
-            onClick={() => handleButtonClick("Monthly")}
+            className={clsx("w-[7rem] py-4", {
+              "bg-primary text-white": activeButton === Plan.Monthly,
+              "bg-transparent text-black": activeButton !== Plan.Monthly,
+              "hover:bg-primary hover:text-white": activeButton === Plan.Monthly,
+              "rounded-3xl": true,
+            })}
+            onClick={() => handleButtonClick(Plan.Monthly)}
           >
             Monthly
           </Button>
           <Button
-            className={`w-[7rem] py-4 ${
-              activeButton === "Annually"
-                ? "bg-primary text-white"
-                : "bg-transparent text-black"
-            } hover:bg-primary hover:text-white rounded-3xl`}
-            onClick={() => handleButtonClick("Annually")}
+            className={clsx("w-[7rem] py-4", {
+              "bg-primary text-white": activeButton === Plan.Annually,
+              "bg-transparent text-black": activeButton !== Plan.Annually,
+              "hover:bg-primary hover:text-white": activeButton === Plan.Annually,
+              "rounded-3xl": true,
+            })}
+            onClick={() => handleButtonClick(Plan.Annually)}
           >
             Annually
           </Button>
@@ -45,12 +55,12 @@ const Subscriptions = () => {
         <PlanCard
           monthlyHeading="Monthly Plan"
           monthlyPrice="$ 9.99/Per Month"
-          buttonText="Buy Monthly Subscription Plan"
+          buttonText={`Buy ${Plan.Monthly} Subscription Plan`} // Use enum value
         />
         <PlanCard
           monthlyHeading="Yearly Plan"
           monthlyPrice="$ 99.99/Per Year"
-          buttonText="Buy Yearly Subscription plan"
+          buttonText={`Buy ${Plan.Annually} Subscription Plan`} // Use enum value
         />
       </div>
     </div>
@@ -58,4 +68,3 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
-
