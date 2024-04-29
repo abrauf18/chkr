@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import icon1 from "@/assets/icons/Logo Wrapper.svg";
-import icon2 from "@/assets/icons/Logo Wrapper (1).svg";
-import icon3 from "@/assets/icons/Logo Wrapper (3).svg";
-import icon4 from "@/assets/icons/Logo Wrapper (4).svg";
-import icon5 from "@/assets/icons/Logo Wrapper (5).svg";
-import icon6 from "@/assets/icons/Logo Wrapper (6).svg";
+import icon1 from "@/public/images/partner1.svg";
+import icon2 from "@/public/images/partner2.svg";
+import icon3 from "@/public/images/partner3.svg";
+import icon4 from "@/public/images/partner4.svg";
+import icon5 from "@/public/images/partner5.svg";
+import icon6 from "@/public/images/partner6.svg";
 
 const Partners = () => {
   return (

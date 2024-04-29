@@ -7,7 +7,7 @@ interface TestimonialsCardProps {
 import React from "react";
 import Image from "next/image";
 import Star from "@/assets/icons/stars-icon";
-import user1 from "@/assets/icons/testUser1.svg";
+import user1 from "@/public/images/testUser1.svg";
 
 const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
   feedback,
