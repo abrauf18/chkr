@@ -6,7 +6,7 @@ interface PlanCardProps {
 }
 
 import React from "react";
-import CheckmarkCircle from "@/assets/icons/CheckmarkCircle";
+import CheckmarkCircle from "@/assets/icons/checkmark-circle";
 
 const PlanCard: React.FC<PlanCardProps> = ({
   title,

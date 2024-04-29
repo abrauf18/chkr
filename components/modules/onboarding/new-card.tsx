@@ -1,11 +1,9 @@
 import React from "react";
-import Image from "next/image";
-import Success from "@/assets/icons/Success";
-import Cardlogos from "@/assets/icons/CardLogos";
-import CardCheck from "@/assets/icons/Cardcheck";
-import Card from "@/assets/icons/Card";
+import Success from "@/assets/icons/success-icon";
+import Cardlogos from "@/assets/icons/card-logos";
+import CardCheck from "@/assets/icons/card-check";
+import Card from "@/assets/icons/card-icon";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 const NewCard = () => {
   return (

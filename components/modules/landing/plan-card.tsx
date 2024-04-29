@@ -10,8 +10,7 @@ interface PlanCardProps {
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import Checkmark from "@/assets/icons/Checkmark";
-
+import Checkmark from "@/assets/icons/checkmark-icon";
 
 const IconText: React.FC<IconTextProps> = ({ text }) => {
   return (
@@ -49,3 +48,4 @@ const PlanCard: React.FC<PlanCardProps> = ({
 };
 
 export default PlanCard;
+

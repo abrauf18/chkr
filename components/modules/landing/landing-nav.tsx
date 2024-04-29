@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ChkrLogo from "@/assets/icons/ChkrLogo";
+import ChkrLogo from "@/assets/icons/chkr-logo";
 
 const LandingPageNavbar: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,8 +49,9 @@ const LandingPageNavbar: React.FC = () => {
           </button>
         </div>
         <div
-          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${sidebarOpen ? "block" : "hidden"
-            }`}
+          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+            sidebarOpen ? "block" : "hidden"
+          }`}
           id="navbar-cta"
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">

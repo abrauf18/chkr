@@ -1,7 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import SubscriptionIcon from "@/assets/icons/subPlanOrange";
-import CompanyInfoWhite from "@/assets/icons/CompanyInfoWhite";
+import PlanIcon from "@/assets/icons/plan-icon";
+import CompanyInfoWhite from "@/assets/icons/companyinfo-icon";
 import Link from "next/link";
 import PlanCard from "./plan-card";
 
@@ -20,7 +19,7 @@ const SubscriptionPlan = () => {
           <span>Company Information</span>
         </div>
         <div className="flex items-center ">
-          <SubscriptionIcon className="w-[4rem] h-[4rem]" />
+          <PlanIcon fill="#FF2600" className="w-[4rem] h-[4rem]" />
           <span className="text-gray-400">Subscription Plan</span>
         </div>
       </div>

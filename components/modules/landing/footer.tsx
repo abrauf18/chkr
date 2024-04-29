@@ -1,5 +1,5 @@
 import React from "react";
-import ChkrLogo from "@/assets/icons/LogoFooter";
+import ChkrLogo from "@/assets/icons/footer-logo";
 import bg from "@/public/images/background.png";
 import { Button } from "@/components/ui/button";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import ArrowIcon from "@/assets/icons/ArrowIcon";
+import ArrowIcon from "@/assets/icons/arrow-icon";
 
 const Features = () => {
   return (
@@ -22,16 +22,25 @@ const Features = () => {
           className="xl:w-[90%] lg:w-[95%] md:w-[90%] w-3/4 h-full rounded-tr-[12rem] rounded-bl-[12rem]"
         >
           <div className="relative xl:w-[420px] lg:w-[300px] md:w-[255px] w-[155px]  border-white border-4 rounded-xl top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Image src="/images/featuresImg.png" alt="Center Image" width={500} height={500} />
+            <Image
+              src="/images/featuresImg.png"
+              alt="Center Image"
+              width={500}
+              height={500}
+            />
             <div className="absolute xl:w-[500px] lg:w-[360px] md:w-[290px] w-[200px]  border-white border-4 rounded-xl top-full left-[16%] transform -translate-y-1/2">
-              <Image src="/images/featuresImg1.png" alt="Right Image" width={500} height={500} />
+              <Image
+                src="/images/featuresImg1.png"
+                alt="Right Image"
+                width={500}
+                height={500}
+              />
             </div>
           </div>
         </div>
         <div className="flex flex-col gap-6">
           <div>
-            <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]"
-            />
+            <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]" />
             <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
               Employee Checkin/Checkout
             </h2>
@@ -42,9 +51,7 @@ const Features = () => {
             <hr />
           </div>
           <div>
-            <ArrowIcon
-              className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem]  w-[2rem] h-[2rem]"
-            />
+            <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem]  w-[2rem] h-[2rem]" />
             <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
               Task Assignment
             </h2>
@@ -55,9 +62,7 @@ const Features = () => {
             <hr />
           </div>
           <div>
-            <ArrowIcon
-              className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]"
-            />
+            <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]" />
             <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
               Task Management
             </h2>

@@ -6,8 +6,8 @@ interface RegisteredCard {
 }
 
 import React from "react";
-import CardCheck from "@/assets/icons/Cardcheck"
-import Card from "@/assets/icons/Card";
+import CardCheck from "@/assets/icons/card-check";
+import Card from "@/assets/icons/card-icon";
 
 const RegisteredCards: React.FC<RegisteredCard> = ({
   cardType,
@@ -46,7 +46,6 @@ const RegisteredCards: React.FC<RegisteredCard> = ({
           <span className="Rubik">{expiryDate}</span>
         </div>
       </div>
-
     </div>
   );
 };

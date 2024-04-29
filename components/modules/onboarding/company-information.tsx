@@ -1,15 +1,14 @@
 import React from "react";
-import Image from "next/image";
-import SubscriptionIcon from "@/assets/icons/subscriptionPlan";
-import Company from "@/assets/icons/Company";
+import SubscriptionIcon from "@/assets/icons/plan-icon";
+import Company from "@/assets/icons/company-icon";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import UploadIcon from "@/assets/icons/upload";
-import User from "@/assets/icons/user";
-import BuildingIcon from "@/assets/icons/BuildingIcon";
-import Phone from "@/assets/icons/phone";
-import Location from "@/assets/icons/location";
+import UploadIcon from "@/assets/icons/upload-icon";
+import User from "@/assets/icons/user-icon";
+import BuildingIcon from "@/assets/icons/building-icon";
+import Phone from "@/assets/icons/phone-icon";
+import Location from "@/assets/icons/location-icon";
 
 const CompanyInformation = () => {
   return (
