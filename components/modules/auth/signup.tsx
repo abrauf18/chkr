@@ -9,8 +9,14 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/lib/types";
+import { Eye, EyeOff } from 'lucide-react';
+
 
 export default function Signup() {
+
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -60,46 +66,47 @@ export default function Signup() {
               <hr className="line" />
             </div>
           </div>
-
-          <div className="grid mb-4 w-full items-center">
-            <Label
-              htmlFor="firstName"
-              className="md:text-lg text-sm font-semibold	"
-            >
-              First Name{" "}
-            </Label>
-            <Input
-              {...register("firstname")}
-              className="bg-[#F9F8F8]"
-              id="firstName"
-              type="name"
-              placeholder="First Name"
-            />
-            {typeof errors.firstname?.message === "string" && (
-              <p className="text-red-600 mt-2">
-                The First Name field is required
-              </p>
-            )}
-          </div>
-          <div className="grid mb-4 w-full items-center">
-            <Label
-              htmlFor="fullName"
-              className="md:text-lg text-sm font-semibold	"
-            >
-              Last Name{" "}
-            </Label>
-            <Input
-              {...register("lastname")}
-              className="bg-[#F9F8F8]"
-              id="LastName"
-              type="name"
-              placeholder="Last Name"
-            />
-            {typeof errors.lastname?.message === "string" && (
-              <p className="text-red-600 mt-2">
-                The Last Name field is required
-              </p>
-            )}
+          <div className="flex gap-4">
+            <div className="mb-4 w-full items-center">
+              <Label
+                htmlFor="firstName"
+                className="md:text-lg text-sm font-semibold	"
+              >
+                First Name{" "}
+              </Label>
+              <Input
+                {...register("firstname")}
+                className="bg-[#F9F8F8]"
+                id="firstName"
+                type="name"
+                placeholder="First Name"
+              />
+              {typeof errors.firstname?.message === "string" && (
+                <p className="text-red-600 mt-2">
+                  The First Name field is required
+                </p>
+              )}
+            </div>
+            <div className="mb-4 w-full items-center">
+              <Label
+                htmlFor="fullName"
+                className="md:text-lg text-sm font-semibold	"
+              >
+                Last Name{" "}
+              </Label>
+              <Input
+                {...register("lastname")}
+                className="bg-[#F9F8F8]"
+                id="LastName"
+                type="name"
+                placeholder="Last Name"
+              />
+              {typeof errors.lastname?.message === "string" && (
+                <p className="text-red-600 mt-2">
+                  The Last Name field is required
+                </p>
+              )}
+            </div>
           </div>
           <div className="grid mb-4 w-full items-center  ">
             <Label htmlFor="email" className="md:text-lg text-sm font-semibold">
@@ -126,13 +133,24 @@ export default function Signup() {
             >
               Password
             </Label>
-            <Input
-              {...register("password")}
-              className="bg-[#F9F8F8]"
-              id="password"
-              type="password"
-              placeholder="**************"
-            />
+            <div className="relative flex items-center">
+              <Input
+                {...register("password")}
+                className="bg-[#F9F8F8] pr-10"
+                id="password"
+                type={showPassword ? "password" : "text"}
+                placeholder="**************"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPassword((prev) => !prev);
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
             {typeof errors.password?.message === "string" && (
               <p className="text-red-600 mt-2">{errors.password?.message}</p>
             )}
@@ -144,13 +162,24 @@ export default function Signup() {
             >
               Confirm Password
             </Label>
-            <Input
-              {...register("confirmPassword")}
-              className="bg-[#F9F8F8]"
-              id="confirmPassword"
-              type="password"
-              placeholder="**************"
-            />
+            <div className="relative flex items-center">
+              <Input
+                {...register("confirmPassword")}
+                className="bg-[#F9F8F8]"
+                id="confirmPassword"
+                type={showConfirmPassword ? "password" : "text"}
+                placeholder="**************"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowConfirmPassword((prev) => !prev);
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showConfirmPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
             {typeof errors.confirmPassword?.message === "string" && (
               <p className="text-red-600 mt-2">
                 {errors.confirmPassword?.message}
@@ -166,7 +195,7 @@ export default function Signup() {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
