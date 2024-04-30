@@ -70,7 +70,7 @@ export default function Signup() {
             <div className="mb-4 w-full items-center">
               <Label
                 htmlFor="firstName"
-                className="md:text-lg text-sm font-semibold	"
+                className="md:text-lg text-sm font-medium	"
               >
                 First Name{" "}
               </Label>
@@ -90,7 +90,7 @@ export default function Signup() {
             <div className="mb-4 w-full items-center">
               <Label
                 htmlFor="fullName"
-                className="md:text-lg text-sm font-semibold	"
+                className="md:text-lg text-sm font-medium	"
               >
                 Last Name{" "}
               </Label>
@@ -109,7 +109,7 @@ export default function Signup() {
             </div>
           </div>
           <div className="grid mb-4 w-full items-center  ">
-            <Label htmlFor="email" className="md:text-lg text-sm font-semibold">
+            <Label htmlFor="email" className="md:text-lg text-sm font-medium	">
               Email Address
             </Label>
             <Input
@@ -129,7 +129,7 @@ export default function Signup() {
           <div className="grid mb-4 w-full items-center">
             <Label
               htmlFor="password"
-              className="md:text-lg text-sm font-semibold	"
+              className="md:text-lg text-sm font-medium	"
             >
               Password
             </Label>
@@ -158,7 +158,7 @@ export default function Signup() {
           <div className="grid mb-4 w-full items-center">
             <Label
               htmlFor="confirmPassword"
-              className="md:text-lg text-sm font-semibold	"
+              className="md:text-lg text-sm font-medium		"
             >
               Confirm Password
             </Label>
