@@ -9,6 +9,7 @@ import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
+import Link from "next/link";
 
 const CompanyInformation = ({
   handleNextStep,
@@ -189,13 +190,14 @@ const CompanyInformation = ({
         </p>
       </div>
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
-        <button
-          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl"
-          type="button"
-          onClick={() => removeOnboardingData()}
-        >
-          Clear
-        </button>
+        <Link href="/" className="hover:text-primary">
+          <button
+            className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl"
+            type="button"
+          >
+            Back to Home
+          </button>
+        </Link>
         <button
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"

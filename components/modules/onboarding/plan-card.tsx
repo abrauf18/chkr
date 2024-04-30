@@ -17,7 +17,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
   const formattedPrice = price.toFixed(2);
 
   return (
-    <div className="rounded-2xl overflow-hidden w-full mx-auto mb-4 hover:border-2 hover:border-primary focus:border-2 focus:border-primary">
+    <div className="overflow-hidden w-full mx-auto mb-4">
       <div className="flex justify-between p-4">
         <div className="flex-col">
           <h3 className="text-lg font-semibold">{title}</h3>
