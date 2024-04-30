@@ -8,7 +8,9 @@ import SubscriptionPlan from "@/components/modules/onboarding/subscription-plan"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Onboarding, OnboardingSchema } from "@/lib/types";
-import Company from "@/assets/icons/company-icon";
+import PlanIcon from "@/assets/icons/plan-icon";
+import CompanyBuilding from "@/assets/icons/company-building";
+import clsx from "clsx";
 
 export default function OnboardingPage() {
   const { currentStep, setCurrentStep, onboardingData, setOnboardingData } =
@@ -70,14 +72,35 @@ export default function OnboardingPage() {
         </p>
         <div className="flex flex-col md:flex-row mt-10 gap-6 text-lg">
           <div className="flex items-center ">
-            <Company className="w-[4rem] h-[4rem]" />
-            <span>Company Information</span>
+            <div
+              className={clsx(
+                "h-14 w-14 rounded-full relative",
+                currentStep === Steps.COMPANY_DETAILS ? "bg-primary" : "bg-white"
+              )}
+            >
+              <CompanyBuilding
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                color={currentStep === Steps.COMPANY_DETAILS ? "white" : "#FF2600"}
+              />
+            </div>
+            <span className="ml-2">Company Information</span>
           </div>
           <div className="flex items-center ">
-            <Company className="w-[4rem] h-[4rem]" />
-            <span className="text-gray-400">Subscription Plan</span>
+            <div
+              className={clsx(
+                "h-14 w-14 rounded-full relative",
+                currentStep === Steps.COMPANY_DETAILS ? "bg-white" : "bg-primary"
+              )}
+            >
+              <PlanIcon
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                color={currentStep === Steps.COMPANY_DETAILS ? "#FF2600" : "white"}
+              />
+            </div>
+            <span className="text-gray-400 ml-2">Subscription Plan</span>
           </div>
         </div>
+
       </div>
       <div className="flex justify-center">
         <FormProvider {...methods}>

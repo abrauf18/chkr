@@ -1,28 +1,17 @@
 import React from 'react'
 
-const subscriptionPlan: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+interface PlanIconProps extends React.SVGProps<SVGSVGElement> {
+  color?: string;
+}
+
+const PlanIcon: React.FC<PlanIconProps> = ({ color = "#FF2600", ...props }) => {
   return (
-    <svg viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <g filter="url(#filter0_d_489_3085)">
-        <rect x="6" y="2" width="50" height="48" rx="24" fill="white" shape-rendering="crispEdges" />
-        <path d="M28.4261 17.0627C29.6836 16.3542 30.3124 16 31 16C31.6876 16 32.3164 16.3542 33.5739 17.0627L35.3239 18.0486C36.6292 18.784 37.2819 19.1517 37.6409 19.7666C38 20.3816 38 21.1316 38 22.6316V24.3684C38 25.8684 38 26.6184 37.6409 27.2334C37.2819 27.8483 36.6292 28.216 35.3239 28.9514L33.5739 29.9373C32.3164 30.6458 31.6876 31 31 31C30.3124 31 29.6836 30.6458 28.4261 29.9373L26.6761 28.9514C25.3708 28.216 24.7181 27.8483 24.3591 27.2334C24 26.6184 24 25.8684 24 24.3684V22.6316C24 21.1316 24 20.3816 24.3591 19.7666C24.7181 19.1517 25.3708 18.784 26.6761 18.0486L28.4261 17.0627Z" stroke="#FF2600" stroke-width="1.5" stroke-linejoin="round" />
-        <path d="M28 24.1667C28 24.1667 28.75 24.1667 29.5 25.5C29.5 25.5 31.8824 22.1667 34 21.5" stroke="#FF2600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M35.8825 29L36.5527 32.2099C36.9833 34.2723 37.1986 35.3035 36.7563 35.7923C36.3141 36.281 35.546 35.8606 34.0099 35.0198L31.7364 33.7753C31.3734 33.5766 31.1919 33.4773 31 33.4773C30.8081 33.4773 30.6266 33.5766 30.2636 33.7753L27.9901 35.0198C26.454 35.8606 25.6859 36.281 25.2437 35.7923C24.8014 35.3035 25.0167 34.2723 25.4473 32.2099L26.1175 29" stroke="#FF2600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </g>
-      <defs>
-        <filter id="filter0_d_489_3085" x="0" y="0" width="62" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="3" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0" />
-          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_489_3085" />
-          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_489_3085" result="shape" />
-        </filter>
-      </defs>
+    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M9.92613 3.06269C11.1836 2.35423 11.8124 2 12.5 2C13.1876 2 13.8164 2.35423 15.0739 3.06269L16.8239 4.04861C18.1292 4.78401 18.7819 5.15171 19.1409 5.76664C19.5 6.38157 19.5 7.13157 19.5 8.63158V10.3684C19.5 11.8684 19.5 12.6184 19.1409 13.2334C18.7819 13.8483 18.1292 14.216 16.8239 14.9514L15.0739 15.9373C13.8164 16.6458 13.1876 17 12.5 17C11.8124 17 11.1836 16.6458 9.92613 15.9373L8.17613 14.9514C6.87081 14.216 6.21815 13.8483 5.85908 13.2334C5.5 12.6184 5.5 11.8684 5.5 10.3684V8.63158C5.5 7.13157 5.5 6.38157 5.85908 5.76664C6.21815 5.15171 6.87081 4.78401 8.17613 4.04861L9.92613 3.06269Z" stroke={color} strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+      <path d="M9.5 10.1667C9.5 10.1667 10.25 10.1667 11 11.5C11 11.5 13.3824 8.16667 15.5 7.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M17.3825 15L18.0527 18.2099C18.4833 20.2723 18.6986 21.3035 18.2563 21.7923C17.8141 22.281 17.046 21.8606 15.5099 21.0198L13.2364 19.7753C12.8734 19.5766 12.6919 19.4773 12.5 19.4773C12.3081 19.4773 12.1266 19.5766 11.7636 19.7753L9.49008 21.0198C7.95397 21.8606 7.18592 22.281 6.74365 21.7923C6.30139 21.3035 6.51669 20.2723 6.94731 18.2099L7.61752 15" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   )
 }
 
-export default subscriptionPlan
+export default PlanIcon

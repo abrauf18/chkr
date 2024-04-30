@@ -192,7 +192,7 @@ const CompanyInformation = ({
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
         <Link href="/" className="hover:text-primary">
           <button
-            className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl"
+            className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl whitespace-nowrap	"
             type="button"
           >
             Back to Home
