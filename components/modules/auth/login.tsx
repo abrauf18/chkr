@@ -6,8 +6,13 @@ import { Label } from "@/components/ui/label";
 import { LoginSchema } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from 'lucide-react';
+
 
 export default function Login() {
+
+  const [showPassword, setShowPassword] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -60,13 +65,24 @@ export default function Login() {
             >
               Password
             </Label>
-            <Input
-              {...register("password")}
-              className="bg-[#F9F8F8]"
-              id="password"
-              type="password"
-              placeholder="**************"
-            />
+            <div className="relative flex items-center">
+              <Input
+                {...register("password")}
+                className="bg-[#F9F8F8]"
+                id="password"
+                type={showPassword ? "password" : "text"}
+                placeholder="**************"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPassword((prev) => !prev);
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
             {typeof errors.password?.message === "string" && (
               <p className="text-red-500 mt-2">{errors.password?.message}</p>
             )}
