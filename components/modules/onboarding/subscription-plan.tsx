@@ -15,9 +15,9 @@ const SubscriptionPlan = ({
   } = useFormContext();
   const { onboardingData, setOnboardingData } = useOnboardingStore();
   return (
-    <div className="flex flex-col justify-center items-center my-20 mx-10">
+    <div className="flex flex-col justify-center items-center my-10 mx-10">
       <div className="flex flex-col w-full justify-center items-center">
-        <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-6 pb-8 my-10 gap-6">
+        <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-10 gap-6">
           <div className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
             <input
               type="radio"
@@ -84,4 +84,3 @@ const SubscriptionPlan = ({
 };
 
 export default SubscriptionPlan;
-
