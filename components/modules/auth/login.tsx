@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import loginImg from "@/public/images/login.png";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LoginSchema } from "@/lib/schema";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginSchema } from "@/lib/types";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Login() {
   const {
@@ -24,8 +24,10 @@ export default function Login() {
       }}
     >
       <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
-        <form className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit((d) => console.log(d))}>
+        <form
+          className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit((d) => console.log(d))}
+        >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Login To Your Account
           </h2>
@@ -44,8 +46,12 @@ export default function Login() {
               id="email"
               placeholder="Email"
             />
-            {errors.email && <p className="text-red-600 mt-2">Email is required</p>}
-            {errors.email && errors.email.type === "pattern" && <p className="text-red-600 mt-2">Invalid email format</p>}
+            {errors.email && (
+              <p className="text-red-500 mt-2">Email is required</p>
+            )}
+            {errors.email && errors.email.type === "pattern" && (
+              <p className="text-red-500 mt-2">Invalid email format</p>
+            )}
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Label
@@ -61,7 +67,9 @@ export default function Login() {
               type="password"
               placeholder="**************"
             />
-            {typeof errors.password?.message === 'string' && <p className="text-red-600 mt-2">{errors.password?.message}</p>}
+            {typeof errors.password?.message === "string" && (
+              <p className="text-red-500 mt-2">{errors.password?.message}</p>
+            )}
           </div>
 
           <div className="flex flex-col md:flex-row mt-4 md:items-center justify-between">

@@ -5,11 +5,9 @@ import User from "@/assets/icons/user-icon";
 import BuildingIcon from "@/assets/icons/building-icon";
 import Phone from "@/assets/icons/phone-icon";
 import Location from "@/assets/icons/location-icon";
-import Company from "@/assets/icons/company-icon";
-import subscriptionPlan from "@/assets/icons/plan-icon";
+import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { Upload } from "lucide-react";
 import useOnboardingStore from "@/store/onboarding-store";
 
 const CompanyInformation = ({
@@ -17,7 +15,7 @@ const CompanyInformation = ({
 }: {
   handleNextStep: () => void;
 }): JSX.Element => {
-  const { setOnboardingData } = useOnboardingStore();
+  const { setOnboardingData, removeOnboardingData } = useOnboardingStore();
   const {
     register,
     trigger,
@@ -59,7 +57,7 @@ const CompanyInformation = ({
       <div className="mb-4 w-full">
         <label
           htmlFor="fileInput"
-          className="md:text-lg text-sm font-semibold"
+          className="md:text-lg text-sm font-semibold w-full"
         >
           Upload Logo
           <input
@@ -69,9 +67,8 @@ const CompanyInformation = ({
             {...register("logo")}
             className="hidden"
           />
-
           <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
-            <Upload size={30} color="#7AA43E" />
+            <Upload width={30} height={30} />
             <span className="text-sm font-medium mt-3">Upload Logo</span>
           </div>
         </label>
@@ -194,9 +191,10 @@ const CompanyInformation = ({
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
         <button
           className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl"
-          type="submit"
+          type="button"
+          onClick={() => removeOnboardingData()}
         >
-          Cancel
+          Clear
         </button>
         <button
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
@@ -206,7 +204,7 @@ const CompanyInformation = ({
           Next
         </button>
       </div>
-    </div >
+    </div>
   );
 };
 

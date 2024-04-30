@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Onboarding, OnboardingSchema } from "@/lib/types";
 import Company from "@/assets/icons/company-icon";
-import subscriptionPlan from "@/assets/icons/plan-icon";
 
 export default function OnboardingPage() {
   const { currentStep, setCurrentStep, onboardingData, setOnboardingData } =
@@ -27,6 +26,10 @@ export default function OnboardingPage() {
         break;
     }
   };
+
+  const handlePreviousStep = () => {
+    setCurrentStep(Steps.COMPANY_DETAILS);
+  };
   const renderStep = () => {
     switch (currentStep) {
       case Steps.COMPANY_DETAILS:
@@ -34,7 +37,8 @@ export default function OnboardingPage() {
       case Steps.PLAN:
         return (
           <SubscriptionPlan
-          // handleNextStep={handleNextStep}
+            // handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
           />
         );
       default:
@@ -77,8 +81,11 @@ export default function OnboardingPage() {
       </div>
       <div className="flex justify-center">
         <FormProvider {...methods}>
-          <form id="onboarding-form" onSubmit={methods.handleSubmit(onSubmit)}
-            className="md:w-[70%] bg-white w-[90%] shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10">
+          <form
+            id="onboarding-form"
+            onSubmit={methods.handleSubmit(onSubmit)}
+            className="md:w-[70%] bg-white w-[90%] shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10"
+          >
             {renderStep()}
           </form>
         </FormProvider>
