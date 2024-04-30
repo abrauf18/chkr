@@ -5,8 +5,9 @@ import AuthLeftSide from "@/components/shared/auth-left-side";
 export default function SignupPage() {
   return (
     <>
-      <Navbar buttonText="Login" textBeforeButton="Already have an account?"
-        Link="login" />
+      <Navbar buttonText="Login"
+        textBeforeButton="Already have an account?"
+        url="login" />
       <div className="grid xl:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 md:mx-6 md:p-4">
         <AuthLeftSide
           heading1="YOUR GATEWAY"

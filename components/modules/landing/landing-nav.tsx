@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import ChkrLogo from "@/assets/icons/chkr-logo";
+import Link from "next/link";
+import Login from "../auth/login";
 
 const LandingPageNavbar: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -18,14 +20,14 @@ const LandingPageNavbar: React.FC = () => {
           <ChkrLogo className="h-8" />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <a href="login">
+          <Link href="/login">
             <button
               type="button"
               className="text-white bg-gray-800 font-medium rounded-2xl text-sm px-4 py-2 text-center"
             >
               Sign in
             </button>
-          </a>
+          </Link>
           <button
             onClick={toggleSidebar}
             type="button"

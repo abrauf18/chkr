@@ -59,7 +59,7 @@ export default function OnboardingPage() {
       <Navbar
         buttonText="Login "
         textBeforeButton="Already have an account"
-        Link="/login"
+        url="/login"
       />
       <div className="flex flex-col justify-center items-center my-10 mx-20">
         <h1 className="font-semibold lg:text-2xl md:text-3xl text-2xl text-center">
