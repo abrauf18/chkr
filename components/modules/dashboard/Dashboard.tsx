@@ -9,28 +9,25 @@ import PendingJobs from '@/assets/icons/PendingJobs'
 import Employees from '@/assets/icons/Employees'
 import CircleArrowRight from '@/assets/icons/circle-arrow-right'
 import AssignedJobCard from './AssignedJobCard'
-import { Camera } from 'lucide-react';
-
-
-// import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import user from "@/public/images/user.svg"
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col md:ml-24 md:w-3/4 w-full border border-black my-10 ">
-      <div className='flex  items-center'>
-        <h1 className='text-3xl font-bold'>Here’s a quick overview to all your insights</h1>
+    <div className="flex flex-col md:ml-24 md:w-3/4 w-full my-10 ">
+      <div className='flex justify-between items-center pt-2'>
+        <div><h1 className='text-3xl font-bold'>Here’s a quick overview to all your insights</h1></div>
         <div className='flex items-center'>
-          {/* <Image src={bell} alt='bell'
-            className='h-10' /> */}
           <BellIcon />
-          <div className='flex items-center bg-white rounded-3xl w-full pr-20 py-4'>
+          <div className='flex items-center bg-white rounded-3xl w-full p-2'>
             <div>
-              <BellIcon />
+              <Image src={user} alt='user' className='w-8 h-8' />
             </div>
-            <div className='flex flex-col'>
-              <h1>Ayesha Khan</h1>
-              <p>Employee</p>
+            <div className='flex flex-col mx-3'>
+              <h1 className='text-base'>Ayesha Khan</h1>
+              <p className='text-sm text-gray-500'>Employee</p>
             </div>
+            <ChevronDown className='m-2' />
           </div>
         </div>
       </div>
@@ -52,21 +49,21 @@ const Dashboard = () => {
       </div>
       {/* Job Cards */}
       <div className='flex md:flex-row flex-col w-full gap-6 mt-10 px-4 md:px-0'>
-        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
+        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>
           <TotalJobs className='mr-2' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>40</h1>
             <p className='text-gray-500 text-lg'>Total Jobs</p>
           </div>
         </div>
-        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
+        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>
           <OngoingJobs className='mr-4' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>25</h1>
             <p className='text-gray-500 text-lg'>Ongoing Jobs</p>
           </div>
         </div>
-        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
+        <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>
           <PendingJobs className='h-14 mr-4' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>15</h1>
@@ -102,10 +99,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <div className='flex justify-between items-center p-4'>
-          <span className='text-xl font-medium'>Recent Assigned Jobs</span>
+        <div className='flex justify-between items-center my-4'>
+          <span className='text-2xl font-semibold'>Recent Assigned Jobs</span>
           <Button className='rounded-3xl text-white'>View All</Button>
         </div>
+        <AssignedJobCard />
         <AssignedJobCard />
       </div>
     </div>
