@@ -1,30 +1,22 @@
 import { z } from "zod";
-// const MAX_FILE_SIZE = 5000000;
-// const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const OnboardingSchema = z.object({
-  logo: z.nullable(
-    z.instanceof(FileList).refine(
-      (fileList) => {
-        // Check if any file exceeds the size limit
-        for (let i = 0; i < fileList.length; i++) {
-          if (fileList[i].size > 5 * 1024 * 1024) {
-            return false;
-          }
-        }
-        return true;
-      },
-      { message: "File size must be less than 5MB" }
-    )
-  ),
-
-  // image: z
-  //   .any()
-  //   .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
-  //   .refine(
-  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-  //     "Only .jpg, .jpeg, .png and .webp formats are supported."
-  //   ),
+  logo: z
+    .nullable(z.instanceof(FileList))
+    .refine((fileList) => {
+      if (!fileList) return true; // Allow null values
+      for (let i = 0; i < fileList.length; i++) {
+        const file = fileList[i];
+        if (file.size > MAX_FILE_SIZE) return false; // Check file size
+        if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) return false; // Check file type
+      }
+      return true;
+    }, {
+      message: "Invalid file format or size.",
+      path: ["logo"]
+    }),
   "company-name": z
     .string()
     .min(1, { message: "Company name must not be empty" }),
