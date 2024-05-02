@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +10,12 @@ import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
+import { ChevronDown } from 'lucide-react';
 import Link from "next/link";
+
+const countries = ["USA", "Canada", "UK", "Australia", "Pakistan", "Germany", "India"];
+const companyTypes = ["Type A", "Type B", "Type C", "Type D"]; // Example list of company types
+
 
 const CompanyInformation = ({
   handleNextStep,
@@ -113,13 +119,26 @@ const CompanyInformation = ({
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
             <BuildingIcon />
           </span>
-          <Input
+          <select id="companyType" {...register("companyType")}
+            className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
+          >
+            <option value="">Select Company Type</option>
+            {companyTypes.map((companyTypes) => (
+              <option key={companyTypes} value={companyTypes}>
+                {companyTypes}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <ChevronDown />
+          </div>
+          {/* <Input
             className="pl-10 bg-[#F9F8F8]"
             id="companyType"
             type="text"
             placeholder="Company Type"
             {...register("company-type")}
-          />
+          /> */}
         </div>
         <p className="text-sm text-red-500">
           {" "}
@@ -176,19 +195,30 @@ const CompanyInformation = ({
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
             <Location />
           </span>
-          <Input
-            className="pl-10 bg-[#F9F8F8]"
+          <select
             id="country"
-            type="text"
-            placeholder="Country Name"
             {...register("country")}
-          />
+            className="w-full pl-10 pr-12 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
+            defaultValue=""
+          >
+            <option value="" disabled hidden>
+              Select Country
+            </option>
+            {countries.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <ChevronDown />
+          </div>
         </div>
         <p className="text-sm text-red-500">
-          {" "}
           <ErrorMessage errors={errors} name="country" />
         </p>
       </div>
+
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
         <Link href="/" className="hover:text-primary">
           <button
