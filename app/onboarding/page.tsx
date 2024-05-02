@@ -55,6 +55,7 @@ export default function OnboardingPage() {
   });
   const onSubmit = (data: Onboarding) => {
     console.log(data);
+    // removeOnboardingData();
   };
   return (
     <>
@@ -75,12 +76,16 @@ export default function OnboardingPage() {
             <div
               className={clsx(
                 "h-14 w-14 rounded-full relative",
-                currentStep === Steps.COMPANY_DETAILS ? "bg-primary" : "bg-white"
+                currentStep === Steps.COMPANY_DETAILS
+                  ? "bg-primary"
+                  : "bg-white"
               )}
             >
               <CompanyBuilding
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                color={currentStep === Steps.COMPANY_DETAILS ? "white" : "#FF2600"}
+                color={
+                  currentStep === Steps.COMPANY_DETAILS ? "white" : "#FF2600"
+                }
               />
             </div>
             <span className="ml-2">Company Information</span>
@@ -89,18 +94,21 @@ export default function OnboardingPage() {
             <div
               className={clsx(
                 "h-14 w-14 rounded-full relative",
-                currentStep === Steps.COMPANY_DETAILS ? "bg-white" : "bg-primary"
+                currentStep === Steps.COMPANY_DETAILS
+                  ? "bg-white"
+                  : "bg-primary"
               )}
             >
               <PlanIcon
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                color={currentStep === Steps.COMPANY_DETAILS ? "#FF2600" : "white"}
+                color={
+                  currentStep === Steps.COMPANY_DETAILS ? "#FF2600" : "white"
+                }
               />
             </div>
             <span className="text-gray-400 ml-2">Subscription Plan</span>
           </div>
         </div>
-
       </div>
       <div className="flex justify-center">
         <FormProvider {...methods}>

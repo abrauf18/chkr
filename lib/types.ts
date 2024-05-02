@@ -1,22 +1,16 @@
 import { z } from "zod";
 const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 export const OnboardingSchema = z.object({
-  logo: z
-    .nullable(z.instanceof(FileList))
-    .refine((fileList) => {
-      if (!fileList) return true; // Allow null values
-      for (let i = 0; i < fileList.length; i++) {
-        const file = fileList[i];
-        if (file.size > MAX_FILE_SIZE) return false; // Check file size
-        if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) return false; // Check file type
-      }
-      return true;
-    }, {
-      message: "Invalid file format or size.",
-      path: ["logo"]
-    }),
+  logo: z.any().refine((val) => val?.length === 1, {
+    message: "Logo is required",
+  }),
   "company-name": z
     .string()
     .min(1, { message: "Company name must not be empty" }),

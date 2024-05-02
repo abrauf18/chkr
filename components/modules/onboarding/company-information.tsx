@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,19 +10,26 @@ import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
-const countries = ["USA", "Canada", "UK", "Australia", "Pakistan", "Germany", "India"];
+const countries = [
+  "USA",
+  "Canada",
+  "UK",
+  "Australia",
+  "Pakistan",
+  "Germany",
+  "India",
+];
 const companyTypes = ["Type A", "Type B", "Type C", "Type D"]; // Example list of company types
-
 
 const CompanyInformation = ({
   handleNextStep,
 }: {
   handleNextStep: () => void;
 }): JSX.Element => {
-  const { setOnboardingData, removeOnboardingData } = useOnboardingStore();
+  const { setOnboardingData } = useOnboardingStore();
   const {
     register,
     trigger,
@@ -119,7 +126,9 @@ const CompanyInformation = ({
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
             <BuildingIcon />
           </span>
-          <select id="companyType" {...register("companyType")}
+          <select
+            id="companyType"
+            {...register("company-type")}
             className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
             <option value="">Select Company Type</option>
