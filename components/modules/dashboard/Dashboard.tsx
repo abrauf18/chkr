@@ -9,7 +9,10 @@ import PendingJobs from '@/assets/icons/PendingJobs'
 import Employees from '@/assets/icons/Employees'
 import CircleArrowRight from '@/assets/icons/circle-arrow-right'
 import AssignedJobCard from './AssignedJobCard'
-import { ChevronDown, Import } from 'lucide-react';
+import { Camera } from 'lucide-react';
+
+
+// import { ChevronDown } from 'lucide-react';
 
 const Dashboard = () => {
   return (
@@ -37,12 +40,7 @@ const Dashboard = () => {
         <div className="flex justify-center items-center gap-2">
           <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6">
             Select Date
-            {/* <Image
-              src={calender}
-              alt="calenderLogo"
-              className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
-            /> */}
-            <Calendar />
+            <Calendar className='ml-2' />
           </Button>
           <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6">
             Filter
@@ -55,27 +53,21 @@ const Dashboard = () => {
       {/* Job Cards */}
       <div className='flex md:flex-row flex-col w-full gap-6 mt-10 px-4 md:px-0'>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
-          <TotalJobs />
-          {/* <Image src={totalJobs} alt='total-Jobs'
-            className='h-14 w-1/4 mr-4' /> */}
+          <TotalJobs className='mr-2' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>40</h1>
             <p className='text-gray-500 text-lg'>Total Jobs</p>
           </div>
         </div>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
-          {/* <Image src={ongoingJobs} alt='Ongoing-Jobs'
-            className='h-14 w-1/4 mr-4' /> */}
-          <OngoingJobs />
+          <OngoingJobs className='mr-4' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>25</h1>
             <p className='text-gray-500 text-lg'>Ongoing Jobs</p>
           </div>
         </div>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-4'>
-          {/* <Image src={pendingJobs} alt='pending-Jobs'
-            className='h-14 w-1/4 mr-4' /> */}
-          <PendingJobs />
+          <PendingJobs className='h-14 mr-4' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>15</h1>
             <p className='text-gray-500 text-lg'>Pending Jobs</p>
@@ -84,11 +76,7 @@ const Dashboard = () => {
       </div>
       <div className='flex flex-col bg-white mt-10 rounded-3xl gap-4 py-6 px-3 mx-4 md:mx-0'>
         <div className='flex justify-start gap-4 px-4'>
-          <div>
-            {/* <Image src={employees} alt='employees'
-              className='h-14 mr-4' /> */}
-            <Employees />
-          </div>
+          <Employees className='mr-4' />
           <div className='flex flex-col'>
             <h1 className='font-bold text-3xl'>30</h1>
             <p className='text-gray-500 text-lg'>Total No. of employees</p>
@@ -108,8 +96,7 @@ const Dashboard = () => {
           <div className='flex items-center mt-4 md:mt-0'>
             <h1 className='text-sm whitespace-nowrap'>See Employees</h1>
             <div>
-              <CircleArrowRight />
-              {/* <Image src={righticon} alt='right-icon' className='h-6 ml-2' /> */}
+              <CircleArrowRight className='ml-2' />
             </div>
           </div>
         </div>
