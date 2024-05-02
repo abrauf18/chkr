@@ -12,6 +12,6 @@ coverage
 **/out/*
 **/lib/*
 **/app/components/ui/*
-**/app/assets/*
+**/assets/*
 next-env.d.ts
 # next.config.js

@@ -1,7 +1,6 @@
-import ResetPassword from "../components/modules/auth/ResetPassword";
-import Navbar from "@/app/components/shared/Navbar";
-import AuthLeftSide from "@/app/components/shared/AuthLeftSide";
-import leftSideImg from "@/app/assets/images/SignUpLeftSide.svg";
+import ResetPassword from "@/components/modules/auth/reset-password";
+import Navbar from "@/components/shared/navbar";
+import AuthLeftSide from "@/components/shared/auth-left-side";
 
 export default function page() {
   return (
@@ -9,16 +8,18 @@ export default function page() {
       <Navbar
         buttonText="Register Now"
         textBeforeButton="Don't have an account?"
+        url="signup"
       />
       <div className="grid xl:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 md:mx-6 md:p-4">
         <AuthLeftSide
           heading1="YOUR HUB"
           heading2="FOR FINDING THE BEST"
           heading3="SERVICE PROVIDERS"
-          url={leftSideImg}
+          url="/images/SignUpLeftSide.svg"
         />
         <ResetPassword />
       </div>
     </>
   );
 }
+
