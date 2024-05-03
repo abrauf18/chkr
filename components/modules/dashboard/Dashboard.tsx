@@ -23,18 +23,17 @@ import {
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col w-full my-2 ">
-
+    <div className="flex flex-col w-full">
       <div className='flex justify-between items-center pt-2'>
-        <div><h1 className='text-3xl font-bold'>Here’s a quick overview to all your insights</h1></div>
+        <div><h1 className='text-xl lg:text-3xl font-bold'>Here’s a quick overview to all your insights !! !!</h1></div>
         <div className='flex items-center'>
           <BellIcon />
           <div className='flex items-center bg-white rounded-3xl w-full p-2'>
             <div>
-              <Image src={user} alt='user' className='w-8 h-8' />
+              <Image src={user} alt='user' className='w-8 h-8 border border-black' />
             </div>
             <div className='flex flex-col mx-3'>
-              <h1 className='text-base'>Ayesha Khan</h1>
+              <h1 className='text-sm lg:text-base whitespace-nowrap'>Ayesha Khan</h1>
               <p className='text-sm text-gray-500'>Employee</p>
             </div>
             <ChevronDown className='m-2' />
@@ -45,11 +44,11 @@ const Dashboard = () => {
       <div className='flex justify-between items-center md:px-0 px-4'>
         <h1 className='text-xl font-bold'>Dashboard!</h1>
         <div className="flex justify-center items-center gap-2">
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6">
+          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
             Select Date
             <Calendar className='ml-2' />
           </Button>
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6">
+          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
             Filter
             <ChevronDown
               className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
@@ -120,7 +119,8 @@ const Dashboard = () => {
           dateTime="15 March 2023 7:00 pm"
           service="Room Cleaning"
           payment="230.00"
-          employeeName="Ralph Edwards" />
+          employeeName="Ralph Edwards"
+          imageurl='/images/user.jpeg' />
         <AssignedJobCard userName="Albert Flores"
           location="2972 Westheimer Rd. Santa Ana, Illinois 85486 "
           status="Checked-out"
@@ -128,7 +128,8 @@ const Dashboard = () => {
           dateTime="24 May 2024 8:00 pm"
           service="Room Cleaning"
           payment="260.00"
-          employeeName="Roy Edwards" />
+          employeeName="Roy Edwards"
+          imageurl='/images/user.jpeg' />
       </div>
       <Pagination className='bg-white mt-4 rounded-3xl p-4'>
         <PaginationContent>
