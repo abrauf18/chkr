@@ -11,10 +11,20 @@ import CircleArrowRight from '@/assets/icons/circle-arrow-right'
 import AssignedJobCard from './AssignedJobCard'
 import { ChevronDown } from 'lucide-react';
 import user from "@/public/images/user.svg"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col md:ml-24 md:w-3/4 w-full my-10 ">
+    <div className="flex flex-col w-full my-2 ">
+
       <div className='flex justify-between items-center pt-2'>
         <div><h1 className='text-3xl font-bold'>Here’s a quick overview to all your insights</h1></div>
         <div className='flex items-center'>
@@ -48,7 +58,7 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Job Cards */}
-      <div className='flex md:flex-row flex-col w-full gap-6 mt-10 px-4 md:px-0'>
+      <div className='flex md:flex-row flex-col w-full gap-6 mt-4 px-4 md:px-0'>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>
           <TotalJobs className='mr-2' />
           <div className='flex flex-col w-3/4'>
@@ -103,9 +113,47 @@ const Dashboard = () => {
           <span className='text-2xl font-semibold'>Recent Assigned Jobs</span>
           <Button className='rounded-3xl text-white'>View All</Button>
         </div>
-        <AssignedJobCard />
-        <AssignedJobCard />
+        <AssignedJobCard userName="Guy Hawkins"
+          location="4140 Parker Rd. Allentown, New Mexico 31134"
+          status="Checked-in"
+          phoneNumber="(603) 555-0123"
+          dateTime="15 March 2023 7:00 pm"
+          service="Room Cleaning"
+          payment="230.00"
+          employeeName="Ralph Edwards" />
+        <AssignedJobCard userName="Albert Flores"
+          location="2972 Westheimer Rd. Santa Ana, Illinois 85486 "
+          status="Checked-out"
+          phoneNumber="(603) 555-0123"
+          dateTime="24 May 2024 8:00 pm"
+          service="Room Cleaning"
+          payment="260.00"
+          employeeName="Roy Edwards" />
       </div>
+      <Pagination className='bg-white mt-4 rounded-3xl p-4'>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>
+              2
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">3</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   )
 }
