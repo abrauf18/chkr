@@ -13,7 +13,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <div>
             <Sidebar />
           </div>
-          <div className="lg:basis-full w-full p-6 md:p-4 lg:p-6">
+          <div className="lg:basis-full w-full pr-6 md:pr-4 pt-2 lg:pr-6">
             {children}
           </div>
         </main>
