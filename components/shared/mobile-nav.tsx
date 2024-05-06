@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import clsx from "clsx";
 import {
   AlignLeft,
   Users,
@@ -13,6 +16,31 @@ import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 
 const MobileNav = () => {
+  const pathname = usePathname();
+
+  const list = [
+    {
+      title: "Dashboard",
+      icon: <LayoutDashboard />,
+      path: "/company-admin/dashboard",
+    },
+    {
+      title: "All Jobs",
+      icon: <StickyNote />,
+      path: "/company-admin/dashboard#all-jobs",
+    },
+    {
+      title: "Employees",
+      icon: <Users />,
+      path: "/company-admin/dashboard#employees",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/company-admin/dashboard#settings",
+    },
+  ];
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   console.log(sidebarOpen);
@@ -20,6 +48,12 @@ const MobileNav = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  const isActive = (path: string) => {
+    const currentPath = pathname.split("#")[0];
+    return currentPath.startsWith(path);
+  };
+
 
   return (
     <div className="md:hidden">
@@ -53,51 +87,29 @@ const MobileNav = () => {
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 w-full ${
-              sidebarOpen ? "block" : "hidden"
-            }`}
+            className={`z-10 absolute top-24 w-full ${sidebarOpen ? "block" : "hidden"
+              }`}
             id="navbar-cta"
           >
             <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
-              <li className="mt-6">
+              <li className="mt-6 mb-10">
                 <SidebarLogo />
               </li>
-              <li className="flex items-center justify-center mt-12">
-                <LayoutDashboard color="white" />
-                <a
-                  href="#home"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:text-primary"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li className="flex items-center justify-center">
-                <StickyNote color="white" />
-                <a
-                  href="#aboutUs"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:text-primary"
-                >
-                  All Jobs
-                </a>
-              </li>
-              <li className="flex items-center justify-center">
-                <Users color="white" />
-                <a
-                  href="#Employees"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:text-primary"
-                >
-                  Employees
-                </a>
-              </li>
-              <li className="flex items-center justify-center">
-                <Settings color="white" />
-                <a
-                  href="#Settings"
-                  className="block py-2 px-3 md:p-0 text-white rounded hover:text-primary"
-                >
-                  Settings
-                </a>
-              </li>
+              {list.map((item) => (
+                <div key={item.path}>
+                  <Link href={item.path}>
+                    <div
+                      className={clsx(
+                        "flex items-center w-full h-12 hover:text-primary hover:bg-white text-white rounded-3xl px-4",
+                        isActive(item.path) && "text-primary",
+                      )}
+                    >
+                      <div>{item.icon}</div>
+                      <span className="ml-3">{item.title}</span>
+                    </div>
+                  </Link>
+                </div>
+              ))}
               <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
                 <CircleHelp color="white" />
               </div>
