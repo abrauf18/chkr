@@ -115,7 +115,7 @@ export default function OnboardingPage() {
           <form
             id="onboarding-form"
             onSubmit={methods.handleSubmit(onSubmit)}
-            className="md:w-[70%] bg-white w-[90%] shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10"
+            className="flex items-center justify-center md:w-[70%] bg-white w-[90%] shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10"
           >
             {renderStep()}
           </form>
