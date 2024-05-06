@@ -11,15 +11,6 @@ import CircleArrowRight from '@/assets/icons/circle-arrow-right'
 import AssignedJobCard from './AssignedJobCard'
 import { ChevronDown } from 'lucide-react';
 import user from "@/public/images/user.svg"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 
 const Dashboard = () => {
   return (
@@ -30,7 +21,8 @@ const Dashboard = () => {
           <BellIcon />
           <div className='flex items-center bg-white rounded-3xl w-full p-2'>
             <div>
-              <Image src={user} alt='user' className='w-8 h-8 border border-black' />
+              <Image src="/images/user.jpeg" height={8} width={8}
+                alt='user' className='w-8 h-8 rounded-full ' />
             </div>
             <div className='flex flex-col mx-3'>
               <h1 className='text-sm lg:text-base whitespace-nowrap'>Ayesha Khan</h1>
@@ -130,30 +122,6 @@ const Dashboard = () => {
           employeeName="Roy Edwards"
           imageurl='/images/user.jpeg' />
       </div>
-      <Pagination className='bg-white mt-4 rounded-3xl p-4'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
     </div>
   )
 }
