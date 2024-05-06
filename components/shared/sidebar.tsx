@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 import {
   Users,
   StickyNote,
@@ -14,7 +13,6 @@ import Link from "next/link";
 import clsx from "clsx";
 
 const SideBar = ({ open }: { open: boolean }) => {
-  const pathname = usePathname();
 
   const list = [
     {
@@ -39,9 +37,10 @@ const SideBar = ({ open }: { open: boolean }) => {
     },
   ];
 
-  const isActive = (path: string) => {
-    const currentPath = pathname.split("#")[0];
-    return currentPath.startsWith(path);
+  const [activePath, setActivePath] = useState("/company-admin/dashboard");
+
+  const handleClick = (path: string) => {
+    setActivePath(path);
   };
 
   return (
@@ -68,10 +67,12 @@ const SideBar = ({ open }: { open: boolean }) => {
               <Link href={item.path}>
                 <div
                   className={clsx(
-                    "flex items-center w-full h-12 hover:text-primary hover:bg-white rounded-3xl xl:px-4",
-                    isActive(item.path) && "text-primary",
-                    !open && "justify-center"
+                    "flex items-center w-full h-12 rounded-3xl xl:px-4",
+                    activePath === item.path && "bg-white text-primary",
+                    !open && "justify-center",
+                    "hover:text-primary hover:bg-white cursor-pointer"
                   )}
+                  onClick={() => handleClick(item.path)}
                 >
                   <div>{item.icon}</div>
                   {open && <span className="ml-3">{item.title}</span>}

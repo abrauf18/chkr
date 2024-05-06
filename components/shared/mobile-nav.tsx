@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
@@ -42,18 +42,15 @@ const MobileNav = () => {
   ];
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activePath, setActivePath] = useState("/company-admin/dashboard");
 
-  console.log(sidebarOpen);
+  const handleClick = (path: string) => {
+    setActivePath(path);
+  };
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-
-  const isActive = (path: string) => {
-    const currentPath = pathname.split("#")[0];
-    return currentPath.startsWith(path);
-  };
-
 
   return (
     <div className="md:hidden">
@@ -100,9 +97,11 @@ const MobileNav = () => {
                   <Link href={item.path}>
                     <div
                       className={clsx(
-                        "flex items-center w-full h-12 hover:text-primary hover:bg-white text-white rounded-3xl px-4",
-                        isActive(item.path) && "text-primary",
+                        "flex items-center w-full h-12 rounded-3xl px-4",
+                        activePath === item.path && "bg-white text-primary",
+                        activePath !== item.path && "text-white"
                       )}
+                      onClick={() => handleClick(item.path)}
                     >
                       <div>{item.icon}</div>
                       <span className="ml-3">{item.title}</span>
@@ -122,4 +121,3 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
-
