@@ -1,6 +1,11 @@
 import React from "react";
-import { Users, StickyNote, Settings, CircleHelp } from "lucide-react";
-import DashboardSquare from "@/assets/icons/dashboard-square";
+import {
+  Users,
+  StickyNote,
+  Settings,
+  CircleHelp,
+  LayoutDashboard,
+} from "lucide-react";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
 import Link from "next/link";
@@ -10,7 +15,7 @@ const SideBar = ({ open }: { open: boolean }) => {
   const list = [
     {
       title: "Dashboard",
-      icon: <DashboardSquare />,
+      icon: <LayoutDashboard />,
       path: "/dashboard",
     },
     {
@@ -32,7 +37,13 @@ const SideBar = ({ open }: { open: boolean }) => {
 
   return (
     <>
-      <div className="w-full flex gap-x-4 justify-start py-6">
+      <div
+        className={clsx(
+          open
+            ? "w-full flex gap-x-4 justify-start py-6"
+            : "w-full flex gap-x-4 justify-center py-6"
+        )}
+      >
         <Link href="#">
           <div className="text-2xl font-bold hover:text-sky-400">
             <div className="logo logo-triangle relative w-10 h-10 inline-block mt-6">

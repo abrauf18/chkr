@@ -1,11 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import ChkrLogo from "@/assets/icons/chkr-logo";
-import { Menu, Users, StickyNote, Settings, CircleHelp, Bell } from "lucide-react";
-import DashboardSquare from "@/assets/icons/dashboard-square";
-import Link from "next/link";
+import {
+  AlignLeft,
+  Users,
+  StickyNote,
+  Settings,
+  CircleHelp,
+  Bell,
+  LayoutDashboard,
+} from "lucide-react";
 import Image from "next/image";
-import LogoFooter from "@/assets/icons/footer-logo";
+import SidebarLogo from "@/assets/icons/sidebar-logo";
 
 const MobileNav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,7 +22,7 @@ const MobileNav = () => {
   };
 
   return (
-    <div className='md:hidden'>
+    <div className="md:hidden">
       <nav className="w-full mt-6 ">
         <div className="flex items-center justify-between py-4 ">
           <div className="flex mx-4 w-full justify-between">
@@ -29,27 +34,36 @@ const MobileNav = () => {
                 aria-controls="navbar-cta"
                 aria-expanded="false"
               >
-                <Menu />
+                <AlignLeft />
               </button>
             </div>
-            <div className='flex gap-2 justify-center items-center'>
-              <div className="bg-white flex justify-center items-center rounded-full h-12 w-12"><Bell /></div>
-              <div className='flex justify-center items-center bg-white rounded-full h-12 w-12'>
-                <Image src='/images/user.jpeg' width={6} height={6} alt='user' className='w-8 h-8 border rounded-full' />
+            <div className="flex gap-2 justify-center items-center">
+              <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
+                <Bell />
+              </div>
+              <div className="flex justify-center items-center bg-white rounded-full h-12 w-12">
+                <Image
+                  src="/images/user.jpeg"
+                  width={6}
+                  height={6}
+                  alt="user"
+                  className="w-8 h-8 border rounded-full"
+                />
               </div>
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 items-center w-full ${sidebarOpen ? "block" : "hidden"
-              }`}
+            className={`z-10 absolute top-24 w-full ${
+              sidebarOpen ? "block" : "hidden"
+            }`}
             id="navbar-cta"
           >
-            <ul className="flex flex-col justify-start font-medium p-4 border-t-0 items-center rounded-lg bg-black">
+            <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
               <li className="mt-6">
-                <LogoFooter />
+                <SidebarLogo />
               </li>
               <li className="flex items-center justify-center mt-12">
-                <DashboardSquare />
+                <LayoutDashboard color="white" />
                 <a
                   href="#home"
                   className="block py-2 px-3 md:p-0 text-white rounded hover:text-primary"
@@ -84,15 +98,16 @@ const MobileNav = () => {
                   Settings
                 </a>
               </li>
-              <div className="flex items-center mt-6 justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer">
-                <CircleHelp />
+              <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
+                <CircleHelp color="white" />
               </div>
             </ul>
           </div>
         </div>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default MobileNav
+export default MobileNav;
+
