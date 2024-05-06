@@ -34,7 +34,7 @@ const SideBar = ({ open }: { open: boolean }) => {
     <>
       <div className="w-full flex gap-x-4 justify-start py-6">
         <Link href="#">
-          <div className="font-garamond text-2xl font-bold hover:text-sky-400">
+          <div className="text-2xl font-bold hover:text-sky-400">
             <div className="logo logo-triangle relative w-10 h-10 inline-block mt-6">
               {open ? <LogoFooter /> : <SidebarLogo />}
             </div>
