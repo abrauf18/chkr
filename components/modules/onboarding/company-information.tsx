@@ -66,6 +66,7 @@ const CompanyInformation = ({
       handleNextStep();
     }
   };
+
   return (
     <div className="flex flex-col w-full justify-center items-center my-10 mx-10">
       <div className="mb-4 w-full">
