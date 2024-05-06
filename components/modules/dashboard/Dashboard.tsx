@@ -26,7 +26,7 @@ const Dashboard = () => {
     <div className="flex flex-col w-full">
       <div className='flex justify-between items-center pt-2'>
         <div><h1 className='text-xl lg:text-3xl font-bold'>Here’s a quick overview to all your insights !! !!</h1></div>
-        <div className='flex items-center'>
+        <div className='flex mobile:hidden items-center'>
           <BellIcon />
           <div className='flex items-center bg-white rounded-3xl w-full p-2'>
             <div>
@@ -41,7 +41,7 @@ const Dashboard = () => {
         </div>
       </div>
       <hr className='my-4' />
-      <div className='flex justify-between items-center md:px-0 px-4'>
+      <div className='flex justify-between items-center'>
         <h1 className='text-xl font-bold'>Dashboard!</h1>
         <div className="flex justify-center items-center gap-2">
           <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
@@ -57,9 +57,9 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Job Cards */}
-      <div className='flex md:flex-row flex-col w-full gap-6 mt-4 px-4 md:px-0'>
+      <div className='flex md:flex-row flex-col w-full gap-6 mt-4'>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>
-          <TotalJobs className='mr-2' />
+          <TotalJobs className='mr-4' />
           <div className='flex flex-col w-3/4'>
             <h1 className='font-bold text-3xl'>40</h1>
             <p className='text-gray-500 text-lg'>Total Jobs</p>
@@ -80,14 +80,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col bg-white mt-10 rounded-3xl gap-4 py-6 px-3 mx-4 md:mx-0'>
-        <div className='flex justify-start gap-4 px-4'>
+      <div className='flex flex-col bg-white mt-6 rounded-3xl gap-4 py-6'>
+        <div className='flex justify-start px-6'>
           <Employees className='mr-4' />
           <div className='flex flex-col'>
             <h1 className='font-bold text-3xl'>30</h1>
             <p className='text-gray-500 text-lg'>Total No. of employees</p>
           </div>
-
         </div>
         <hr className="h-0.5 bg-gray-200 mx-8 px-4" />
         <div className='flex md:flex-row flex-col mx-8 justify-between'>
