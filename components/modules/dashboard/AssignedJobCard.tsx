@@ -13,7 +13,7 @@ interface AssignedJobCardProps {
   service: string;
   payment: string;
   employeeName: string;
-  imageurl: string | undefined;
+  imageurl: string;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
@@ -83,7 +83,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
               alt="user-image"
               height={6}
               width={6}
-              className="rounded-full border border-black h-10 w-10"
+              className="rounded-full h-10 w-10"
             />
             <span className="mt-2 ml-2 font-semibold">{employeeName}</span>
           </div>
