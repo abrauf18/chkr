@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { usePathname } from "next/navigation";
 import {
   Users,
   StickyNote,
@@ -12,28 +14,35 @@ import Link from "next/link";
 import clsx from "clsx";
 
 const SideBar = ({ open }: { open: boolean }) => {
+  const pathname = usePathname();
+
   const list = [
     {
       title: "Dashboard",
       icon: <LayoutDashboard />,
-      path: "/dashboard",
+      path: "/company-admin/dashboard",
     },
     {
       title: "All Jobs",
       icon: <StickyNote />,
-      path: "/all-jobs",
+      path: "/company-admin/dashboard#all-jobs",
     },
     {
       title: "Employees",
       icon: <Users />,
-      path: "/employees",
+      path: "/company-admin/dashboard#employees",
     },
     {
       title: "Settings",
       icon: <Settings />,
-      path: "/settings",
+      path: "/company-admin/dashboard#settings",
     },
   ];
+
+  const isActive = (path: string) => {
+    const currentPath = pathname.split("#")[0];
+    return currentPath.startsWith(path);
+  };
 
   return (
     <>
@@ -45,7 +54,7 @@ const SideBar = ({ open }: { open: boolean }) => {
         )}
       >
         <Link href="#">
-          <div className="text-2xl font-bold hover:text-sky-400">
+          <div className="text-2xl font-bold">
             <div className="logo logo-triangle relative w-10 h-10 inline-block mt-6">
               {open ? <LogoFooter /> : <SidebarLogo />}
             </div>
@@ -55,11 +64,12 @@ const SideBar = ({ open }: { open: boolean }) => {
       <div className="relative w-full space-y-6 h-[85%] mt-12">
         <div className="space-y-3 h-[76%] overflow-auto section-scrollbar">
           {list.map((item) => (
-            <div>
+            <div key={item.path}>
               <Link href={item.path}>
                 <div
                   className={clsx(
                     "flex items-center w-full h-12 hover:text-primary hover:bg-white rounded-3xl xl:px-4",
+                    isActive(item.path) && "text-primary",
                     !open && "justify-center"
                   )}
                 >
@@ -79,4 +89,3 @@ const SideBar = ({ open }: { open: boolean }) => {
 };
 
 export default SideBar;
-
