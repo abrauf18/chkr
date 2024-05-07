@@ -4,6 +4,7 @@ import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
 import DeleteIcon from "@/assets/icons/delete-icon";
 
+
 interface AssignedJobCardProps {
   userName: string;
   location: string;
@@ -51,32 +52,32 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap gap-4 ">
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold">Phone number:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2">
+            <span className="font-bold md:text-lg">Phone number:</span>
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
               {phoneNumber}
             </span>
           </div>
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold ">Date & Time:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 ">
+            <span className="font-bold md:text-lg">Date & Time:</span>
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
               {dateTime}
             </span>
           </div>
-          <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold ">Service:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2">
+          <div className="flex flex-col text-sm whitespace-nowrap">
+            <span className="font-bold md:text-lg">Service:</span>
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
               {service}
             </span>
           </div>
-          <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold">To Pay:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 ">
+          <div className="flex flex-col text-sm whitespace-nowrap">
+            <span className="font-bold md:text-lg">To Pay:</span>
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base ">
               $ {payment} USD
             </span>
           </div>
         </div>
-        <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-          <span className="font-bold ">Assigned To:</span>
+        <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
+          <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
           <div className="flex mt-2">
             <Image
               src={imageurl}
@@ -85,7 +86,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
               width={6}
               className="rounded-full h-10 w-10"
             />
-            <span className="mt-2 ml-2 font-semibold">{employeeName}</span>
+            <span className="mt-2 ml-2 font-semibold text-sm  text-[#232324]">{employeeName}</span>
           </div>
         </div>
       </div>
