@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Calendar: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Calendar: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M9.16669 11.333H13.3334M6.66669 11.333H6.67417M10.8334 14.6663H6.66669M13.3334 14.6663H13.3259" stroke="#232324" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Card: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       viewBox="0 0 20 14"

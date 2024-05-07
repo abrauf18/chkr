@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CardLogos: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const CardLogos: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg viewBox="0 0 144 28" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="14" cy="14" r="14" fill="#CF1928" />

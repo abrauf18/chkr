@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Google: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Google: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M23.9949 12.77C23.9949 11.98 23.9249 11.23 23.8049 10.5H12.5049V15.01H18.9749C18.6849 16.49 17.8349 17.74 16.5749 18.59V21.59H20.4349C22.6949 19.5 23.9949 16.42 23.9949 12.77Z" fill="#4285F4" />

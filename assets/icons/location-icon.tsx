@@ -1,6 +1,6 @@
 import React from 'react'
 
-const location: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const location: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M12.0833 7.50033C12.0833 8.65091 11.1505 9.58366 9.99996 9.58366C8.84938 9.58366 7.91663 8.65091 7.91663 7.50033C7.91663 6.34973 8.84938 5.41699 9.99996 5.41699C11.1505 5.41699 12.0833 6.34973 12.0833 7.50033Z" stroke="#7C7C7C" stroke-width="1.5" />

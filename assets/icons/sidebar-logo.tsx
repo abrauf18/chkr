@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SidebarLogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const SidebarLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect x="0.313514" y="0.313514" width="46.4" height="46.4" rx="1.25405" fill="#FF2600" />

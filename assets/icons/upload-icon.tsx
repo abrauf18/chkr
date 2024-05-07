@@ -1,6 +1,6 @@
 import React from "react";
 
-const Upload: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Upload: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       viewBox="0 0 25 24"

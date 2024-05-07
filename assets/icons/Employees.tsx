@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Employees: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Employees: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"  {...props}>
       <rect width="64" height="64" rx="32" fill="#FF1C13" fill-opacity="0.2" />

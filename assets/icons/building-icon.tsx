@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BuildingIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const BuildingIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M13.3334 8.33301L15.1245 8.87034C16.2689 9.21367 16.841 9.38534 17.1705 9.82817C17.5 10.271 17.5 10.8684 17.5 12.0631V18.333" stroke="#7C7C7C" strokeWidth="1.5" strokeLinejoin="round" />

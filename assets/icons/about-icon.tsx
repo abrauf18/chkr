@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AboutIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const AboutIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       viewBox="0 0 49 50"
