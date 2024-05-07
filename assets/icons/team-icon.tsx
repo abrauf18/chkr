@@ -1,6 +1,6 @@
 import React from "react";
 
-const TeamIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const TeamIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       viewBox="0 0 51 50"

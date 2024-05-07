@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-@font-face {
+/* @font-face {
   font-family: "LufgaBold";
   src: local("LufgaBold"), url("../fonts/LufgaBold.ttf") format("truetype");
 }
@@ -24,11 +24,11 @@
 
 .lufgaRegular {
   font-family: "LufgaRegular", sans-serif !important;
-}
+} */
 
 body {
   background-color: #f9f8f8;
-  font-family: "LufgaRegular";
+  /* font-family: "LufgaRegular"; */
 }
 
 a {

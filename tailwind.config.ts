@@ -19,6 +19,7 @@ const config = {
       padding: "2rem",
     },
     screens: {
+      mobile: { "max": "768px" },
       xs: "400px",
       ...defaultTheme.screens,
     },

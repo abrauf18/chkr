@@ -1,6 +1,6 @@
 import React from 'react'
 
-const microsoft: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const microsoft: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clip-path="url(#clip0_488_2744)">

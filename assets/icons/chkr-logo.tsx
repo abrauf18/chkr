@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChkrLogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const ChkrLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       width="117"
@@ -228,3 +228,4 @@ const ChkrLogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
 };
 
 export default ChkrLogo;
+

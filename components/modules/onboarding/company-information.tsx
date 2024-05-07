@@ -66,8 +66,9 @@ const CompanyInformation = ({
       handleNextStep();
     }
   };
+
   return (
-    <div className="flex flex-col justify-center items-center my-10 mx-10">
+    <div className="flex flex-col w-full justify-center items-center my-10 mx-10">
       <div className="mb-4 w-full">
         <label
           htmlFor="fileInput"
@@ -141,13 +142,6 @@ const CompanyInformation = ({
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <ChevronDown />
           </div>
-          {/* <Input
-            className="pl-10 bg-[#F9F8F8]"
-            id="companyType"
-            type="text"
-            placeholder="Company Type"
-            {...register("company-type")}
-          /> */}
         </div>
         <p className="text-sm text-red-500">
           {" "}
@@ -238,7 +232,7 @@ const CompanyInformation = ({
           </button>
         </Link>
         <button
-          className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
           onClick={changeNextStep}
         >

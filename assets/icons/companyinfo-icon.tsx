@@ -1,6 +1,6 @@
 import React from "react";
 
-const CompanyInfoWhite: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const CompanyInfoWhite: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg
       width="62"

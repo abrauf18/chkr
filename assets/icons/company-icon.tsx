@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Company: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Company: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g filter="url(#filter0_d_489_3077)">

@@ -8,9 +8,13 @@ import React from "react";
 import ChkrLogo from "@/assets/icons/chkr-logo";
 import Link from "next/link";
 
-const Navbar: React.FC<NavbarProps> = ({ buttonText, textBeforeButton, url }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  buttonText,
+  textBeforeButton,
+  url,
+}) => {
   return (
-    <div className="flex justify-center items-center w-full">
+    <section className="flex justify-center items-center w-full">
       <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">
         {/* Left side content */}
         <div className="flex items-center flex-shrink-0 text-black">
@@ -29,10 +33,9 @@ const Navbar: React.FC<NavbarProps> = ({ buttonText, textBeforeButton, url }) =>
           </Link>
         </div>
       </nav>
-    </div>
+    </section>
   );
 };
 
 export default Navbar;
-
 

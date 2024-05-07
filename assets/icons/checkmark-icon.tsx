@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Checkmark: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Checkmark: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_834_7339)">
