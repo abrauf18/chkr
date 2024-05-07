@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import localFont from 'next/font/local'
+
+const myFont = localFont({ src: '../fonts/LufgaRegular.ttf' })
 
 export const metadata: Metadata = {
   title: "CHKR",
@@ -13,8 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={myFont.className}>{children}</body>
     </html>
   );
 }
-
