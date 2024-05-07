@@ -13,9 +13,6 @@ const Navbar: React.FC<NavbarProps> = ({
   textBeforeButton,
   url,
 }) => {
-  if (typeof window === "undefined") {
-    return null;
-  }
   return (
     <section className="flex justify-center items-center w-full">
       <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">

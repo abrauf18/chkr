@@ -1,8 +1,8 @@
 import React from 'react'
 
-const DeleteIcon = () => {
+const DeleteIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
   return (
-    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect width="41" height="41" rx="7.6875" fill="#EA4335" fill-opacity="0.1" />
       <path d="M27.1495 14.7373L26.6001 23.6257C26.4597 25.8966 26.3895 27.0321 25.8203 27.8485C25.5388 28.252 25.1766 28.5927 24.7563 28.8486C23.9064 29.3664 22.7688 29.3664 20.4935 29.3664C18.2152 29.3664 17.0761 29.3664 16.2256 28.8477C15.8051 28.5913 15.4427 28.25 15.1614 27.8457C14.5923 27.0281 14.5237 25.891 14.3864 23.6169L13.8503 14.7373" stroke="#EA4335" stroke-width="1.5" stroke-linecap="round" />
       <path d="M17.8402 20.2656H23.1599" stroke="#EA4335" stroke-width="1.5" stroke-linecap="round" />
