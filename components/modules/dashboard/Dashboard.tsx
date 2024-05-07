@@ -9,17 +9,21 @@ import PendingJobs from '@/assets/icons/PendingJobs'
 import Employees from '@/assets/icons/Employees'
 import CircleArrowRight from '@/assets/icons/circle-arrow-right'
 import AssignedJobCard from './AssignedJobCard'
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Bell } from 'lucide-react';
 import user from "@/public/images/user.svg"
 
 const Dashboard = () => {
   return (
     <div className="flex flex-col w-full">
       <div className='flex justify-between items-center pt-2'>
+
         <div><h1 className='text-xl lg:text-3xl font-bold'>Here’s a quick overview to all your insights !! !!</h1></div>
-        <div className='flex mobile:hidden items-center'>
-          <BellIcon />
-          <div className='flex items-center bg-white rounded-3xl w-full p-2'>
+        <div className='flex mobile:hidden items-center gap-3 w-full justify-end'>
+          <div className='flex justify-center items-center bg-white rounded-full h-14 w-14'>
+            <Bell />
+          </div>
+
+          <div className='flex items-center bg-white rounded-3xl p-2 border'>
             <div>
               <Image src="/images/user.jpeg" height={8} width={8}
                 alt='user' className='w-8 h-8 rounded-full ' />
