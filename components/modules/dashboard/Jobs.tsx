@@ -125,12 +125,12 @@ const Jobs = () => {
       <div className='flex justify-between items-center'>
         <h1 className='text-xl font-bold'>All Jobs</h1>
         <div className="flex justify-center items-center gap-2">
-          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base">
+          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
             <CalendarDays className='mr-2' color='#FF2600' />
             March 11 - March 17, 2024
             <ChevronDown className='ml-2' />
           </Button>
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
+          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
             Filter
             <ChevronDown
               className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
@@ -144,9 +144,9 @@ const Jobs = () => {
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary' : ''}`}
+            className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary' : ''} ${tab.text === "Cancelled" ? "mobile:hidden" : ''}`}
           >
-            <div className={`rounded-full w-2 h-2 ${activeTab === tab.id ? 'bg-primary' : 'bg-white'}`}></div>
+            <div className={`rounded-full w-2 h-2 ${activeTab === tab.id ? 'bg-primary' : 'bg-white'} `}></div>
             <div><span>{tab.text}</span></div>
           </div>
         ))}
