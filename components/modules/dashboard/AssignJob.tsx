@@ -69,8 +69,8 @@ export default function AssignJob() {
             <div className='flex justify-between py-2 px-4'>
               <div className='flex justify-center items-center'>
                 <Checkbox />
-                <Image src="/images/avatar.svg" alt='user' width={3} height={3}
-                  className='ml-10 mr-2' />
+                <div className='h-12 w-12 ml-10 mr-2'><Image src="/images/avatar.svg" alt='user' width={3} height={3}
+                /></div>
                 <span className='font-semibold whitespace-nowrap'>{user.username}</span>
               </div>
               <div className='flex items-center justify-center my-3 p-2 mobile:rounded-lg rounded-xl border-2 gap-2'>
