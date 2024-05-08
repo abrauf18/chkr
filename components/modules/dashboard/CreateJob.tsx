@@ -15,6 +15,9 @@ import {
 import CreateJobFirstStep from './CreateJobFirstStep';
 import CreateJobSecondStep from './CreateJobSecondStep';
 import AssignJob from './AssignJob';
+import JobPayment from './JobPayment';
+import JobDetails from './JobDetails';
+
 
 const service = ["A", "B", " C", "D"]; // Example list of company types
 
@@ -26,7 +29,7 @@ export default function CreateJob() {
         <DialogTrigger>
           <div className='flex items-center rounded-3xl text-white bg-primary p-2 whitespace-nowrap'><CirclePlus className='mr-2 h-5' />Create new job</div>
         </DialogTrigger>
-        <DialogContent className='bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-auto'>
+        <DialogContent className='bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden'>
           <DialogHeader>
             <DialogTitle>
               <span>Create new job</span>
@@ -36,6 +39,8 @@ export default function CreateJob() {
               {/* <CreateJobFirstStep /> */}
               {/* <CreateJobSecondStep /> */}
               <AssignJob />
+              {/* <JobPayment /> */}
+              {/* <JobDetails /> */}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
