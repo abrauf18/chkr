@@ -1,9 +1,17 @@
 "use client";
-import React from 'react'
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, MapPinned, Phone, CalendarClock, CircleDollarSign, MoveRight, ChevronDown } from 'lucide-react';
-import useJobStore from '@/store/job-store';
+import {
+  User,
+  MapPinned,
+  Phone,
+  CalendarClock,
+  CircleDollarSign,
+  MoveRight,
+  ChevronDown,
+} from "lucide-react";
+import useJobStore from "@/store/job-store";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
@@ -11,9 +19,7 @@ const service = ["A", "B", " C", "D"]; // Example list of company types
 interface Props {
   handleNextStep: () => void;
 }
-const CreateJobFirstStep = ({
-  handleNextStep,
-}: Props): JSX.Element => {
+const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
   const { setJobData } = useJobStore();
   const {
     register,
@@ -23,7 +29,6 @@ const CreateJobFirstStep = ({
   } = useFormContext();
 
   const changeNextStep = async () => {
-    console.log("next")
     const isValid = await trigger([
       "customer-name",
       "payment",
@@ -31,7 +36,6 @@ const CreateJobFirstStep = ({
       "date-time",
       "location",
       "service",
-      "description"
     ]);
     if (isValid) {
       const data = getValues([
@@ -41,17 +45,15 @@ const CreateJobFirstStep = ({
         "date-time",
         "location",
         "service",
-        "description"
-
       ]);
       setJobData({
         "customer-name": data[0],
-        "payment": data[1],
+        payment: data[1],
         "phone-number": data[2],
         "date-time": data[3],
         location: data[4],
         service: data[5],
-        "description": data[6],
+        description: "",
       });
       handleNextStep();
     }
@@ -91,7 +93,7 @@ const CreateJobFirstStep = ({
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <User color='#636363' />
+            <User color="#636363" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -108,7 +110,7 @@ const CreateJobFirstStep = ({
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <MapPinned color='#636363' />
+            <MapPinned color="#636363" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -129,7 +131,7 @@ const CreateJobFirstStep = ({
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <Phone color='#636363' />
+            <Phone color="#636363" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -150,7 +152,7 @@ const CreateJobFirstStep = ({
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <CalendarClock color='#636363' />
+            <CalendarClock color="#636363" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -171,7 +173,7 @@ const CreateJobFirstStep = ({
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <CircleDollarSign color='#636363' />
+            <CircleDollarSign color="#636363" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -194,7 +196,8 @@ const CreateJobFirstStep = ({
         Next
       </button>
     </>
-  )
+  );
 };
 
 export default CreateJobFirstStep;
+
