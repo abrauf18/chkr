@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import CompanyInformation from "@/components/modules/onboarding/company-information";
 import Navbar from "@/components/shared/navbar";
 import useOnboardingStore, { Steps } from "@/store/onboarding-store";

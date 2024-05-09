@@ -3,6 +3,10 @@ import Image from 'next/image';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from "@/components/ui/input";
 import { DollarSign } from 'lucide-react';
+import { useFormContext } from 'react-hook-form';
+import useJobStore from '@/store/job-store';
+import { Button } from '@/components/ui/button';
+
 const users: { username: string; status: string }[] = [
   { username: 'John oe', status: 'Available' },
   { username: 'Jane Smith', status: 'Assigned' },
@@ -14,7 +18,13 @@ const users: { username: string; status: string }[] = [
   { username: 'Ayesha ', status: 'Assigned' },
   // Add more users as needed
 ];
-export default function JobPayment() {
+export default function JobPayment({ handlePreviousStep, handleNextStep }: { handlePreviousStep: () => void; handleNextStep: () => void; }) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+  const { jobData, setJobData } = useJobStore();
+
   return (
     <div className='overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl'>
       {users.map((user) => (
@@ -45,6 +55,22 @@ export default function JobPayment() {
           <hr />
         </div>
       ))}
+      <div className="flex justify-between mt-4">
+        <Button
+          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl mr-4"
+          type="button"
+          onClick={handlePreviousStep}
+        >
+          Previous
+        </Button>
+        <Button
+          className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          type="button"
+          onClick={handleNextStep}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
