@@ -8,7 +8,7 @@ import {
   Phone,
   CalendarClock,
   CircleDollarSign,
-  MoveRight,
+  ArrowRight,
   ChevronDown,
 } from "lucide-react";
 import useJobStore from "@/store/job-store";
@@ -188,13 +188,17 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           <ErrorMessage errors={errors} name="payment" />
         </p>
       </div>
-      <button
-        className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
-        type="button"
-        onClick={changeNextStep}
-      >
-        Next
-      </button>
+      <div className="flex justify-end mt-10">
+        <button
+          className="flex gap-2 items-center justify-center bg-primary text-white font-medium py-3 px-5 rounded-3xl"
+          type="button"
+          onClick={changeNextStep}
+        >
+          Next
+          <ArrowRight className="h-5 w-5" />
+        </button>
+      </div>
+
     </>
   );
 };
