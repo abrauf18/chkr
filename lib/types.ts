@@ -70,7 +70,10 @@ export const ResetPasswordSchema = z
   });
 
 export const EmployeeSchema = z.object({
-  employeeName: z.string().max(50).min(1, { message: "Employee name must not be empty" }),
+  employeeName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
   phoneNumber: z
     .string()
@@ -82,3 +85,19 @@ export const FeedbackSchema = z.object({
   // rating: z.number().min(1, { message: "Rating is required" })
   //   .max(5, { message: "Rating must be between 1 and 5" }),
 });
+export const JobSchema = z.object({
+  "customer-name": z
+    .string()
+    .min(1, { message: "Company name must not be empty" }),
+  payment: z.string().min(1, { message: "Company type must not be empty" }),
+  "phone-number": z
+    .string()
+    .min(1, { message: "Phone number must not be empty" }),
+  "date-time": z.string().min(1, { message: "Phone number must not be empty" }),
+  location: z.string().min(1, { message: "Location must not be empty" }),
+  service: z.string().min(1, { message: "Plan must not be empty" }),
+  description: z.string().min(1, { message: "Description must not be empty" }),
+});
+
+export type Jobs = z.infer<typeof JobSchema>;
+
