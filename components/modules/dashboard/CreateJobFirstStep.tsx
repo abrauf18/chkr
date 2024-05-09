@@ -1,19 +1,69 @@
+"use client";
 import React from 'react'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, CirclePlus, MapPinned, Phone, CalendarClock, CircleDollarSign, MoveRight, ChevronDown } from 'lucide-react';
-
+import { User, MapPinned, Phone, CalendarClock, CircleDollarSign, MoveRight, ChevronDown } from 'lucide-react';
+import useJobStore from '@/store/job-store';
+import { useFormContext } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 const service = ["A", "B", " C", "D"]; // Example list of company types
+interface Props {
+  handleNextStep: () => void;
+}
+const CreateJobFirstStep = ({
+  handleNextStep,
+}: Props): JSX.Element => {
+  const { setJobData } = useJobStore();
+  const {
+    register,
+    trigger,
+    formState: { errors },
+    getValues,
+  } = useFormContext();
 
-export default function CreateJobFirstStep() {
+  const changeNextStep = async () => {
+    console.log("next")
+    const isValid = await trigger([
+      "customer-name",
+      "payment",
+      "phone-number",
+      "date-time",
+      "location",
+      "service",
+      "description"
+    ]);
+    if (isValid) {
+      const data = getValues([
+        "customer-name",
+        "payment",
+        "phone-number",
+        "date-time",
+        "location",
+        "service",
+        "description"
+
+      ]);
+      setJobData({
+        "customer-name": data[0],
+        "payment": data[1],
+        "phone-number": data[2],
+        "date-time": data[3],
+        location: data[4],
+        service: data[5],
+        "description": data[6],
+      });
+      handleNextStep();
+    }
+  };
+
   return (
     <>
       <div className="mb-4 w-full relative">
         <div className="relative flex items-center">
           <select
             id="service"
-            // {...register("service")}
+            {...register("service")}
             className="w-full pl-3 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
             <option value="">Select Service</option>
@@ -48,7 +98,7 @@ export default function CreateJobFirstStep() {
             id="customerName"
             type="text"
             placeholder="Enter customer fullname"
-          // {...register("customer-name")}
+            {...register("customer-name")}
           />
         </div>
       </div>
@@ -65,13 +115,13 @@ export default function CreateJobFirstStep() {
             id="location"
             type="text"
             placeholder="Customer location"
-          // {...register("location")}
+            {...register("location")}
           />
         </div>
         {/* <p className="text-sm text-red-500">
-{" "}
-<ErrorMessage errors={errors} name="location" />
-</p> */}
+        {" "}
+        <ErrorMessage errors={errors} name="location" />
+        </p> */}
       </div>
       <div className="mb-4 w-full relative">
         <Label htmlFor="phone" className="md:text-lg text-sm font-semibold">
@@ -86,7 +136,7 @@ export default function CreateJobFirstStep() {
             id="phone"
             type="text"
             placeholder="Enter Phone Number"
-          // {...register("phone-number")}
+            {...register("phone-number")}
           />
         </div>
         {/* <p className="text-sm text-red-500">
@@ -107,7 +157,7 @@ export default function CreateJobFirstStep() {
             id="Date and time"
             type="text"
             placeholder="Select Date&Time"
-          // {...register("Date&Timer")}
+            {...register("date-time")}
           />
         </div>
         {/* <p className="text-sm text-red-500">
@@ -128,7 +178,7 @@ export default function CreateJobFirstStep() {
             id="Payment"
             type="text"
             placeholder="Enter amount"
-          // {...register("Payment")}
+            {...register("payment")}
           />
         </div>
         {/* <p className="text-sm text-red-500">
@@ -136,6 +186,15 @@ export default function CreateJobFirstStep() {
         <ErrorMessage errors={errors} name="Payment" />
       </p> */}
       </div>
+      <button
+        className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+        type="button"
+        onClick={changeNextStep}
+      >
+        Next
+      </button>
     </>
   )
-}
+};
+
+export default CreateJobFirstStep;

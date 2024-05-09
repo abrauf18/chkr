@@ -12,6 +12,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useFormContext } from 'react-hook-form';
+import useJobStore from '@/store/job-store';
 
 const users: { username: string; status: string }[] = [
   { username: 'John Doe', status: 'Available' },
@@ -25,7 +27,13 @@ const users: { username: string; status: string }[] = [
   // Add more users as needed
 ];
 
-export default function AssignJob() {
+export default function AssignJob({ handlePreviousStep, handleNextStep }: { handlePreviousStep: () => void; handleNextStep: () => void; }) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  const { jobData, setJobData } = useJobStore();
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -102,6 +110,22 @@ export default function AssignJob() {
           onClick={() => setCurrentPage(currentPage + 1)}
         />
       </Pagination>
+      <div className="flex justify-between mt-4">
+        <Button
+          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl mr-4"
+          type="button"
+          onClick={handlePreviousStep}
+        >
+          Previous
+        </Button>
+        <Button
+          className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          type="button"
+          onClick={handleNextStep}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

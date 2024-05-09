@@ -1,8 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button';
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { User, CirclePlus, MapPinned, Phone, CalendarClock, CircleDollarSign, MoveRight, ChevronDown } from 'lucide-react';
+import { User, CirclePlus, MoveRight } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -17,12 +15,82 @@ import CreateJobSecondStep from './CreateJobSecondStep';
 import AssignJob from './AssignJob';
 import JobPayment from './JobPayment';
 import JobDetails from './JobDetails';
-
-
-const service = ["A", "B", " C", "D"]; // Example list of company types
+import useJobStore, { Steps } from '@/store/job-store';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import { Jobs, JobSchema } from "@/lib/types";
 
 
 export default function CreateJob() {
+  const { currentStep, setCurrentStep, jobData, setJobData } =
+    useJobStore();
+
+  const handleNextStep = () => {
+    switch (currentStep) {
+      case Steps.Create_Job_First_Step:
+        setCurrentStep(Steps.Create_Job_Second_Step);
+        break;
+      case Steps.Create_Job_Second_Step:
+        setCurrentStep(Steps.Assign_Job);
+        break;
+      case Steps.Assign_Job:
+        setCurrentStep(Steps.Payment);
+        break;
+      // case Steps.Payment:
+      //   setCurrentStep(Steps.Job_Details);
+      //   break;
+      default:
+        setCurrentStep(Steps.Create_Job_First_Step);
+        break;
+    }
+  };
+
+  const handlePreviousStep = () => {
+    setCurrentStep(Steps.Create_Job_First_Step);
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case Steps.Create_Job_First_Step:
+        return (
+          <CreateJobFirstStep handleNextStep={handleNextStep} />
+        );
+      case Steps.Create_Job_Second_Step:
+        return (
+          <CreateJobSecondStep
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        );
+      case Steps.Assign_Job:
+        return (
+          <AssignJob
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        );
+      case Steps.Payment:
+        return (
+          <JobPayment
+            handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+  const methods = useForm({
+    resolver: zodResolver(JobSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: jobData,
+  });
+  const onSubmit = (data: Jobs) => {
+    console.log(data);
+    // removeOnboardingData();
+  };
+
   return (
     <>
       <Dialog>
@@ -36,16 +104,18 @@ export default function CreateJob() {
               <hr className='my-6' />
             </DialogTitle>
             <DialogDescription className='text-black'>
+              <FormProvider  {...methods}>
+                {renderStep()}
+              </FormProvider>
+
               {/* <CreateJobFirstStep /> */}
               {/* <CreateJobSecondStep /> */}
-              <AssignJob />
-              {/* <JobPayment /> */}
-              {/* <JobDetails /> */}
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
-            <Button type="submit" className='rounded-3xl text-white'>Next<MoveRight className='ml-2' /></Button>
-          </DialogFooter>
+          {/* <DialogFooter>
+            <Button type="submit" className='rounded-3xl text-white'>Next<MoveRight className='ml-2'
+              onSubmit={methods.handleSubmit(onSubmit)} /></Button>
+          </DialogFooter> */}
         </DialogContent>
       </Dialog>
     </>
