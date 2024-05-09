@@ -107,9 +107,6 @@ export default function CreateJob() {
               <FormProvider  {...methods}>
                 {renderStep()}
               </FormProvider>
-
-              {/* <CreateJobFirstStep /> */}
-              {/* <CreateJobSecondStep /> */}
             </DialogDescription>
           </DialogHeader>
           {/* <DialogFooter>
