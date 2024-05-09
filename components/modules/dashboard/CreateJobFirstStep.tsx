@@ -77,10 +77,10 @@ const CreateJobFirstStep = ({
             <ChevronDown />
           </div>
         </div>
-        {/* <p className="text-sm text-red-500">
-        {" "}
-        <ErrorMessage errors={errors} name="company-type" />
-      </p> */}
+        <p className="text-sm text-red-500">
+          {" "}
+          <ErrorMessage errors={errors} name="service" />
+        </p>
       </div>
       <div className="mb-4 w-full relative">
         <Label
@@ -118,10 +118,10 @@ const CreateJobFirstStep = ({
             {...register("location")}
           />
         </div>
-        {/* <p className="text-sm text-red-500">
-        {" "}
-        <ErrorMessage errors={errors} name="location" />
-        </p> */}
+        <p className="text-sm text-red-500">
+          {" "}
+          <ErrorMessage errors={errors} name="location" />
+        </p>
       </div>
       <div className="mb-4 w-full relative">
         <Label htmlFor="phone" className="md:text-lg text-sm font-semibold">
@@ -139,10 +139,10 @@ const CreateJobFirstStep = ({
             {...register("phone-number")}
           />
         </div>
-        {/* <p className="text-sm text-red-500">
-      {" "}
-    <ErrorMessage errors={errors} name="phone-number" />
-      </p> */}
+        <p className="text-sm text-red-500">
+          {" "}
+          <ErrorMessage errors={errors} name="phone-number" />
+        </p>
       </div>
       <div className="mb-4 w-full relative">
         <Label htmlFor="Date&Time" className="md:text-lg text-sm font-semibold">
@@ -160,10 +160,10 @@ const CreateJobFirstStep = ({
             {...register("date-time")}
           />
         </div>
-        {/* <p className="text-sm text-red-500">
-        {" "}
-        <ErrorMessage errors={errors} name="Date&Time" />
-      </p> */}
+        <p className="text-sm text-red-500">
+          {" "}
+          <ErrorMessage errors={errors} name="date-time" />
+        </p>
       </div>
       <div className="mb-4 w-full relative">
         <Label htmlFor="Payment" className="md:text-lg text-sm font-semibold">
@@ -181,10 +181,10 @@ const CreateJobFirstStep = ({
             {...register("payment")}
           />
         </div>
-        {/* <p className="text-sm text-red-500">
-        {" "}
-        <ErrorMessage errors={errors} name="Payment" />
-      </p> */}
+        <p className="text-sm text-red-500">
+          {" "}
+          <ErrorMessage errors={errors} name="payment" />
+        </p>
       </div>
       <button
         className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
