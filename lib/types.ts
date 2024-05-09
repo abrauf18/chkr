@@ -69,3 +69,24 @@ export const ResetPasswordSchema = z
     path: ["confirmPassword"], // path of error
   });
 
+export const JobSchema = z.object({
+  "customer-name": z
+    .string()
+    .min(1, { message: "Company name must not be empty" }),
+  "payment": z
+    .string()
+    .min(1, { message: "Company type must not be empty" }),
+  "phone-number": z
+    .string()
+    .min(1, { message: "Phone number must not be empty" }),
+  "date-time": z
+    .string()
+    .min(1, { message: "Phone number must not be empty" }),
+  location: z.string().min(1, { message: "Location must not be empty" }),
+  service: z.string().min(1, { message: "Plan must not be empty" }),
+  "description": z
+    .string()
+    .min(1, { message: "Description must not be empty" }),
+});
+
+export type Jobs = z.infer<typeof JobSchema>;
