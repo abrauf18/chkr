@@ -4,8 +4,16 @@ import { Button } from '@/components/ui/button'
 import { Bold, Italic, Link2, MapPinned } from 'lucide-react'
 import React from 'react'
 import Comment, { CommentProps } from './Comment'
+import useJobStore from '@/store/job-store'
+import { useFormContext } from 'react-hook-form'
 
-export default function JobDetails() {
+export default function JobDetails({ handlePreviousStep }: { handlePreviousStep: () => void; }) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+  const { jobData, setJobData } = useJobStore();
+
   const comments: CommentProps[] = [
     {
       date: '27/03/2023',
@@ -114,6 +122,15 @@ export default function JobDetails() {
         {comments.map((comment, index) => (
           <Comment key={index} {...comment} />
         ))}
+      </div>
+      <div className="flex justify-between mt-4">
+        <Button
+          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl mr-4"
+          type="button"
+          onClick={handlePreviousStep}
+        >
+          Previous
+        </Button>
       </div>
     </div>
 

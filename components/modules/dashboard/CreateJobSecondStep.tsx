@@ -29,7 +29,7 @@ export default function CreateJobSecondStep({
     }
   };
   return (
-    <div className="mb-4 w-full relative">
+    <div className="flex flex-col w-full mx-4">
       <Label htmlFor="description" className="md:text-lg text-sm font-semibold">
         Description
       </Label>
@@ -41,24 +41,28 @@ export default function CreateJobSecondStep({
         maxLength={500}
         style={{ resize: "none" }}
         {...register("description")}
+        className="border rounded-xl mr-4 bg-gray-50 p-2 h-[25vh]"
       />
       <p className="text-red-500 text-sm">
         <ErrorMessage errors={errors} name="description" />
       </p>
-      <button
-        className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl"
-        type="button"
-        onClick={handlePreviousStep}
-      >
-        Previous
-      </button>
-      <button
-        className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
-        type="button"
-        onClick={handleDescriptionChange}
-      >
-        Next
-      </button>
+      <div className="flex justify-center gap-3 mt-3">
+        <button
+          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl"
+          type="button"
+          onClick={handlePreviousStep}
+        >
+          Previous
+        </button>
+        <button
+          className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          type="button"
+          onClick={handleDescriptionChange}
+        >
+          Next
+        </button>
+      </div>
+
     </div>
   );
 }

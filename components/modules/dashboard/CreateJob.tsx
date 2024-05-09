@@ -36,9 +36,9 @@ export default function CreateJob() {
       case Steps.Assign_Job:
         setCurrentStep(Steps.Payment);
         break;
-      // case Steps.Payment:
-      //   setCurrentStep(Steps.Job_Details);
-      //   break;
+      case Steps.Payment:
+        setCurrentStep(Steps.Job_Details);
+        break;
       default:
         setCurrentStep(Steps.Create_Job_First_Step);
         break;
@@ -46,8 +46,28 @@ export default function CreateJob() {
   };
 
   const handlePreviousStep = () => {
-    setCurrentStep(Steps.Create_Job_First_Step);
+    switch (currentStep) {
+      case Steps.Create_Job_First_Step:
+        // Handle previous step from the first step
+        break;
+      case Steps.Create_Job_Second_Step:
+        setCurrentStep(Steps.Create_Job_First_Step);
+        break;
+      case Steps.Assign_Job:
+        setCurrentStep(Steps.Create_Job_Second_Step);
+        break;
+      case Steps.Payment:
+        setCurrentStep(Steps.Assign_Job);
+        break;
+      case Steps.Job_Details:
+        setCurrentStep(Steps.Payment);
+        break;
+      default:
+        setCurrentStep(Steps.Create_Job_First_Step); // Reset to first step
+        break;
+    }
   };
+
 
   const renderStep = () => {
     switch (currentStep) {
@@ -73,6 +93,13 @@ export default function CreateJob() {
         return (
           <JobPayment
             handleNextStep={handleNextStep}
+            handlePreviousStep={handlePreviousStep}
+          />
+        );
+      case Steps.Job_Details:
+        return (
+          <JobDetails
+            // handleNextStep={handleNextStep}
             handlePreviousStep={handlePreviousStep}
           />
         );
