@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Jobs } from "@/lib/types";
+import { JobSchema } from "@/lib/types"; // Import your validation schema
 
 export const Steps = {
   Create_Job_First_Step: "Create_Job_First_Step",
@@ -14,7 +15,7 @@ interface JobStore {
   currentStep: string;
   jobData: Jobs;
   setCurrentStep: (step: string) => void;
-  setJobData: (data: Jobs) => void;
+  setJobData: (data: Partial<Jobs>) => void;
   removeOnboardingData: () => void;
 }
 
@@ -30,12 +31,21 @@ const useJobStore = create(
         location: "",
         service: "",
         description: "",
+        selectedUsers: [], // Initialize selected users as an empty array
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
-      setJobData: (data: Partial<Jobs>) =>
-        set((state) => ({
-          jobData: { ...state.jobData, ...data },
-        })),
+      setJobData: (data: Partial<Jobs>) => {
+        try {
+          // Validate data against JobSchema
+          JobSchema.parse(data);
+          set((state) => ({
+            jobData: { ...state.jobData, ...data },
+          }));
+        } catch (error) {
+          console.error("Validation error:", error);
+          // Handle validation error (e.g., display message to user)
+        }
+      },
       removeOnboardingData: () =>
         set({
           currentStep: Steps.Create_Job_First_Step,
@@ -47,6 +57,7 @@ const useJobStore = create(
             location: "",
             service: "",
             description: "",
+            selectedUsers: [],
           },
         }),
     }),
@@ -58,4 +69,3 @@ const useJobStore = create(
 );
 
 export default useJobStore;
-
