@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Input } from "@/components/ui/input";
-import { Calendar, ChevronDown, Search, User } from 'lucide-react';
+import { ArrowRight, Calendar, ChevronDown, Search, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -72,16 +72,16 @@ export default function AssignJob({ handlePreviousStep, handleNextStep }: { hand
         </div>
       </div>
       <div className='overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl'>
-        {currentUsers.map((user) => (
-          <div key={user.username} className=' px-4'>
+        {currentUsers.map((user, index) => (
+          <div key={user.username} className={`px-4 ${index % 4 === 1 || index % 4 === 3 ? 'bg-gray-100' : ''}`}>
             <div className='flex justify-between py-2 px-4'>
               <div className='flex justify-center items-center'>
                 <Checkbox />
-                <div className='h-12 w-12 ml-10 mr-2'><Image src="/images/avatar.svg" alt='user' width={3} height={3}
+                <div className='h-10 w-10 ml-10 mr-2'><Image src="/images/avatar.svg" alt='user' width={3} height={3}
                 /></div>
                 <span className='font-semibold whitespace-nowrap'>{user.username}</span>
               </div>
-              <div className='flex items-center justify-center my-3 p-2 mobile:rounded-lg rounded-xl border-2 gap-2'>
+              <div className='flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2'>
                 <div className={`rounded-full h-2 w-2 ${user.status == 'Available' ? 'bg-green-500' : 'bg-primary'}`}></div>
                 <span className='font-medium text-sm mobile:hidden'>{user.status}</span>
               </div>
@@ -89,41 +89,36 @@ export default function AssignJob({ handlePreviousStep, handleNextStep }: { hand
             <hr />
           </div>
         ))}
+        <Pagination className='px-4 py-2'>
+          <PaginationPrevious
+            onClick={() => setCurrentPage(currentPage - 1)}
+          />
+          <PaginationContent>
+            {Array.from({ length: Math.ceil(users.length / itemsPerPage) }, (_, i) => (
+              <PaginationItem key={i}>
+                <PaginationLink
+                  onClick={() => paginate(i + 1)}
+                  isActive={i + 1 === currentPage}
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+          </PaginationContent>
+          <PaginationNext
+            onClick={() => setCurrentPage(currentPage + 1)}
+          />
+        </Pagination>
       </div>
-      <Pagination>
-        <PaginationPrevious
-          onClick={() => setCurrentPage(currentPage - 1)}
-        />
-        <PaginationContent>
-          {Array.from({ length: Math.ceil(users.length / itemsPerPage) }, (_, i) => (
-            <PaginationItem key={i}>
-              <PaginationLink
-                onClick={() => paginate(i + 1)}
-                isActive={i + 1 === currentPage}
-              >
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-        </PaginationContent>
-        <PaginationNext
-          onClick={() => setCurrentPage(currentPage + 1)}
-        />
-      </Pagination>
-      <div className="flex justify-between mt-4">
-        <Button
-          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl mr-4"
-          type="button"
-          onClick={handlePreviousStep}
-        >
-          Previous
-        </Button>
+
+      <div className="flex justify-end mt-10">
         <Button
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
           onClick={handleNextStep}
         >
-          Next
+          Assign Job
+          <ArrowRight className="h-6 w-6" />
         </Button>
       </div>
     </div>
