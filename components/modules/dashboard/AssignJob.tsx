@@ -11,19 +11,25 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useFormContext, useFieldArray, useWatch } from "react-hook-form";
+import { useFormContext, useFieldArray } from "react-hook-form";
 import useJobStore from "@/store/job-store";
+import { ErrorMessage } from "@hookform/error-message";
 
-const users: { username: string; status: string }[] = [
-  { username: "John Doe", status: "Available" },
-  { username: "Jane Smith", status: "Assigned" },
-  { username: "Michael Lee", status: "Available" },
-  { username: "Ayesha Lee", status: "Assigned" },
-  { username: "Doe", status: "Available" },
-  { username: " Anne", status: "Assigned" },
-  { username: " Lee", status: "Available" },
-  { username: "Ayesha ", status: "Assigned" },
-  // Add more users as needed
+interface User {
+  id: number;
+  username: string;
+  status: string;
+}
+
+const users: User[] = [
+  { id: 1, username: "John Doe", status: "Available" },
+  { id: 2, username: "Jane Smith", status: "Assigned" },
+  { id: 3, username: "Michael Lee", status: "Available" },
+  { id: 4, username: "Ayesha Lee", status: "Assigned" },
+  { id: 5, username: "John", status: "Available" },
+  { id: 6, username: "Jane", status: "Assigned" },
+  { id: 7, username: "Michael", status: "Available" },
+  { id: 8, username: "Ayesha ", status: "Assigned" },
 ];
 
 export default function AssignJob({
@@ -34,16 +40,14 @@ export default function AssignJob({
   const {
     trigger,
     getValues,
-    register,
-    control,
+    watch,
+    setValue,
     formState: { errors },
+    clearErrors,
   } = useFormContext<Record<string, any>>();
 
+  const selectedUsers = watch("selectedUsers");
   const { jobData, setJobData } = useJobStore();
-  const { fields } = useFieldArray({
-    control,
-    name: "selectedUsers",
-  });
 
   const handleCheckboxChange = async () => {
     const isValid = await trigger(["selectedUsers"]);
@@ -62,9 +66,35 @@ export default function AssignJob({
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const isUserSelected = (id: number) => {
+    return selectedUsers.some(
+      (selectedUser: { id: number }) => selectedUser.id === id
+    );
+  };
+
+  const handleChange = (user: User) => {
+    if (isUserSelected(user.id)) {
+      setValue(
+        "selectedUsers",
+        selectedUsers.filter(
+          (selectedUser: { id: number }) => selectedUser.id !== user.id
+        )
+      );
+    } else {
+      setValue("selectedUsers", [
+        ...selectedUsers,
+        {
+          ...user,
+        },
+      ]);
+      if (errors.selectedUsers) {
+        clearErrors("selectedUsers");
+      }
+    }
+  };
   return (
     <div>
-      <div className="flex flex-row mobile:flex-col justify-between w-full ">
+      <div className="flex flex-row mobile:flex-col justify-between w-full mb-5">
         <div className="relative flex items-center w-1/2 mobile:w-full">
           <Input
             className="bg-[#F9F8F8] pr-10"
@@ -87,11 +117,15 @@ export default function AssignJob({
           </Button>
         </div>
       </div>
-      <div className="overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl">
+      <p className="text-sm text-red-500 text-right">
+        {" "}
+        <ErrorMessage errors={errors} name="selectedUsers" />
+      </p>
+      <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl">
         {currentUsers.map((user, index) => (
           <>
             <div
-              key={user.username}
+              key={user.id}
               className={`px-4 ${
                 index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
               }`}
@@ -100,9 +134,8 @@ export default function AssignJob({
                 <div className="flex justify-center items-center">
                   <input
                     type="checkbox"
-                    {...register(
-                      `selectedUsers.${index + (currentPage - 1) * 4}.username`
-                    )}
+                    onChange={() => handleChange(user)}
+                    checked={isUserSelected(user.id)}
                     value={user.username}
                   />
                   <div className="h-10 w-10 ml-10 mr-2">

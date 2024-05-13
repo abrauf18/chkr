@@ -94,7 +94,16 @@ export default function OnboardingSteps() {
                 }
               />
             </div>
-            <span className={clsx(currentStep === Steps.COMPANY_DETAILS ? "text-black" : "text-gray-400", "ml-2")}>Subscription Plan</span>
+            <span
+              className={clsx(
+                currentStep === Steps.COMPANY_DETAILS
+                  ? "text-black"
+                  : "text-gray-400",
+                "ml-2"
+              )}
+            >
+              Subscription Plan
+            </span>
           </div>
           <div className="flex items-center ">
             <div
@@ -112,7 +121,14 @@ export default function OnboardingSteps() {
                 }
               />
             </div>
-            <span className={clsx(currentStep === Steps.PLAN ? "text-black" : "text-gray-400", "ml-2")}>Subscription Plan</span>
+            <span
+              className={clsx(
+                currentStep === Steps.PLAN ? "text-black" : "text-gray-400",
+                "ml-2"
+              )}
+            >
+              Subscription Plan
+            </span>
           </div>
         </div>
       </div>

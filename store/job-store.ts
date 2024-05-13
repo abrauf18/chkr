@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Jobs } from "@/lib/types";
-import { JobSchema } from "@/lib/types"; // Import your validation schema
 
 export const Steps = {
   Create_Job_First_Step: "Create_Job_First_Step",
