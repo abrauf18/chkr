@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Calendar, ChevronDown, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, Calendar, ChevronDown, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -11,28 +11,29 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useFormContext, useFieldArray, useWatch } from 'react-hook-form';
-import useJobStore from '@/store/job-store';
+import { useFormContext, useFieldArray, useWatch } from "react-hook-form";
+import useJobStore from "@/store/job-store";
 
 const users: { username: string; status: string }[] = [
-  { username: 'John Doe', status: 'Available' },
-  { username: 'Jane Smith', status: 'Assigned' },
-  { username: 'Michael Lee', status: 'Available' },
-  { username: 'Ayesha Lee', status: 'Assigned' },
-  { username: 'Doe', status: 'Available' },
-  { username: ' Anne', status: 'Assigned' },
-  { username: ' Lee', status: 'Available' },
-  { username: 'Ayesha ', status: 'Assigned' },
+  { username: "John Doe", status: "Available" },
+  { username: "Jane Smith", status: "Assigned" },
+  { username: "Michael Lee", status: "Available" },
+  { username: "Ayesha Lee", status: "Assigned" },
+  { username: "Doe", status: "Available" },
+  { username: " Anne", status: "Assigned" },
+  { username: " Lee", status: "Available" },
+  { username: "Ayesha ", status: "Assigned" },
   // Add more users as needed
 ];
 
-export default function AssignJob({ handleNextStep }: { handleNextStep: () => void }) {
-  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-
+export default function AssignJob({
+  handleNextStep,
+}: {
+  handleNextStep: () => void;
+}) {
   const {
     trigger,
     getValues,
-    watch,
     register,
     control,
     formState: { errors },
@@ -41,19 +42,16 @@ export default function AssignJob({ handleNextStep }: { handleNextStep: () => vo
   const { jobData, setJobData } = useJobStore();
   const { fields } = useFieldArray({
     control,
-    name: 'selectedUsers',
+    name: "selectedUsers",
   });
 
-  console.log(watch("selectedUsers"))
-
-
-  const handleCheckboxChange = () => {
-    const isValid = trigger(['selectedUsers']);
-    console.log("is valid")
-    if (!isValid) return;
-    const data = getValues(['selectedUsers']);
-    setJobData({ ...jobData, selectedUsers: data });
-    handleNextStep();
+  const handleCheckboxChange = async () => {
+    const isValid = await trigger(["selectedUsers"]);
+    if (isValid) {
+      const data = getValues(["selectedUsers"]);
+      setJobData({ ...jobData, selectedUsers: data });
+      handleNextStep();
+    }
   };
 
   const itemsPerPage = 4;
@@ -66,72 +64,92 @@ export default function AssignJob({ handleNextStep }: { handleNextStep: () => vo
 
   return (
     <div>
-      <div className='flex flex-row mobile:flex-col justify-between w-full '>
+      <div className="flex flex-row mobile:flex-col justify-between w-full ">
         <div className="relative flex items-center w-1/2 mobile:w-full">
           <Input
             className="bg-[#F9F8F8] pr-10"
             id="text"
             type="text"
-            placeholder='Search by Employee name'
+            placeholder="Search by Employee name"
           />
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2" >
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <Search />
           </div>
         </div>
         <div className="flex items-center gap-2 mobile:mt-4">
           <Button className="bg-white mobile:w-full border rounded-xl p-4 text-sm lg:text-base">
             Select Date
-            <Calendar className='ml-2' />
+            <Calendar className="ml-2" />
           </Button>
           <Button className="bg-white mobile:w-full border rounded-xl p-4 text-sm lg:text-base">
             Filter
-            <ChevronDown
-              className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
-            />
+            <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
           </Button>
         </div>
       </div>
-      <div className='overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl'>
+      <div className="overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl">
         {currentUsers.map((user, index) => (
-          <div key={user.username} className={`px-4 ${index % 4 === 1 || index % 4 === 3 ? 'bg-gray-100' : ''}`}>
-            <div className='flex justify-between py-2 px-4'>
-              <div className='flex justify-center items-center'>
-                <input
-                  type="checkbox"
-                  {...register(`selectedUsers.${index + (currentPage - 1) * 4}.username`)}
-                  value={user.username}
-                />
-                <div className='h-10 w-10 ml-10 mr-2'><Image src="/images/avatar.svg" alt='user' width={3} height={3}
-                /></div>
-                <span className='font-semibold whitespace-nowrap'>{user.username}</span>
+          <>
+            <div
+              key={user.username}
+              className={`px-4 ${
+                index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
+              }`}
+            >
+              <div className="flex justify-between py-2 px-4">
+                <div className="flex justify-center items-center">
+                  <input
+                    type="checkbox"
+                    {...register(
+                      `selectedUsers.${index + (currentPage - 1) * 4}.username`
+                    )}
+                    value={user.username}
+                  />
+                  <div className="h-10 w-10 ml-10 mr-2">
+                    <Image
+                      src="/images/avatar.svg"
+                      alt="user"
+                      width={3}
+                      height={3}
+                    />
+                  </div>
+                  <span className="font-semibold whitespace-nowrap">
+                    {user.username}
+                  </span>
+                </div>
+                <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
+                  <div
+                    className={`rounded-full h-2 w-2 ${
+                      user.status == "Available" ? "bg-green-500" : "bg-primary"
+                    }`}
+                  ></div>
+                  <span className="font-medium text-sm mobile:hidden">
+                    {user.status}
+                  </span>
+                </div>
               </div>
-              <div className='flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2'>
-                <div className={`rounded-full h-2 w-2 ${user.status == 'Available' ? 'bg-green-500' : 'bg-primary'}`}></div>
-                <span className='font-medium text-sm mobile:hidden'>{user.status}</span>
-              </div>
+              <hr />
             </div>
-            <hr />
-          </div>
+          </>
         ))}
-        <Pagination className='px-4 py-2'>
-          <PaginationPrevious
-            onClick={() => setCurrentPage(currentPage - 1)}
-          />
+        <Pagination className="px-4 py-2">
+          <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
           <PaginationContent>
-            {Array.from({ length: Math.ceil(users.length / itemsPerPage) }, (_, i) => (
-              <PaginationItem key={i}>
-                <PaginationLink
-                  onClick={() => paginate(i + 1)}
-                  isActive={i + 1 === currentPage}
-                >
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
+            {Array.from(
+              { length: Math.ceil(users.length / itemsPerPage) },
+              (_, i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink
+                    onClick={() => paginate(i + 1)}
+                    isActive={i + 1 === currentPage}
+                  >
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
           </PaginationContent>
-          <PaginationNext
-            onClick={() => setCurrentPage(currentPage + 1)}
-          />
+          <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
         </Pagination>
       </div>
 
@@ -148,3 +166,4 @@ export default function AssignJob({ handleNextStep }: { handleNextStep: () => vo
     </div>
   );
 }
+

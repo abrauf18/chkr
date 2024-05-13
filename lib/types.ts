@@ -73,9 +73,7 @@ export const JobSchema = z.object({
   "customer-name": z
     .string()
     .min(1, { message: "Company name must not be empty" }),
-  "payment": z
-    .string()
-    .min(1, { message: "Payment must not be empty" }),
+  payment: z.string().min(1, { message: "Payment must not be empty" }),
   "phone-number": z
     .string()
     .min(1, { message: "Phone number must not be empty" }),
@@ -84,10 +82,9 @@ export const JobSchema = z.object({
     .min(1, { message: "Date and time must not be empty" }),
   location: z.string().min(1, { message: "Location must not be empty" }),
   service: z.string().min(1, { message: "Select a service" }),
-  "description": z
-    .string()
-    .min(1, { message: "Description must not be empty" }),
-  selectedUsers: z.array(z.string())
+  description: z.string().min(1, { message: "Description must not be empty" }),
+  selectedUsers: z
+    .array(z.string())
     .min(1, { message: "Select at least one user" }),
 });
 
