@@ -99,6 +99,9 @@ export const JobSchema = z.object({
   location: z.string().min(1, { message: "Location must not be empty" }),
   service: z.string().min(1, { message: "Select a service" }),
   description: z.string().min(1, { message: "Description must not be empty" }),
+  selectedUsers: z
+    .array(z.string())
+    .min(1, { message: "Select at least one user" }),
 });
 
 export type Jobs = z.infer<typeof JobSchema>;
