@@ -35,16 +35,9 @@ const useJobStore = create(
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
       setJobData: (data: Partial<Jobs>) => {
-        try {
-          // Validate data against JobSchema
-          JobSchema.parse(data);
-          set((state) => ({
-            jobData: { ...state.jobData, ...data },
-          }));
-        } catch (error) {
-          console.error("Validation error:", error);
-          // Handle validation error (e.g., display message to user)
-        }
+        set((state) => ({
+          jobData: { ...state.jobData, ...data },
+        }));
       },
       removeOnboardingData: () =>
         set({
@@ -69,3 +62,4 @@ const useJobStore = create(
 );
 
 export default useJobStore;
+

@@ -55,7 +55,6 @@ export default function CreateJobSecondStep({
           <ArrowRight className="h-6 w-6" />
         </button>
       </div>
-
     </div>
   );
 }
