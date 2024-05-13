@@ -22,8 +22,8 @@ export default function CreateJobSecondStep({
   const handleDescriptionChange = async () => {
     const isValid = await trigger(["description"]);
     if (isValid) {
-      const data = getValues(["description"]);
-      setJobData({ ...jobData, description: data[0] });
+      const data = getValues("description");
+      setJobData({ ...jobData, description: data });
       handleNextStep();
     }
   };

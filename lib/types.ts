@@ -1,3 +1,5 @@
+import { stat } from "fs";
+import { User } from "lucide-react";
 import { z } from "zod";
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -100,7 +102,9 @@ export const JobSchema = z.object({
   service: z.string().min(1, { message: "Select a service" }),
   description: z.string().min(1, { message: "Description must not be empty" }),
   selectedUsers: z
-    .array(z.string())
+    .array(
+      z.object({ id: z.number(), username: z.string(), status: z.string() })
+    )
     .min(1, { message: "Select at least one user" }),
 });
 
