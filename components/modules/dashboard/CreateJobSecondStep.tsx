@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { useFormContext } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { ErrorMessage } from "@hookform/error-message";
+import { ArrowRight } from "lucide-react";
 
 export default function CreateJobSecondStep({
   handlePreviousStep,
@@ -46,20 +47,14 @@ export default function CreateJobSecondStep({
       <p className="text-red-500 text-sm">
         <ErrorMessage errors={errors} name="description" />
       </p>
-      <div className="flex justify-center gap-3 mt-3">
+      <div className="flex justify-end mt-10 mx-4">
         <button
-          className="w-full lg:w-[10rem] bg-gray-300 font-medium py-3 px-10 rounded-3xl"
-          type="button"
-          onClick={handlePreviousStep}
-        >
-          Previous
-        </button>
-        <button
-          className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          className="flex justify-center items-center gap-2 w-full mobile:w-[10rem] md:w-[35%] bg-primary text-white font-medium py-3 px-10 rounded-3xl "
           type="button"
           onClick={handleDescriptionChange}
         >
-          Next
+          Continue & Assign
+          <ArrowRight className="h-6 w-6" />
         </button>
       </div>
 
