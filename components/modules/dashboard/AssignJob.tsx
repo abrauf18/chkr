@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Calendar, ChevronDown, Search, User } from 'lucide-react';
+import { ArrowRight, Calendar, ChevronDown, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   Pagination,
   PaginationContent,
@@ -12,7 +11,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFieldArray, useWatch } from 'react-hook-form';
 import useJobStore from '@/store/job-store';
 
 const users: { username: string; status: string }[] = [
@@ -21,26 +20,48 @@ const users: { username: string; status: string }[] = [
   { username: 'Michael Lee', status: 'Available' },
   { username: 'Ayesha Lee', status: 'Assigned' },
   { username: 'Doe', status: 'Available' },
-  { username: ' Smith', status: 'Assigned' },
+  { username: ' Anne', status: 'Assigned' },
   { username: ' Lee', status: 'Available' },
   { username: 'Ayesha ', status: 'Assigned' },
   // Add more users as needed
 ];
 
-export default function AssignJob({ handlePreviousStep, handleNextStep }: { handlePreviousStep: () => void; handleNextStep: () => void; }) {
+export default function AssignJob({ handleNextStep }: { handleNextStep: () => void }) {
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+
   const {
+    trigger,
+    getValues,
+    watch,
     register,
+    control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<Record<string, any>>();
 
   const { jobData, setJobData } = useJobStore();
+  const { fields } = useFieldArray({
+    control,
+    name: 'selectedUsers',
+  });
+
+  console.log(watch("selectedUsers"))
+
+
+  const handleCheckboxChange = () => {
+    const isValid = trigger(['selectedUsers']);
+    console.log("is valid")
+    if (!isValid) return;
+    const data = getValues(['selectedUsers']);
+    setJobData({ ...jobData, selectedUsers: data });
+    handleNextStep();
+  };
+
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const indexOfLastUser = currentPage * itemsPerPage;
   const indexOfFirstUser = indexOfLastUser - itemsPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
@@ -48,7 +69,6 @@ export default function AssignJob({ handlePreviousStep, handleNextStep }: { hand
       <div className='flex flex-row mobile:flex-col justify-between w-full '>
         <div className="relative flex items-center w-1/2 mobile:w-full">
           <Input
-            // /{...register("password")}
             className="bg-[#F9F8F8] pr-10"
             id="text"
             type="text"
@@ -76,7 +96,11 @@ export default function AssignJob({ handlePreviousStep, handleNextStep }: { hand
           <div key={user.username} className={`px-4 ${index % 4 === 1 || index % 4 === 3 ? 'bg-gray-100' : ''}`}>
             <div className='flex justify-between py-2 px-4'>
               <div className='flex justify-center items-center'>
-                <Checkbox />
+                <input
+                  type="checkbox"
+                  {...register(`selectedUsers.${index + (currentPage - 1) * 4}.username`)}
+                  value={user.username}
+                />
                 <div className='h-10 w-10 ml-10 mr-2'><Image src="/images/avatar.svg" alt='user' width={3} height={3}
                 /></div>
                 <span className='font-semibold whitespace-nowrap'>{user.username}</span>
@@ -115,7 +139,7 @@ export default function AssignJob({ handlePreviousStep, handleNextStep }: { hand
         <Button
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
-          onClick={handleNextStep}
+          onClick={handleCheckboxChange}
         >
           Assign Job
           <ArrowRight className="h-6 w-6" />
