@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button';
-import { User, CirclePlus, MoveRight } from 'lucide-react';
+import { User, CirclePlus, MoveRight, ArrowLeft } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -127,7 +127,16 @@ export default function CreateJob() {
         <DialogContent className='bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden'>
           <DialogHeader>
             <DialogTitle>
-              <span>Create new job</span>
+              <div className='flex justify-start items-center'>
+                <Button
+                  type="button"
+                  onClick={handlePreviousStep}
+                  className='bg-transparent hover:bg-transparent'
+                >
+                  <ArrowLeft />
+                </Button>
+                <span className='whitespace-nowrap'>Create new job</span>
+              </div>
               <hr className='my-6' />
             </DialogTitle>
             <DialogDescription className='text-black'>
