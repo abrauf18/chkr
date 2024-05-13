@@ -54,6 +54,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         location: data[4],
         service: data[5],
         description: "",
+        selectedUsers: [],
       });
       handleNextStep();
     }

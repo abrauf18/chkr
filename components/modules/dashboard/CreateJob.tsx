@@ -79,14 +79,12 @@ export default function CreateJob() {
         return (
           <CreateJobSecondStep
             handleNextStep={handleNextStep}
-            handlePreviousStep={handlePreviousStep}
           />
         );
       case Steps.Assign_Job:
         return (
           <AssignJob
             handleNextStep={handleNextStep}
-            handlePreviousStep={handlePreviousStep}
           />
         );
       case Steps.Payment:

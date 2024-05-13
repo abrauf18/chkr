@@ -7,10 +7,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import { ArrowRight } from "lucide-react";
 
 export default function CreateJobSecondStep({
-  handlePreviousStep,
   handleNextStep,
 }: {
-  handlePreviousStep: () => void;
   handleNextStep: () => void;
 }) {
   const {
