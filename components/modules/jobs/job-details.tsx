@@ -3,7 +3,7 @@ import EditIcon from '@/assets/icons/edit-icon'
 import { Button } from '@/components/ui/button'
 import { Bold, Italic, Link2, MapPinned } from 'lucide-react'
 import React from 'react'
-import Comment, { CommentProps } from './Comment'
+import Comment, { CommentProps } from './comments'
 import useJobStore from '@/store/job-store'
 import { useFormContext } from 'react-hook-form'
 

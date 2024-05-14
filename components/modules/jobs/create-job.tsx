@@ -9,11 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import CreateJobFirstStep from "./CreateJobFirstStep";
-import CreateJobSecondStep from "./CreateJobSecondStep";
-import AssignJob from "./AssignJob";
-import JobPayment from "./JobPayment";
-import JobDetails from "./JobDetails";
+import CreateJobFirstStep from "./create-job-first-step";
+import CreateJobSecondStep from "./create-job-second-step";
+import AssignJob from "./assign-job";
+import JobPayment from "./job-payment";
+import JobDetails from "./job-details";
 import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
