@@ -1,6 +1,6 @@
-import React from 'react'
-import { Button } from '@/components/ui/button';
-import { User, CirclePlus, MoveRight, ArrowLeft } from 'lucide-react';
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { User, CirclePlus, MoveRight, ArrowLeft } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -8,22 +8,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter
-} from "@/components/ui/dialog"
-import CreateJobFirstStep from './CreateJobFirstStep';
-import CreateJobSecondStep from './CreateJobSecondStep';
-import AssignJob from './AssignJob';
-import JobPayment from './JobPayment';
-import JobDetails from './JobDetails';
-import useJobStore, { Steps } from '@/store/job-store';
+} from "@/components/ui/dialog";
+import CreateJobFirstStep from "./CreateJobFirstStep";
+import CreateJobSecondStep from "./CreateJobSecondStep";
+import AssignJob from "./AssignJob";
+import JobPayment from "./JobPayment";
+import JobDetails from "./JobDetails";
+import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Jobs, JobSchema } from "@/lib/types";
 
-
 export default function CreateJob() {
-  const { currentStep, setCurrentStep, jobData, setJobData } =
-    useJobStore();
+  const { currentStep, setCurrentStep, jobData } = useJobStore();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -68,25 +65,14 @@ export default function CreateJob() {
     }
   };
 
-
   const renderStep = () => {
     switch (currentStep) {
       case Steps.Create_Job_First_Step:
-        return (
-          <CreateJobFirstStep handleNextStep={handleNextStep} />
-        );
+        return <CreateJobFirstStep handleNextStep={handleNextStep} />;
       case Steps.Create_Job_Second_Step:
-        return (
-          <CreateJobSecondStep
-            handleNextStep={handleNextStep}
-          />
-        );
+        return <CreateJobSecondStep handleNextStep={handleNextStep} />;
       case Steps.Assign_Job:
-        return (
-          <AssignJob
-            handleNextStep={handleNextStep}
-          />
-        );
+        return <AssignJob handleNextStep={handleNextStep} />;
       case Steps.Payment:
         return (
           <JobPayment
@@ -120,35 +106,40 @@ export default function CreateJob() {
     <>
       <Dialog>
         <DialogTrigger>
-          <div className='flex items-center rounded-3xl text-white bg-primary p-2 whitespace-nowrap'><CirclePlus className='mr-2 h-5' />Create new job</div>
+          <div className="flex items-center rounded-3xl text-white bg-primary p-2 whitespace-nowrap">
+            <CirclePlus className="mr-2 h-5" />
+            Create new job
+          </div>
         </DialogTrigger>
-        <DialogContent className='bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden'>
+        <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden">
           <DialogHeader>
             <DialogTitle>
-              <div className='flex justify-start items-center'>
+              <div className="flex justify-start items-center">
                 <Button
                   type="button"
                   onClick={handlePreviousStep}
-                  className='bg-transparent hover:bg-transparent'
+                  className="bg-transparent hover:bg-transparent"
                 >
                   <ArrowLeft />
                 </Button>
-                <span className='whitespace-nowrap'>Create new job</span>
+                <span className="whitespace-nowrap">Create new job</span>
               </div>
-              <hr className='my-6' />
+              <hr className="my-6" />
             </DialogTitle>
-            <DialogDescription className='text-black'>
-              <FormProvider  {...methods}>
-                {renderStep()}
+            <DialogDescription className="text-black">
+              <FormProvider {...methods}>
+                <form
+                  id="create-job-form"
+                  onSubmit={methods.handleSubmit(onSubmit)}
+                >
+                  {renderStep()}
+                </form>
               </FormProvider>
             </DialogDescription>
           </DialogHeader>
-          {/* <DialogFooter>
-            <Button type="submit" className='rounded-3xl text-white'>Next<MoveRight className='ml-2'
-              onSubmit={methods.handleSubmit(onSubmit)} /></Button>
-          </DialogFooter> */}
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
+
