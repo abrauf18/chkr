@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import AddEmployee from "./add-employee";
 import EmployeeTable from "./employe-table";
+import Feedback from "@/components/shared/feedback";
 
 export interface Employee {
   name: string;
@@ -121,6 +122,7 @@ export default function Employees() {
     <div className="border rounded-2xl my-20">
       <div>
         <AddEmployee />
+        <Feedback />
       </div>
       <div>
         <EmployeeTable
