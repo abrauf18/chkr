@@ -1,8 +1,11 @@
-import ReviewStar from '@/assets/icons/star';
-import { Star } from 'lucide-react';
-import { useState } from 'react';
+import ReviewStar from "@/assets/icons/star";
+import { Star } from "lucide-react";
+import { useState } from "react";
 
-const StarRating = ({ rating, onChange }: {
+const StarRating = ({
+  rating,
+  onChange,
+}: {
   rating: number;
   onChange: (rating: number) => void;
 }) => {
@@ -24,7 +27,8 @@ const StarRating = ({ rating, onChange }: {
     <div className="flex">
       {[...Array(5)].map((_, index) => {
         const starValue = index + 1;
-        const fillColor = (hoverRating || rating) >= starValue ? '#FFC107' : '#D9D9D9';
+        const fillColor =
+          (hoverRating || rating) >= starValue ? "#FFC107" : "#D9D9D9";
         return (
           <span
             key={index}
@@ -42,3 +46,4 @@ const StarRating = ({ rating, onChange }: {
 };
 
 export default StarRating;
+

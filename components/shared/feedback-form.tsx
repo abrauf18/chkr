@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { Label } from '../ui/label'
-import { Button } from '../ui/button'
-import StarRating from './star-rating'
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FeedbackSchema } from '@/lib/types';
-import { ErrorMessage } from '@hookform/error-message';
+import React, { useState } from "react";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import StarRating from "./star-rating";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FeedbackSchema } from "@/lib/types";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function FeedbackForm() {
   const {
@@ -21,7 +21,7 @@ export default function FeedbackForm() {
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
   };
-  console.log(rating)
+  console.log(rating);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -29,14 +29,25 @@ export default function FeedbackForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className='mt-6'>
-        <h1 className='text-black text-xl text-semibold'>How was your experience?</h1>
-        <span className='text-lg whitespace-nowrap text-neutral-700'>Thank you for choosing to provide feedback. Please rate your experience from 1 to 5 stars</span>
-        <div className='flex justify-center items-center w-full my-6'>
+      <div className="mt-6">
+        <h1 className="text-black text-xl text-semibold">
+          How was your experience?
+        </h1>
+        <span className="text-lg whitespace-nowrap text-neutral-700">
+          Thank you for choosing to provide feedback. Please rate your
+          experience from 1 to 5 stars
+        </span>
+        <div className="flex justify-center items-center w-full my-6">
           <StarRating rating={rating} onChange={handleRatingChange} />
         </div>
-        <h1 className='text-black text-semibold text-xl'>Add your comments as feedback below.</h1>
-        <span className='text-lg whitespace-nowrap text-neutral-700	'> Your thoughts and suggestions are highly appreciated and help us improve our services.</span>
+        <h1 className="text-black text-semibold text-xl">
+          Add your comments as feedback below.
+        </h1>
+        <span className="text-lg whitespace-nowrap text-neutral-700	">
+          {" "}
+          Your thoughts and suggestions are highly appreciated and help us
+          improve our services.
+        </span>
         <textarea
           id="comment"
           placeholder="Additional comments here"
@@ -50,15 +61,16 @@ export default function FeedbackForm() {
         <p className="text-red-500 text-sm">
           <ErrorMessage errors={errors} name="comment" />
         </p>
-        <div className='flex w-full gap-6 mt-6'>
-          <Button className='w-full rounded-2xl bg-gray-300 text-black'>
+        <div className="flex w-full gap-6 mt-6">
+          <Button className="w-full rounded-2xl bg-gray-300 text-black">
             Cancel
           </Button>
-          <Button className='w-full rounded-2xl text-white'>
+          <Button className="w-full rounded-2xl text-white">
             Submit Feedback
           </Button>
         </div>
       </div>
     </form>
-  )
+  );
 }
+
