@@ -6,7 +6,7 @@ import { ArrowRight, DollarSign } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { Button } from "@/components/ui/button";
-import { User } from "./AssignJob";
+import { User } from "./assign-job";
 
 export default function JobPayment({
   handlePreviousStep,

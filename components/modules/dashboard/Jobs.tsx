@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import AssignedJobCard from './AssignedJobCard';
-import { ChevronDown, CirclePlus, CalendarDays } from 'lucide-react';
+import AssignedJobCard from './assigned-job-card';
+import { ChevronDown, CalendarDays } from 'lucide-react';
 import DashboardHeader from '@/components/shared/dashboard-header';
-import CreateJob from "@/components/modules/jobs/CreateJob";
+import CreateJob from '../jobs/create-job';
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);

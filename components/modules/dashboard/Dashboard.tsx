@@ -6,7 +6,7 @@ import TotalJobs from '@/assets/icons/TotalJobs'
 import OngoingJobs from '@/assets/icons/OngoingJobs'
 import PendingJobs from '@/assets/icons/PendingJobs'
 import Employees from '@/assets/icons/Employees'
-import AssignedJobCard from './AssignedJobCard'
+import AssignedJobCard from './assigned-job-card'
 import { ChevronDown, Bell, CircleArrowRight } from 'lucide-react';
 import DashboardHeader from '@/components/shared/dashboard-header'
 
