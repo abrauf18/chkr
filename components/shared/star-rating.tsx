@@ -1,28 +1,40 @@
-// StarRating.tsx
-import React from 'react';
+import { useState } from 'react';
 
-interface StarRatingProps {
+const StarRating = ({ rating, onChange }: {
   rating: number;
-  onRatingChange?: (newRating: number) => void;
-}
+  onChange: (rating: number) => void;
+}) => {
+  const [hoverRating, setHoverRating] = useState(0);
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange }) => {
-  const handleClick = (newRating: number) => {
-    onRatingChange?.(newRating);
+  const handleMouseEnter = (starRating: number) => {
+    setHoverRating(starRating);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverRating(0);
+  };
+
+  const handleClick = (starRating: number) => {
+    onChange(starRating);
   };
 
   return (
-    <div className="flex space-x-1">
-      {[1, 2, 3, 4, 5].map((starValue) => (
-        <span
-          key={starValue}
-          className={`cursor-pointer text-xl hover:text-yellow-500 ${starValue <= rating ? 'text-yellow-500' : 'text-gray-400'
-            }`}
-          onClick={() => handleClick(starValue)}
-        >
-          ★
-        </span>
-      ))}
+    <div className="flex">
+      {[...Array(5)].map((_, index) => {
+        const starValue = index + 1;
+        return (
+          <span
+            key={index}
+            className={`text-2xl cursor-pointer ${(hoverRating || rating) >= starValue ? 'text-yellow-500' : 'text-gray-400'
+              }`}
+            onMouseEnter={() => handleMouseEnter(starValue)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleClick(starValue)}
+          >
+            ★
+          </span>
+        );
+      })}
     </div>
   );
 };
