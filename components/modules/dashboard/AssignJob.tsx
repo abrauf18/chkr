@@ -15,10 +15,11 @@ import { useFormContext, useFieldArray } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { ErrorMessage } from "@hookform/error-message";
 
-interface User {
+export interface User {
   id: number;
   username: string;
   status: string;
+  amount?: number;
 }
 
 const users: User[] = [
@@ -47,6 +48,7 @@ export default function AssignJob({
   } = useFormContext<Record<string, any>>();
 
   const selectedUsers = watch("selectedUsers");
+  console.log(selectedUsers);
   const { jobData, setJobData } = useJobStore();
 
   const handleCheckboxChange = async () => {
