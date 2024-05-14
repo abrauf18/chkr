@@ -30,7 +30,7 @@ const useJobStore = create(
         location: "",
         service: "",
         description: "",
-        selectedUsers: [], // Initialize selected users as an empty array
+        selectedUsers: [],
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
       setJobData: (data: Partial<Jobs>) => {
