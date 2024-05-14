@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import AssignedJobCard from './AssignedJobCard';
 import { ChevronDown, CirclePlus, CalendarDays } from 'lucide-react';
 import DashboardHeader from '@/components/shared/dashboard-header';
-import CreateJob from './CreateJob';
+import CreateJob from "@/components/modules/jobs/CreateJob";
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
