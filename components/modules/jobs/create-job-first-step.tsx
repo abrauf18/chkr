@@ -46,16 +46,6 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         "location",
         "service",
       ]);
-      console.log({
-        "customer-name": data[0],
-        payment: data[1],
-        "phone-number": data[2],
-        "date-time": data[3],
-        location: data[4],
-        service: data[5],
-        description: "",
-        selectedUsers: [],
-      });
 
       setJobData({
         "customer-name": data[0],

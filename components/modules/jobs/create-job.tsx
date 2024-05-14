@@ -20,7 +20,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Jobs, JobSchema } from "@/lib/types";
 
 export default function CreateJob() {
-  const { currentStep, setCurrentStep, jobData } = useJobStore();
+  const { currentStep, setCurrentStep, jobData, removeOnboardingData } =
+    useJobStore();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -97,9 +98,11 @@ export default function CreateJob() {
     reValidateMode: "onChange",
     defaultValues: jobData,
   });
+
   const onSubmit = (data: Jobs) => {
     console.log(data);
-    // removeOnboardingData();
+    methods.reset();
+    removeOnboardingData();
   };
 
   return (

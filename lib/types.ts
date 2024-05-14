@@ -103,7 +103,12 @@ export const JobSchema = z.object({
   description: z.string().min(1, { message: "Description must not be empty" }),
   selectedUsers: z
     .array(
-      z.object({ id: z.number(), username: z.string(), status: z.string() })
+      z.object({
+        id: z.number(),
+        username: z.string(),
+        status: z.string(),
+        amount: z.number().optional(),
+      })
     )
     .min(1, { message: "Select at least one user" }),
 });

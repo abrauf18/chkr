@@ -48,13 +48,12 @@ export default function AssignJob({
   } = useFormContext<Record<string, any>>();
 
   const selectedUsers = watch("selectedUsers");
-  console.log(selectedUsers);
   const { jobData, setJobData } = useJobStore();
 
   const handleCheckboxChange = async () => {
     const isValid = await trigger(["selectedUsers"]);
     if (isValid) {
-      const data = getValues(["selectedUsers"]);
+      const data = getValues("selectedUsers");
       setJobData({ ...jobData, selectedUsers: data });
       handleNextStep();
     }
@@ -75,16 +74,17 @@ export default function AssignJob({
   };
 
   const handleChange = (user: User) => {
+    const users = getValues("selectedUsers");
     if (isUserSelected(user.id)) {
       setValue(
         "selectedUsers",
-        selectedUsers.filter(
+        users.filter(
           (selectedUser: { id: number }) => selectedUser.id !== user.id
         )
       );
     } else {
       setValue("selectedUsers", [
-        ...selectedUsers,
+        ...users,
         {
           ...user,
         },

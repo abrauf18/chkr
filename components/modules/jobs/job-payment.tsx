@@ -7,6 +7,7 @@ import { useFormContext } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { Button } from "@/components/ui/button";
 import { User } from "./assign-job";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function JobPayment({
   handlePreviousStep,
@@ -17,23 +18,28 @@ export default function JobPayment({
 }) {
   const {
     setValue,
+    watch,
     formState: { errors },
   } = useFormContext();
-  const { jobData, setJobData } = useJobStore();
-  const users = jobData.selectedUsers[0];
+  const users = watch("selectedUsers");
 
-  const handleChange = (user: User) => {
-    setValue(`selectedUsers[${user.id}].amount`, user.amount);
-    const data = jobData.selectedUsers.map((u) => {
+  const handleChange = (user: User, e: any) => {
+    const list = users.map((u: any) => {
       if (u.id === user.id) {
-        return { ...u, amount: user.amount };
+        return { ...u, amount: Number(e.target.value) };
       }
       return u;
     });
-    setJobData({ ...jobData, selectedUsers: data });
+    setValue("selectedUsers", list, {
+      shouldValidate: true,
+    });
   };
   return (
     <div className="overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl">
+      <p className="text-sm text-red-500 text-right">
+        {" "}
+        <ErrorMessage errors={errors} name="selectedUsers" />
+      </p>
       {Array.isArray(users) &&
         users.map((user) => (
           <div key={user.id} className=" px-4">
@@ -65,7 +71,7 @@ export default function JobPayment({
                     id="amount"
                     type="text"
                     placeholder="Enter amount"
-                    onChange={() => handleChange(user)}
+                    onChange={(e) => handleChange(user, e)}
                   />
                 </div>
               </div>
