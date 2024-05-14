@@ -69,3 +69,10 @@ export const ResetPasswordSchema = z
     path: ["confirmPassword"], // path of error
   });
 
+export const EmployeeSchema = z.object({
+  employeeName: z.string().max(50).min(1, { message: "Employee name must not be empty" }),
+  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
+});
