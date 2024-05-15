@@ -24,7 +24,7 @@ const useJobStore = create(
       currentStep: Steps.Create_Job_First_Step,
       jobData: {
         "customer-name": "",
-        payment: "",
+        payment: 0,
         "phone-number": "",
         "date-time": "",
         location: "",
@@ -43,7 +43,7 @@ const useJobStore = create(
           currentStep: Steps.Create_Job_First_Step,
           jobData: {
             "customer-name": "",
-            payment: "",
+            payment: 0,
             "phone-number": "",
             "date-time": "",
             location: "",
