@@ -2,6 +2,9 @@ import { z } from "zod";
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
 
 export const OnboardingSchema = z.object({
   logo: z.any().refine((val) => val?.length === 1, {
@@ -15,6 +18,8 @@ export const OnboardingSchema = z.object({
     .min(1, { message: "Company type must not be empty" }),
   "phone-number": z
     .string()
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!"),
     .min(1, { message: "Phone number must not be empty" })
     .regex(phoneRegex, "Invalid Number!"),
   location: z.string().min(1, { message: "Location must not be empty" }),
