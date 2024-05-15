@@ -122,12 +122,15 @@ export default function CreateJob() {
     <>
       <Dialog>
         <DialogTrigger>
-          <div className="flex items-center rounded-3xl text-white bg-primary p-2 whitespace-nowrap">
-            <CirclePlus className="mr-2 h-5" />
-            Create new job
+          <div className="flex items-center rounded-3xl gap-1 text-white bg-primary p-3 whitespace-nowrap">
+            <CirclePlus className="h-5" />
+            Create new Job
           </div>
         </DialogTrigger>
-        <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden">
+        <DialogContent
+          className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           <DialogHeader>
             <DialogTitle>
               <div className="flex justify-start items-center">
@@ -158,3 +161,4 @@ export default function CreateJob() {
     </>
   );
 }
+

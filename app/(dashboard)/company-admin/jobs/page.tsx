@@ -1,8 +1,9 @@
-import Jobs from '@/components/modules/dashboard/Jobs'
-import React from 'react'
+import Jobs from "@/components/modules/jobs/Jobs";
+import React from "react";
 
 const page = () => {
-  return <Jobs />
-}
+  return <Jobs />;
+};
 
-export default page
+export default page;
+

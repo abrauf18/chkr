@@ -16,6 +16,8 @@ export const OnboardingSchema = z.object({
   "phone-number": z
     .string()
     .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!")
+    .min(1, { message: "Phone number must not be empty" })
     .regex(phoneRegex, "Invalid Number!"),
   location: z.string().min(1, { message: "Location must not be empty" }),
   country: z.string().min(1, { message: "Country must not be empty" }),
@@ -66,6 +68,22 @@ export const ResetPasswordSchema = z
     path: ["confirmPassword"], // path of error
   });
 
+export const EmployeeSchema = z.object({
+  employeeName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
+  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
+});
+
+export const FeedbackSchema = z.object({
+  comment: z.string().max(50).min(1, { message: "Comment must not be empty" }),
+  // rating: z.number().min(1, { message: "Rating is required" })
+  //   .max(5, { message: "Rating must be between 1 and 5" }),
+});
 export const JobSchema = z.object({
   "customer-name": z
     .string()

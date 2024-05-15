@@ -28,8 +28,11 @@ export default function CreateJobSecondStep({
     }
   };
   return (
-    <div className="flex flex-col w-full mx-4">
-      <Label htmlFor="description" className="md:text-lg text-sm font-semibold">
+    <div className="flex flex-col w-full mx-auto">
+      <Label
+        htmlFor="description"
+        className="flex w-full md:text-lg text-sm font-semibold"
+      >
         Description
       </Label>
       <textarea
@@ -40,12 +43,12 @@ export default function CreateJobSecondStep({
         maxLength={500}
         style={{ resize: "none" }}
         {...register("description")}
-        className="border rounded-xl mr-4 bg-gray-50 p-2 h-[25vh]"
+        className="border rounded-xl bg-gray-50 p-2 h-[25vh] w-full"
       />
       <p className="text-red-500 text-sm">
         <ErrorMessage errors={errors} name="description" />
       </p>
-      <div className="flex justify-end mt-10 mx-4">
+      <div className="flex justify-end mt-10">
         <button
           className="flex justify-center items-center gap-2 w-full mobile:w-[10rem] md:w-[35%] bg-primary text-white font-medium py-3 px-10 rounded-3xl whitespace-nowrap "
           type="button"

@@ -90,13 +90,13 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
       <div className="mb-4 w-full relative">
         <Label
           htmlFor="customerName"
-          className="md:text-lg text-sm font-semibold"
+          className="flex w-full md:text-lg text-sm font-semibold"
         >
           Customer Name
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <User color="#636363" />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+            <User color="#636363" className="h-4 w-4" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -108,12 +108,15 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </div>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="location" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="location"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Location
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <MapPinned color="#636363" />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+            <MapPinned color="#636363" className="h-4 w-4" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -129,12 +132,15 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="phone" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="phone"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Phone Number
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <Phone color="#636363" />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+            <Phone color="#636363" className="h-4 w-4" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -149,12 +155,15 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="Date&Time" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="Date&Time"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Select Date&Time
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <CalendarClock color="#636363" />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+            <CalendarClock color="#636363" className="h-4 w-4" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"
@@ -170,12 +179,15 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="Payment" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="Payment"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Payment
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-            <CircleDollarSign color="#636363" />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+            <CircleDollarSign color="#636363" className="w-4 h-4" />
           </span>
           <Input
             className="pl-10 bg-[#F9F8F8]"

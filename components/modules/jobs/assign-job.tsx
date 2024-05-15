@@ -96,7 +96,7 @@ export default function AssignJob({
   };
   return (
     <div>
-      <div className="flex flex-row mobile:flex-col justify-between w-full mb-5">
+      <div className="flex flex-row mobile:flex-col justify-between w-full mb-5 mx-auto">
         <div className="relative flex items-center w-1/2 mobile:w-full">
           <Input
             className="bg-[#F9F8F8] pr-10"
@@ -128,8 +128,9 @@ export default function AssignJob({
           <>
             <div
               key={user.id}
-              className={`px-4 ${index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
-                }`}
+              className={`px-4 ${
+                index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
+              }`}
             >
               <div className="flex justify-between py-2 px-4">
                 <div className="flex justify-center items-center">
@@ -153,8 +154,9 @@ export default function AssignJob({
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
                   <div
-                    className={`rounded-full h-2 w-2 ${user.status == "Available" ? "bg-green-500" : "bg-primary"
-                      }`}
+                    className={`rounded-full h-2 w-2 ${
+                      user.status == "Available" ? "bg-green-500" : "bg-primary"
+                    }`}
                   ></div>
                   <span className="font-medium text-sm mobile:hidden">
                     {user.status}
@@ -188,7 +190,7 @@ export default function AssignJob({
 
       <div className="flex w-full justify-end mt-10">
         <Button
-          className="w-1/4 bg-primary text-white font-medium py-3 rounded-3xl"
+          className="md:w-1/4 bg-primary text-white font-medium py-3 rounded-3xl"
           type="button"
           onClick={handleCheckboxChange}
         >
