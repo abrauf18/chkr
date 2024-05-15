@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { User, CirclePlus, MoveRight, ArrowLeft } from "lucide-react";
+import { CirclePlus, ArrowLeft } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -66,6 +66,23 @@ export default function CreateJob() {
     }
   };
 
+  const getStepHeading = () => {
+    switch (currentStep) {
+      case Steps.Create_Job_First_Step:
+        return "Create New Job - Step 1";
+      case Steps.Create_Job_Second_Step:
+        return "Create New Job - Step 2";
+      case Steps.Assign_Job:
+        return "Assign Job";
+      case Steps.Payment:
+        return "Job Payment";
+      case Steps.Job_Details:
+        return "Job Details";
+      default:
+        return "Create New Job";
+    }
+  };
+
   const renderStep = () => {
     switch (currentStep) {
       case Steps.Create_Job_First_Step:
@@ -87,6 +104,7 @@ export default function CreateJob() {
         return null;
     }
   };
+
   const methods = useForm({
     resolver: zodResolver(JobSchema),
     mode: "onChange",
@@ -120,7 +138,7 @@ export default function CreateJob() {
                 >
                   <ArrowLeft />
                 </Button>
-                <span className="whitespace-nowrap">Create new job</span>
+                <span className="whitespace-nowrap">{getStepHeading()}</span>
               </div>
               <hr className="my-6" />
             </DialogTitle>
@@ -140,4 +158,3 @@ export default function CreateJob() {
     </>
   );
 }
-
