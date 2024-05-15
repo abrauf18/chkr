@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import CreateJobFirstStep from "./create-job-first-step";
-import CreateJobSecondStep from "./create-job-second-step";
+import CreateJobFirstStep from "./basic-information";
+import CreateJobSecondStep from "./description";
 import AssignJob from "./assign-job";
 import JobPayment from "./job-payment";
 import JobDetails from "./job-details";
@@ -69,9 +69,9 @@ export default function CreateJob() {
   const getStepHeading = () => {
     switch (currentStep) {
       case Steps.Create_Job_First_Step:
-        return "Create New Job - Step 1";
+        return "Create New Job 1/2";
       case Steps.Create_Job_Second_Step:
-        return "Create New Job - Step 2";
+        return "Create New Job 2/2";
       case Steps.Assign_Job:
         return "Assign Job";
       case Steps.Payment:

@@ -47,7 +47,7 @@ export default function CreateJobSecondStep({
       </p>
       <div className="flex justify-end mt-10 mx-4">
         <button
-          className="flex justify-center items-center gap-2 w-full mobile:w-[10rem] md:w-[35%] bg-primary text-white font-medium py-3 px-10 rounded-3xl "
+          className="flex justify-center items-center gap-2 w-full mobile:w-[10rem] md:w-[35%] bg-primary text-white font-medium py-3 px-10 rounded-3xl whitespace-nowrap "
           type="button"
           onClick={handleDescriptionChange}
         >
