@@ -139,7 +139,6 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           <Input
             className="pl-10 bg-[#F9F8F8]"
             id="phone"
-            type="text"
             placeholder="Enter Phone Number"
             {...register("phone-number")}
           />
@@ -160,7 +159,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           <Input
             className="pl-10 bg-[#F9F8F8]"
             id="Date and time"
-            type="text"
+            type="datetime-local"
             placeholder="Select Date&Time"
             {...register("date-time")}
           />
@@ -181,7 +180,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           <Input
             className="pl-10 bg-[#F9F8F8]"
             id="Payment"
-            type="text"
+            type="number"
             placeholder="Enter amount"
             {...register("payment")}
           />

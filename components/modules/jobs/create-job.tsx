@@ -82,12 +82,7 @@ export default function CreateJob() {
           />
         );
       case Steps.Job_Details:
-        return (
-          <JobDetails
-            // handleNextStep={handleNextStep}
-            handlePreviousStep={handlePreviousStep}
-          />
-        );
+        return <JobDetails handlePreviousStep={handlePreviousStep} />;
       default:
         return null;
     }
