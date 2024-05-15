@@ -1,3 +1,5 @@
+import ReviewStar from '@/assets/icons/star';
+import { Star } from 'lucide-react';
 import { useState } from 'react';
 
 const StarRating = ({ rating, onChange }: {
@@ -22,16 +24,16 @@ const StarRating = ({ rating, onChange }: {
     <div className="flex">
       {[...Array(5)].map((_, index) => {
         const starValue = index + 1;
+        const fillColor = (hoverRating || rating) >= starValue ? '#FFC107' : '#D9D9D9';
         return (
           <span
             key={index}
-            className={`text-2xl cursor-pointer ${(hoverRating || rating) >= starValue ? 'text-yellow-500' : 'text-gray-400'
-              }`}
+            className="text-2xl mx-1 cursor-pointer"
             onMouseEnter={() => handleMouseEnter(starValue)}
             onMouseLeave={handleMouseLeave}
             onClick={() => handleClick(starValue)}
           >
-            ★
+            <ReviewStar fill={fillColor} />
           </span>
         );
       })}
