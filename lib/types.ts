@@ -1,13 +1,7 @@
-import { stat } from "fs";
-import { User } from "lucide-react";
 import { z } from "zod";
-const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
 
 export const OnboardingSchema = z.object({
   logo: z.any().refine((val) => val?.length === 1, {
@@ -21,7 +15,8 @@ export const OnboardingSchema = z.object({
     .min(1, { message: "Company type must not be empty" }),
   "phone-number": z
     .string()
-    .min(1, { message: "Phone number must not be empty" }),
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!"),
   location: z.string().min(1, { message: "Location must not be empty" }),
   country: z.string().min(1, { message: "Country must not be empty" }),
   plan: z.string().min(1, { message: "Plan must not be empty" }),
@@ -91,10 +86,14 @@ export const JobSchema = z.object({
   "customer-name": z
     .string()
     .min(1, { message: "Company name must not be empty" }),
-  payment: z.string().min(1, { message: "Payment must not be empty" }),
+  payment: z.coerce
+    .number()
+    .positive()
+    .min(1, { message: "Payment must not be empty" }),
   "phone-number": z
     .string()
-    .min(1, { message: "Phone number must not be empty" }),
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!"),
   "date-time": z
     .string()
     .min(1, { message: "Date and time must not be empty" }),

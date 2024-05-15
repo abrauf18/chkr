@@ -4,7 +4,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, DollarSign } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import useJobStore from "@/store/job-store";
 import { Button } from "@/components/ui/button";
 import { User } from "./assign-job";
 import { ErrorMessage } from "@hookform/error-message";
