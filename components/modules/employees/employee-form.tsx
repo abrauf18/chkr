@@ -30,7 +30,7 @@ export default function EmployeeForm() {
         <div className="mb-4 w-full relative">
           <Label
             htmlFor="employeeName"
-            className="md:text-medium text-sm font-semibold"
+            className="flex md:text-medium text-sm font-semibold"
           >
             Employee Name
           </Label>
@@ -52,7 +52,7 @@ export default function EmployeeForm() {
           </p>
         </div>
         <div className="mb-4 w-full relative">
-          <Label htmlFor="email" className="md:text-medium text-sm font-semibold">
+          <Label htmlFor="email" className="flex md:text-medium text-sm font-semibold">
             Email
           </Label>
           <div className="relative flex items-center">
@@ -73,7 +73,7 @@ export default function EmployeeForm() {
           </p>
         </div>
         <div className="mb-4 w-full relative">
-          <Label htmlFor="phoneNumber" className="md:text-medium text-sm font-semibold">
+          <Label htmlFor="phoneNumber" className="flex md:text-medium text-sm font-semibold">
             Phone Number
           </Label>
           <div className="relative flex items-center">
