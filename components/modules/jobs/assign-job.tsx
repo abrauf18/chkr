@@ -26,7 +26,7 @@ const users: User[] = [
   { id: 1, username: "John Doe", status: "Available" },
   { id: 2, username: "Jane Smith", status: "Assigned" },
   { id: 3, username: "Michael Lee", status: "Available" },
-  { id: 4, username: "Ayesha Lee", status: "Assigned" },
+  { id: 4, username: "Ayesha Khan", status: "Assigned" },
   { id: 5, username: "John", status: "Available" },
   { id: 6, username: "Jane", status: "Assigned" },
   { id: 7, username: "Michael", status: "Available" },
@@ -128,9 +128,8 @@ export default function AssignJob({
           <>
             <div
               key={user.id}
-              className={`px-4 ${
-                index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
-              }`}
+              className={`px-4 ${index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
+                }`}
             >
               <div className="flex justify-between py-2 px-4">
                 <div className="flex justify-center items-center">
@@ -154,9 +153,8 @@ export default function AssignJob({
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
                   <div
-                    className={`rounded-full h-2 w-2 ${
-                      user.status == "Available" ? "bg-green-500" : "bg-primary"
-                    }`}
+                    className={`rounded-full h-2 w-2 ${user.status == "Available" ? "bg-green-500" : "bg-primary"
+                      }`}
                   ></div>
                   <span className="font-medium text-sm mobile:hidden">
                     {user.status}
@@ -188,14 +186,14 @@ export default function AssignJob({
         </Pagination>
       </div>
 
-      <div className="flex justify-end mt-10">
+      <div className="flex w-full justify-end mt-10">
         <Button
-          className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+          className="w-1/4 bg-primary text-white font-medium py-3 rounded-3xl"
           type="button"
           onClick={handleCheckboxChange}
         >
           Assign Job
-          <ArrowRight className="h-6 w-6" />
+          <ArrowRight className="h-6 w-6 pl-2" />
         </Button>
       </div>
     </div>
