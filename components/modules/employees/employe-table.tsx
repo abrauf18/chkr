@@ -39,22 +39,22 @@ const EmployeeTable = ({
       <Table>
         <TableHeader>
           <TableRow className="bg-white">
-            <TableHead>Employee Name</TableHead>
+            <TableHead className="text-black font-semibold">Employee Name</TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span>Email</span>
+                <span className="text-black font-semibold">Email</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span>Phone Number</span>
+                <span className="text-black font-semibold">Phone Number</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2 p-1">
-                <span>Availability</span>
+                <span className="text-black font-semibold">Availability</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
@@ -72,11 +72,10 @@ const EmployeeTable = ({
               <TableCell className="w-32">
                 <div className="flex items-center justify-center pl-2 gap-2 border rounded-lg py-1">
                   <span
-                    className={`${
-                      employee.availability === "Available"
-                        ? "bg-green-500"
-                        : "bg-primary"
-                    } rounded-full w-2 h-2`}
+                    className={`${employee.availability === "Available"
+                      ? "bg-green-500"
+                      : "bg-primary"
+                      } rounded-full w-2 h-2`}
                   ></span>
                   <span>{employee.availability}</span>
                 </div>
@@ -86,7 +85,7 @@ const EmployeeTable = ({
           <TableRow></TableRow>
         </TableBody>
       </Table>
-      <Pagination className="flex w-full justify-center items-center mt-4 border border-black">
+      <Pagination className="flex w-full justify-center items-center mt-4">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

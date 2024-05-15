@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import AddEmployee from "./add-employee";
 import EmployeeTable from "./employe-table";
 import Feedback from "@/components/shared/feedback";
+import DashboardHeader from "@/components/shared/dashboard-header";
+import { Button } from "@/components/ui/button";
+import { CalendarDays, ChevronDown } from "lucide-react";
+import CreateJob from "../jobs/create-job";
 
 export interface Employee {
   name: string;
@@ -119,12 +123,27 @@ export default function Employees() {
   );
 
   return (
-    <div className="border rounded-2xl my-20">
-      <div>
-        <AddEmployee />
-        <Feedback />
+    <>
+      <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">Dashboard</h1>
+        <div className="flex justify-center items-center gap-2">
+          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+            <CalendarDays className="mr-2" color="#FF2600" />
+            March 11 - March 17, 2024
+            <ChevronDown className="ml-2" />
+          </Button>
+          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+            Filter
+            <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
+          </Button>
+          <AddEmployee />
+        </div>
       </div>
       <div>
+        <Feedback />
+      </div>
+      <div className="border rounded-2xl my-3">
         <EmployeeTable
           employees={employees}
           currentPage={currentPage}
@@ -133,7 +152,7 @@ export default function Employees() {
           currentEmployees={currentEmployees}
         />
       </div>
-    </div>
+    </>
   );
 }
 

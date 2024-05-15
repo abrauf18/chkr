@@ -11,6 +11,7 @@ import EmployeeForm from './employee-form'
 import { FormProvider, useForm } from 'react-hook-form'
 import { EmployeeSchema } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CirclePlus } from 'lucide-react';
 
 
 export default function AddEmployee() {
@@ -28,7 +29,12 @@ export default function AddEmployee() {
 
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger>
+        <div className="flex items-center rounded-3xl text-white bg-primary p-2 whitespace-nowrap">
+          <CirclePlus className="mr-2 h-5" />
+          Add Employee
+        </div>
+      </DialogTrigger>
       <DialogContent className='bg-white'>
         <DialogHeader>
           <DialogTitle>Add New Employee</DialogTitle>
