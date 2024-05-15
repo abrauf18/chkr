@@ -23,12 +23,12 @@ const SideBar = ({ open }: { open: boolean }) => {
     {
       title: "All Jobs",
       icon: <StickyNote />,
-      path: "/company-admin/dashboard#all-jobs",
+      path: "/company-admin/jobs",
     },
     {
       title: "Employees",
       icon: <Users />,
-      path: "/company-admin/dashboard#employees",
+      path: "/company-admin/employees",
     },
     {
       title: "Settings",
