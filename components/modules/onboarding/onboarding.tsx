@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import CompanyInformation from "@/components/modules/onboarding/company-information";
 import Navbar from "@/components/shared/navbar";
 import useOnboardingStore, { Steps } from "@/store/onboarding-store";
@@ -94,7 +94,16 @@ export default function OnboardingSteps() {
                 }
               />
             </div>
-            <span className={clsx(currentStep === Steps.COMPANY_DETAILS ? "text-black" : "text-gray-400", "ml-2")}>Subscription Plan</span>
+            <span
+              className={clsx(
+                currentStep === Steps.COMPANY_DETAILS
+                  ? "text-black"
+                  : "text-gray-400",
+                "ml-2"
+              )}
+            >
+              Subscription Plan
+            </span>
           </div>
           <div className="flex items-center ">
             <div
@@ -112,7 +121,14 @@ export default function OnboardingSteps() {
                 }
               />
             </div>
-            <span className={clsx(currentStep === Steps.PLAN ? "text-black" : "text-gray-400", "ml-2")}>Subscription Plan</span>
+            <span
+              className={clsx(
+                currentStep === Steps.PLAN ? "text-black" : "text-gray-400",
+                "ml-2"
+              )}
+            >
+              Subscription Plan
+            </span>
           </div>
         </div>
       </div>
