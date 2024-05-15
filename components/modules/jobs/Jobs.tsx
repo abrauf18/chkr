@@ -125,8 +125,8 @@ const Jobs = () => {
       <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">All Jobs</h1>
-        <div className="flex justify-center items-center gap-2">
-          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+        <div className="flex justify-center items-center gap-2 md:w-[87%]">
+          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base mobile:hidden">
             <CalendarDays className="mr-2" color="#FF2600" />
             March 11 - March 17, 2024
             <ChevronDown className="ml-2" />
@@ -138,12 +138,12 @@ const Jobs = () => {
           <CreateJob />
         </div>
       </div>
-      <div className="flex gap-2 items-center my-4">
+      <div className="flex gap-2 items-center my-3 w-full mx-auto">
         {tabData.map((tab) => (
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
               } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
             <div
@@ -151,12 +151,13 @@ const Jobs = () => {
                 } `}
             ></div>
             <div>
-              <span>{tab.text}</span>
+              <span className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"
+                } `}>{tab.text}</span>
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-4">
+      <div>
         {tabData.map((tab) => (
           <div
             key={tab.id}
