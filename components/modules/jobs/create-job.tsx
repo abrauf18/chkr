@@ -127,7 +127,7 @@ export default function CreateJob() {
             Create new job
           </div>
         </DialogTrigger>
-        <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] max-h-[80vh] overflow-y-auto overflow-x-hidden">
+        <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <DialogHeader>
             <DialogTitle>
               <div className="flex justify-start items-center">

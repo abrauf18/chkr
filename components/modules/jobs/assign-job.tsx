@@ -96,7 +96,7 @@ export default function AssignJob({
   };
   return (
     <div>
-      <div className="flex flex-row mobile:flex-col justify-between w-full mb-5">
+      <div className="flex flex-row mobile:flex-col justify-between w-full mb-5 mx-auto">
         <div className="relative flex items-center w-1/2 mobile:w-full">
           <Input
             className="bg-[#F9F8F8] pr-10"
@@ -188,7 +188,7 @@ export default function AssignJob({
 
       <div className="flex w-full justify-end mt-10">
         <Button
-          className="w-1/4 bg-primary text-white font-medium py-3 rounded-3xl"
+          className="md:w-1/4 bg-primary text-white font-medium py-3 rounded-3xl"
           type="button"
           onClick={handleCheckboxChange}
         >
