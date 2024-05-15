@@ -14,7 +14,7 @@ export default function Feedback() {
 
     <Dialog>
       <DialogTrigger>Open</DialogTrigger>
-      <DialogContent className='bg-white md:max-w-[58%] max-h-[80vh] overflow-y-auto overflow-x-hidden'>
+      <DialogContent className='bg-white mobile:max-w-[90%] md:max-w-[65%] max-h-[80vh] overflow-y-auto overflow-x-auto'>
         <DialogHeader>
           <DialogTitle>Submit your feedback</DialogTitle>
           <hr className='my-10' />
