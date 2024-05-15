@@ -123,15 +123,15 @@ const Jobs = () => {
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center w-full">
         <h1 className="text-xl font-bold">All Jobs</h1>
-        <div className="flex justify-center items-center gap-2 md:w-[87%]">
-          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base mobile:hidden">
+        <div className="flex justify-end items-center gap-2 md:w-[87%]">
+          <Button className="bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base mobile:hidden">
             <CalendarDays className="mr-2" color="#FF2600" />
             March 11 - March 17, 2024
             <ChevronDown className="ml-2" />
           </Button>
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+          <Button className="bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
             Filter
             <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
           </Button>
@@ -143,16 +143,23 @@ const Jobs = () => {
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
-              } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
+            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
+              activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+            } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
             <div
-              className={`rounded-full w-2 h-2 ${activeTab === tab.id ? "bg-primary" : "bg-white"
-                } `}
+              className={`rounded-full w-2 h-2 ${
+                activeTab === tab.id ? "bg-primary" : "bg-white"
+              } `}
             ></div>
             <div>
-              <span className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"
-                } `}>{tab.text}</span>
+              <span
+                className={`whitespace-nowrap mobile:text-sm ${
+                  activeTab === tab.id ? "font-bold" : "font-medium"
+                } `}
+              >
+                {tab.text}
+              </span>
             </div>
           </div>
         ))}
