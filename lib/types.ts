@@ -116,3 +116,19 @@ export const JobSchema = z.object({
 
 export type Jobs = z.infer<typeof JobSchema>;
 
+export const SettingsSchema = z.object({
+  fullName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
+  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  contactNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
+  password: z
+    .string()
+    .min(8, { message: "Password is too short" })
+    .max(20, { message: "Password is too long" }),
+});
+
+export type Settings = z.infer<typeof SettingsSchema>;
