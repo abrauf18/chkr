@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { SettingsSchema, Settings } from '@/lib/types';
+import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Mail, Lock, Contact, Eye, EyeOff } from 'lucide-react';
@@ -9,7 +9,7 @@ const PersonalInformation: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
 
   const { register, handleSubmit, formState: { errors } } = useForm<Settings>({
-    resolver: zodResolver(SettingsSchema),
+    resolver: zodResolver(SettingPersonalInfosSchema),
     defaultValues: {
       fullName: 'Ayesha Rashid Khan',
       email: 'ayesha@example.com',
@@ -29,7 +29,7 @@ const PersonalInformation: React.FC = () => {
         <div className="relative mt-2">
           <input
             {...register('fullName')}
-            className="w-full p-3 pr-10 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
+            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
           />
           <User className="absolute right-3 top-3 text-gray-500" />
         </div>
@@ -51,7 +51,7 @@ const PersonalInformation: React.FC = () => {
         <div className="relative mt-2">
           <input
             {...register('contactNumber')}
-            className="w-full p-3 pr-10 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
+            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
           />
           <Contact className="absolute right-3 top-3 text-gray-500" />
         </div>
@@ -64,7 +64,7 @@ const PersonalInformation: React.FC = () => {
             {...register('password')}
             id="password"
             type={showPassword ? "password" : "text"}
-            className="w-full p-3 pr-10 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
+            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
           />
           <button
             type="button"
