@@ -129,6 +129,21 @@ export const SettingsSchema = z.object({
     .string()
     .min(8, { message: "Password is too short" })
     .max(20, { message: "Password is too long" }),
+  companyName: z
+    .string()
+    .min(1, { message: "Company name must not be empty" }),
+  companyType: z
+    .string()
+    .min(1, { message: "Company type must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!")
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!"),
+  location: z.string().min(1, { message: "Location must not be empty" }),
+  country: z.string().min(1, { message: "Country must not be empty" }),
+  plan: z.string().min(1, { message: "Plan must not be empty" }),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;
