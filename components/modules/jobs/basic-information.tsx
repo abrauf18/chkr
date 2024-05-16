@@ -108,7 +108,10 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </div>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="location" className="flex w-full md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="location"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Location
         </Label>
         <div className="relative flex items-center">
@@ -129,7 +132,10 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="phone" className="flex w-full md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="phone"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Phone Number
         </Label>
         <div className="relative flex items-center">
@@ -149,7 +155,10 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="Date&Time" className="flex w-full md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="Date&Time"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Select Date&Time
         </Label>
         <div className="relative flex items-center">
@@ -170,7 +179,10 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="Payment" className="flex w-full md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="Payment"
+          className="flex w-full md:text-lg text-sm font-semibold"
+        >
           Payment
         </Label>
         <div className="relative flex items-center">

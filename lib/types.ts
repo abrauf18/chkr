@@ -16,6 +16,8 @@ export const OnboardingSchema = z.object({
   "phone-number": z
     .string()
     .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegex, "Invalid Number!")
+    .min(1, { message: "Phone number must not be empty" })
     .regex(phoneRegex, "Invalid Number!"),
   location: z.string().min(1, { message: "Location must not be empty" }),
   country: z.string().min(1, { message: "Country must not be empty" }),

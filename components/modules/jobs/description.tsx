@@ -29,7 +29,10 @@ export default function CreateJobSecondStep({
   };
   return (
     <div className="flex flex-col w-full mx-auto">
-      <Label htmlFor="description" className="flex w-full md:text-lg text-sm font-semibold">
+      <Label
+        htmlFor="description"
+        className="flex w-full md:text-lg text-sm font-semibold"
+      >
         Description
       </Label>
       <textarea
