@@ -9,7 +9,7 @@ const Settings: React.FC = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto mt-8 bg-white my-4 p-6 rounded-2xl">
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} personalData={{ name: "Ayesha Rashid Khan", email: "asha@gmail.com" }} companyData={{ name: "Company Name", email: "seviceadmin@example.com" }} />
       <div className="mt-6">
         {activeTab === 'personal' && <PersonalInformation />}
         {activeTab === 'company' && <CompanyInformation />}

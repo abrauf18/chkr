@@ -1,18 +1,27 @@
-"use client"
+// use client (assuming you're using it for code splitting)
 import React from 'react';
 import Image from 'next/image';
+
+interface TabData {
+  name: string;
+  email: string;
+}
 
 interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  personalData: TabData;
+  companyData: TabData;
 }
 
-const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
+const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, personalData, companyData }) => {
+  const activeData = activeTab === 'personal' ? personalData : companyData;
+
   return (
     <div className="max-w-screen-lg mx-auto mt-8 bg-white my-4 p-6 rounded-2xl">
       <div className="relative">
-        <div className="bg-gray-800 h-24 rounded-t-2xl"></div>
-        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-white rounded-full border-4 border-white">
+        <div className="bg-[url('/images/Profile_bg.svg')] h-32 rounded-2xl"></div>
+        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">
           <Image
             src="/images/companyLogo.svg"
             alt="company logo"
@@ -23,8 +32,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
       <div className="mt-12 text-center">
-        <h1 className="text-xl font-semibold">Company Name</h1>
-        <p className="text-gray-500">Serviceadmin@example.com</p>
+        <h1 className="text-xl font-semibold">{activeData?.name}</h1>
+        <p className="text-gray-500">{activeData?.email}</p>
       </div>
       <div className="mt-6 flex justify-center">
         <div className="flex space-x-8">
