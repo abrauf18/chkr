@@ -33,7 +33,7 @@ const SideBar = ({ open }: { open: boolean }) => {
     {
       title: "Settings",
       icon: <Settings />,
-      path: "/company-admin/dashboard#settings",
+      path: "/company-admin/settings",
     },
   ];
 
