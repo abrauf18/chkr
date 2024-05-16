@@ -144,9 +144,6 @@ export default function Employees() {
           <AddEmployee />
         </div>
       </div>
-      <div>
-        <Feedback />
-      </div>
       <div className="border rounded-2xl my-3">
         <EmployeeTable
           employees={employees}
