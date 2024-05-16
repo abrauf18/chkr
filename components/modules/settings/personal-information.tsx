@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import { SettingsSchema, Settings } from '@/lib/types';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Mail, Lock, Contact, Eye, EyeOff } from 'lucide-react';
 
 const PersonalInformation: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(true);
+
   const { register, handleSubmit, formState: { errors } } = useForm<Settings>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
       fullName: 'Ayesha Rashid Khan',
       email: 'ayesha@example.com',
       contactNumber: '+1234 685 8594',
-      password: '************',
+      password: 'helo123',
     }
   });
 
@@ -58,11 +61,20 @@ const PersonalInformation: React.FC = () => {
         <label className="block text-gray-800 font-bold">Password</label>
         <div className="relative mt-2">
           <input
-            type="password"
             {...register('password')}
+            id="password"
+            type={showPassword ? "password" : "text"}
             className="w-full p-3 pr-10 bg-gray-100 rounded-md border border-gray-300 focus:outline-none"
           />
-          <Lock className="absolute right-3 top-3 text-gray-500" />
+          <button
+            type="button"
+            onClick={() => {
+              setShowPassword((prev) => !prev);
+            }}
+            className="absolute right-3 top-3 text-gray-500"
+          >
+            {showPassword ? <EyeOff /> : <Eye />}
+          </button>
         </div>
         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
       </div>
