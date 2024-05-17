@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react';
-import OverviewCard from './overview-card';
 import { CircleChevronRight, MailPlus, MoveDownLeft, MoveDownRight, MoveUpLeft, MoveUpRight, Receipt, StickyNote } from 'lucide-react';
 import JobRequestCard from './job-request-card';
 import Summary from './summary';

@@ -26,7 +26,7 @@ const JobRequestCard: React.FC<CardProps> = ({
             <span className="font-semibold md:text-lg text-gray-700">
               {address}
               <Link href='company-employee/dashboard'
-                className='text-primary text-sm md:text-base font-semibold ml-1'>
+                className='text-primary text-sm md:text-base font-semibold ml-2'>
                 View Direction
               </Link>
             </span>
