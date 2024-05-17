@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { MapPinned } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
+import { Button } from "@/components/ui/button";
+import { MapPinned } from "lucide-react";
+import Link from "next/link";
+import React from "react";
 
 interface CardProps {
   name: string;
@@ -14,7 +14,13 @@ interface CardProps {
 }
 
 const JobRequestCard: React.FC<CardProps> = ({
-  name, address, zipCode, dateTime, service, paymentStatus, amount
+  name,
+  address,
+  zipCode,
+  dateTime,
+  service,
+  paymentStatus,
+  amount,
 }) => {
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
@@ -25,21 +31,28 @@ const JobRequestCard: React.FC<CardProps> = ({
             <MapPinned className="h-5 w-5" />
             <span className="font-semibold md:text-lg text-gray-700">
               {address}
-              <Link href='company-employee/dashboard'
-                className='text-primary text-sm md:text-base font-semibold ml-2'>
+              <Link
+                href="#"
+                className="text-primary text-sm md:text-base font-semibold ml-2"
+              >
                 View Direction
               </Link>
             </span>
-
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
-          <Button className='rounded-3xl text-white'>Accept</Button>
-          <Button className='rounded-3xl text-black bg-gray-100'>Decline</Button>
+          <Button className="rounded-3xl text-white">Accept</Button>
+          <Button className="rounded-3xl text-black bg-gray-100">
+            Decline
+          </Button>
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">
-        Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. Laborem tempor Lorem incididunt. Sed fermentum eget velit sit amet sagittis. Sed egestas egestas arcu, quis fermentum justo laoreet non. Maecenas sapien quam, mollis vitae blandit a, blandit vel lectus.
+        Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt.
+        Pariatur sint culpa do incididunt eiusmod eiusmod culpa. Laborem tempor
+        Lorem incididunt. Sed fermentum eget velit sit amet sagittis. Sed
+        egestas egestas arcu, quis fermentum justo laoreet non. Maecenas sapien
+        quam, mollis vitae blandit a, blandit vel lectus.
       </p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap xl:gap-10 gap-4">
@@ -78,3 +91,4 @@ const JobRequestCard: React.FC<CardProps> = ({
 };
 
 export default JobRequestCard;
+
