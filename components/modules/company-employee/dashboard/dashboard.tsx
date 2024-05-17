@@ -116,7 +116,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-2xl xl:text-3xl text-gray-700'>18</h1>
-              <p className='text-gray-400 text-xl'>Completed Jobs</p>
+              <p className='text-gray-400 text-xl xl:whitespace-nowrap'>Completed Jobs</p>
             </div>
           </div>
           <div className='flex justify-between'>
@@ -139,7 +139,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-3xl text-gray-700'>02</h1>
-              <p className='text-gray-400 text-xl'>New Requests</p>
+              <p className='text-gray-400 text-xl xl:whitespace-nowrap'>New Requests</p>
             </div>
           </div>
           <div className='flex justify-between'>

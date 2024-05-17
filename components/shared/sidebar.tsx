@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Users,
   StickyNote,
@@ -11,8 +11,16 @@ import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
 import Link from "next/link";
 import clsx from "clsx";
+import { usePathname } from 'next/navigation'
+
 
 const SideBar = ({ open }: { open: boolean }) => {
+  const [activePath, setActivePath] = useState<string>("");
+
+  const pathname = usePathname()
+  useEffect(() => {
+    setActivePath(pathname);
+  }, [pathname]);
 
   const list = [
     {
@@ -37,7 +45,6 @@ const SideBar = ({ open }: { open: boolean }) => {
     },
   ];
 
-  const [activePath, setActivePath] = useState("/company-admin/dashboard");
 
   const handleClick = (path: string) => {
     setActivePath(path);
