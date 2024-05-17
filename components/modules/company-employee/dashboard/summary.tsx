@@ -20,8 +20,8 @@ export default function Summary() {
               <span className='text-xs md:text-sm text-gray-500'>No. of Completed Jobs</span>
             </div>
           </div>
-          <div className='flex items-center border border-black rounded-3xl p-3 gap-1 mobile:w-[35%]'>
-            <span className='text-sm whitespace-nowrap'>This Year</span>
+          <div className='flex items-center border border-black rounded-3xl p-3 gap-1 mobile:w-[6rem] mobile:mb-2'>
+            <span className='mobile:text-xs md:text-sm whitespace-nowrap'>This Year</span>
             <ChevronDown className='h-4 w-4' />
           </div>
         </div>
