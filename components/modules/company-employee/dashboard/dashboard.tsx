@@ -2,17 +2,22 @@ import React from 'react'
 import OverviewCard from './overview-card'
 import { CircleChevronRight, MailPlus, MoveDownLeft, MoveDownRight, MoveUpLeft, MoveUpRight, Receipt, StickyNote } from 'lucide-react'
 import JobRequestCard from './job-request-card'
+import Summary from './summary'
+import DashboardHeader from '@/components/shared/dashboard-header'
 
 export default function Dashboard() {
   return (
-    <div className='flex flex-col mx-auto'>
-      <div className='flex flex-col lg:flex-row gap-4 my-10 w-full mx-auto border border-black'>
-        <div className='flex flex-col w-[32%] bg-white rounded-3xl py-8 px-6 gap-6'>
-          <div className='flex items-center xl:gap-9 gap-2'>
+    <div className='flex flex-col mx-auto gap-4'>
+      <DashboardHeader
+        title='Dashboard' />
+      <h1 className='text-xl font-semibold'>Overview</h1>
+      <div className='flex flex-col lg:flex-row gap-4 w-full mx-auto'>
+        <div className='flex flex-col w-full bg-white rounded-3xl py-8 px-6 gap-6'>
+          <div className='flex items-center xl:gap-9 gap-2 w-full'>
             <div className='bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center'>
               <Receipt color='#3498DB' />
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-3xl lg:text-2xl text-gray-700 whitespace-nowrap'>$ 120.8K</h1>
               <p className='text-gray-400 text-xl'>Total Earnings</p>
             </div>
@@ -25,13 +30,13 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className='flex flex-col w-[32%] bg-white rounded-3xl py-8 px-6 gap-6'>
-          <div className='flex items-center xl:gap-9 gap-2'>
-            <div className='bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center'>
+        <div className='flex flex-col w-full bg-white rounded-3xl py-8 px-6 gap-6'>
+          <div className='flex items-center xl:gap-9 gap-2 w-full'>
+            <div className='bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center '>
               <StickyNote color='#BB6BD9' />
             </div>
-            <div className='flex flex-col'>
-              <h1 className='font-bold text-3xl text-gray-700'>18</h1>
+            <div className='flex flex-col w-[40%]'>
+              <h1 className='font-bold text-2xl xl:text-3xl text-gray-700'>18</h1>
               <p className='text-gray-400 text-xl'>Completed Jobs</p>
             </div>
           </div>
@@ -48,21 +53,21 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className='flex flex-col w-[32%] bg-white rounded-3xl py-8 px-6 gap-6'>
+        <div className='flex flex-col w-full bg-white rounded-3xl py-8 px-6 gap-6'>
           <div className='flex items-center xl:gap-9 gap-2'>
             <div className='bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center'>
               <MailPlus color='#F2994A' />
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-3xl text-gray-700'>02</h1>
-              <p className='text-gray-400 text-xl whitespace-nowrap'>New Requests</p>
+              <p className='text-gray-400 text-xl'>New Requests</p>
             </div>
           </div>
           <div className='flex justify-between'>
             <div className='flex xl:flex-row flex-col items-center gap-1 text-green-500'>
-              <div className='flex items-center w-full'>
+              <div className='flex items-center w-full gap-1'>
                 <MoveUpRight className='h-4 w-4' />
-                <span className='text-xs xl:text-sm font-bold'>1.20%</span>
+                <span className='text-xs xl:text-sm font-bold'>3.64%</span>
               </div>
               <span className='text-gray-400 ml-2 whitespace-nowrap lg:text-sm text-base'>since last month</span>
             </div>
@@ -72,6 +77,10 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <h1 className='text-xl font-semibold my-4'>Jobs & Earning Summary</h1>
+        <Summary />
       </div>
       <div className='flex flex-col gap-4'>
         <h1 className='text-xl font-semibold'>Job Requests</h1>

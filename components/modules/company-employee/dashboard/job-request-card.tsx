@@ -42,7 +42,7 @@ const JobRequestCard: React.FC<CardProps> = ({
         Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. Laborem tempor Lorem incididunt. Sed fermentum eget velit sit amet sagittis. Sed egestas egestas arcu, quis fermentum justo laoreet non. Maecenas sapien quam, mollis vitae blandit a, blandit vel lectus.
       </p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
-        <div className="flex flex-wrap md:gap-10 gap-4">
+        <div className="flex flex-wrap xl:gap-10 gap-4">
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Zip Code:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
