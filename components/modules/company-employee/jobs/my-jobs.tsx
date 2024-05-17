@@ -83,7 +83,7 @@ export default function MyJobs() {
 
   const totalPages = Math.ceil(jobRequests.length / ITEMS_PER_PAGE);
   return (
-    <div>
+    <div className='flex flex-col mx-auto gap-3'>
       <DashboardHeader title='My Jobs' />
       <div className='flex justify-between items-center'>
         <h1 className='text-xl font-bold'>All Jobs</h1>
