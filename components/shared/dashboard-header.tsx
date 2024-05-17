@@ -28,7 +28,7 @@ export default function DashboardHeader({ title }: DashboardHeaderProps) {
           </div>
         </div>
       </div>
-      <hr className='my-4' />
+      <hr className='my-3' />
     </>
   );
 }
