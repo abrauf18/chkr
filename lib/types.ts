@@ -116,3 +116,38 @@ export const JobSchema = z.object({
 
 export type Jobs = z.infer<typeof JobSchema>;
 
+export const SettingPersonalInfosSchema = z.object({
+  fullName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
+  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  contactNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
+  password: z
+    .string()
+    .min(8, { message: "Password is too short" })
+    .max(20, { message: "Password is too long" }),
+});
+
+export type Settings = z.infer<typeof SettingPersonalInfosSchema>;
+
+const phoneRegexx = /^(\+?\d{1,4}[-.\s]?(\(?\d{1,3}\)?)[-.\s]?)?(\d{1,4}[-.\s]?)*\d{1,4}$/;
+
+export const SettingsCompanyInfoSchema = z.object({
+  companyName: z
+    .string()
+    .min(1, { message: "Company name must not be empty" }),
+  companyType: z
+    .string()
+    .min(1, { message: "Company type must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(1, { message: "Phone number must not be empty" })
+    .regex(phoneRegexx, { message: "Invalid Number!" }),
+  location: z.string().min(1, { message: "Location must not be empty" }),
+  country: z.string().min(1, { message: "Country must not be empty" }),
+});
+
+export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
