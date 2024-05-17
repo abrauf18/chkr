@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Check, MapPinned } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import SelectStatus from './select-status';
+
 
 interface CardProps {
   name: string;
@@ -28,8 +30,8 @@ const OngoingJobCard: React.FC<CardProps> = ({
   const [isCompleted, setIsCompleted] = useState(paymentStatus === 'Completed'); // Manage completed state
 
   const handleClick = () => {
-    setIsCompleted(true); // Update state on button click
-    onMarkComplete && onMarkComplete(); // Call optional callback if provided
+    setIsCompleted(true);
+    onMarkComplete && onMarkComplete();
   };
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
@@ -51,12 +53,13 @@ const OngoingJobCard: React.FC<CardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <Button
             className={`rounded-3xl text-white ${isCompleted ? 'bg-green-500 hover:bg-green-500' : 'bg-gray-200 hover:bg-green-500'}`}
-            onClick={handleClick} // Attach click handler to the button
+            onClick={handleClick}
           >
             <Check />
             <span>{isCompleted ? 'Completed' : 'Mark as Complete'}</span>
           </Button>
-          <Button className='rounded-3xl text-black bg-gray-100'>Decline</Button>
+          <SelectStatus />
+          {/* <Button className='rounded-3xl text-black bg-gray-100'>Decline</Button> */}
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">
