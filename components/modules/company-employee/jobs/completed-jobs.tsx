@@ -102,14 +102,14 @@ export default function CompletedJobs() {
   );
 
   return (
-    <>
+    <div>
       {displayedJobs.map((job) => (
         <CompletedJobCard
           key={job.userName} // Use a unique identifier (e.g., job ID) for better performance
           {...job}
         />
       ))}
-      <Pagination>
+      <Pagination className='bg-white my-6 rounded-xl p-4' >
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -138,6 +138,6 @@ export default function CompletedJobs() {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </>
+    </div>
   );
 }
