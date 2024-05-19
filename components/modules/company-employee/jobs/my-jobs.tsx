@@ -36,16 +36,16 @@ export default function MyJobs() {
   return (
     <div>
       <div className="flex flex-col w-full">
-        <DashboardHeader title='Here’s all completed & ongoing Jobs !' />
+        <DashboardHeader title='My Jobs' />
         <div className='flex justify-between items-center'>
-          <h1 className='text-xl font-bold'>Track your Assigned Services</h1>
+          <h1 className='text-base md:text-xl font-bold'>Track your Assigned Services</h1>
           <div className="flex justify-center items-center gap-2">
             <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
               <CalendarDays className='mr-2' color='#FF2600' />
               March 11 - March 17, 2024
               <ChevronDown className='ml-2' />
             </Button>
-            <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+            <Button className="w-full md:w-[90%] bg-white rounded-3xl p-6 text-sm lg:text-base">
               Filter
               <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
             </Button>
@@ -56,7 +56,7 @@ export default function MyJobs() {
             <div
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}
-              className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary' : ''
+              className={`flex items-center bg-white rounded-2xl md:py-3 md:px-6 px-1 py-2 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary font-bold' : ''
                 }`}
             >
               <div
@@ -64,7 +64,7 @@ export default function MyJobs() {
                   } `}
               />
               <div>
-                <span>{tab.text}</span>
+                <span className='text-xs md:text-base whitespace-nowrap'>{tab.text}</span>
               </div>
             </div>
           ))}
