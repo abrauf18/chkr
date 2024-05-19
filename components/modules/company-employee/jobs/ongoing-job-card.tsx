@@ -4,6 +4,7 @@ import { Check, MapPinned } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import SelectStatus from './select-status';
+import MarkAsComplete from './mark-as-complete';
 
 
 interface CardProps {
@@ -51,13 +52,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
-          <Button
-            className={`rounded-3xl text-white ${isCompleted ? 'bg-green-500 hover:bg-green-500' : 'bg-gray-200 hover:bg-green-500'}`}
-            onClick={handleClick}
-          >
-            <Check />
-            <span>{isCompleted ? 'Completed' : 'Mark as Complete'}</span>
-          </Button>
+          <MarkAsComplete />
           <SelectStatus />
           {/* <Button className='rounded-3xl text-black bg-gray-100'>Decline</Button> */}
         </div>
