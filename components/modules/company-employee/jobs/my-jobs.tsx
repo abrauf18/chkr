@@ -1,145 +1,76 @@
 "use client"
-import DashboardHeader from '@/components/shared/dashboard-header'
-import { Button } from '@/components/ui/button'
-import { CalendarDays, ChevronDown } from 'lucide-react'
-import React, { useState } from 'react'
-import OngoingJobCard from './ongoing-job-card'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import DashboardHeader from '@/components/shared/dashboard-header';
+import { Button } from '@/components/ui/button';
+import { CalendarDays, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import JobRequests from './job-requests'; // Import your component for new job requests
+import OngoingJobs from './ongoing-jobs'; // Import your component for ongoing jobs
+import CompletedJobs from './completed-jobs'; // Import your component for completed jobs
 
-const jobRequests = [
-  // Populate with your job requests data
-  {
-    name: "Guy Hawkins",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    name: "Ayesha",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    name: "Joe",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    name: "Zyaima",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    name: "Usama",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Delivery",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    name: "Ali",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  // Add more job requests here
+const tabsData = [
+  { id: 1, text: 'New Job Requests' },
+  { id: 2, text: 'Ongoing Jobs' },
+  { id: 3, text: 'Completed Jobs' },
 ];
-const ITEMS_PER_PAGE = 2;
 
 export default function MyJobs() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState<number>(1);
 
-  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = jobRequests.slice(indexOfFirstItem, indexOfLastItem);
+  const handleTabClick = (tabId: number) => {
+    setActiveTab(tabId);
+  };
 
-  const totalPages = Math.ceil(jobRequests.length / ITEMS_PER_PAGE);
+  const renderContent = () => {
+    switch (activeTab) {
+      case 1:
+        return <JobRequests />;
+      case 2:
+        return <OngoingJobs />;
+      case 3:
+        return <CompletedJobs />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className='flex flex-col mx-auto gap-3'>
-      <DashboardHeader title='My Jobs' />
-      <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-bold'>All Jobs</h1>
-        <div className="flex justify-center items-center gap-2">
-          <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
-            <CalendarDays className='mr-2' color='#FF2600' />
-            March 11 - March 17, 2024
-            <ChevronDown className='ml-2' />
-          </Button>
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
-            Filter
-            <ChevronDown
-              className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
-            />
-          </Button>
+    <div>
+      <div className="flex flex-col w-full">
+        <DashboardHeader title='Here’s all completed & ongoing Jobs !' />
+        <div className='flex justify-between items-center'>
+          <h1 className='text-xl font-bold'>Track your Assigned Services</h1>
+          <div className="flex justify-center items-center gap-2">
+            <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+              <CalendarDays className='mr-2' color='#FF2600' />
+              March 11 - March 17, 2024
+              <ChevronDown className='ml-2' />
+            </Button>
+            <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+              Filter
+              <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
+            </Button>
+          </div>
         </div>
-      </div>
-      {currentItems.map((jobRequest, index) => (
-        <OngoingJobCard
-          key={index}
-          name={jobRequest.name}
-          address={jobRequest.address}
-          zipCode={jobRequest.zipCode}
-          dateTime={jobRequest.dateTime}
-          service={jobRequest.service}
-          paymentStatus={jobRequest.paymentStatus}
-          amount={jobRequest.amount}
-        />
-      ))}
-      <Pagination className='bg-white p-2 rounded-xl my-2 shadow-xl'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            />
-          </PaginationItem>
-          {[...Array(totalPages)].map((_, i) => (
-            <PaginationItem key={i}>
-              <PaginationLink
-                href="#"
-                onClick={() => setCurrentPage(i + 1)}
-                className={currentPage === i + 1 ? 'active' : ''}
-              >
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
+        <div className="flex gap-2 items-center my-4">
+          {tabsData.map((tab) => (
+            <div
+              key={tab.id}
+              onClick={() => handleTabClick(tab.id)}
+              className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary' : ''
+                }`}
+            >
+              <div
+                className={`rounded-full w-2 h-2 ${activeTab === tab.id ? 'bg-primary' : 'bg-white'
+                  } `}
+              />
+              <div>
+                <span>{tab.text}</span>
+              </div>
+            </div>
           ))}
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+        </div>
+        <div>{renderContent()}</div>
+      </div>
     </div>
-  )
+  );
 }
