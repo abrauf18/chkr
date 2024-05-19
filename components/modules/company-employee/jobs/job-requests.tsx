@@ -71,7 +71,6 @@ export default function JobRequests() {
 
   return (
     <div>
-      <DashboardHeader title='My Jobs' />
       <div className='flex flex-col gap-6'>
         {displayedJobs.map((job) => (
           <JobRequestCard key={job.name} {...job} />
