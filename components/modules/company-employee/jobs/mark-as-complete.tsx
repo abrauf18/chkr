@@ -19,20 +19,20 @@ export default function MarkAsComplete() {
   };
 
   const handleCancel = () => {
-    setIsCompleted(false); // Reset completion status on cancel
+    setIsCompleted(false);
   };
 
   return (
     <>
       <Dialog>
         <DialogTrigger
-          className={`bg-gray-200 flex items-center px-4 py-2 text-white rounded-3xl gap-1 ${isCompleted ? 'bg-green-500' : ''
+          className={`bg-gray-200 flex items-center px-4 py-2 text-gray-400 whitespace-nowrap text-sm rounded-3xl gap-1 ${isCompleted ? 'bg-green-500' : ''
             }`}
         >
-          <Check />
+          <Check className='w-4 h-4' />
           <span>{isCompleted ? 'Completed' : 'Mark as Complete'}</span>
         </DialogTrigger>
-        <DialogContent className='bg-white'>
+        <DialogContent className='bg-white mobile:max-w-[90%] rounded-2xl'>
           <DialogHeader>
             <DialogTitle>Confirm Job Completion
               <hr className='my-4' />
