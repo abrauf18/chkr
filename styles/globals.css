@@ -158,3 +158,8 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: unset;
+}
+
