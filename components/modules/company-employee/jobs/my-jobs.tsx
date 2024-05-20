@@ -3,10 +3,9 @@ import DashboardHeader from '@/components/shared/dashboard-header';
 import { Button } from '@/components/ui/button';
 import { CalendarDays, ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
-import JobRequests from './job-requests'; // Import your component for new job requests
-import OngoingJobs from './ongoing-jobs'; // Import your component for ongoing jobs
-import CompletedJobs from './completed-jobs'; // Import your component for completed jobs
-
+import JobRequests from './job-requests';
+import OngoingJobs from './ongoing-jobs';
+import CompletedJobs from './completed-jobs';
 const tabsData = [
   { id: 1, text: 'New Job Requests' },
   { id: 2, text: 'Ongoing Jobs' },

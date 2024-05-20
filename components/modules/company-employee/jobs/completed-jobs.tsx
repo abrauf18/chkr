@@ -105,7 +105,7 @@ export default function CompletedJobs() {
     <div>
       {displayedJobs.map((job) => (
         <CompletedJobCard
-          key={job.userName} // Use a unique identifier (e.g., job ID) for better performance
+          key={job.userName}
           {...job}
         />
       ))}

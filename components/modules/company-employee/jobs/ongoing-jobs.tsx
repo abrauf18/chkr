@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/pagination';
 
 const OngoingJobsData = [
-  // Populate with your job requests data
   {
     id: 1,
     name: "Guy Hawkins",
@@ -98,12 +97,12 @@ export default function OngoingJobs() {
     if (storedCompletedJobs) {
       setCompletedJobIds(JSON.parse(storedCompletedJobs));
     }
-  }, []); // Run on component mount
+  }, []);
 
-  const handleMarkComplete = (jobId: number) => {
-    setCompletedJobIds([...completedJobIds, jobId]);
-    localStorage.setItem('completedJobIds', JSON.stringify([...completedJobIds, jobId]));
-  };
+  // const handleMarkComplete = (jobId: number) => {
+  //   setCompletedJobIds([...completedJobIds, jobId]);
+  //   localStorage.setItem('completedJobIds', JSON.stringify([...completedJobIds, jobId]));
+  // };
 
   const displayedJobs = OngoingJobsData.filter((job) => !completedJobIds.includes(job.id)).slice(
     (currentPage - 1) * jobsPerPage,

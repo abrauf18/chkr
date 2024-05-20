@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react';
-import DashboardHeader from '@/components/shared/dashboard-header';
 import JobRequestCard from '../dashboard/job-request-card';
 import {
   Pagination,
@@ -49,14 +48,13 @@ const DUMMY_DATA = [
     zipCode: '10010',
     amount: '990',
   },
-  // Add more dummy data objects here following the same structure
 ];
 
 export default function JobRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 2; // Number of cards displayed per page
+  const jobsPerPage = 2;
 
-  const totalPages = Math.ceil(DUMMY_DATA.length / jobsPerPage); // Calculate total pages
+  const totalPages = Math.ceil(DUMMY_DATA.length / jobsPerPage);
 
   const handlePageChange = (newPage: number) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -76,7 +74,7 @@ export default function JobRequests() {
           <JobRequestCard key={job.name} {...job} />
         ))}
       </div>
-      <Pagination>
+      <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

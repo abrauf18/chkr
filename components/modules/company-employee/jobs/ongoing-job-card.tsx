@@ -1,12 +1,9 @@
 "use client"
-import { Button } from '@/components/ui/button';
-import { Check, MapPinned } from 'lucide-react';
+import { MapPinned } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import SelectStatus from './select-status';
+import React from 'react';
 import MarkAsComplete from './mark-as-complete';
-import Select from './select';
-
+import Select from './select-status';
 
 interface CardProps {
   name: string;
@@ -48,7 +45,6 @@ const OngoingJobCard: React.FC<CardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <MarkAsComplete />
           <Select />
-          {/* <SelectStatus /> */}
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">
