@@ -13,9 +13,8 @@ interface CardProps {
   zipCode: string;
   dateTime: string;
   service: string;
-  paymentStatus: string; // "Mark as Complete" or "Completed" (initial state)
+  paymentStatus: string;
   amount: string;
-  onMarkComplete?: () => void; // Optional callback for handling mark complete action
 }
 
 const OngoingJobCard: React.FC<CardProps> = ({
@@ -26,14 +25,8 @@ const OngoingJobCard: React.FC<CardProps> = ({
   service,
   paymentStatus,
   amount,
-  onMarkComplete,
 }) => {
-  const [isCompleted, setIsCompleted] = useState(paymentStatus === 'Completed'); // Manage completed state
 
-  const handleClick = () => {
-    setIsCompleted(true);
-    onMarkComplete && onMarkComplete();
-  };
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
       <div className="flex flex-wrap justify-between items-center">
@@ -54,7 +47,6 @@ const OngoingJobCard: React.FC<CardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <MarkAsComplete />
           <SelectStatus />
-          {/* <Button className='rounded-3xl text-black bg-gray-100'>Decline</Button> */}
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">

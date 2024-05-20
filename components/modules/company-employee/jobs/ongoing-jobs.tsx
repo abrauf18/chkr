@@ -1,9 +1,8 @@
-"use client"
-import DashboardHeader from '@/components/shared/dashboard-header'
-import { Button } from '@/components/ui/button'
-import { CalendarDays, ChevronDown } from 'lucide-react'
-import React, { useState } from 'react'
-import OngoingJobCard from './ongoing-job-card'
+import DashboardHeader from '@/components/shared/dashboard-header';
+import { Button } from '@/components/ui/button';
+import { CalendarDays, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import OngoingJobCard from './ongoing-job-card';
 import {
   Pagination,
   PaginationContent,
@@ -12,11 +11,12 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from '@/components/ui/pagination';
 
-const jobRequests = [
+const OngoingJobsData = [
   // Populate with your job requests data
   {
+    id: 1,
     name: "Guy Hawkins",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -26,6 +26,7 @@ const jobRequests = [
     amount: "230.00"
   },
   {
+    id: 2,
     name: "Ayesha",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -35,6 +36,7 @@ const jobRequests = [
     amount: "230.00"
   },
   {
+    id: 3,
     name: "Joe",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -44,6 +46,7 @@ const jobRequests = [
     amount: "230.00"
   },
   {
+    id: 4,
     name: "Zyaima",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -53,6 +56,7 @@ const jobRequests = [
     amount: "230.00"
   },
   {
+    id: 5,
     name: "Usama",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -62,6 +66,7 @@ const jobRequests = [
     amount: "230.00"
   },
   {
+    id: 6,
     name: "Ali",
     address: "4140 Parker Rd. Allentown, New Mexico 31134",
     zipCode: "10001",
@@ -70,59 +75,67 @@ const jobRequests = [
     paymentStatus: "Verified",
     amount: "230.00"
   },
-  // Add more job requests here
 ];
+
 const ITEMS_PER_PAGE = 2;
 
 export default function OngoingJobs() {
   const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 3;
 
-  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = jobRequests.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(OngoingJobsData.length / jobsPerPage);
 
-  const totalPages = Math.ceil(jobRequests.length / ITEMS_PER_PAGE);
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const [completedJobIds, setCompletedJobIds] = useState<number[]>([]);
+
+  useEffect(() => {
+    const storedCompletedJobs = localStorage.getItem('completedJobIds');
+    if (storedCompletedJobs) {
+      setCompletedJobIds(JSON.parse(storedCompletedJobs));
+    }
+  }, []); // Run on component mount
+
+  const handleMarkComplete = (jobId: number) => {
+    setCompletedJobIds([...completedJobIds, jobId]);
+    localStorage.setItem('completedJobIds', JSON.stringify([...completedJobIds, jobId]));
+  };
+
+  const displayedJobs = OngoingJobsData.filter((job) => !completedJobIds.includes(job.id)).slice(
+    (currentPage - 1) * jobsPerPage,
+    currentPage * jobsPerPage
+  );
+
   return (
     <div className='flex flex-col mx-auto gap-4'>
-      {currentItems.map((jobRequest, index) => (
+      {displayedJobs.map((job) => (
         <OngoingJobCard
-          key={index}
-          name={jobRequest.name}
-          address={jobRequest.address}
-          zipCode={jobRequest.zipCode}
-          dateTime={jobRequest.dateTime}
-          service={jobRequest.service}
-          paymentStatus={jobRequest.paymentStatus}
-          amount={jobRequest.amount}
+          key={job.id}
+          {...job}
         />
       ))}
-      <Pagination className='bg-white p-2 rounded-xl my-2 shadow-xl'>
+      <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            />
+            <PaginationPrevious href="#" onClick={() => handlePageChange(currentPage - 1)} />
           </PaginationItem>
-          {[...Array(totalPages)].map((_, i) => (
-            <PaginationItem key={i}>
-              <PaginationLink
-                href="#"
-                onClick={() => setCurrentPage(i + 1)}
-                className={currentPage === i + 1 ? 'active' : ''}
-              >
-                {i + 1}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <PaginationItem key={index + 1}>
+              <PaginationLink href="#" onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
+          <PaginationEllipsis hidden={totalPages <= 5} />
           <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            />
+            <PaginationNext href="#" onClick={() => handlePageChange(currentPage + 1)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
     </div>
-  )
+  );
 }
