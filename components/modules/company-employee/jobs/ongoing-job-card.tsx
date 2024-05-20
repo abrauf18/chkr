@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import SelectStatus from './select-status';
 import MarkAsComplete from './mark-as-complete';
+import Select from './select';
 
 
 interface CardProps {
@@ -46,7 +47,8 @@ const OngoingJobCard: React.FC<CardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <MarkAsComplete />
-          <SelectStatus />
+          <Select />
+          {/* <SelectStatus /> */}
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">
