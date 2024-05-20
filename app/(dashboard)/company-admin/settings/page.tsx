@@ -1,5 +1,5 @@
-import Settings from '@/components/modules/settings/settings'
 import React from 'react'
+import Settings from '@/components/modules/company-admin/settings/settings'
 
 
 export default function page() {

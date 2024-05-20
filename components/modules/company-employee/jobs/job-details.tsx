@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Bold, Italic, Link2, MapPinned } from 'lucide-react'
 import React from 'react'
-import Comment, { CommentProps } from '../../jobs/comments'
+import Comment, { CommentProps } from '../../company-admin/jobs/comments'
 import Select from './select-status'
 import MarkAsComplete from './mark-as-complete'
 
