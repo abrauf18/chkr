@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import CompanyInformation from "@/components/modules/onboarding/company-information";
+import CompanyInformation from "@/components/modules/company-admin/onboarding/company-information";
 import Navbar from "@/components/shared/navbar";
 import useOnboardingStore, { Steps } from "@/store/onboarding-store";
-import SubscriptionPlan from "@/components/modules/onboarding/subscription-plan";
+import SubscriptionPlan from "@/components/modules/company-admin/onboarding/subscription-plan";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Onboarding, OnboardingSchema } from "@/lib/types";

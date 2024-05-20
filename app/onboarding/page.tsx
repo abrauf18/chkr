@@ -1,4 +1,4 @@
-import OnboardingSteps from "@/components/modules/onboarding/onboarding";
+import OnboardingSteps from "@/components/modules/company-admin/onboarding/onboarding";
 import React from "react";
 
 const OnboardingPage = () => {
