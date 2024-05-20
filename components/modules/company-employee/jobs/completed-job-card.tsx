@@ -1,9 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import Location from "@/assets/icons/location-icon";
-import EditIcon from "@/assets/icons/edit-icon";
-import DeleteIcon from "@/assets/icons/delete-icon";
-
 
 interface CompletedJobCardProps {
   userName: string;
