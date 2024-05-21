@@ -1,7 +1,7 @@
 "use client";
 
 import { MapPinned } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Comment, { CommentProps } from "../../company-admin/jobs/comments";
 import Select from "./select-status";
 import MarkAsComplete from "./mark-as-complete";
@@ -29,7 +29,7 @@ export default function JobDetails() {
   ];
 
   return (
-    <div className="flex flex-col px-4 gap-4 w-full">
+    <div className="flex flex-col px-4 gap-4 w-full text-black">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">Leslie Alexander</h1>
