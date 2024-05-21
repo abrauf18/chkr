@@ -163,3 +163,6 @@ input[type="number"] {
   max-width: unset;
 }
 
+.ce-toolbaractions.ce-toolbaractions--opened {
+  display: none;
+}
