@@ -6,6 +6,8 @@ import {
   Settings,
   CircleHelp,
   LayoutDashboard,
+  Layers,
+  Timer,
 } from "lucide-react";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
@@ -13,16 +15,15 @@ import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from 'next/navigation'
 
-
 const SideBar = ({ open }: { open: boolean }) => {
   const [activePath, setActivePath] = useState<string>("");
 
-  const pathname = usePathname()
+  const pathname = usePathname();
   useEffect(() => {
     setActivePath(pathname);
   }, [pathname]);
 
-  const list = [
+  const adminList = [
     {
       title: "Dashboard",
       icon: <LayoutDashboard />,
@@ -45,6 +46,41 @@ const SideBar = ({ open }: { open: boolean }) => {
     },
   ];
 
+  const employeeList = [
+    {
+      title: "Dashboard",
+      icon: <LayoutDashboard />,
+      path: "/company-employee/dashboard",
+    },
+    {
+      title: "My Jobs",
+      icon: <Timer />,
+      path: "/company-employee/jobs",
+    },
+    {
+      title: "Payments",
+      icon: <Layers />,
+      path: "/company-employee/payment",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/company-employee/settings",
+    },
+  ];
+
+  // Select the appropriate list based on the active pathname
+  const getList = () => {
+    if (activePath.startsWith("/company-admin")) {
+      return adminList;
+    }
+    if (activePath.startsWith("/company-employee")) {
+      return employeeList;
+    }
+    return []; // Default to an empty list if no match
+  };
+
+  const list = getList();
 
   const handleClick = (path: string) => {
     setActivePath(path);
