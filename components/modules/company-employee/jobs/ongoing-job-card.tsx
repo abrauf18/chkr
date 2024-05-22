@@ -1,5 +1,5 @@
 "use client"
-import { MapPinned } from 'lucide-react';
+import { CircleArrowRight, MapPinned } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import MarkAsComplete from './mark-as-complete';
@@ -46,7 +46,6 @@ const OngoingJobCard: React.FC<CardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <MarkAsComplete />
           <Select />
-          <ShowJobDetails />
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">
@@ -80,8 +79,9 @@ const OngoingJobCard: React.FC<CardProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
+        <div className="flex flex-col whitespace-nowrap mr-4 mt-1 gap-2">
           <span className="font-bold text-xl md:text-3xl">${amount} USD</span>
+          <ShowJobDetails />
         </div>
       </div>
     </div>
