@@ -1,4 +1,4 @@
-import JobDetails from '@/components/modules/company-employee/jobs/job-details'
+import JobDetails from '@/components/shared/job-details'
 import MyJobs from '@/components/modules/company-employee/jobs/my-jobs'
 import React from 'react'
 

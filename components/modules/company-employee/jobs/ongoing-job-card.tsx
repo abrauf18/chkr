@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import MarkAsComplete from './mark-as-complete';
 import Select from './select-status';
-import ShowJobDetails from './show-job-details';
+import ShowJobDetails from '../../../shared/show-job-details';
 
 interface CardProps {
   name: string;

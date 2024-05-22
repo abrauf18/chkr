@@ -13,7 +13,6 @@ import CreateJobFirstStep from "./basic-information";
 import CreateJobSecondStep from "./description";
 import AssignJob from "./assign-job";
 import JobPayment from "./job-payment";
-import JobDetails from "./job-details";
 import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -76,8 +75,6 @@ export default function CreateJob() {
         return "Assign Job";
       case Steps.Payment:
         return "Job Payment";
-      case Steps.Job_Details:
-        return "Job Details";
       default:
         return "Create New Job";
     }
@@ -98,8 +95,6 @@ export default function CreateJob() {
             handlePreviousStep={handlePreviousStep}
           />
         );
-      case Steps.Job_Details:
-        return <JobDetails handlePreviousStep={handlePreviousStep} />;
       default:
         return null;
     }
