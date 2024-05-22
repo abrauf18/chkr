@@ -3,7 +3,7 @@ import Image from "next/image";
 import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
 import DeleteIcon from "@/assets/icons/delete-icon";
-
+import ShowJobDetails from "../../../shared/show-job-details";
 
 interface AssignedJobCardProps {
   userName: string;
@@ -47,6 +47,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           </div>
           <EditIcon />
           <DeleteIcon />
+          <ShowJobDetails />
         </div>
       </div>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">

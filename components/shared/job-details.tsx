@@ -1,13 +1,17 @@
 "use client";
 
 import { MapPinned } from "lucide-react";
+import EditIcon from "@/assets/icons/edit-icon";
+import DeleteIcon from "@/assets/icons/delete-icon";
 import React, { useState } from "react";
-import Comment, { CommentProps } from "../../company-admin/jobs/comments";
-import Select from "./select-status";
-import MarkAsComplete from "./mark-as-complete";
+import Comment, { CommentProps } from "../modules/company-admin/jobs/comments";
+import Select from "../modules/company-employee/jobs/select-status";
+import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import TextEditor from "@/components/shared/text-editor";
+import { usePathname } from "next/navigation";
 
 export default function JobDetails() {
+  const pathname = usePathname();
   const [text, setText] = useState("");
 
   const handleChange = (event: any) => {
@@ -41,9 +45,19 @@ export default function JobDetails() {
           </div>
         </div>
         <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
-          <Select />
-          <MarkAsComplete />
+          {pathname === "/company-employee/jobs" && <Select />}
+          {pathname === "/company-employee/jobs" && <MarkAsComplete />}
         </div>
+        {pathname === "/company-admin/jobs" &&
+          <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
+            <div className="flex items-center bg-gray-100 rounded-xl px-3">
+              <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
+              <span>status</span>
+            </div>
+            <EditIcon />
+            <DeleteIcon />
+          </div>}
+
       </div>
       <div className="flex flex-col gap-1">
         <span className="font-bold text-lg">Description:</span>
