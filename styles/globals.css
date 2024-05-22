@@ -164,5 +164,9 @@ input[type="number"] {
 }
 
 .ce-toolbaractions.ce-toolbaractions--opened {
-  display: none;
+  display: none !important;
 }
+.ce-toolbar__actions.ce-toolbar__actions--opened {
+  display: none !important;
+}
+
