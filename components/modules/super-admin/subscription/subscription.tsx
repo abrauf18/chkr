@@ -18,22 +18,24 @@ export default function Subscription() {
 
   return (
     <>
-      <DashboardHeader title='Payments' />
-      <Header title='My Earnings Overview' />
-      <div className="grid gap-6 mt-6 lg:grid-cols-4">
-        <div className="lg:col-span-1">
-          <UsersSummaryCard {...userSummaryData[0]} />
+      <div className='flex flex-col gap-4'>
+        <DashboardHeader title='Payments' />
+        <h1 className='text-xl'>Subscription Summary</h1>
+        <div className="grid gap-6 lg:grid-cols-4">
+          <div className="lg:col-span-1">
+            <UsersSummaryCard {...userSummaryData[0]} />
+          </div>
+          <div className="lg:col-span-1">
+            <UsersSummaryCard {...userSummaryData[1]} />
+          </div>
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <CompaniesSummaryCard {...companySummaryData[0]} />
+            <CompaniesSummaryCard {...companySummaryData[1]} />
+          </div>
         </div>
-        <div className="lg:col-span-1">
-          <UsersSummaryCard {...userSummaryData[1]} />
-        </div>
-        <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <CompaniesSummaryCard {...companySummaryData[0]} />
-          <CompaniesSummaryCard {...companySummaryData[1]} />
-        </div>
+        <Header title='Transaction Summary' />
+        <SubscriptionList />
       </div>
-      <Header title='Transaction Summary' />
-      <SubscriptionList />
     </>
   );
 }
