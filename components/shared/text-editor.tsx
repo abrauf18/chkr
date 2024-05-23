@@ -10,20 +10,25 @@ const TextEditor = () => {
     let editorInstance: EditorJS | null = null;
 
     const initializeEditor = async () => {
-      try {
-        editorInstance = new EditorJS({
-          onChange: async (api: API) => {
-            try {
-              const data: OutputData = await api.saver.save();
-              setEditorData(data);
-            } catch (error) {
-              console.error("Error saving editor data:", error);
-            }
-          },
-        });
-        setEditor(editorInstance);
-      } catch (error) {
-        console.error("Error initializing editor:", error);
+      if (typeof window !== "undefined") {
+        try {
+          const EditorJS = (await import("@editorjs/editorjs")).default;
+          const OutputData = await import("@editorjs/editorjs");
+
+          editorInstance = new EditorJS({
+            onChange: async (api: any) => {
+              try {
+                const data: OutputData = await api.saver.save();
+                setEditorData(data);
+              } catch (error) {
+                console.error("Error saving editor data:", error);
+              }
+            },
+          });
+          setEditor(editorInstance);
+        } catch (error) {
+          console.error("Error initializing editor:", error);
+        }
       }
     };
 
@@ -51,11 +56,13 @@ const TextEditor = () => {
 
   return (
     <div className="relative">
-      <div
-        id="editorjs"
-        contentEditable
-        className="cdx-block min-h-32 p-2 rounded-lg border mt-2"
-      />
+      {typeof window !== "undefined" && (
+        <div
+          id="editorjs"
+          contentEditable
+          className="cdx-block min-h-32 p-2 rounded-lg border mt-2"
+        />
+      )}
       <Button
         className="absolute z-10 bottom-2 right-2 text-white rounded-full w-24 "
         onClick={handleGetEditorData}
@@ -67,4 +74,3 @@ const TextEditor = () => {
 };
 
 export default TextEditor;
-
