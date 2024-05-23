@@ -5,12 +5,33 @@ import AssignedJobCard from "../dashboard/assigned-job-card";
 import { ChevronDown, CalendarDays } from "lucide-react";
 import DashboardHeader from "@/components/shared/dashboard-header";
 import CreateJob from "./create-job";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+const ITEMS_PER_PAGE = 2;
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const paginate = (data: any[], currentPage: number, itemsPerPage: number) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return data.slice(startIndex, startIndex + itemsPerPage);
   };
 
   const allJobsData = [
@@ -120,6 +141,10 @@ const Jobs = () => {
     { id: 4, text: "Cancelled", content: cancelledJobsData },
   ];
 
+  const activeTabData = tabData.find((tab) => tab.id === activeTab)?.content || [];
+  const paginatedData = paginate(activeTabData, currentPage, ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(activeTabData.length / ITEMS_PER_PAGE);
+
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
@@ -162,31 +187,40 @@ const Jobs = () => {
         ))}
       </div>
       <div>
-        {tabData.map((tab) => (
-          <div
-            key={tab.id}
-            style={{ display: activeTab === tab.id ? "block" : "none" }}
-          >
-            {tab.content.map((jobData, index) => (
-              <AssignedJobCard
-                key={index}
-                userName={jobData.userName}
-                location={jobData.location}
-                status={jobData.status}
-                phoneNumber={jobData.phoneNumber}
-                dateTime={jobData.dateTime}
-                service={jobData.service}
-                payment={jobData.payment}
-                employeeName={jobData.employeeName}
-                imageurl={jobData.imageurl}
-              />
-            ))}
-          </div>
+        {paginatedData.map((jobData, index) => (
+          <AssignedJobCard
+            key={index}
+            userName={jobData.userName}
+            location={jobData.location}
+            status={jobData.status}
+            phoneNumber={jobData.phoneNumber}
+            dateTime={jobData.dateTime}
+            service={jobData.service}
+            payment={jobData.payment}
+            employeeName={jobData.employeeName}
+            imageurl={jobData.imageurl}
+          />
         ))}
       </div>
+      <Pagination className="bg-white my-6 rounded-xl p-4">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} />
+          </PaginationItem>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <PaginationItem key={i + 1}>
+              <PaginationLink onClick={() => handlePageChange(i + 1)}>
+                {i + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };
 
 export default Jobs;
-

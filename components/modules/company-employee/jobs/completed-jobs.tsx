@@ -90,9 +90,19 @@ export default function CompletedJobs() {
 
   const totalPages = Math.ceil(DUMMY_DATA.length / jobsPerPage);
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+  const handleClickPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
@@ -109,32 +119,20 @@ export default function CompletedJobs() {
           {...job}
         />
       ))}
-      <Pagination className='bg-white my-6 rounded-xl p-4' >
+      <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => handlePageChange(currentPage - 1)}
-            />
+            <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, index) => (
             <PaginationItem key={index + 1}>
-              <PaginationLink
-                href="#"
-                onClick={() => handlePageChange(index + 1)}
-              >
+              <PaginationLink onClick={() => handleClickPage(index + 1)}>
                 {index + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationEllipsis
-            hidden={totalPages <= 5}
-          />
           <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() => handlePageChange(currentPage + 1)}
-            />
+            <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

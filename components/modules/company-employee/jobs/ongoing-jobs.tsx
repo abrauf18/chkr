@@ -84,9 +84,19 @@ export default function OngoingJobs() {
 
   const totalPages = Math.ceil(OngoingJobsData.length / jobsPerPage);
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+  const handleClickPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
@@ -98,11 +108,6 @@ export default function OngoingJobs() {
       setCompletedJobIds(JSON.parse(storedCompletedJobs));
     }
   }, []);
-
-  // const handleMarkComplete = (jobId: number) => {
-  //   setCompletedJobIds([...completedJobIds, jobId]);
-  //   localStorage.setItem('completedJobIds', JSON.stringify([...completedJobIds, jobId]));
-  // };
 
   const displayedJobs = OngoingJobsData.filter((job) => !completedJobIds.includes(job.id)).slice(
     (currentPage - 1) * jobsPerPage,
@@ -120,18 +125,17 @@ export default function OngoingJobs() {
       <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" onClick={() => handlePageChange(currentPage - 1)} />
+            <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, index) => (
             <PaginationItem key={index + 1}>
-              <PaginationLink href="#" onClick={() => handlePageChange(index + 1)}>
+              <PaginationLink onClick={() => handleClickPage(index + 1)}>
                 {index + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationEllipsis hidden={totalPages <= 5} />
           <PaginationItem>
-            <PaginationNext href="#" onClick={() => handlePageChange(currentPage + 1)} />
+            <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

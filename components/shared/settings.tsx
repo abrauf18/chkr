@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Header from "./header";
+import Header from "./settings-header";
 import PersonalInformation from "./personal-information";
 import CompanyInformation from "../modules/company-admin/settings/company-information";
 

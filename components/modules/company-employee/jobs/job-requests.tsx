@@ -4,7 +4,6 @@ import JobRequestCard from '../dashboard/job-request-card';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -52,54 +51,50 @@ const DUMMY_DATA = [
 
 export default function JobRequests() {
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 2;
+  const itemsPerPage = 2;
 
-  const totalPages = Math.ceil(DUMMY_DATA.length / jobsPerPage);
+  const totalPages = Math.ceil(DUMMY_DATA.length / itemsPerPage);
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+  const handleClickPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
-  const displayedJobs = DUMMY_DATA.slice(
-    (currentPage - 1) * jobsPerPage,
-    currentPage * jobsPerPage
-  );
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = DUMMY_DATA.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div>
       <div className='flex flex-col gap-6'>
-        {displayedJobs.map((job) => (
+        {paginatedData.map((job) => (
           <JobRequestCard key={job.name} {...job} />
         ))}
       </div>
       <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => handlePageChange(currentPage - 1)}
-            />
+            <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, index) => (
             <PaginationItem key={index + 1}>
-              <PaginationLink
-                href="#"
-                onClick={() => handlePageChange(index + 1)}
-              >
+              <PaginationLink onClick={() => handleClickPage(index + 1)}>
                 {index + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationEllipsis
-            hidden={totalPages <= 5} // Hide ellipsis if total pages <= 5
-          />
           <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() => handlePageChange(currentPage + 1)}
-            />
+            <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

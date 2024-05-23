@@ -80,23 +80,40 @@ const transactions = [
     Status: "Cash out"
   },
 ]
+
 const ITEMS_PER_PAGE = 6;
+
 export function TransactionHistory() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const paginatedTransactions = transactions.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
 
-  const handlePageChange = (pageNumber: SetStateAction<number>) => {
-    setCurrentPage(pageNumber);
+  const totalPages = Math.ceil(transactions.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (pageNumber: number) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
 
-  const totalPages = Math.ceil(transactions.length / ITEMS_PER_PAGE);
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <>
-      <Table className=" rounded-2xl">
+      <Table className="rounded-2xl">
         <TableHeader>
           <TableRow className="bg-white">
             <TableHead>
@@ -127,14 +144,13 @@ export function TransactionHistory() {
         </TableHeader>
         <TableBody>
           {paginatedTransactions.map((transaction, index) => (
-            <TableRow key={transaction.ID} className={index % 2 === 1 ? "bg-white" : ""}>
+            <TableRow key={index} className={index % 2 === 1 ? "bg-white" : ""}>
               <TableCell className="font-medium">{transaction.ID}</TableCell>
               <TableCell>{transaction.Date}</TableCell>
               <TableCell>{transaction.Amount}</TableCell>
-              <TableCell >
-                <div className="flex items-center justify-center border rounded-lg gap-1 w-[6rem] p-1">
-                  <div className={`rounded-full w-2 h-2 ${transaction.Status === "Cash in" ? "bg-green-500" : "bg-primary"
-                    }`}></div>
+              <TableCell>
+                <div className={`flex items-center justify-center border rounded-lg gap-1 w-[6rem] p-1 ${transaction.Status === "Cash in" ? "bg-green-100" : "bg-red-100"}`}>
+                  <div className={`rounded-full w-2 h-2 ${transaction.Status === "Cash in" ? "bg-green-500" : "bg-red-500"}`}></div>
                   <span>{transaction.Status}</span>
                 </div>
               </TableCell>
@@ -142,33 +158,23 @@ export function TransactionHistory() {
           ))}
         </TableBody>
       </Table>
-      <Pagination>
+      <Pagination className="bg-white my-6 rounded-xl p-4">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => handlePageChange(currentPage - 1)}
-            />
+            <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, i) => (
             <PaginationItem key={i + 1}>
-              <PaginationLink
-                href="#"
-                onClick={() => handlePageChange(i + 1)}
-              >
+              <PaginationLink onClick={() => handlePageChange(i + 1)}>
                 {i + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationEllipsis />
           <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() => handlePageChange(currentPage + 1)}
-            />
+            <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
     </>
-  )
+  );
 }

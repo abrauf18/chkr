@@ -8,6 +8,9 @@ import {
   LayoutDashboard,
   Layers,
   Timer,
+  Building2,
+  MessageSquareText,
+  Receipt,
 } from "lucide-react";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
@@ -69,6 +72,33 @@ const SideBar = ({ open }: { open: boolean }) => {
     },
   ];
 
+  const superAdminList = [
+    {
+      title: "Subscription",
+      icon: <Receipt />,
+      path: "/super-admin/subscription",
+    },
+    {
+      title: "Companies",
+      icon: <Building2 />,
+      path: "/super-admin/companies",
+    },
+    {
+      title: "Feedback",
+      icon: <MessageSquareText />,
+      path: "/super-admin/feedback",
+    },
+    {
+      title: "Admins",
+      icon: <Users />,
+      path: "/company-admin/admins",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/company-admin/settings",
+    },
+  ];
   // Select the appropriate list based on the active pathname
   const getList = () => {
     if (activePath.startsWith("/company-admin")) {
@@ -76,6 +106,9 @@ const SideBar = ({ open }: { open: boolean }) => {
     }
     if (activePath.startsWith("/company-employee")) {
       return employeeList;
+    }
+    if (activePath.startsWith("/super-admin")) {
+      return superAdminList;
     }
     return []; // Default to an empty list if no match
   };
