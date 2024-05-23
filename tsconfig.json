@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/assets/icons/ChkrLogo.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/assets/icons/ChkrLogo.jsx", "components/shared/text-editor.tsx"],
   "exclude": ["node_modules"]
 }

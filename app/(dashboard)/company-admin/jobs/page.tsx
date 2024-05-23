@@ -1,4 +1,4 @@
-import Jobs from "@/components/modules/jobs/Jobs";
+import Jobs from "@/components/modules/company-admin/jobs/Jobs";
 import React from "react";
 
 const page = () => {

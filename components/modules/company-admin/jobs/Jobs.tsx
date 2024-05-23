@@ -143,20 +143,17 @@ const Jobs = () => {
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
-              activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
-            } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
+            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+              } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
             <div
-              className={`rounded-full w-2 h-2 ${
-                activeTab === tab.id ? "bg-primary" : "bg-white"
-              } `}
+              className={`rounded-full w-2 h-2 ${activeTab === tab.id ? "bg-primary" : "bg-white"
+                } `}
             ></div>
             <div>
               <span
-                className={`whitespace-nowrap mobile:text-sm ${
-                  activeTab === tab.id ? "font-bold" : "font-medium"
-                } `}
+                className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"
+                  } `}
               >
                 {tab.text}
               </span>
