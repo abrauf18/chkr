@@ -1,7 +1,7 @@
-import React from 'react'
-import Settings from '@/components/modules/company-admin/settings/settings'
-
+import React from "react";
+import Settings from "@/components/shared/settings";
 
 export default function page() {
-  return <Settings />
+  return <Settings />;
 }
+
