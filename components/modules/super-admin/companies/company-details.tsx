@@ -2,6 +2,7 @@ import { MapPinned, PencilLine } from 'lucide-react';
 import React from 'react';
 import PlanCard from '../../company-admin/onboarding/plan-card';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface CompanyDetailsProps {
   companyName: string;
@@ -33,10 +34,12 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
             <div className="text-xl font-medium text-black">{companyName}</div>
           </div>
         </div>
-        <Button className="text-white p-3 rounded-3xl flex items-center gap-2 mobile:mt-4 mobile:w-full mobile:mx-auto">
-          <PencilLine className='w-4 h-4' />
-          Edit Profile
-        </Button>
+        <Link href='/super-admin/companies/editprofile'>
+          <Button className="text-white p-3 rounded-3xl flex items-center gap-2 mobile:mt-4 mobile:w-full mobile:mx-auto">
+            <PencilLine className='w-4 h-4' />
+            Edit Profile
+          </Button>
+        </Link>
       </div>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-4 text-black">
         <div className="flex flex-wrap xl:gap-10 gap-4">
