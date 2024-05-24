@@ -1,7 +1,7 @@
 import { MapPinned } from 'lucide-react';
 import React from 'react';
 import CardOptions from './card-options';
-
+import Image from 'next/image';
 interface CompanyCardProps {
   companyName: string;
   companyType: string;
@@ -24,7 +24,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
       <div className='flex justify-between'>
         <div className="flex items-center mb-4">
           <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-white">
-            <span className="text-xl font-bold">{companyName.charAt(0)}</span>
+            <Image alt='company-logo' width={4} height={4} src='/images/companyLogo.svg' />
           </div>
           <div className="flex flex-col ml-4 gap-1">
             <div className="font-medium text-lg">{companyName}</div>
@@ -42,11 +42,11 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
       <div className="flex justify-between items-center">
         <div className="flex items-center bg-gray-100 py-2 px-5 rounded-xl gap-2">
           <MapPinned className='w-4 h-4' color='gray' />
-          {location}
+          <span className='whitespace-nowrap'>{location}</span>
         </div>
         <div className="flex items-center gap-2 py-2 px-5 rounded-xl bg-gray-100">
           <div className='rounded-full bg-blue-400 h-3 w-3'></div>
-          {staffCount} Staff Workers
+          <span className='whitespace-nowrap'>{staffCount} Staff Workers</span>
         </div>
       </div>
     </div>
