@@ -11,7 +11,7 @@ import CompanyDetails from "./company-details-modal";
 import CompanyDetailsModal from "./company-details-modal";
 
 export default function accountDropdown() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
 
   return (
