@@ -4,6 +4,7 @@ import CompaniesSummaryCard from './companies-summary-card';
 import SubscriptionList from './subscription-list';
 import DashboardHeader from '@/components/shared/dashboard-header';
 import Header from '@/components/shared/header';
+import Stripe from '@/components/shared/stripe';
 
 export default function Subscription() {
   const userSummaryData = [
