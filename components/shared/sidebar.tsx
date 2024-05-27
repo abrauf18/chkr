@@ -99,6 +99,29 @@ const SideBar = ({ open }: { open: boolean }) => {
       path: "/super-admin/settings",
     },
   ];
+
+  const AdminList = [
+    {
+      title: "Subscription",
+      icon: <Receipt />,
+      path: "/admin/subscription",
+    },
+    {
+      title: "Companies",
+      icon: <Building2 />,
+      path: "/admin/companies",
+    },
+    {
+      title: "Feedback",
+      icon: <MessageSquareText />,
+      path: "/admin/feedback",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/admin/settings",
+    },
+  ];
   // Select the appropriate list based on the active pathname
   const getList = () => {
     if (activePath.startsWith("/company-admin")) {
@@ -109,6 +132,9 @@ const SideBar = ({ open }: { open: boolean }) => {
     }
     if (activePath.startsWith("/super-admin")) {
       return superAdminList;
+    }
+    if (activePath.startsWith("/admin")) {
+      return AdminList;
     }
     return []; // Default to an empty list if no match
   };
