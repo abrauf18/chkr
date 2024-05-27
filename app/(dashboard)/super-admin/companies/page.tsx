@@ -1,6 +1,6 @@
 import Companies from '@/components/modules/super-admin/companies/companies'
 import React from 'react'
 
-export default function page() {
+export default function CompaniesPage() {
   return <Companies />
 }
