@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewStar from "@/assets/icons/star";
+import Image from 'next/image';
 
 interface ReviewCardProps {
   name: string;
@@ -13,7 +14,7 @@ interface ReviewCardProps {
 const FeedbackCard: React.FC<ReviewCardProps> = ({ name, avatar, rating, time, reviewHeading, review }) => {
   return (
     <div className="p-4 border rounded-lg shadow-md flex space-x-4 bg-white">
-      <img src={avatar} alt={`${name}'s avatar`} className="w-12 h-12 rounded-full" />
+      <Image width={5} height={5} src='/images/avatar.svg' alt='user-img' className="w-12 h-12 rounded-full" />
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">{name}</h3>
