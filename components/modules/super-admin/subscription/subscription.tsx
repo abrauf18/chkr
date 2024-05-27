@@ -21,7 +21,6 @@ export default function Subscription() {
     <>
       <div className='flex flex-col gap-4'>
         <DashboardHeader title='Payments' />
-        <Stripe />
         <h1 className='text-xl'>Subscription Summary</h1>
         <div className="grid gap-6 lg:grid-cols-4">
           <div className="lg:col-span-1">
