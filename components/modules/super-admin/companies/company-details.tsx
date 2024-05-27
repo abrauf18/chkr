@@ -71,12 +71,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
         </div>
       </div>
       <div className="mt-8">
-        <div className='flex justify-between items-center'>
-          <div className="text-lg font-medium text-black">Subscription Plan</div>
-          <button className="bg-transparent text-primary hover:bg-primary hover:text-white font-medium p-3 rounded-2xl border border-primary">
-            Change Plan
-          </button>
-        </div>
+        <div className="text-lg font-medium text-black">Subscription Plan</div>
         <div className="flex items-baseline hover:border-2 p-2 mt-4 text-black hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
           <input
             type="radio"

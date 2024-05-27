@@ -6,8 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Delete, EllipsisVertical, Trash2 } from "lucide-react";
-import CompanyDetails from "./company-details-modal";
+import { EllipsisVertical, Trash2 } from "lucide-react";
 import CompanyDetailsModal from "./company-details-modal";
 
 export default function accountDropdown() {

@@ -32,7 +32,7 @@ export default function Filter() {
           open && "border-white/40"
         )}
       >
-        Filter
+        <span>Filter</span>
         <ChevronDown className='w-4 h-4' />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border z-[10] menu-shadow rounded-[16px]'>

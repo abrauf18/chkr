@@ -9,18 +9,15 @@ interface HeaderProps {
 
 export default function CompanyHeader({ title }: HeaderProps) {
   return (
-    <div className='flex justify-between items-center'>
-      <h1 className='text-xl font-base'>{title}</h1>
-      <div className="flex justify-center items-center gap-2">
-        <Button className="md:w-[90%] w-1/2 bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
+    <div className='flex flex-row mobile:flex-col md:justify-between items-center'>
+      <h1 className='flex w-full text-xl font-base'>{title}</h1>
+      <div className="flex md:justify-end gap-1 items-center w-full mobile:mt-2">
+        <Button className=" bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base">
           <CalendarDays className='mr-2 w-5 h-5' color='#FF2600' />
-          Joined Date
+          <span>Joined Date</span>
           <ChevronDown className='ml-2' />
         </Button>
         <Filter />
-        <Button>
-          Add new Company
-        </Button>
       </div>
     </div>
   )
