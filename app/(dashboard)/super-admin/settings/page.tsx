@@ -1,9 +1,9 @@
 import Settings from "@/components/shared/settings";
 import React from "react";
 
-const SettingPage = () => {
+const SettingsPage = () => {
   return <Settings />;
 };
 
-export default SettingPage;
+export default SettingsPage;
 

@@ -16,7 +16,7 @@ import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
 import Link from "next/link";
 import clsx from "clsx";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 const SideBar = ({ open }: { open: boolean }) => {
   const [activePath, setActivePath] = useState<string>("");
@@ -91,12 +91,12 @@ const SideBar = ({ open }: { open: boolean }) => {
     {
       title: "Admins",
       icon: <Users />,
-      path: "/company-admin/admins",
+      path: "/super-admin/admins",
     },
     {
       title: "Settings",
       icon: <Settings />,
-      path: "/company-admin/settings",
+      path: "/super-admin/settings",
     },
   ];
   // Select the appropriate list based on the active pathname
@@ -166,3 +166,4 @@ const SideBar = ({ open }: { open: boolean }) => {
 };
 
 export default SideBar;
+
