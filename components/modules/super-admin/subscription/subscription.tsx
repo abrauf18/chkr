@@ -4,6 +4,7 @@ import CompaniesSummaryCard from './companies-summary-card';
 import SubscriptionList from './subscription-list';
 import DashboardHeader from '@/components/shared/dashboard-header';
 import Header from '@/components/shared/header';
+import Stripe from '@/components/shared/stripe';
 
 export default function Subscription() {
   const userSummaryData = [
@@ -20,6 +21,7 @@ export default function Subscription() {
     <>
       <div className='flex flex-col gap-4'>
         <DashboardHeader title='Payments' />
+        <Stripe />
         <h1 className='text-xl'>Subscription Summary</h1>
         <div className="grid gap-6 lg:grid-cols-4">
           <div className="lg:col-span-1">
