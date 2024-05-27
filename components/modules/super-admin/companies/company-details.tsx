@@ -27,8 +27,6 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
         <div className="flex items-center">
           <div
             className="rounded-full bg-yellow-400 h-16 w-16 flex items-center justify-center">
-            {/* Placeholder for company logo */}
-            <span className="text-white text-2xl font-bold">U</span>
           </div>
           <div className="ml-4">
             <div className="text-xl font-medium text-black">{companyName}</div>

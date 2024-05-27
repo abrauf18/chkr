@@ -23,7 +23,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
     <div className="max-w-sm rounded-xl overflow-hidden shadow-lg p-5 bg-white">
       <div className='flex justify-between'>
         <div className="flex items-center mb-4">
-          <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+          <div className="w-12 h-12 rounded-full flex items-center justify-center text-white">
             <Image alt='company-logo' width={4} height={4} src='/images/companyLogo.svg' />
           </div>
           <div className="flex flex-col ml-4 gap-1">
