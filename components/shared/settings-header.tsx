@@ -12,7 +12,7 @@ interface HeaderProps {
   setActiveTab: (tab: string) => void;
   personalData: TabData;
   companyData: TabData;
-  isEmployee?: boolean;
+  isAdmin?: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   personalData,
   companyData,
-  isEmployee,
+  isAdmin,
 }) => {
   const activeData = activeTab === "personal" ? personalData : companyData;
 
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
         <h1 className="text-xl font-semibold">{activeData?.name}</h1>
         <p className="text-gray-500">{activeData?.email}</p>
       </div>
-      {!isEmployee && (
+      {isAdmin && (
         <div className="mt-6 flex justify-center">
           <div className="flex space-x-8">
             <button
