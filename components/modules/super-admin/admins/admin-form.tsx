@@ -5,18 +5,18 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EmployeeSchema } from '@/lib/types';
+import { AdminSchema } from '@/lib/types';
 import { ArrowRight, Mail, Phone, User } from 'lucide-react';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function EmployeeForm() {
+export default function AdminForm() {
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(EmployeeSchema),
+    resolver: zodResolver(AdminSchema),
   });
 
   const onSubmit = handleSubmit((data) => {
@@ -29,7 +29,7 @@ export default function EmployeeForm() {
       <div className='flex flex-col text-black mt-6'>
         <div className="mb-4 w-full relative">
           <Label
-            htmlFor="employeeFirstName"
+            htmlFor="adminFirstName"
             className="flex md:text-medium text-sm font-semibold"
           >
             First Name
@@ -40,20 +40,20 @@ export default function EmployeeForm() {
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
-              id="employeeFirstName"
+              id="adminFirstName"
               type="text"
-              placeholder="Enter employee first name"
-              {...register("employeeFirstName")}
+              placeholder="Enter admin first name"
+              {...register("adminFirstName")}
             />
           </div>
           <p className="text-sm text-red-500 mt-1">
             {" "}
-            <ErrorMessage errors={errors} name="employeeFirstName" />
+            <ErrorMessage errors={errors} name="adminFirstName" />
           </p>
         </div>
         <div className="mb-4 w-full relative">
           <Label
-            htmlFor="employeeLastName"
+            htmlFor="adminLastName"
             className="flex md:text-medium text-sm font-semibold"
           >
             Last Name
@@ -64,15 +64,15 @@ export default function EmployeeForm() {
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
-              id="employeeLastName"
+              id="adminLastName"
               type="text"
-              placeholder="Enter employee last name"
-              {...register("employeeLastName")}
+              placeholder="Enter admin last name"
+              {...register("adminLastName")}
             />
           </div>
           <p className="text-sm text-red-500 mt-1">
             {" "}
-            <ErrorMessage errors={errors} name="employeeLastName" />
+            <ErrorMessage errors={errors} name="adminLastName" />
           </p>
         </div>
         <div className="mb-4 w-full relative">
@@ -87,7 +87,7 @@ export default function EmployeeForm() {
               className="pl-10 bg-[#F9F8F8]"
               id="email"
               type="text"
-              placeholder="Enter your email"
+              placeholder="Enter email address"
               {...register("email")}
             />
           </div>
@@ -101,7 +101,7 @@ export default function EmployeeForm() {
             type='submit'
             className='text-white rounded-3xl'>
             <span>Send Invite</span>
-            <ArrowRight />
+            <ArrowRight className='w-4 h-4 ml-2' />
           </Button>
         </div>
       </div>

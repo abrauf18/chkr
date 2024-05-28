@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Mail, Lock, Contact, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Eye, EyeOff } from "lucide-react";
 
 const PersonalInformation: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -17,7 +17,6 @@ const PersonalInformation: React.FC = () => {
     defaultValues: {
       fullName: "Ayesha Rashid Khan",
       email: "ayesha@example.com",
-      contactNumber: "+1234 685 8594",
       password: "helo123",
     },
   });
@@ -54,23 +53,6 @@ const PersonalInformation: React.FC = () => {
         </div>
         {errors.email && (
           <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label className="md:text-lg text-sm font-semibold">
-          Contact Number
-        </label>
-        <div className="relative mt-2">
-          <input
-            {...register("contactNumber")}
-            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
-          />
-          <Contact className="absolute right-3 top-3 text-gray-500" />
-        </div>
-        {errors.contactNumber && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.contactNumber.message}
-          </p>
         )}
       </div>
       <div className="mb-6">

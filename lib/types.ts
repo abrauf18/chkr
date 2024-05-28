@@ -69,14 +69,15 @@ export const ResetPasswordSchema = z
   });
 
 export const EmployeeSchema = z.object({
-  employeeName: z
+  employeeFirstName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
+  employeeLastName: z
     .string()
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
-  phoneNumber: z
-    .string()
-    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
 });
 
 export const FeedbackSchema = z.object({
@@ -122,9 +123,6 @@ export const SettingPersonalInfosSchema = z.object({
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
-  contactNumber: z
-    .string()
-    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
   password: z
     .string()
     .min(8, { message: "Password is too short" })
@@ -151,3 +149,15 @@ export const SettingsCompanyInfoSchema = z.object({
 });
 
 export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
+
+export const AdminSchema = z.object({
+  adminFirstName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Admin first name must not be empty" }),
+  adminLastName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Admin last name must not be empty" }),
+  email: z.string().email().min(1, { message: "Email must not be empty" }),
+});
