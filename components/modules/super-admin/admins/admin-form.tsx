@@ -42,7 +42,7 @@ export default function AdminForm() {
               className="pl-10 bg-[#F9F8F8]"
               id="adminFirstName"
               type="text"
-              placeholder="Enter Admin First Name"
+              placeholder="Enter admin first name"
               {...register("adminFirstName")}
             />
           </div>
@@ -66,7 +66,7 @@ export default function AdminForm() {
               className="pl-10 bg-[#F9F8F8]"
               id="adminLastName"
               type="text"
-              placeholder="Enter Admin Last Name"
+              placeholder="Enter admin last name"
               {...register("adminLastName")}
             />
           </div>
@@ -87,7 +87,7 @@ export default function AdminForm() {
               className="pl-10 bg-[#F9F8F8]"
               id="email"
               type="text"
-              placeholder="Enter Email address"
+              placeholder="Enter email address"
               {...register("email")}
             />
           </div>

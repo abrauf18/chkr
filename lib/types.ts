@@ -69,14 +69,15 @@ export const ResetPasswordSchema = z
   });
 
 export const EmployeeSchema = z.object({
-  employeeName: z
+  employeeFirstName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Employee name must not be empty" }),
+  employeeLastName: z
     .string()
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
-  phoneNumber: z
-    .string()
-    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
 });
 
 export const FeedbackSchema = z.object({

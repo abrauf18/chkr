@@ -29,10 +29,10 @@ export default function EmployeeForm() {
       <div className='flex flex-col text-black mt-6'>
         <div className="mb-4 w-full relative">
           <Label
-            htmlFor="employeeName"
+            htmlFor="employeeFirstName"
             className="flex md:text-medium text-sm font-semibold"
           >
-            Employee Name
+            First Name
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
@@ -40,15 +40,39 @@ export default function EmployeeForm() {
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
-              id="employeeName"
+              id="employeeFirstName"
               type="text"
-              placeholder="Enter Full Name"
-              {...register("employeeName")}
+              placeholder="Enter employee first name"
+              {...register("employeeFirstName")}
             />
           </div>
           <p className="text-sm text-red-500 mt-1">
             {" "}
-            <ErrorMessage errors={errors} name="employeeName" />
+            <ErrorMessage errors={errors} name="employeeFirstName" />
+          </p>
+        </div>
+        <div className="mb-4 w-full relative">
+          <Label
+            htmlFor="employeeLastName"
+            className="flex md:text-medium text-sm font-semibold"
+          >
+            Last Name
+          </Label>
+          <div className="relative flex items-center">
+            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+              <User color="#636363" className='h-4 w-4' />
+            </span>
+            <Input
+              className="pl-10 bg-[#F9F8F8]"
+              id="employeeLastName"
+              type="text"
+              placeholder="Enter employee last name"
+              {...register("employeeLastName")}
+            />
+          </div>
+          <p className="text-sm text-red-500 mt-1">
+            {" "}
+            <ErrorMessage errors={errors} name="employeeLastName" />
           </p>
         </div>
         <div className="mb-4 w-full relative">
@@ -70,27 +94,6 @@ export default function EmployeeForm() {
           <p className="text-sm text-red-500 mt-1">
             {" "}
             <ErrorMessage errors={errors} name="email" />
-          </p>
-        </div>
-        <div className="mb-4 w-full relative">
-          <Label htmlFor="phoneNumber" className="flex md:text-medium text-sm font-semibold">
-            Phone Number
-          </Label>
-          <div className="relative flex items-center">
-            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-              <Phone color="#636363" className='h-4 w-4' />
-            </span>
-            <Input
-              className="pl-10 bg-[#F9F8F8]"
-              id="phoneNumber"
-              type="text"
-              placeholder="Enter Phone Number"
-              {...register("phoneNumber")}
-            />
-          </div>
-          <p className="text-sm text-red-500 mt-1">
-            {" "}
-            <ErrorMessage errors={errors} name="phoneNumber" />
           </p>
         </div>
         <div className='flex justify-end mt-6'>
