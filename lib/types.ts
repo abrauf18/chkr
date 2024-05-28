@@ -122,9 +122,6 @@ export const SettingPersonalInfosSchema = z.object({
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
-  contactNumber: z
-    .string()
-    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
   password: z
     .string()
     .min(8, { message: "Password is too short" })
