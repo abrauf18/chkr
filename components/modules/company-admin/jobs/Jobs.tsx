@@ -1,10 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import AssignedJobCard from "../dashboard/assigned-job-card";
-import { ChevronDown, CalendarDays } from "lucide-react";
 import DashboardHeader from "@/components/shared/dashboard-header";
-import CreateJob from "./create-job";
 import {
   Pagination,
   PaginationContent,

@@ -1,7 +1,5 @@
 "use client";
 import DashboardHeader from "@/components/shared/dashboard-header";
-import { Button } from "@/components/ui/button";
-import { CalendarDays, ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 import JobRequests from "./job-requests";
 import OngoingJobs from "./ongoing-jobs";

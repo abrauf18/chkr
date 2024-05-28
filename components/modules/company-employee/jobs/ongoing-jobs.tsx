@@ -1,6 +1,3 @@
-import DashboardHeader from '@/components/shared/dashboard-header';
-import { Button } from '@/components/ui/button';
-import { CalendarDays, ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import OngoingJobCard from './ongoing-job-card';
 import {

@@ -9,27 +9,15 @@ import Employees from '@/assets/icons/Employees'
 import AssignedJobCard from './assigned-job-card'
 import { ChevronDown, Bell, CircleArrowRight } from 'lucide-react';
 import DashboardHeader from '@/components/shared/dashboard-header'
+import Header from '@/components/shared/header'
 
 const Dashboard = () => {
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader
         title='Here’s a quick overview to all your insights !! !!' />
-      <div className='flex justify-between items-center'>
-        <h1 className='text-xl font-bold'>Dashboard!</h1>
-        <div className="flex justify-center items-center gap-2">
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
-            Select Date
-            <Calendar className='ml-2' />
-          </Button>
-          <Button className="md:w-[90%] w-1/2 bg-white rounded-3xl p-6 text-sm lg:text-base">
-            Filter
-            <ChevronDown
-              className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]"
-            />
-          </Button>
-        </div>
-      </div>
+      <Header title='Dashboard!' />
+
       {/* Job Cards */}
       <div className='flex md:flex-row flex-col w-full gap-6 mt-4'>
         <div className='flex md:w-[32%] bg-white rounded-3xl items-center py-8 px-6'>

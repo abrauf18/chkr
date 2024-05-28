@@ -10,17 +10,16 @@ export default function Header({ title }: HeaderProps) {
   return (
     <>
       <div className='flex mobile:flex-col justify-between items-center'>
-        <h1 className='text-xl font-base whitespace-nowrap w-full'>{title}</h1>
-        <div className="flex items-center gap-2 mobile:w-full mobile:mt-2">
-          <Button className="md:w-[90%] bg-white hover:bg-white rounded-3xl p-6 text-sm lg:text-base">
-            <CalendarDays className='mr-2' color='#FF2600' />
-            <span className='mobile:hidden'>March 11 - March 17, 2024</span>
-            <span className='md:hidden'>Select Date</span>
-            <ChevronDown className='ml-2' />
+        <h1 className='text-xl font-bold w-full'>{title}</h1>
+        <div className="flex items-center gap-2 mobile:mt-2 md:mt-2 lg:mt-0 justify-end mobile:justify-start w-full ">
+          <Button className="bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base flex gap-2">
+            <CalendarDays className="ml-2 w-4 h-4" color="#FF2600" />
+            <span>Select Date</span>
+            <ChevronDown className='w-4 h-4' />
           </Button>
-          <Button className="md:w-[90%] bg-white rounded-3xl p-6 text-sm lg:text-base">
+          <Button className="bg-white rounded-3xl py-6 text-sm lg:text-base flex gap-2 items-center justify-center">
             Filter
-            <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
+            <ChevronDown className='w-4 h-4' />
           </Button>
         </div>
       </div>
