@@ -30,7 +30,7 @@ export default function AddEmployee() {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="flex items-center rounded-3xl text-white bg-primary p-2 mobile:py-3 whitespace-nowrap">
+        <div className="flex items-center rounded-3xl text-white bg-primary p-3 whitespace-nowrap">
           <CirclePlus className="md:mr-2 h-5 mobile:h-4" />
           <span className='mobile:text-xs'>Add Employee</span>
         </div>

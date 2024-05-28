@@ -14,7 +14,7 @@ export default function AddAdmin() {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className='flex items-center justify-center rounded-3xl bg-primary gap-2 py-2 px-3'>
+        <div className='flex items-center justify-center rounded-3xl bg-primary gap-2 py-3 px-3'>
           <CirclePlus className='w-4 h-4' color='white' />
           <span className='text-white whitespace-nowrap mobile:text-sm'>Add Admin</span>
         </div>

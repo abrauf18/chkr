@@ -13,6 +13,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import AdminHeader from "@/components/shared/admin-header";
 
 const ITEMS_PER_PAGE = 2;
 
@@ -148,21 +149,7 @@ const Jobs = () => {
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
-      <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl font-bold">All Jobs</h1>
-        <div className="flex justify-end items-center gap-2 md:w-[87%]">
-          <Button className="bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base mobile:hidden">
-            <CalendarDays className="mr-2" color="#FF2600" />
-            March 11 - March 17, 2024
-            <ChevronDown className="ml-2" />
-          </Button>
-          <Button className="bg-white rounded-3xl p-6 text-sm lg:text-base mobile:hidden">
-            Filter
-            <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
-          </Button>
-          <CreateJob />
-        </div>
-      </div>
+      <AdminHeader title="All Jobs" isAdmin={true} isSuperAdmin={false} page="createJob" />
       <div className="flex gap-2 items-center my-3 w-full mx-auto">
         {tabData.map((tab) => (
           <div
