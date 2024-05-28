@@ -150,9 +150,13 @@ export const SettingsCompanyInfoSchema = z.object({
 export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
 
 export const AdminSchema = z.object({
-  adminName: z
+  adminFirstName: z
     .string()
     .max(50)
-    .min(1, { message: "Admin name must not be empty" }),
+    .min(1, { message: "Admin first name must not be empty" }),
+  adminLastName: z
+    .string()
+    .max(50)
+    .min(1, { message: "Admin last name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
 });

@@ -29,10 +29,10 @@ export default function AdminForm() {
       <div className='flex flex-col text-black mt-6'>
         <div className="mb-4 w-full relative">
           <Label
-            htmlFor="employeeName"
+            htmlFor="adminFirstName"
             className="flex md:text-medium text-sm font-semibold"
           >
-            Admin Name
+            First Name
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
@@ -40,15 +40,39 @@ export default function AdminForm() {
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
-              id="adminName"
+              id="adminFirstName"
               type="text"
-              placeholder="Enter Admin Full Name"
-              {...register("adminName")}
+              placeholder="Enter Admin First Name"
+              {...register("adminFirstName")}
             />
           </div>
           <p className="text-sm text-red-500 mt-1">
             {" "}
-            <ErrorMessage errors={errors} name="adminName" />
+            <ErrorMessage errors={errors} name="adminFirstName" />
+          </p>
+        </div>
+        <div className="mb-4 w-full relative">
+          <Label
+            htmlFor="adminLastName"
+            className="flex md:text-medium text-sm font-semibold"
+          >
+            Last Name
+          </Label>
+          <div className="relative flex items-center">
+            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+              <User color="#636363" className='h-4 w-4' />
+            </span>
+            <Input
+              className="pl-10 bg-[#F9F8F8]"
+              id="adminLastName"
+              type="text"
+              placeholder="Enter Admin Last Name"
+              {...register("adminLastName")}
+            />
+          </div>
+          <p className="text-sm text-red-500 mt-1">
+            {" "}
+            <ErrorMessage errors={errors} name="adminLastName" />
           </p>
         </div>
         <div className="mb-4 w-full relative">
