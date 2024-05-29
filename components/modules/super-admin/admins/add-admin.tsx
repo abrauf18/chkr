@@ -20,7 +20,7 @@ export default function AddAdmin() {
         </div>
       </DialogTrigger>
       <DialogContent
-        className="bg-white md:max-w-[55%] xl:max-w-[45%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
+        className="bg-white md:max-w-[55%] xl:max-w-[40%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
       >
         <DialogHeader>
           <DialogTitle>

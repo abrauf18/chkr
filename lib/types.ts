@@ -175,5 +175,8 @@ export const AdminSchema = z.object({
     .string()
     .max(50)
     .min(1, { message: "Admin last name must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
 });
