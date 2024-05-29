@@ -37,7 +37,7 @@ export default function Signup() {
         backgroundImage: `url(${SignupImg.src})`,
       }}
     >
-      <div className="flex lg:w-[95%] sm:w-[85%] md:w-full py-6 justify-center items-center">
+      <div className="flex lg:w-[95%] mobile:w-[85%] md:w-full py-6 justify-center items-center">
         <form
           className="bg-white lg:[70%] xl:w-3/4 shadow-md rounded-3xl px-8 pt-6 pb-8 my-10"
           onSubmit={onSubmit}
