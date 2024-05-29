@@ -28,17 +28,25 @@ export type Onboarding = z.infer<typeof OnboardingSchema>;
 
 export const SignUpSchema = z
   .object({
-    firstname: z.string().min(2).max(50).min(1),
-    lastname: z.string().min(2).max(50).min(1),
-    email: z.string().email().min(1),
+    firstName: z.string()
+      .min(1, { message: "First name is required" })
+      .max(50, { message: "First name can have maximum 50 characters" }),
+    lastName: z.string().max(50)
+      .min(1, { message: "Last name is required" }),
+    email: z.string()
+      .min(1, { message: "Email is required" })
+      .email({ message: "Email is invalid" }),
     contactNumber: z
       .string()
-      .min(1, { message: "Phone number must not be empty" })
-      .regex(phoneRegex, "Invalid Number!")
-      .min(1, { message: "Phone number must not be empty" })
+      .min(1, { message: "Phone number is required" })
       .regex(phoneRegex, "Invalid Number!"),
-    password: z.string().min(8).min(1),
-    confirmPassword: z.string().min(8).min(1),
+    password: z.string()
+      .min(1, { message: "Password is required" })
+      .min(8, { message: "Password is too short" })
+      .max(20, { message: "Password is too long" }),
+    confirmPassword: z.string()
+      .min(1, { message: "Password is required" })
+      .min(8, { message: "Password must have 8 characters" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

@@ -76,17 +76,16 @@ export default function Signup() {
                 First Name{" "}
               </Label>
               <Input
-                {...register("firstname")}
+                {...register("firstName")}
                 className="bg-[#F9F8F8]"
                 id="firstName"
                 type="name"
                 placeholder="First Name"
               />
-              {typeof errors.firstname?.message === "string" && (
-                <p className="text-red-600 mt-2">
-                  The First Name field is required
-                </p>
-              )}
+              <p className="text-sm text-red-500 mt-1">
+                {" "}
+                <ErrorMessage errors={errors} name="firstName" />
+              </p>
             </div>
             <div className="mb-4 w-full items-center">
               <Label
@@ -96,17 +95,16 @@ export default function Signup() {
                 Last Name{" "}
               </Label>
               <Input
-                {...register("lastname")}
+                {...register("lastName")}
                 className="bg-[#F9F8F8]"
                 id="LastName"
                 type="name"
                 placeholder="Last Name"
               />
-              {typeof errors.lastname?.message === "string" && (
-                <p className="text-red-600 mt-2">
-                  The Last Name field is required
-                </p>
-              )}
+              <p className="text-sm text-red-500 mt-1">
+                {" "}
+                <ErrorMessage errors={errors} name="lastName" />
+              </p>
             </div>
           </div>
           <div className="grid mb-4 w-full items-center  ">
@@ -120,12 +118,10 @@ export default function Signup() {
               id="email"
               placeholder="Enter your email"
             />
-            {errors.email && (
-              <p className="text-red-600 mt-2">Email is required</p>
-            )}
-            {errors.email && errors.email.type === "pattern" && (
-              <p className="text-red-600 mt-2">Invalid email format</p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="email" />
+            </p>
           </div>
           <div className="grid mb-4 w-full items-center  ">
             <Label htmlFor="email" className="md:text-lg text-sm font-medium	">
@@ -168,9 +164,10 @@ export default function Signup() {
                 {showPassword ? <EyeOff /> : <Eye />}
               </button>
             </div>
-            {typeof errors.password?.message === "string" && (
-              <p className="text-red-600 mt-2">{errors.password?.message}</p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="password" />
+            </p>
           </div>
           <div className="grid mb-4 w-full items-center">
             <Label
@@ -197,11 +194,10 @@ export default function Signup() {
                 {showConfirmPassword ? <EyeOff /> : <Eye />}
               </button>
             </div>
-            {typeof errors.confirmPassword?.message === "string" && (
-              <p className="text-red-600 mt-2">
-                {errors.confirmPassword?.message}
-              </p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="confirmPassword" />
+            </p>
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
