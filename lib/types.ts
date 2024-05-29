@@ -91,7 +91,10 @@ export const EmployeeSchema = z.object({
     .string()
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
   phoneNumber: z
     .string()
     .min(8, { message: "Phone Number must contain at least 8 numbers" }),
@@ -178,13 +181,17 @@ export const AdminSchema = z.object({
   adminFirstName: z
     .string()
     .max(50)
-    .min(1, { message: "Admin first name must not be empty" }),
+    .min(1, { message: "Admin first name is required" }),
   adminLastName: z
     .string()
     .max(50)
-    .min(1, { message: "Admin last name must not be empty" }),
+    .min(1, { message: "Admin last name is required" }),
   phoneNumber: z
     .string()
+    .min(1, { message: "Phone number is required" })
     .min(8, { message: "Phone Number must contain at least 8 numbers" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
 });

@@ -47,7 +47,7 @@ export default function AdminForm() {
                 {...register("adminFirstName")}
               />
             </div>
-            <p className="text-sm text-red-500 mt-1">
+            <p className="mobile:text-xs text-sm text-red-500 mt-1 text-left">
               {" "}
               <ErrorMessage errors={errors} name="adminFirstName" />
             </p>
@@ -71,7 +71,7 @@ export default function AdminForm() {
                 {...register("adminLastName")}
               />
             </div>
-            <p className="text-sm text-red-500 mt-1">
+            <p className="mobile:text-xs text-sm text-red-500 mt-1 text-left">
               {" "}
               <ErrorMessage errors={errors} name="adminLastName" />
             </p>
@@ -93,7 +93,7 @@ export default function AdminForm() {
               {...register("email")}
             />
           </div>
-          <p className="text-sm text-red-500 mt-1">
+          <p className="mobile:text-xs text-sm text-red-500 mt-1 text-left">
             {" "}
             <ErrorMessage errors={errors} name="email" />
           </p>
