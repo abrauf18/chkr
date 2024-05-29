@@ -8,7 +8,7 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
   const [activeTab, setActiveTab] = useState<string>("personal");
 
   return (
-    <div className="max-w-screen-lg mx-auto mt-8 bg-white my-4 p-6 rounded-2xl">
+    <div className="max-w-screen-xl mx-auto mt-8 bg-white my-4 p-6 rounded-2xl">
       <Header
         isAdmin={isAdmin}
         activeTab={activeTab}
