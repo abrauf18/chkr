@@ -16,8 +16,8 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
   url,
 }) => {
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <div className="w-full text-center font-semibold xl:text-5xl md:text-4xl sm:text-4xl text-xl p-2">
+    <div className="w-full flex flex-col justify-between items-center">
+      <div className="w-full text-center font-semibold xl:text-5xl md:text-4xl sm:text-4xl text-xl p-2 lg:mt-32">
         <h1>{heading1}</h1>
         <div className="relative md:mt-2 sm:mt-2 mt-1">
           <div className="absolute bg-[#FFC7BD] h-6 w-1/2 bottom-0 left-1/2 transform -translate-x-1/2 z-0"></div>
