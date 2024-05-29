@@ -31,6 +31,12 @@ export const SignUpSchema = z
     firstname: z.string().min(2).max(50).min(1),
     lastname: z.string().min(2).max(50).min(1),
     email: z.string().email().min(1),
+    contactNumber: z
+      .string()
+      .min(1, { message: "Phone number must not be empty" })
+      .regex(phoneRegex, "Invalid Number!")
+      .min(1, { message: "Phone number must not be empty" })
+      .regex(phoneRegex, "Invalid Number!"),
     password: z.string().min(8).min(1),
     confirmPassword: z.string().min(8).min(1),
   })
@@ -78,6 +84,9 @@ export const EmployeeSchema = z.object({
     .max(50)
     .min(1, { message: "Employee name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
 });
 
 export const FeedbackSchema = z.object({

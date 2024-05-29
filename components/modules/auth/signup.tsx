@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/lib/types";
 import { Eye, EyeOff } from 'lucide-react';
+import { ErrorMessage } from "@hookform/error-message";
 
 
 export default function Signup() {
@@ -117,7 +118,7 @@ export default function Signup() {
               className="bg-[#F9F8F8]"
               type="email"
               id="email"
-              placeholder="Email"
+              placeholder="Enter your email"
             />
             {errors.email && (
               <p className="text-red-600 mt-2">Email is required</p>
@@ -125,6 +126,22 @@ export default function Signup() {
             {errors.email && errors.email.type === "pattern" && (
               <p className="text-red-600 mt-2">Invalid email format</p>
             )}
+          </div>
+          <div className="grid mb-4 w-full items-center  ">
+            <Label htmlFor="email" className="md:text-lg text-sm font-medium	">
+              Contact Number
+            </Label>
+            <Input
+              {...register("contactNumber")}
+              className="bg-[#F9F8F8]"
+              type="number"
+              id="contactNumber"
+              placeholder="Enter your contact number"
+            />
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="contactNumber" />
+            </p>
           </div>
           <div className="grid mb-4 w-full items-center">
             <Label
