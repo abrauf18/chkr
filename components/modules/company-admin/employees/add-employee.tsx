@@ -35,10 +35,12 @@ export default function AddEmployee() {
           <span className='mobile:text-xs'>Add Employee</span>
         </div>
       </DialogTrigger>
-      <DialogContent className='bg-white'>
+      <DialogContent
+        className="bg-white md:max-w-[65%] xl:max-w-[40%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
-          <DialogTitle>Add New Employee</DialogTitle>
-          <hr className='my-6' />
+          <DialogTitle className='text-left'>Add New Employee
+            <hr className='my-6' />
+          </DialogTitle>
           <DialogDescription>
             <EmployeeForm />
           </DialogDescription>
