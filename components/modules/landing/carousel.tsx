@@ -15,7 +15,7 @@ function Carousel() {
     {
       id: 1,
       feedback:
-        "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "John Smith",
       companyName: "XYZ Company",
       rating: "4",
@@ -23,7 +23,7 @@ function Carousel() {
     {
       id: 2,
       feedback:
-        "CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
@@ -31,7 +31,7 @@ function Carousel() {
     {
       id: 3,
       feedback:
-        " “CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
@@ -39,7 +39,7 @@ function Carousel() {
     {
       id: 4,
       feedback:
-        "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
@@ -47,7 +47,7 @@ function Carousel() {
     {
       id: 5,
       feedback:
-        "“CKHR is a game-changer! It's streamlined our workforce management, saved us time, and improved accuracy. Highly recommend!“",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "john doe",
       companyName: "XYZ Company",
       rating: "4",
@@ -55,7 +55,7 @@ function Carousel() {
     {
       id: 6,
       feedback:
-        "“CKHR has made managing our team a breeze! It's user-friendly, boosts productivity, and ensures accountability.”",
+      "“CKHR is a game-changer! Highly recommend!“",
       authorName: "john doe",
       companyName: "abc Company",
       rating: "4",
@@ -103,7 +103,7 @@ function Carousel() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex top-4 justify-center py-2 mt-5">
+      <div className="flex top-4 justify-center py-2">
         <div className="lg:flex lg:h-[50vh] gap-12 items-center justify-center lg:mx-2 mx-5 testimonial-container">
           {shuffledSlides
             .slice(currentIndex, currentIndex + 2)
@@ -127,7 +127,7 @@ function Carousel() {
             ))}
         </div>
       </div>
-      <div className="flex mt">
+      <div className="flex">
         {dots.map((_, index) => (
           <div
             key={index}

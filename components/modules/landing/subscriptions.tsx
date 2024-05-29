@@ -19,11 +19,11 @@ const Subscriptions = () => {
 
   return (
     <div id="subscription" className="bg-white">
-      <div className="flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-32">
-        <h1 className="xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center">
+      <div className="flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-6 mt-32">
+        <h1 className="xl:font-semibold text-5xl md:font-semibold text-center">
           Our Subscriptions
         </h1>
-        <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center mb-4">
+        <p className="lg:text-2xl font-normal text-[#232324] text-center mb-4">
           Empower your business with seamless employee management and tracking.
         </p>
         <div className="flex gap-2 bg-gray-200 p-2 rounded-3xl">

@@ -12,7 +12,7 @@ const LandingPageNavbar: React.FC = () => {
 
   return (
     <nav className=" border-gray-200 fixed z-50 w-full mt-6 navbar">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-5 py-4 shadow-md rounded-full bg-white ">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md rounded-full bg-white ">
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
           <ChkrLogo className="h-8" />
         </a>

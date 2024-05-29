@@ -14,14 +14,14 @@ const Benefits = () => {
           style={{
             backgroundImage: `url(${bg.src})`,
             backgroundSize: "cover",
-            height: "500px",
+            height: "620px",
           }}
         >
           <div className="flex flex-col xl:mx-24 lg:py-10 mx-10 py-10 items-center gap-4 text-white">
-            <h1 className="xl:font-semibold xl:text-4xl font-semibold md:text-3xl text-center">
+            <h1 className="font-medium xl:text-5xl text-center">
               Experience the Benefits: Optimize Your Workforce
             </h1>
-            <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium  text-sm text-center">
+            <p className="xl:text-2xl lg:text-xl md:text-lg font-normal text-sm text-center">
               Empower your business with seamless employee management and
               tracking.
             </p>
