@@ -85,12 +85,12 @@ export const ResetPasswordSchema = z
 export const EmployeeSchema = z.object({
   employeeFirstName: z
     .string()
-    .max(50)
-    .min(1, { message: "Employee name must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Employee first name is required" }),
   employeeLastName: z
     .string()
-    .max(50)
-    .min(1, { message: "Employee name must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Employee last name is required" }),
   email: z.string()
     .min(1, { message: "Email is required" })
     .email({ message: "Email is invalid" })
@@ -140,11 +140,11 @@ export type Jobs = z.infer<typeof JobSchema>;
 export const SettingPersonalInfosSchema = z.object({
   firstName: z
     .string()
-    .max(50)
+    .max(20, { message: "Name must no longer than 20 characters" })
     .min(1, { message: "First name must not be empty" }),
   lastName: z
     .string()
-    .max(50)
+    .max(20, { message: "Name must no longer than 20 characters" })
     .min(1, { message: "Last name must not be empty" }),
   email: z.string().email().min(1, { message: "Email must not be empty" }),
   contactNumber: z
@@ -180,11 +180,11 @@ export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
 export const AdminSchema = z.object({
   adminFirstName: z
     .string()
-    .max(50)
+    .max(20, { message: "Name must no longer than 20 characters" })
     .min(1, { message: "Admin first name is required" }),
   adminLastName: z
     .string()
-    .max(50)
+    .max(20, { message: "Name must no longer than 20 characters" })
     .min(1, { message: "Admin last name is required" }),
   phoneNumber: z
     .string()
