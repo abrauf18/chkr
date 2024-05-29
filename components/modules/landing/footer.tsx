@@ -2,6 +2,7 @@ import React from "react";
 import ChkrLogo from "@/assets/icons/footer-logo";
 import bg from "@/public/images/background.png";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -23,7 +24,7 @@ const Footer = () => {
 
           {/* Right side content */}
           <div className="flex items-center">
-            <div className="flex gap-2 md:gap-10 ml-4 text-white">
+            <div className="flex gap-4 lg:gap-10 ml-4 text-white">
               <a href="#home" className="md:text-lg text-xs hover:text-primary">
                 Home
               </a>
@@ -60,10 +61,13 @@ const Footer = () => {
             Revolutionizing Workforce Management, One Click at a Time; WITH CHKR
           </h1>
           <div className="flex gap-2 mt-6 ">
-            <Button className="w-[136px] py-6 border border-white hover:border-primary text-white bg-transparent hover:bg-primary hover:text-black rounded-3xl">
+            <Link href='/login'>
+            <Button 
+            className="w-[136px] py-6 border hover:border-white border-primary text-white hover:bg-transparent rounded-3xl">
               Sign in
             </Button>
-            <Button className="w-[160px] py-6 border border-white hover:border-primary text-white bg-transparent hover:bg-primary hover:text-black rounded-3xl">
+            </Link>
+            <Button className="w-[160px] py-6 border hover:border-primary border-white text-white bg-transparent hover:bg-primary hover:text-white rounded-3xl">
               Explore the Chkr
             </Button>
           </div>
