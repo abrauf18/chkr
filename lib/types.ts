@@ -141,12 +141,15 @@ export const SettingPersonalInfosSchema = z.object({
   firstName: z
     .string()
     .max(20, { message: "Name must no longer than 20 characters" })
-    .min(1, { message: "First name must not be empty" }),
+    .min(1, { message: "First name is required" }),
   lastName: z
     .string()
     .max(20, { message: "Name must no longer than 20 characters" })
-    .min(1, { message: "Last name must not be empty" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+    .min(1, { message: "Last name is required" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
   contactNumber: z
     .string()
     .min(8, { message: "Phone Number must contain at least 8 numbers" }),
@@ -163,16 +166,16 @@ const phoneRegexx = /^(\+?\d{1,4}[-.\s]?(\(?\d{1,3}\)?)[-.\s]?)?(\d{1,4}[-.\s]?)
 export const SettingsCompanyInfoSchema = z.object({
   companyName: z
     .string()
-    .min(1, { message: "Company name must not be empty" }),
+    .min(1, { message: "Company name is required" }),
   companyType: z
     .string()
-    .min(1, { message: "Company type must not be empty" }),
+    .min(1, { message: "Please select a company type" }),
   phoneNumber: z
     .string()
-    .min(1, { message: "Phone number must not be empty" })
+    .min(1, { message: "Phone number is required" })
     .regex(phoneRegexx, { message: "Invalid Number!" }),
-  location: z.string().min(1, { message: "Location must not be empty" }),
-  country: z.string().min(1, { message: "Country must not be empty" }),
+  location: z.string().min(1, { message: "Location is required" }),
+  country: z.string().min(1, { message: "Please select a country" }),
 });
 
 export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
