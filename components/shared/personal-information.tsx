@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Mail, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, Contact, Eye, EyeOff } from "lucide-react";
 
 const PersonalInformation: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -15,8 +15,10 @@ const PersonalInformation: React.FC = () => {
   } = useForm<Settings>({
     resolver: zodResolver(SettingPersonalInfosSchema),
     defaultValues: {
-      fullName: "Ayesha Rashid Khan",
+      firstName: "Ayesha",
+      lastName: "Rashid Khan",
       email: "ayesha@example.com",
+      contactNumber: "+1234 685 8594",
       password: "helo123",
     },
   });
@@ -27,18 +29,33 @@ const PersonalInformation: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto">
-      <div className="mb-4">
-        <label className="md:text-lg text-sm font-semibold">Full Name</label>
-        <div className="relative mt-2">
-          <input
-            {...register("fullName")}
-            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
-          />
-          <User className="absolute right-3 top-3 text-gray-500" />
+      <div className="flex mobile:flex-col flex-row md:gap-4">
+        <div className="mb-4 w-full">
+          <label className="md:text-lg text-sm font-semibold">First Name</label>
+          <div className="relative mt-2">
+            <input
+              {...register("firstName")}
+              className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
+            />
+            <User className="absolute right-3 top-3 text-gray-500" />
+          </div>
+          {errors.firstName && (
+            <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+          )}
         </div>
-        {errors.fullName && (
-          <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
-        )}
+        <div className="mb-4 w-full">
+          <label className="md:text-lg text-sm font-semibold">Last Name</label>
+          <div className="relative mt-2">
+            <input
+              {...register("lastName")}
+              className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
+            />
+            <User className="absolute right-3 top-3 text-gray-500" />
+          </div>
+          {errors.lastName && (
+            <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+          )}
+        </div>
       </div>
       <div className="mb-4">
         <label className="md:text-lg text-sm font-semibold">
@@ -53,6 +70,23 @@ const PersonalInformation: React.FC = () => {
         </div>
         {errors.email && (
           <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+        )}
+      </div>
+      <div className="mb-4">
+        <label className="md:text-lg text-sm font-semibold">
+          Contact Number
+        </label>
+        <div className="relative mt-2">
+          <input
+            {...register("contactNumber")}
+            className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
+          />
+          <Contact className="absolute right-3 top-3 text-gray-500" />
+        </div>
+        {errors.contactNumber && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.contactNumber.message}
+          </p>
         )}
       </div>
       <div className="mb-6">
@@ -97,4 +131,3 @@ const PersonalInformation: React.FC = () => {
 };
 
 export default PersonalInformation;
-

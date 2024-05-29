@@ -28,11 +28,25 @@ export type Onboarding = z.infer<typeof OnboardingSchema>;
 
 export const SignUpSchema = z
   .object({
-    firstname: z.string().min(2).max(50).min(1),
-    lastname: z.string().min(2).max(50).min(1),
-    email: z.string().email().min(1),
-    password: z.string().min(8).min(1),
-    confirmPassword: z.string().min(8).min(1),
+    firstName: z.string()
+      .min(1, { message: "First name is required" })
+      .max(50, { message: "First name can have maximum 50 characters" }),
+    lastName: z.string().max(50)
+      .min(1, { message: "Last name is required" }),
+    email: z.string()
+      .min(1, { message: "Email is required" })
+      .email({ message: "Email is invalid" }),
+    contactNumber: z
+      .string()
+      .min(1, { message: "Phone number is required" })
+      .regex(phoneRegex, "Invalid Number!"),
+    password: z.string()
+      .min(1, { message: "Password is required" })
+      .min(8, { message: "Password is too short" })
+      .max(20, { message: "Password is too long" }),
+    confirmPassword: z.string()
+      .min(1, { message: "Password is required" })
+      .min(8, { message: "Password must have 8 characters" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -71,13 +85,19 @@ export const ResetPasswordSchema = z
 export const EmployeeSchema = z.object({
   employeeFirstName: z
     .string()
-    .max(50)
-    .min(1, { message: "Employee name must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Employee first name is required" }),
   employeeLastName: z
     .string()
-    .max(50)
-    .min(1, { message: "Employee name must not be empty" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Employee last name is required" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
+  phoneNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
 });
 
 export const FeedbackSchema = z.object({
@@ -118,11 +138,21 @@ export const JobSchema = z.object({
 export type Jobs = z.infer<typeof JobSchema>;
 
 export const SettingPersonalInfosSchema = z.object({
-  fullName: z
+  firstName: z
     .string()
-    .max(50)
-    .min(1, { message: "Employee name must not be empty" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "First name is required" }),
+  lastName: z
+    .string()
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Last name is required" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
+  contactNumber: z
+    .string()
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
   password: z
     .string()
     .min(8, { message: "Password is too short" })
@@ -136,16 +166,16 @@ const phoneRegexx = /^(\+?\d{1,4}[-.\s]?(\(?\d{1,3}\)?)[-.\s]?)?(\d{1,4}[-.\s]?)
 export const SettingsCompanyInfoSchema = z.object({
   companyName: z
     .string()
-    .min(1, { message: "Company name must not be empty" }),
+    .min(1, { message: "Company name is required" }),
   companyType: z
     .string()
-    .min(1, { message: "Company type must not be empty" }),
+    .min(1, { message: "Please select a company type" }),
   phoneNumber: z
     .string()
-    .min(1, { message: "Phone number must not be empty" })
+    .min(1, { message: "Phone number is required" })
     .regex(phoneRegexx, { message: "Invalid Number!" }),
-  location: z.string().min(1, { message: "Location must not be empty" }),
-  country: z.string().min(1, { message: "Country must not be empty" }),
+  location: z.string().min(1, { message: "Location is required" }),
+  country: z.string().min(1, { message: "Please select a country" }),
 });
 
 export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
@@ -153,11 +183,18 @@ export type SettingsCompany = z.infer<typeof SettingsCompanyInfoSchema>;
 export const AdminSchema = z.object({
   adminFirstName: z
     .string()
-    .max(50)
-    .min(1, { message: "Admin first name must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Admin first name is required" }),
   adminLastName: z
     .string()
-    .max(50)
-    .min(1, { message: "Admin last name must not be empty" }),
-  email: z.string().email().min(1, { message: "Email must not be empty" }),
+    .max(20, { message: "Name must no longer than 20 characters" })
+    .min(1, { message: "Admin last name is required" }),
+  phoneNumber: z
+    .string()
+    .min(1, { message: "Phone number is required" })
+    .min(8, { message: "Phone Number must contain at least 8 numbers" }),
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Email is invalid" })
+  ,
 });
