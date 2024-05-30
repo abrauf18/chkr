@@ -27,7 +27,7 @@
 } */
 
 body {
-  background-color: white;
+  background-color: #f9f8f8;
   /* font-family: "LufgaRegular"; */
 }
 
@@ -170,3 +170,12 @@ input[type="number"] {
   display: none !important;
 }
 
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

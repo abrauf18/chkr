@@ -64,12 +64,7 @@ export default function OnboardingSteps() {
     // removeOnboardingData();
   };
   return (
-    <><div className="bg-gray-100">
-      <Navbar
-        buttonText="Login "
-        textBeforeButton="Already have an account"
-        url="/login"
-      />
+    <>
       <div className="flex flex-col justify-center items-center mt-10 mx-20">
         <h1 className="font-semibold lg:text-2xl md:text-3xl text-2xl text-center">
           Welcome Aboard! Let's Complete Your Profile.
@@ -102,7 +97,7 @@ export default function OnboardingSteps() {
                 "ml-2"
               )}
             >
-              Subscription Plan
+              Company Information
             </span>
           </div>
           <div className="flex items-center ">
@@ -137,12 +132,11 @@ export default function OnboardingSteps() {
           <form
             id="onboarding-form"
             onSubmit={methods.handleSubmit(onSubmit)}
-            className="flex items-center justify-center md:w-[70%] bg-white w-[90%] shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10"
+            className="flex items-center justify-center w-[90%] md:w-[60%] bg-white shadow-md rounded-3xl md:px-8 pt-6 pb-8 my-10"
           >
             {renderStep()}
           </form>
         </FormProvider>
-      </div>
       </div>
     </>
   );

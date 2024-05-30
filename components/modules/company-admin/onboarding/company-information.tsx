@@ -87,7 +87,7 @@ const CompanyInformation = ({
             <span className="text-sm font-medium mt-3">Upload Logo</span>
           </div>
         </label>
-        <p className="text-sm text-red-500">
+        <p className="text-sm text-red-500 mt-1">
           {" "}
           <ErrorMessage errors={errors} name="logo" />
         </p>
@@ -111,7 +111,7 @@ const CompanyInformation = ({
             {...register("company-name")}
           />
         </div>
-        <p className="text-sm text-red-500">
+        <p className="text-sm text-red-500 mt-1">
           {" "}
           <ErrorMessage errors={errors} name="company-name" />
         </p>
@@ -128,11 +128,14 @@ const CompanyInformation = ({
             <BuildingIcon />
           </span>
           <select
+          required
             id="companyType"
             {...register("company-type")}
-            className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
+            className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
-            <option value="">Select Company Type</option>
+            <option
+            className="text-gray-200"
+            value="">Select Company Type</option>
             {companyTypes.map((companyTypes) => (
               <option key={companyTypes} value={companyTypes}>
                 {companyTypes}
@@ -164,7 +167,7 @@ const CompanyInformation = ({
             {...register("phone-number")}
           />
         </div>
-        <p className="text-sm text-red-500">
+        <p className="text-sm text-red-500 mt-1">
           {" "}
           <ErrorMessage errors={errors} name="phone-number" />
         </p>
@@ -181,11 +184,11 @@ const CompanyInformation = ({
             className="pl-10 bg-[#F9F8F8]"
             id="location"
             type="text"
-            placeholder="abc Road, xyz Town"
+            placeholder="Abc Road, xyz Town"
             {...register("location")}
           />
         </div>
-        <p className="text-sm text-red-500">
+        <p className="text-sm text-red-500 mt-1">
           {" "}
           <ErrorMessage errors={errors} name="location" />
         </p>
@@ -199,9 +202,10 @@ const CompanyInformation = ({
             <Location />
           </span>
           <select
+            required
             id="country"
             {...register("country")}
-            className="w-full pl-10 pr-12 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
+            className="w-full pl-10 pr-12 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
             defaultValue=""
           >
             <option value="" disabled hidden>
@@ -217,20 +221,20 @@ const CompanyInformation = ({
             <ChevronDown />
           </div>
         </div>
-        <p className="text-sm text-red-500">
+        <p className="text-sm text-red-500 mt-1">
           <ErrorMessage errors={errors} name="country" />
         </p>
       </div>
 
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
-        <Link href="/" className="hover:text-primary">
+        {/* <Link href="/" className="hover:text-primary">
           <button
             className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl whitespace-nowrap	"
             type="button"
           >
             Back to Home
           </button>
-        </Link>
+        </Link> */}
         <button
           className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
