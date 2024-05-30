@@ -2,17 +2,25 @@
 import React, { useState } from "react";
 import ChkrLogo from "@/assets/icons/chkr-logo";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const LandingPageNavbar: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const getLinkClass = (path: string) => {
+    return pathname === path
+      ? "block py-2 px-3 md:p-0 text-primary rounded hover:text-primary"
+      : "block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary";
+  };
+
   return (
-    <nav className=" border-gray-200 w-full my-8 navbar">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md rounded-full bg-white ">
+    <nav className="border-gray-200 w-full my-8 navbar">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md rounded-full bg-white">
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
           <ChkrLogo className="h-8" />
         </a>
@@ -28,7 +36,7 @@ const LandingPageNavbar: React.FC = () => {
           <button
             onClick={toggleSidebar}
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-cta"
             aria-expanded="false"
           >
@@ -50,49 +58,34 @@ const LandingPageNavbar: React.FC = () => {
           </button>
         </div>
         <div
-          className={`md:z-10 -z-10  absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+          className={`md:z-10 -z-10 absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
             sidebarOpen ? "block" : "hidden"
           }`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
+          <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
             <li>
-              <Link
-                href="#home"
-                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
-              >
+              <Link href="#home" className={getLinkClass("#home")}>
                 Home
               </Link>
             </li>
             <li>
-              <Link
-                href="#aboutUs"
-                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
-              >
+              <Link href="#aboutUs" className={getLinkClass("#aboutUs")}>
                 About Us
               </Link>
             </li>
             <li>
-              <Link
-                href="#features"
-                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
-              >
+              <Link href="#features" className={getLinkClass("#features")}>
                 Features
               </Link>
             </li>
             <li>
-              <Link
-                href="#testimonials"
-                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
-              >
+              <Link href="#testimonials" className={getLinkClass("#testimonials")}>
                 Testimonials
               </Link>
             </li>
             <li>
-              <Link
-                href="#subscription"
-                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
-              >
+              <Link href="#subscription" className={getLinkClass("#subscription")}>
                 Subscription
               </Link>
             </li>
@@ -104,4 +97,3 @@ const LandingPageNavbar: React.FC = () => {
 };
 
 export default LandingPageNavbar;
-
