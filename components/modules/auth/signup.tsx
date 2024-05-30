@@ -62,7 +62,7 @@ export default function Signup() {
             <div className="flex-1">
               <hr className="line" />
             </div>
-            <div className="px-4">or</div>
+            <div className="px-4">OR</div>
             <div className="flex-1">
               <hr className="line" />
             </div>
@@ -149,7 +149,7 @@ export default function Signup() {
             <div className="relative flex items-center">
               <Input
                 {...register("password")}
-                className="bg-[#F9F8F8] pr-10"
+                className="bg-[#F9F8F8] pr-10 !pt-4"
                 id="password"
                 type={showPassword ? "password" : "text"}
                 placeholder="**************"
@@ -179,7 +179,7 @@ export default function Signup() {
             <div className="relative flex items-center">
               <Input
                 {...register("confirmPassword")}
-                className="bg-[#F9F8F8]"
+                className="bg-[#F9F8F8] !pt-4"
                 id="confirmPassword"
                 type={showConfirmPassword ? "password" : "text"}
                 placeholder="**************"
@@ -201,10 +201,10 @@ export default function Signup() {
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
-              className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-2xl"
+              className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
             >
-              Register an account
+              Sign Up
             </button>
           </div>
         </form>

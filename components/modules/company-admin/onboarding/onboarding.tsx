@@ -64,20 +64,20 @@ export default function OnboardingSteps() {
     // removeOnboardingData();
   };
   return (
-    <>
+    <><div className="bg-gray-100">
       <Navbar
         buttonText="Login "
         textBeforeButton="Already have an account"
         url="/login"
       />
-      <div className="flex flex-col justify-center items-center my-10 mx-20">
+      <div className="flex flex-col justify-center items-center mt-10 mx-20">
         <h1 className="font-semibold lg:text-2xl md:text-3xl text-2xl text-center">
           Welcome Aboard! Let's Complete Your Profile.
         </h1>
         <p className="lg:text-lg md:text-lg md:font-medium text-center text-gray-400 mt-6">
           Please Provide required Information about your company
         </p>
-        <div className="flex flex-col md:flex-row mt-10 gap-6 text-lg">
+        <div className="flex flex-col md:flex-row mt-8 gap-6 text-lg">
           <div className="flex items-center ">
             <div
               className={clsx(
@@ -142,6 +142,7 @@ export default function OnboardingSteps() {
             {renderStep()}
           </form>
         </FormProvider>
+      </div>
       </div>
     </>
   );

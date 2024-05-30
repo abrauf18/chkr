@@ -7,6 +7,10 @@ import { LoginSchema } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from 'lucide-react';
+import Link from "next/link";
+import Google from "@/assets/icons/google-icon";
+import { Button } from "@/components/ui/button";
+import Microsoft from "@/assets/icons/microsoft-icon";
 
 
 export default function Login() {
@@ -28,17 +32,14 @@ export default function Login() {
         backgroundImage: `url(${loginImg.src})`,
       }}
     >
-      <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
+      <div className="flex w-full py-12 justify-center items-center">
         <form
-          className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
+          className="bg-white w-[90%] md:w-[85%] shadow-md rounded-3xl px-8 py-8"
           onSubmit={handleSubmit((d) => console.log(d))}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
-            Login To Your Account
+            Sign In To Your Account
           </h2>
-          <p className="md:w-full text-center mb-6 text-sm ">
-            Login with the credentials provided by your company
-          </p>
           <hr className="my-6" />
           <div className="grid mb-4 w-full items-center gap-1.5 	">
             <Label htmlFor="email" className="md:text-lg text-sm font-semibold">
@@ -58,17 +59,17 @@ export default function Login() {
               <p className="text-red-500 mt-2">Invalid email format</p>
             )}
           </div>
-          <div className="grid w-full  items-center gap-1.5">
+          <div className="grid w-full items-center gap-1.5">
             <Label
               htmlFor="password"
-              className="md:text-lg text-sm font-semibold	"
+              className="md:text-lg text-sm font-semibold"
             >
               Password
             </Label>
             <div className="relative flex items-center">
               <Input
                 {...register("password")}
-                className="bg-[#F9F8F8]"
+                className="bg-[#F9F8F8] !pt-4"
                 id="password"
                 type={showPassword ? "password" : "text"}
                 placeholder="**************"
@@ -88,7 +89,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="flex flex-col md:flex-row mt-4 md:items-center justify-between">
+          <div className="flex flex-col md:flex-row mt-6 md:items-center justify-between">
             <label className="inline-flex items-center">
               <input
                 type="checkbox"
@@ -96,20 +97,41 @@ export default function Login() {
               />
               <span className="ml-2 text-gray-700">Remember Me</span>
             </label>
-            <a
+            <Link
               className="inline-block align-baseline font-bold text-sm text-primary"
-              href="#"
+              href="/forgot-password"
             >
               Forgot Password?
-            </a>
+            </Link>
           </div>
-          <div className="flex items-center justify-center mt-6">
+          <div className="flex items-center justify-center mt-10">
             <button
-              className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-2xl"
+              className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
             >
-              Continue to Login
+              Sign In with Email
             </button>
+          </div>
+          <div className="mt-5">
+          <div className="flex items-center my-4">
+            <div className="flex-1">
+              <hr className="line" />
+            </div>
+            <div className="px-4">OR</div>
+            <div className="flex-1">
+              <hr className="line" />
+            </div>
+          </div>
+          <div className="flex justify-center gap-2">
+            <Button className="xl:w-[90%] bg-gray-100 rounded-3xl">
+              <Google className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
+              Google
+            </Button>
+            <Button className=" xl:w-[90%] bg-gray-100 rounded-3xl">
+              <Microsoft className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
+              Microsoft
+            </Button>
+          </div>
           </div>
         </form>
       </div>
