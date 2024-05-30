@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { ChevronDown, CircleUserRound, EllipsisVertical, LogOut, MessageSquareShare, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleUserRound, EllipsisVertical, LogOut, MessageSquareShare, Trash2 } from "lucide-react";
 import Image from "next/image";
 export default function UserOptions() {
   const [open, setOpen] = useState(false);
@@ -15,7 +15,6 @@ export default function UserOptions() {
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>
       <DropdownMenuTrigger
-        
       >
         <div className='flex items-center bg-white rounded-3xl p-2'>
             <div>
@@ -25,7 +24,8 @@ export default function UserOptions() {
               <h1 className='text-sm lg:text-base whitespace-nowrap'>Ayesha Khan</h1>
               <p className='text-sm text-gray-500'>Employee</p>
             </div>
-            <ChevronDown className="w-4 h-4"/>
+            {!open && <ChevronDown className="w-4 h-4"/> }
+            {open && <ChevronUp className="w-4 h-4"/>}
           </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]'>
