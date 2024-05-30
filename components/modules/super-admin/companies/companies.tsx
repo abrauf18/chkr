@@ -81,7 +81,7 @@ export default function Companies() {
       <CompanyHeader title='List of Companies Onboarded' />
       <div className="flex flex-col gap-4 my-8">
         <h1>Recently added</h1>
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 mobile:grid-cols-1 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
           {recentlyAddedCompanies.map((company, index) => (
             <CompanyCard
               key={index}
@@ -96,7 +96,7 @@ export default function Companies() {
         </div>
 
         <h1>All Companies</h1>
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 mobile:grid-cols-1 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
           {allCompanies.map((company, index) => (
             <CompanyCard
               key={index}

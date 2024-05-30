@@ -23,7 +23,7 @@ export default function accountDropdown() {
       >
         <EllipsisVertical />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]'>
+      {/* <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]'>
         <div>
           <CompanyDetailsModal />
         </div>
@@ -31,7 +31,7 @@ export default function accountDropdown() {
           <Trash2 className="w-4 h-4" color="gray" />
           <span className="text-gray-600">Delete Company</span>
         </div>
-      </DropdownMenuContent>
+      </DropdownMenuContent> */}
     </DropdownMenu>
   );
 }

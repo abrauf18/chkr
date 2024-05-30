@@ -18,9 +18,11 @@ import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
-const SideBar = ({ open }: { open: boolean }) => {
+const SideBar = ({ width, open, setOpen}: { width:number, open: boolean, setOpen: (value:boolean) => void }) => {
   const [activePath, setActivePath] = useState<string>("");
-
+ if(width <= 1024 && width >= 768){
+  setOpen(false);
+ }
   const pathname = usePathname();
   useEffect(() => {
     setActivePath(pathname);
@@ -145,6 +147,7 @@ const SideBar = ({ open }: { open: boolean }) => {
     setActivePath(path);
   };
 
+
   return (
     <>
       <div
@@ -169,7 +172,7 @@ const SideBar = ({ open }: { open: boolean }) => {
               <Link href={item.path}>
                 <div
                   className={clsx(
-                    "flex items-center w-full h-12 rounded-3xl xl:px-4",
+                    "flex gap-2 px-2 items-center w-full h-12 rounded-3xl xl:px-4",
                     activePath === item.path && "bg-white text-primary",
                     !open && "justify-center",
                     "hover:text-primary hover:bg-white cursor-pointer"
@@ -177,7 +180,7 @@ const SideBar = ({ open }: { open: boolean }) => {
                   onClick={() => handleClick(item.path)}
                 >
                   <div>{item.icon}</div>
-                  {open && <span className="ml-3">{item.title}</span>}
+                  {open && <span>{item.title}</span>}
                 </div>
               </Link>
             </div>
