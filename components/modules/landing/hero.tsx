@@ -5,11 +5,9 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div
-      id="home"
-      className="mx-[5%] relative md:h-full mt-32 mb-28 md:mb-[28rem] lg:mb-[32rem] xl:mb-[46rem] !bg-gray-300 "
-    >
+    <div className="mx-[5%] relative md:h-full mb-28 md:mb-[28rem] lg:mb-[32rem] xl:mb-[46rem]">
       <div
+        id="home"
         className="h-[35rem] md:h-[150%] xl:h-[200%] w-full bg-black rounded-2xl overflow-hidden"
         style={{
           backgroundImage: `url(${bg.src})`,
@@ -45,7 +43,12 @@ const Hero = () => {
 
         {/* Hero image */}
         <div className="absolute w-3/4 md:w-[70%] xl:top-[210%] lg:top-[160%] md:top-[150%] top-[95%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-          <Image src="/images/HeroBanner.svg" alt="Hero Image" width={800} height={600} />
+          <Image
+            src="/images/HeroBanner.svg"
+            alt="Hero Image"
+            width={800}
+            height={600}
+          />
         </div>
       </div>
     </div>

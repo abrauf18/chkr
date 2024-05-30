@@ -4,7 +4,7 @@ import ArrowIcon from "@/assets/icons/arrow-icon";
 
 const Features = () => {
   return (
-    <div id="features" className="bg-white pt-10">
+    <div id="features" className="bg-white pt-10 mb-32">
       <div className="flex flex-col mx-auto justify-center items-center gap-4 w-full">
         <h1 className="font-medium text-5xl text-center">
           Efficiency Unleashed: Explore Our Tools

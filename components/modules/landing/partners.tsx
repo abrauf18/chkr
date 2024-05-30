@@ -9,7 +9,7 @@ import icon6 from "@/public/images/partner6.svg";
 
 const Partners = () => {
   return (
-    <div className="flex flex-col lg:py-10 mx-6 md:mx-16 items-center gap-4">
+    <div className="flex flex-col lg:py-10 mx-6 md:mx-16 items-center gap-4 mb-24">
       <h1 className="xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center">
         Our Partners
       </h1>

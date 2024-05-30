@@ -11,7 +11,7 @@ const LandingPageNavbar: React.FC = () => {
   };
 
   return (
-    <nav className=" border-gray-200 fixed z-50 w-full mt-6 navbar">
+    <nav className=" border-gray-200 w-full my-8 navbar">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md rounded-full bg-white ">
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
           <ChkrLogo className="h-8" />
@@ -20,7 +20,7 @@ const LandingPageNavbar: React.FC = () => {
           <Link href="/login">
             <button
               type="button"
-              className="text-white bg-gray-800 font-medium rounded-2xl text-sm px-4 py-2 text-center"
+              className="text-white bg-gray-800 hover:bg-primary font-medium rounded-2xl text-sm px-4 py-2 text-center"
             >
               Sign in
             </button>
@@ -57,44 +57,44 @@ const LandingPageNavbar: React.FC = () => {
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8  md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
             <li>
-              <a
+              <Link
                 href="#home"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
+                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#aboutUs"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
+                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
               >
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#features"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
+                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
               >
                 Features
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#testimonials"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
+                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
               >
                 Testimonials
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#subscription"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:text-primary"
+                className="block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary"
               >
                 Subscription
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

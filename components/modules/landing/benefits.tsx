@@ -8,7 +8,7 @@ import Pros from "./pros";
 const Benefits = () => {
   return (
     <div>
-      <div className=" relative md:mb-56">
+      <div className=" relative md:mb-56 mb-24">
         <div
           className="flex md:w-full md:h-screen mt-6 h-1/2 justify-center bg-cover bg-no-repeat md:bg-center"
           style={{
@@ -17,8 +17,8 @@ const Benefits = () => {
             height: "620px",
           }}
         >
-          <div className="flex flex-col xl:mx-24 lg:py-10 mx-10 py-10 items-center gap-4 text-white">
-            <h1 className="font-medium xl:text-5xl text-center">
+          <div className="flex flex-col xl:mx-24 lg:py-10 mx-10 md:py-10 py-24 items-center gap-4 text-white">
+            <h1 className="font-medium text-3xl xl:text-5xl text-center md:pt-5">
               Experience the Benefits: Optimize Your Workforce
             </h1>
             <p className="xl:text-2xl lg:text-xl md:text-lg font-normal text-sm text-center">

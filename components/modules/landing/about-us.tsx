@@ -5,7 +5,7 @@ import TeamIcon from "@/assets/icons/team-icon";
 
 const AboutUs = () => {
   return (
-    <div id="aboutUs" className="bg-white pt-10">
+    <div id="aboutUs" className="bg-white pt-10 mb-24">
       <div className="flex flex-col w-3/4 xl:w-[55%] xl:mx-24 mx-4 md:mx-10 justify-start gap-10">
         <h2 className="xl:font-semibold text-5xl font-semibold">
           Why Choose Us <br />

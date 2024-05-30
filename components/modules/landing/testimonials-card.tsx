@@ -24,7 +24,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
               <span className="lg:text-xl md:text-lg font-semibold capitalize">
                 {authorName}
               </span>
-              <span className="lg:text-lg md:text-base font-normal capitalize">
+              <span className="lg:text-lg md:text-base text-sm font-normal capitalize">
                 ( {companyName} )
               </span>
             </div>
