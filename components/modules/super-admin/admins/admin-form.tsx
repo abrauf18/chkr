@@ -9,7 +9,7 @@ import { AdminSchema } from '@/lib/types';
 import { ArrowRight, Mail, Phone, User } from 'lucide-react';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function AdminForm({isEdit}:{isEdit:boolean}) {
+export default function AdminForm({isEdit}:{isEdit?:boolean}) {
 
   const {
     register,
