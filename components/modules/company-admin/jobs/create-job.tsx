@@ -68,9 +68,9 @@ export default function CreateJob() {
   const getStepHeading = () => {
     switch (currentStep) {
       case Steps.Create_Job_First_Step:
-        return "Create New Job 1/2";
+        return "Job Information";
       case Steps.Create_Job_Second_Step:
-        return "Create New Job 2/2";
+        return "Job Description";
       case Steps.Assign_Job:
         return "Assign Job";
       case Steps.Payment:
@@ -129,13 +129,15 @@ export default function CreateJob() {
           <DialogHeader>
             <DialogTitle>
               <div className="flex justify-start items-center">
-                <Button
-                  type="button"
-                  onClick={handlePreviousStep}
-                  className="bg-transparent hover:bg-transparent"
-                >
-                  <ArrowLeft />
-                </Button>
+                {currentStep !== Steps.Create_Job_First_Step && (
+                  <Button
+                    type="button"
+                    onClick={handlePreviousStep}
+                    className="bg-transparent hover:bg-transparent"
+                  >
+                    <ArrowLeft />
+                  </Button>
+                )}
                 <span className="whitespace-nowrap">{getStepHeading()}</span>
               </div>
               <hr className="my-6" />
@@ -156,4 +158,3 @@ export default function CreateJob() {
     </>
   );
 }
-

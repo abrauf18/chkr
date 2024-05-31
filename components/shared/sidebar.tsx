@@ -159,7 +159,7 @@ const SideBar = ({ width, open, setOpen}: { width:number, open: boolean, setOpen
       >
         <Link href="#">
           <div className="text-2xl font-bold">
-            <div className="logo logo-triangle relative w-10 h-10 inline-block mt-6">
+            <div className="logo logo-triangle relative w-10 h-10 inline-block">
               {open ? <LogoFooter /> : <SidebarLogo width={45}/>}
             </div>
           </div>
@@ -188,8 +188,12 @@ const SideBar = ({ width, open, setOpen}: { width:number, open: boolean, setOpen
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer">
-          <CircleHelp />
+        <div className={clsx("flex w-full absolute xl:bottom-10 bottom-6",
+          !open && "justify-center items-center"
+        )}>
+        <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full hover:animate-bounce cursor-pointer">
+          <CircleHelp/>
+        </div>
         </div>
       </div>
     </>

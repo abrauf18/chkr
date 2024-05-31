@@ -39,7 +39,7 @@ const EmployeeTable = ({
       <Table>
         <TableHeader>
           <TableRow className="bg-white">
-            <TableHead className="text-black font-semibold">Employee Name</TableHead>
+            <TableHead className="text-black font-semibold whitespace-nowrap">Employee Name</TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
                 <span className="text-black font-semibold">Email</span>
@@ -48,7 +48,7 @@ const EmployeeTable = ({
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span className="text-black font-semibold">Phone Number</span>
+                <span className="text-black font-semibold whitespace-nowrap">Phone Number</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
@@ -66,7 +66,7 @@ const EmployeeTable = ({
               key={employee.name}
               className={index % 2 === 1 ? "bg-white" : "bg-gray-100"}
             >
-              <TableCell className="font-medium">{employee.name}</TableCell>
+              <TableCell className="font-medium whitespace-nowrap">{employee.name}</TableCell>
               <TableCell>{employee.email}</TableCell>
               <TableCell>{employee.phone}</TableCell>
               <TableCell className="w-32">

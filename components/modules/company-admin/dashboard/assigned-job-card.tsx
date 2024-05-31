@@ -29,7 +29,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   imageurl,
 }) => {
   return (
-    <div className="mt-4 bg-white rounded-3xl py-10 px-4">
+    <div className="mt-4 bg-white rounded-3xl p-4">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{userName}</h1>
@@ -42,7 +42,12 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
-            <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
+            {status.toLowerCase() === "checked-in" && (
+              <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
+            )}
+            {status.toLowerCase() === "checked-out" && (
+              <div className="bg-[#748afe] rounded-full h-2 w-2 mr-2"></div>
+            )}
             <span>{status}</span>
           </div>
           <EditIcon />
@@ -87,7 +92,9 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
               width={6}
               className="rounded-full h-10 w-10"
             />
-            <span className="mt-2 ml-2 font-semibold text-sm  text-[#232324]">{employeeName}</span>
+            <span className="mt-2 ml-2 font-semibold text-sm  text-[#232324]">
+              {employeeName}
+            </span>
           </div>
         </div>
       </div>
@@ -96,4 +103,3 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
-

@@ -112,18 +112,18 @@ const PersonalInformation: React.FC = () => {
           <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
         )}
       </div>
-      <div className="flex justify-between">
+      <div className="flex gap-2 justify-between">
         <button
           type="button"
-          className="py-2 px-4 bg-gray-200 text-gray-700 rounded-2xl"
+          className="mobile:w-full w-36 py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl"
         >
-          Discard Changes
+          Discard
         </button>
         <button
           type="submit"
-          className="py-2 px-4 bg-primary text-white rounded-2xl"
+          className="mobile:w-full w-36 py-2 px-4 bg-primary text-white rounded-3xl"
         >
-          Save Changes
+          Save
         </button>
       </div>
     </form>
