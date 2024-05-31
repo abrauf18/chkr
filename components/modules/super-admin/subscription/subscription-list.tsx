@@ -63,7 +63,7 @@ export default function SubscriptionList() {
         <TableHeader>
           <TableRow className='bg-white'>
             <TableHead>
-              <div className='flex gap-2 items-center text-black whitespace-nowrap py-6'>
+              <div className='flex gap-2 items-center text-black whitespace-nowrap py-6 w-[12rem]'>
                 Company Name
                 <ArrowDown className='w-4 h-4' />
               </div>

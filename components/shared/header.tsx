@@ -9,7 +9,7 @@ interface HeaderProps {
 export default function Header({ title }: HeaderProps) {
   return (
     <>
-      <div className='flex mobile:flex-col justify-between items-center'>
+      <div className='flex mobile:flex-col justify-between items-center mt-3'>
         <h1 className='text-xl font-bold w-full'>{title}</h1>
         <div className="flex items-center gap-2 mobile:mt-2 md:mt-2 lg:mt-0 justify-end mobile:justify-start w-full ">
           <Button className="bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base flex gap-2">

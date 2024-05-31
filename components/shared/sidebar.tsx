@@ -160,13 +160,15 @@ const SideBar = ({ width, open, setOpen}: { width:number, open: boolean, setOpen
         <Link href="#">
           <div className="text-2xl font-bold">
             <div className="logo logo-triangle relative w-10 h-10 inline-block mt-6">
-              {open ? <LogoFooter /> : <SidebarLogo />}
+              {open ? <LogoFooter /> : <SidebarLogo width={45}/>}
             </div>
           </div>
         </Link>
       </div>
       <div className="relative w-full space-y-6 h-[85%] mt-12">
-        <div className="space-y-3 h-[76%] overflow-auto section-scrollbar">
+        <div className={clsx("space-y-3 h-[76%] overflow-auto section-scrollbar",
+          !open && "flex flex-col items-center"
+        )}>
           {list.map((item) => (
             <div key={item.path}>
               <Link href={item.path}>
@@ -174,7 +176,7 @@ const SideBar = ({ width, open, setOpen}: { width:number, open: boolean, setOpen
                   className={clsx(
                     "flex gap-2 px-2 items-center w-full h-12 rounded-3xl xl:px-4",
                     activePath === item.path && "bg-white text-primary",
-                    !open && "justify-center",
+                    !open && "justify-center md:w-[38px] md:h-[38px] lg:w-[43px] lg:h-[43px]",
                     "hover:text-primary hover:bg-white cursor-pointer"
                   )}
                   onClick={() => handleClick(item.path)}

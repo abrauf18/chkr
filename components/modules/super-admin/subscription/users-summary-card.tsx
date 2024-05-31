@@ -16,7 +16,8 @@ export default function UsersSummaryCard({
       <p className="whitespace-nowrap">Your {period} Users</p>
       {amount !== undefined && (
         <h1 className="font-bold text-2xl xl:text-3xl whitespace-nowrap">
-          $ {amount.toFixed(2)} {currency}
+          $ {amount.toFixed(2)} 
+          <span className="text-sm ml-1">{currency}</span>
         </h1>
       )}
     </div>

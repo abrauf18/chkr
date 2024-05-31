@@ -6,10 +6,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronUp, CircleUserRound, EllipsisVertical, LogOut, MessageSquareShare, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleUserRound, LogOut} from "lucide-react";
 import Image from "next/image";
+import Feedback from "./feedback";
+import Link from "next/link";
 export default function UserOptions() {
   const [open, setOpen] = useState(false);
+  
 
 
   return (
@@ -20,7 +23,7 @@ export default function UserOptions() {
             <div>
               <Image src="/images/user.jpeg" height={8} width={8} alt='user' className='w-8 h-8 rounded-full ' />
             </div>
-            <div className='flex flex-col mx-3 text-left'>
+            <div className='flex flex-col mx-3 text-left mobile:hidden'>
               <h1 className='text-sm lg:text-base whitespace-nowrap'>Ayesha Khan</h1>
               <p className='text-sm text-gray-500'>Employee</p>
             </div>
@@ -33,14 +36,13 @@ export default function UserOptions() {
           <CircleUserRound className="w-5 h-5" color="black" />
           <span className="text-[#292D32]">Profile Settings</span>
         </div>
-        <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
-          <MessageSquareShare className="w-5 h-5" color="black" />
-          <span className="text-gray-800">Submit Feedback</span>
-        </div>
+        <Feedback/>
+        <Link href="/login">
         <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
           <LogOut className="w-5 h-5" color="#FF2600" />
           <span className="text-primary">Logout</span>
         </div>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

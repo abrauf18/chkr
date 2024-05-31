@@ -31,8 +31,8 @@ const PersonalInformation: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto">
       <div className="flex mobile:flex-col flex-row md:gap-4">
         <div className="mb-4 w-full">
-          <label className="md:text-lg text-sm font-semibold">First Name</label>
-          <div className="relative mt-2">
+          <label className="text-base font-semibold">First Name</label>
+          <div className="relative">
             <input
               {...register("firstName")}
               className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
@@ -44,8 +44,8 @@ const PersonalInformation: React.FC = () => {
           )}
         </div>
         <div className="mb-4 w-full">
-          <label className="md:text-lg text-sm font-semibold">Last Name</label>
-          <div className="relative mt-2">
+          <label className="text-base font-semibold">Last Name</label>
+          <div className="relative">
             <input
               {...register("lastName")}
               className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
@@ -58,10 +58,10 @@ const PersonalInformation: React.FC = () => {
         </div>
       </div>
       <div className="mb-4">
-        <label className="md:text-lg text-sm font-semibold">
+        <label className="text-base font-semibold">
           Email Address
         </label>
-        <div className="relative mt-2">
+        <div className="relative">
           <input
             {...register("email")}
             className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
@@ -73,10 +73,10 @@ const PersonalInformation: React.FC = () => {
         )}
       </div>
       <div className="mb-4">
-        <label className="md:text-lg text-sm font-semibold">
+        <label className="text-base font-semibold">
           Contact Number
         </label>
-        <div className="relative mt-2">
+        <div className="relative">
           <input
             {...register("contactNumber")}
             className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
@@ -90,8 +90,8 @@ const PersonalInformation: React.FC = () => {
         )}
       </div>
       <div className="mb-6">
-        <label className="md:text-lg text-sm font-semibold">Password</label>
-        <div className="relative mt-2">
+        <label className="text-base font-semibold">Password</label>
+        <div className="relative">
           <input
             {...register("password")}
             id="password"

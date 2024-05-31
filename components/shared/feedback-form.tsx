@@ -29,7 +29,6 @@ export default function FeedbackForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="mt-6">
         <div className="flex flex-col text-left justify-start lg:whitespace-nowrap mx-auto w-full">
           <h1 className="text-black mobile:text-lg md:text-xl text-semibold">
             How was your experience?
@@ -73,7 +72,6 @@ export default function FeedbackForm() {
             Submit Feedback
           </Button>
         </div>
-      </div>
     </form>
   );
 }
