@@ -4,6 +4,7 @@ import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
 import DeleteIcon from "@/assets/icons/delete-icon";
 import ShowJobDetails from "../../../shared/show-job-details";
+import DeleteModal from "../../super-admin/admins/delete-modal";
 
 interface AssignedJobCardProps {
   userName: string;
@@ -51,7 +52,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             <span>{status}</span>
           </div>
           <EditIcon />
-          <DeleteIcon />
+          <DeleteModal/>
           <ShowJobDetails />
         </div>
       </div>
