@@ -4,12 +4,12 @@ import ArrowIcon from "@/assets/icons/arrow-icon";
 
 const Features = () => {
   return (
-    <div id="features" className="bg-white pt-10">
-      <div className="flex flex-col xl:mx-24 md:mx-10 mx-6 justify-center items-center gap-4">
-        <h1 className="xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center">
+    <div id="features" className="bg-white pt-10 mb-32">
+      <div className="flex flex-col mx-auto justify-center items-center gap-4 w-full">
+        <h1 className="font-medium text-5xl text-center">
           Efficiency Unleashed: Explore Our Tools
         </h1>
-        <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium text-sm text-center">
+        <p className="xl:text-2xl lg:text-xl md:text-lg font-normal text-sm text-center w-[60%]">
           Explore the robust features of CHKR designed to streamline employee
           check-ins, task assignments, and management with ease and efficiency.
         </p>
@@ -41,10 +41,10 @@ const Features = () => {
         <div className="flex flex-col gap-6">
           <div>
             <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]" />
-            <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
+            <h2 className="text-2xl font-semibold mt-2 text-[#232324]">
               Employee Checkin/Checkout
             </h2>
-            <p className="xl:text-2xl md:text-base text-sm my-4">
+            <p className="text-xl font-normal mt-2 my-4">
               Employees can easily clock in and out of their tasks, keeping
               track of their work time effortlessly.
             </p>
@@ -52,10 +52,10 @@ const Features = () => {
           </div>
           <div>
             <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem]  w-[2rem] h-[2rem]" />
-            <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
+            <h2 className="text-2xl font-semibold mt-2 text-[#232324]">
               Task Assignment
             </h2>
-            <p className="xl:text-2xl md:text-base text-sm mt-2 my-4">
+            <p className="text-xl font-normal mt-2 my-4">
               Assign tasks to your team members within the app, making it simple
               to delegate responsibilities and keep everyone on the same page.
             </p>
@@ -63,10 +63,10 @@ const Features = () => {
           </div>
           <div>
             <ArrowIcon className="xl:w-[4rem] xl:h-[4rem] mr-2 md:w-[3.5rem] md:h-[3rem] w-[2rem] h-[2rem]" />
-            <h2 className="xl:text-3xl md:text-lg font-bold mt-2">
+            <h2 className="text-2xl font-semibold mt-2 text-[#232324]">
               Task Management
             </h2>
-            <p className="xl:text-2xl md:text-base text-sm mt-2 my-4">
+            <p className="text-xl font-normal mt-2 my-4">
               Stay organized by tracking and overseeing tasks efficiently,
               ensuring that everything gets done smoothly and on time.
             </p>

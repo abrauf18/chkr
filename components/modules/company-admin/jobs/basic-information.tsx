@@ -159,7 +159,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           htmlFor="Date&Time"
           className="flex w-full md:text-lg text-sm font-semibold"
         >
-          Select Date&Time
+          Date & Time
         </Label>
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">

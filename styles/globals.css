@@ -170,3 +170,12 @@ input[type="number"] {
   display: none !important;
 }
 
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

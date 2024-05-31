@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordSchema } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import RightsideImg from "@/public/images/SignupRightside.svg";
 
 
 export default function ResetPassword() {
@@ -26,8 +27,11 @@ export default function ResetPassword() {
   });
 
   return (
-    <div className="flex md:w-full mt-6 w-screen rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center">
-      <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
+    <div  className="flex w-full h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
+    style={{
+      backgroundImage: `url(${RightsideImg.src})`,
+    }}>
+      <div className="flex mobile:w-[90%] py-6 justify-center items-center">
         <form
           className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
           onSubmit={onSubmit}

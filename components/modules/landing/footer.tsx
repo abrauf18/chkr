@@ -2,12 +2,13 @@ import React from "react";
 import ChkrLogo from "@/assets/icons/footer-logo";
 import bg from "@/public/images/background.png";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <div className=" mb-20">
       <div
-        className="flex flex-col w-full h-full  md:mt-6 justify-center bg-cover bg-no-repeat md:bg-center"
+        className="flex flex-col w-full h-full  md:mt-6 justify-center bg-cover bg-no-repeat bg-center"
         style={{
           backgroundImage: `url(${bg.src})`,
           backgroundSize: "cover",
@@ -15,39 +16,40 @@ const Footer = () => {
           overflow: "hidden",
         }}
       >
-        <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap md:mx-10 mx-4 my-6 md:py-2 md:px-10 rounded-3xl">
+        <nav className="w-[95%] flex mobile:flex-col flex-row md:items-center justify-between md:flex-wrap md:mx-10 mx-4 my-6 md:py-2 md:px-10 rounded-3xl">
           {/* Left side content */}
           <div className="flex items-center ">
             <ChkrLogo className="h-auto" />
           </div>
 
           {/* Right side content */}
-          <div className="flex items-center">
-            <div className="flex gap-2 md:gap-10 ml-4 text-white">
-              <a href="#home" className="md:text-lg text-xs hover:text-primary">
+          <div className="flex items-center mobile:mt-4">
+            <div className="flex gap-4 lg:gap-10 md:ml-4 ml-1 text-white">
+              <a href="#home" 
+                className="text-lg mobile:text-sm hover:text-primary">
                 Home
               </a>
               <a
                 href="#aboutUs"
-                className="md:text-lg text-xs hover:text-primary"
+                className="text-lg mobile:text-sm hover:text-primary whitespace-nowrap"
               >
                 <span>About Us</span>
               </a>
               <a
                 href="#features"
-                className="md:text-lg text-xs hover:text-primary"
+                className="text-lg mobile:text-sm hover:text-primary"
               >
                 Features
               </a>
               <a
                 href="#testimonials"
-                className="md:text-lg text-xs hover:text-primary"
+                className="text-lg mobile:text-sm hover:text-primary"
               >
                 Testimonials
               </a>
               <a
                 href="#subscription"
-                className="md:text-lg text-xs hover:text-primary"
+                className="text-lg mobile:text-sm hover:text-primary"
               >
                 Subscription
               </a>
@@ -60,15 +62,18 @@ const Footer = () => {
             Revolutionizing Workforce Management, One Click at a Time; WITH CHKR
           </h1>
           <div className="flex gap-2 mt-6 ">
-            <Button className="w-[136px] py-6 border border-white hover:border-primary text-white bg-transparent hover:bg-primary hover:text-black rounded-3xl">
+            <Link href='/login'>
+            <Button 
+            className="w-[136px] py-6 border hover:border-white border-primary text-white hover:bg-transparent rounded-3xl">
               Sign in
             </Button>
-            <Button className="w-[160px] py-6 border border-white hover:border-primary text-white bg-transparent hover:bg-primary hover:text-black rounded-3xl">
+            </Link>
+            <Button className="w-[160px] py-6 border hover:border-primary border-white text-white bg-transparent hover:bg-primary hover:text-white rounded-3xl">
               Explore the Chkr
             </Button>
           </div>
           <div className="h-[1px] w-full bg-white rounded-full my-4"></div>
-          <p>CHKR. All Rights Reserved 2024. Licensing</p>
+          <p className=" text-lg mobile:text-xs mb-4">CHKR. All Rights Reserved 2024. Licensing</p>
         </div>
       </div>
     </div>

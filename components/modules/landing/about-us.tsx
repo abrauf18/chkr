@@ -5,13 +5,13 @@ import TeamIcon from "@/assets/icons/team-icon";
 
 const AboutUs = () => {
   return (
-    <div id="aboutUs" className="bg-white pt-10">
-      <div className="flex flex-col w-1/2 md:w-3/4 xl:mx-24 mx-4 md:mx-10 justify-start gap-4">
-        <h2 className="xl:font-semibold xl:text-4xl font-semibold md:text-3xl">
+    <div id="aboutUs" className="bg-white pt-10 mb-24">
+      <div className="flex flex-col w-3/4 xl:w-[55%] xl:mx-24 mx-4 md:mx-10 justify-start gap-10">
+        <h2 className="xl:font-semibold text-5xl font-semibold">
           Why Choose Us <br />
           for best service experience
         </h2>
-        <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium text-sm">
+        <p className="text-2xl font-normal text-[#23242A]">
           We're dedicated to revolutionizing how businesses handle home service
           tasks and employee check-ins. Our team brings expertise in software
           development, data analytics, and customer service to create a seamless
@@ -27,7 +27,7 @@ const AboutUs = () => {
             <h2 className="xl:text-3xl md:text-2xl md:font-bold">
               Our Mission
             </h2>
-            <p className="xl:text-xl text-sm md:text-lg mt-2">
+            <p className="xl:text-xl text-sm md:text-lg mt-2 text-[#23242A] mobile:w-1/2">
               Revolutionizing home service task management and employee
               check-ins for streamlined operations and enhanced productivity.
             </p>
@@ -39,7 +39,7 @@ const AboutUs = () => {
           </span>
           <div>
             <h2 className="xl:text-3xl md:text-2xl md:font-bold">Our Team</h2>
-            <p className="xl:text-xl text-sm md:text-lg mt-2">
+            <p className="xl:text-xl text-sm md:text-lg mt-2 text-[#23242A] mobile:w-1/2">
               A dedicated group of professionals with expertise in software
               development, data analytics, and customer service, committed to
               ensuring CHKRR remains intuitive, reliable, and responsive to user

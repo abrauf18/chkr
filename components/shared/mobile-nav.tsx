@@ -11,14 +11,26 @@ import {
   CircleHelp,
   Bell,
   LayoutDashboard,
+  Building2,
+  Layers,
+  MessageSquareText,
+  Receipt,
+  Timer,
 } from "lucide-react";
 import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
+import UserOptions from "./user-options";
+import ChkrLogo from "@/assets/icons/chkr-logo";
 
 const MobileNav = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activePath, setActivePath] = useState("/company-admin/dashboard");
   const pathname = usePathname();
+  useEffect(() => {
+    setActivePath(pathname);
+  }, [pathname]);
 
-  const list = [
+  const adminList = [
     {
       title: "Dashboard",
       icon: <LayoutDashboard />,
@@ -27,26 +39,116 @@ const MobileNav = () => {
     {
       title: "All Jobs",
       icon: <StickyNote />,
-      path: "/company-admin/dashboard#all-jobs",
+      path: "/company-admin/jobs",
     },
     {
       title: "Employees",
       icon: <Users />,
-      path: "/company-admin/dashboard#employees",
+      path: "/company-admin/employees",
     },
     {
       title: "Settings",
       icon: <Settings />,
-      path: "/company-admin/dashboard#settings",
+      path: "/company-admin/settings",
     },
   ];
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activePath, setActivePath] = useState("/company-admin/dashboard");
+  const employeeList = [
+    {
+      title: "Dashboard",
+      icon: <LayoutDashboard />,
+      path: "/company-employee/dashboard",
+    },
+    {
+      title: "My Jobs",
+      icon: <Timer />,
+      path: "/company-employee/jobs",
+    },
+    {
+      title: "Payments",
+      icon: <Layers />,
+      path: "/company-employee/payment",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/company-employee/settings",
+    },
+  ];
+
+  const superAdminList = [
+    {
+      title: "Subscription",
+      icon: <Receipt />,
+      path: "/super-admin/subscription",
+    },
+    {
+      title: "Companies",
+      icon: <Building2 />,
+      path: "/super-admin/companies",
+    },
+    {
+      title: "Feedback",
+      icon: <MessageSquareText />,
+      path: "/super-admin/feedback",
+    },
+    {
+      title: "Admins",
+      icon: <Users />,
+      path: "/super-admin/admins",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/super-admin/settings",
+    },
+  ];
+
+  const AdminList = [
+    {
+      title: "Subscription",
+      icon: <Receipt />,
+      path: "/admin/subscription",
+    },
+    {
+      title: "Companies",
+      icon: <Building2 />,
+      path: "/admin/companies",
+    },
+    {
+      title: "Feedback",
+      icon: <MessageSquareText />,
+      path: "/admin/feedback",
+    },
+    {
+      title: "Settings",
+      icon: <Settings />,
+      path: "/admin/settings",
+    },
+  ];
+  // Select the appropriate list based on the active pathname
+  const getList = () => {
+    if (activePath.startsWith("/company-admin")) {
+      return adminList;
+    }
+    if (activePath.startsWith("/company-employee")) {
+      return employeeList;
+    }
+    if (activePath.startsWith("/super-admin")) {
+      return superAdminList;
+    }
+    if (activePath.startsWith("/admin")) {
+      return AdminList;
+    }
+    return []; // Default to an empty list if no match
+  };
+
+  const list = getList();
 
   const handleClick = (path: string) => {
     setActivePath(path);
   };
+
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -56,7 +158,7 @@ const MobileNav = () => {
     <div className="md:hidden">
       <nav className="w-full mt-6 ">
         <div className="flex items-center justify-between py-4 ">
-          <div className="flex mx-4 w-full justify-between">
+          <div className="flex mx-4 w-full justify-between items-center">
             <div>
               <button
                 onClick={toggleSidebar}
@@ -72,15 +174,7 @@ const MobileNav = () => {
               <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
               </div>
-              <div className="flex justify-center items-center bg-white rounded-full h-12 w-12">
-                <Image
-                  src="/images/user.jpeg"
-                  width={6}
-                  height={6}
-                  alt="user"
-                  className="w-8 h-8 border rounded-full"
-                />
-              </div>
+              <UserOptions/>
             </div>
           </div>
           <div

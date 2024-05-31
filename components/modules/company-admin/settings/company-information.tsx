@@ -151,13 +151,13 @@ export default function CompanyInformation() {
         <div className="flex w-full justify-between mt-4">
           <button
             type="button"
-            className="py-3 px-6 bg-gray-200 text-gray-700 rounded-2xl text-sm"
+            className="py-3 px-6 bg-gray-200 text-gray-700 rounded-3xl text-sm"
           >
             Discard Changes
           </button>
           <button
             type="submit"
-            className="py-3 px-6 bg-primary text-white rounded-2xl text-sm"
+            className="py-3 px-6 bg-primary text-white rounded-3xl text-sm"
           >
             Save Changes
           </button>

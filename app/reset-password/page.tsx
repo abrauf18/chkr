@@ -5,6 +5,7 @@ import AuthLeftSide from "@/components/shared/auth-left-side";
 export default function page() {
   return (
     <>
+    <div className="bg-gray-100">
       <Navbar
         buttonText="Register Now"
         textBeforeButton="Don't have an account?"
@@ -18,6 +19,7 @@ export default function page() {
           url="/images/SignUpLeftSide.svg"
         />
         <ResetPassword />
+      </div>
       </div>
     </>
   );

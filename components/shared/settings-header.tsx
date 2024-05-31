@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({
   const activeData = activeTab === "personal" ? personalData : companyData;
 
   return (
-    <div className="max-w-screen-xl mx-auto mt-8 bg-white p-4 rounded-2xl">
+    <div className="max-w-screen-xl mx-auto bg-white p-4 rounded-2xl">
       <div className="relative">
         <div className="bg-[url('/images/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">

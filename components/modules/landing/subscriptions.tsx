@@ -13,17 +13,18 @@ enum Plan {
 const Subscriptions = () => {
   const [activeButton, setActiveButton] = useState<Plan>(Plan.Monthly); // Update state type
 
-  const handleButtonClick = (buttonName: Plan) => { // Update argument type
+  const handleButtonClick = (buttonName: Plan) => {
+    // Update argument type
     setActiveButton(buttonName);
   };
 
   return (
-    <div id="subscription" className="bg-white">
-      <div className="flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-4 mt-32">
-        <h1 className="xl:font-semibold xl:text-4xl md:font-semibold md:text-3xl text-center">
+    <div id="subscription" className="bg-white mb-12">
+      <div className="flex flex-col xl:mx-24 md:mx-10 justify-center items-center gap-6 mt-32">
+        <h1 className="xl:font-semibold text-5xl md:font-semibold text-center">
           Our Subscriptions
         </h1>
-        <p className="xl:text-2xl lg:text-xl md:text-lg md:font-medium text-center mb-4">
+        <p className="lg:text-2xl font-normal text-[#232324] text-center mb-4">
           Empower your business with seamless employee management and tracking.
         </p>
         <div className="flex gap-2 bg-gray-200 p-2 rounded-3xl">
@@ -31,7 +32,8 @@ const Subscriptions = () => {
             className={clsx("w-[7rem] py-4", {
               "bg-primary text-white": activeButton === Plan.Monthly,
               "bg-transparent text-black": activeButton !== Plan.Monthly,
-              "hover:bg-primary hover:text-white": activeButton === Plan.Monthly,
+              "hover:bg-primary hover:text-white":
+                activeButton === Plan.Monthly,
               "rounded-3xl": true,
             })}
             onClick={() => handleButtonClick(Plan.Monthly)}
@@ -42,7 +44,8 @@ const Subscriptions = () => {
             className={clsx("w-[7rem] py-4", {
               "bg-primary text-white": activeButton === Plan.Annually,
               "bg-transparent text-black": activeButton !== Plan.Annually,
-              "hover:bg-primary hover:text-white": activeButton === Plan.Annually,
+              "hover:bg-primary hover:text-white":
+                activeButton === Plan.Annually,
               "rounded-3xl": true,
             })}
             onClick={() => handleButtonClick(Plan.Annually)}
@@ -68,3 +71,4 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
+

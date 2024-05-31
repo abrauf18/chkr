@@ -33,7 +33,7 @@ export default function ShowJobDetails() {
       </DialogTrigger>
       <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="text-left">
             Job Details
             <hr className="my-6" />
           </DialogTitle>

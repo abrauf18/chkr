@@ -145,7 +145,7 @@ const Jobs = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
+      <DashboardHeader title="" />
       <AdminHeader title="All Jobs" isAdmin={true} isSuperAdmin={false} page="createJob" />
       <div className="flex gap-2 items-center my-3 w-full mx-auto">
         {tabData.map((tab) => (
@@ -155,10 +155,9 @@ const Jobs = () => {
             className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
               } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
-            <div
-              className={`rounded-full w-2 h-2 ${activeTab === tab.id ? "bg-primary" : "bg-white"
-                } `}
-            ></div>
+             {activeTab === tab.id && (
+              <div className="rounded-full w-2 h-2 bg-primary" />
+            )}
             <div>
               <span
                 className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"

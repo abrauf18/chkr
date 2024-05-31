@@ -14,7 +14,7 @@ import Checkmark from "@/assets/icons/checkmark-icon";
 
 const IconText: React.FC<IconTextProps> = ({ text }) => {
   return (
-    <div className="flex justify-center items-center mb-2">
+    <div className="flex justify-center items-center mb-2 gap-2">
       <Checkmark className="w-3 h-3 mr-2" />
       <span className="font-medium text-base">{text}</span>
     </div>
@@ -39,7 +39,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         <IconText key={index} text="Unlimited Collaboration Project Team" />
       ))}
       <div className="flex justify-center items-center">
-        <Button className="w-3/4 py-4 text-white font-semibold mt-10 mb-10 xl:mt-10 border border-white bg-primary rounded-3xl hover:bg-transparent">
+        <Button className="w-full mx-6 py-7 px-8 text-white font-semibold mt-10 mb-6 border border-white bg-primary rounded-[50px] hover:bg-transparent">
           {buttonText}
         </Button>
       </div>

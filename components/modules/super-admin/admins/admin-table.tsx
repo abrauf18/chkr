@@ -16,10 +16,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-import { ArrowDown } from 'lucide-react'
+import { ArrowDown, Ban } from 'lucide-react'
 import DeleteIcon from '@/assets/icons/delete-icon'
 import EditIcon from '@/assets/icons/edit-icon'
 import Image from 'next/image'
+import DeleteModal from './delete-modal'
+import EditAdmin from './edit-admin'
 
 interface Admin {
   id: number;
@@ -71,7 +73,7 @@ const AdminTable: React.FC = () => {
         <TableHeader>
           <TableRow className='bg-white'>
             <TableHead>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-[12rem]">
                 <span className="text-black font-semibold whitespace-nowrap">Admin Name</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
@@ -114,11 +116,12 @@ const AdminTable: React.FC = () => {
               </TableCell>
               <TableCell>
                 <div className='flex gap-2'>
-                  <button>
-                    <EditIcon />
-                  </button>
-                  <button>
-                    <DeleteIcon />
+                  <EditAdmin/>
+                 <DeleteModal/>
+                 <button>
+                    <div className='bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center'>
+                      <Ban color='#ff8a00' className='w-5 h-5'/>
+                    </div>
                   </button>
                 </div>
               </TableCell>

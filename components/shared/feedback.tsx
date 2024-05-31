@@ -8,14 +8,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import FeedbackForm from "./feedback-form";
+import { MessageSquareShare } from "lucide-react";
 
 export default function Feedback() {
   return (
     <Dialog>
-      <DialogContent className="bg-white mobile:max-w-[90%] md:max-w-[65%] max-h-[80vh] overflow-y-auto overflow-x-auto">
+      <DialogTrigger asChild>
+      <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
+          <MessageSquareShare className="w-5 h-5" color="black" />
+          <span className="text-gray-800">Submit Feedback</span>
+        </div>
+      </DialogTrigger>
+      <DialogContent className="bg-white mobile:max-w-[90%] md:max-w-[75%] max-h-[80vh] overflow-y-auto overflow-x-auto">
         <DialogHeader>
-          <DialogTitle>Submit your feedback</DialogTitle>
-          <hr className="my-10" />
+          <DialogTitle>Submit your feedback
+          <hr className="my-5" />
+          </DialogTitle>
           <DialogDescription>
             <FeedbackForm />
           </DialogDescription>

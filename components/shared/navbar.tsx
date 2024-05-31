@@ -15,10 +15,10 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
   return (
     <section className="flex justify-center items-center w-full">
-      <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-2 px-4 rounded-3xl">
+      <nav className="w-[95%] flex md:items-center justify-between md:flex-wrap bg-white md:mx-10 mx-4 my-6 py-3 px-4 rounded-3xl">
         {/* Left side content */}
         <div className="flex items-center flex-shrink-0 text-black">
-          <ChkrLogo className="h-auto" />
+          <ChkrLogo className="h-12 ml-2" />
         </div>
         {/* Right side content */}
         <div className="flex items-center">
@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>{" "}
           {/* Hidden on mobile */}
           <Link href={url}>
-            <button className="bg-gray-900 text-white md:font-semibold font-light py-2 px-4 rounded-3xl">
+            <button className="bg-[#3F3F3F] hover:bg-primary text-white font-medium text-sm py-2 px-4 rounded-3xl">
               {buttonText}
             </button>
           </Link>

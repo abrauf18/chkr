@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export default function CompanyHeader({ title }: HeaderProps) {
   return (
-    <div className='flex flex-row mobile:flex-col md:justify-between items-center'>
+    <div className='flex flex-row mobile:flex-col md:justify-between items-center mt-2'>
       <h1 className='flex w-full text-xl font-base'>{title}</h1>
       <div className="flex md:justify-end gap-1 items-center w-full mobile:mt-2">
         <Button className=" bg-white hover:bg-white rounded-3xl py-6 text-sm lg:text-base">

@@ -18,7 +18,7 @@ export default function ForgetPassword() {
 
   return (
     <div
-      className="flex md:w-full mt-6 w-screen h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
+      className="flex md:w-full w-screen h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
       style={{
         backgroundImage: `url(${RightsideImg.src})`,
       }}

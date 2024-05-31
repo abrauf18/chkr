@@ -122,11 +122,8 @@ export default function Employees() {
 
   return (
     <>
-      <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
+      <DashboardHeader title="" />
       <AdminHeader title="Dashboard" isAdmin={true} isSuperAdmin={false} page="addEmployee" />
-      <div>
-        <Feedback />
-      </div>
       <div className="border rounded-2xl my-3">
         <EmployeeTable
           employees={employees}
