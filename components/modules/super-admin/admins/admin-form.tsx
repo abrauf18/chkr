@@ -9,7 +9,7 @@ import { AdminSchema } from '@/lib/types';
 import { ArrowRight, Mail, Phone, User } from 'lucide-react';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function AdminForm() {
+export default function AdminForm({isEdit}:{isEdit:boolean}) {
 
   const {
     register,
@@ -119,14 +119,25 @@ export default function AdminForm() {
             <ErrorMessage errors={errors} name="phoneNumber" />
           </p>
         </div>
-        <div className='flex justify-end mt-6'>
+        {!isEdit && <div className='flex justify-end mt-6'>
           <Button
             type='submit'
             className='text-white rounded-3xl'>
             <span>Send Invite</span>
             <ArrowRight className='w-4 h-4 ml-2' />
           </Button>
-        </div>
+        </div>}
+      {isEdit && 
+      <div className='flex justify-between items-center mt-3'>
+        <Button className='bg-gray-100 text-black rounded-3xl'>
+          Discard Changes
+        </Button>
+        <Button className='rounded-3xl text-white'>
+          Save Changes
+        </Button>
+      </div>
+      }
+        
       </div>
     </form>
   )
