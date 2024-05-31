@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
+import UserOptions from "./user-options";
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -72,15 +73,7 @@ const MobileNav = () => {
               <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
               </div>
-              <div className="flex justify-center items-center bg-white rounded-full h-12 w-12">
-                <Image
-                  src="/images/user.jpeg"
-                  width={6}
-                  height={6}
-                  alt="user"
-                  className="w-8 h-8 border rounded-full"
-                />
-              </div>
+              <UserOptions/>
             </div>
           </div>
           <div
