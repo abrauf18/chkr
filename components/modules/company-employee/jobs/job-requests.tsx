@@ -13,7 +13,7 @@ import {
 const DUMMY_DATA = [
   {
     name: 'Jerome Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380  View Direction',
+    address: '8502 Preston Rd. Inglewood, Maine 98380',
     service: 'ihdd',
     paymentStatus: 'done',
     dateTime: '15 March 2023 7:00 pm',
@@ -22,7 +22,7 @@ const DUMMY_DATA = [
   },
   {
     name: 'Chris Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380  View Direction',
+    address: '8502 Preston Rd. Inglewood, Maine 98380',
     service: 'ihdd',
     paymentStatus: 'done',
     dateTime: '15 March 2023 7:00 pm',
@@ -31,7 +31,7 @@ const DUMMY_DATA = [
   },
   {
     name: 'Joe Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380  View Direction',
+    address: '8502 Preston Rd. Inglewood, Maine 98380',
     service: 'ihdd',
     paymentStatus: 'done',
     dateTime: '15 March 2023 7:00 pm',
@@ -40,7 +40,7 @@ const DUMMY_DATA = [
   },
   {
     name: ' Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380  View Direction',
+    address: '8502 Preston Rd. Inglewood, Maine 98380',
     service: 'ihdd',
     paymentStatus: 'done',
     dateTime: '15 March 2023 7:00 pm',
