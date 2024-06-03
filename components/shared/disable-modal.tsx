@@ -6,38 +6,37 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import DeleteIcon from '@/assets/icons/delete-icon'
 import CancelCircle from '@/assets/icons/cancel-circle-half-dot'
 import { Button } from '@/components/ui/button'
-import { Trash2 } from 'lucide-react'
+import { Ban, Trash2 } from 'lucide-react'
 
-export default function DeleteModal() {
+export default function DisableModal() {
   const pathname = usePathname();
 
   return (
     <Dialog>
       <DialogTrigger>
-        {pathname === '/company-admin/jobs' || pathname === '/super-admin/admins' ? (
-          <DeleteIcon />
-        ) : pathname === '/super-admin/companies' ? (
+        {pathname === '/super-admin/companies' && (
           <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
-            <Trash2 className="w-4 h-4" color="gray" />
-            <span className="text-gray-600">Delete Company</span>          
+            <Ban className="w-4 h-4" color="gray" />
+            <span className="text-gray-600">Disable Company</span>          
           </div>
-        ) : null}
+        )}
+        {pathname === '/super-admin/admins' && (
+          <div className='bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center'>
+            <Ban color='#ff8a00' className='w-5 h-5'/>
+          </div>
+        )}
       </DialogTrigger>
-      <DialogContent
-        className="bg-white md:max-w-1/2 mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
-      >
+      <DialogContent className="bg-white md:max-w-1/2 mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
           <DialogDescription>
             <div className='flex flex-col justify-center items-center mt-10 gap-6'>
               <CancelCircle/>
               <h1 className='text-2xl font-medium text-black'>Are you sure?</h1>
-              <p className='font-normal text-lg text-center'>Do you really want to delete this? After deleting you can’t undo this</p>
+              <p className='font-normal text-lg text-center'>Do you really want to disable this?</p>
               <div className='flex w-full justify-between'>
                 <Button className='text-white rounded-3xl px-5'>
                   Cancel

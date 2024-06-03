@@ -42,7 +42,7 @@ export default function MyJobs() {
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex justify-center items-center text-center bg-white rounded-2xl md:py-3 md:px-6 px-1 py-2 gap-2 cursor-pointer ${activeTab === tab.id
+            className={`flex justify-center items-center text-center bg-white rounded-2xl md:py-3 md:px-6 px-3 py-2 gap-2 cursor-pointer ${activeTab === tab.id
               ? "bg-primary border-b-2 border-primary font-bold"
               : " text-gray-600"}`}
           >

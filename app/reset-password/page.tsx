@@ -1,6 +1,12 @@
 import ResetPassword from "@/components/modules/auth/reset-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Reset Password",
+  description: "Reset your password for your CHKR account. Choose a new strong password and regain access",
+};
 
 export default function page() {
   return (

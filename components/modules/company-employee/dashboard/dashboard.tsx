@@ -97,7 +97,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-3xl lg:text-2xl text-gray-700 whitespace-nowrap'>$ 120.8K</h1>
-              <p className='text-gray-400 text-xl'>Total Earnings</p>
+              <p className='text-gray-400 text-xl mobile:whitespace-nowrap'>Total Earnings</p>
             </div>
           </div>
           <div className='flex'>
@@ -115,7 +115,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-2xl xl:text-3xl text-gray-700'>18</h1>
-              <p className='text-gray-400 text-xl xl:whitespace-nowrap'>Completed Jobs</p>
+              <p className='text-gray-400 text-xl xl:whitespace-nowrap mobile:whitespace-nowrap'>Completed Jobs</p>
             </div>
           </div>
           <div className='flex justify-between'>
@@ -138,7 +138,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-[40%]'>
               <h1 className='font-bold text-3xl text-gray-700'>02</h1>
-              <p className='text-gray-400 text-xl xl:whitespace-nowrap'>New Requests</p>
+              <p className='text-gray-400 text-xl xl:whitespace-nowrap mobile:whitespace-nowrap'>New Requests</p>
             </div>
           </div>
           <div className='flex justify-between'>
@@ -160,7 +160,7 @@ export default function Dashboard() {
         <h1 className='text-xl font-semibold my-4'>Jobs & Earning Summary</h1>
         <Summary />
       </div>
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-4 mt-4'>
         <h1 className='text-xl font-semibold'>Job Requests</h1>
         {currentItems.map((jobRequest, index) => (
           <JobRequestCard
