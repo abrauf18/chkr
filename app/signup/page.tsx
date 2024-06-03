@@ -1,6 +1,13 @@
 import Signup from "@/components/modules/auth/signup";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+  description: "Sign up for a free account today",
+};
+
 
 export default function SignupPage() {
   return (

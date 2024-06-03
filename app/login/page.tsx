@@ -1,6 +1,12 @@
 import Login from "@/components/modules/auth/login";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign In",
+  description: "Log in securely to your CHKR account.",
+};
 
 export default function LoginPage() {
   return (
