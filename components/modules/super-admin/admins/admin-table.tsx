@@ -22,6 +22,7 @@ import EditIcon from '@/assets/icons/edit-icon'
 import Image from 'next/image'
 import DeleteModal from './delete-modal'
 import EditAdmin from './edit-admin'
+import DisableModal from '../../../shared/disable-modal'
 
 interface Admin {
   id: number;
@@ -118,11 +119,7 @@ const AdminTable: React.FC = () => {
                 <div className='flex gap-2'>
                   <EditAdmin/>
                  <DeleteModal/>
-                 <button>
-                    <div className='bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center'>
-                      <Ban color='#ff8a00' className='w-5 h-5'/>
-                    </div>
-                  </button>
+                <DisableModal/>
                 </div>
               </TableCell>
             </TableRow>

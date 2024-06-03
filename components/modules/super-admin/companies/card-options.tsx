@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Ban, EllipsisVertical, Trash2 } from "lucide-react";
 import CompanyDetailsModal from "./company-details-modal";
 import DeleteModal from "../admins/delete-modal";
+import DisableModal from "@/components/shared/disable-modal";
 
 export default function AccountDropdown() {
   const [open, setOpen] = useState(false);
@@ -29,10 +30,8 @@ export default function AccountDropdown() {
         <div>
           <CompanyDetailsModal />
         </div>
-          <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
-            <Ban className="w-4 h-4" color="gray" />
-            <span className="text-gray-600">Disable Company</span>          
-          </div>
+        <DisableModal/>
+      
         {pathname !== '/admin/companies' && (
         <DeleteModal/>
         )}
