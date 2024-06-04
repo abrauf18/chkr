@@ -8,18 +8,16 @@ import {
 import { signOut } from "next-auth/react";
 import { ChevronDown, ChevronUp, CircleUserRound, LogOut } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Feedback from "./feedback";
 
 export default function UserOptions() {
   const [open, setOpen] = useState(false);
-  const { push } = useRouter();
 
   const handleLogout = async () => {
-    const result = signOut({
-      redirect: false,
+    signOut({
+      redirect: true,
+      callbackUrl: "/login",
     });
-    return push("/login");
   };
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>

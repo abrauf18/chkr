@@ -43,7 +43,7 @@ export default function Signup() {
       }
       toast.error(result.message);
     } catch (error) {
-      console.error(error);
+      return toast.error("Something went wrong");
     }
   });
 

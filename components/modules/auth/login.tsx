@@ -39,7 +39,7 @@ export default function Login() {
       if (session) {
         const role = session?.user?.user?.role;
         if (role) {
-          toast.success(session?.user?.user?.message);
+          toast.success("Logged in successfully");
           if (role === "admin" || role === "super-admin") {
             return router.push(`/${role}/subscription`);
           }
