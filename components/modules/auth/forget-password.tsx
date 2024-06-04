@@ -8,10 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgetPasswordAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
 export default function ForgetPassword() {
-  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,7 +26,6 @@ export default function ForgetPassword() {
       });
       if (result.statusCode === 200) {
         toast.success(result.message);
-        return push("/reset-password");
       }
       toast.error(result.message);
     } catch (error) {

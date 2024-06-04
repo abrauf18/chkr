@@ -20,34 +20,36 @@ export default function ResetPassword() {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(ResetPasswordSchema),
   });
 
-
   const onSubmit = handleSubmit(async (data) => {
-    console.log("data",data); 
     try {
-      const { token, password, confirmPassword } = data;
+      const { password, confirmPassword } = data;
       const result = await ResetPasswordAction({
-        token,
+        token: token as string,
         password,
-        confirm_password:confirmPassword,
+        confirm_password: confirmPassword,
       });
       if (result.statusCode === 200) {
         toast.success(result.message);
         push("/login");
       } else {
-        toast.error(result.message);
+        //check if result.message is an array
+        if (Array.isArray(result.message)) {
+          toast.error(result.message[0]);
+        } else {
+          toast.error(result.message);
+        }
       }
     } catch (error) {
       console.log("Error resetting password:", error);
       toast.error("Something went wrong. Please try again later.");
     }
   });
-  
+
   return (
     <div
       className="flex w-full h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
@@ -116,3 +118,4 @@ export default function ResetPassword() {
     </div>
   );
 }
+
