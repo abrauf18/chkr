@@ -10,3 +10,8 @@ export interface ForgetPasswordInterface {
   email: string;
 }
 
+export interface ResetPasswordInterface {
+  token: string,
+  password: string;
+  confirm_password: string;
+}
