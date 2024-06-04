@@ -1,42 +1,67 @@
-"use client"
-interface FormData {
-  password: string;
-  confirmPassword: string;
-}
+"use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordSchema } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import RightsideImg from "@/public/images/SignupRightside.svg";
-
+import { ResetPasswordAction } from "@/actions/auth/auth-action";
+import { toast } from "react-toastify";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function ResetPassword() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  const { push } = useRouter();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
     resolver: zodResolver(ResetPasswordSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
 
+  const onSubmit = handleSubmit(async (data) => {
+    console.log("data",data); 
+    try {
+      const { token, password, confirmPassword } = data;
+      const result = await ResetPasswordAction({
+        token,
+        password,
+        confirm_password:confirmPassword,
+      });
+      if (result.statusCode === 200) {
+        toast.success(result.message);
+        push("/login");
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.log("Error resetting password:", error);
+      toast.error("Something went wrong. Please try again later.");
+    }
+  });
+  
   return (
-    <div  className="flex w-full h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
-    style={{
-      backgroundImage: `url(${RightsideImg.src})`,
-    }}>
+    <div
+      className="flex w-full h-full md:h-screen xl:h-full rounded-3xl justify-center items-center bg-cover bg-no-repeat md:bg-center"
+      style={{
+        backgroundImage: `url(${RightsideImg.src})`,
+      }}
+    >
       <div className="flex mobile:w-[90%] py-6 justify-center items-center">
         <form
           className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
           onSubmit={onSubmit}
+          // onSubmit={(data) => console.log(data)}
         >
-          <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
+          <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold mb-6">
             Reset Password
           </h2>
           <p className="md:w-full text-center mb-6 text-sm">
@@ -56,13 +81,13 @@ export default function ResetPassword() {
               type="password"
               placeholder="**************"
             />
-            {errors && errors.password && (
-              <p className="text-red-600 mt-2">{errors.password.message}</p>
-            )}
+            <p className="mobile:text-xs text-sm text-red-500 mt-1">
+              <ErrorMessage errors={errors} name="password" />
+            </p>
           </div>
           <div className="grid w-full items-center gap-1.5 mt-4">
             <Label
-              htmlFor="retypePassword"
+              htmlFor="confirm_password"
               className="md:text-lg text-sm font-semibold"
             >
               Re-Type Password
@@ -70,13 +95,13 @@ export default function ResetPassword() {
             <Input
               {...register("confirmPassword")}
               className="bg-[#F9F8F8]"
-              id="retypePassword"
+              id="confirm_password"
               type="password"
               placeholder="**************"
             />
-            {errors && errors.confirmPassword && (
-              <p className="text-red-600 mt-2">{errors.confirmPassword.message}</p>
-            )}
+            <p className="mobile:text-xs text-sm text-red-500 mt-1">
+              <ErrorMessage errors={errors} name="confirmPassword" />
+            </p>
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
