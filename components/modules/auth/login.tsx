@@ -6,16 +6,18 @@ import { Label } from "@/components/ui/label";
 import { LoginSchema } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Google from "@/assets/icons/google-icon";
 import { Button } from "@/components/ui/button";
 import Microsoft from "@/assets/icons/microsoft-icon";
-
+import { getSession, signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
-
   const [showPassword, setShowPassword] = useState(true);
+  const router = useRouter();
 
   const {
     register,
@@ -23,6 +25,31 @@ export default function Login() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(LoginSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const { email, password } = data;
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      const session: any = await getSession();
+      if (session) {
+        const role = session?.user?.user?.role;
+        if (role) {
+          toast.success(session?.user?.user?.message);
+          if (role === "admin" || role === "super-admin") {
+            return router.push(`/${role}/subscription`);
+          }
+          return router.push(`/${role}/dashboard`);
+        }
+        return toast.error(session?.user?.message);
+      }
+    } catch (error) {
+      return error;
+    }
   });
 
   return (
@@ -35,7 +62,7 @@ export default function Login() {
       <div className="flex w-full py-12 justify-center items-center">
         <form
           className="bg-white w-[90%] md:w-[85%] shadow-md rounded-3xl px-8 py-8"
-          onSubmit={handleSubmit((d) => console.log(d))}
+          onSubmit={onSubmit}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Sign In To Your Account
@@ -113,25 +140,25 @@ export default function Login() {
             </button>
           </div>
           <div className="mt-5">
-          <div className="flex items-center my-4">
-            <div className="flex-1">
-              <hr className="line" />
+            <div className="flex items-center my-4">
+              <div className="flex-1">
+                <hr className="line" />
+              </div>
+              <div className="px-4">OR</div>
+              <div className="flex-1">
+                <hr className="line" />
+              </div>
             </div>
-            <div className="px-4">OR</div>
-            <div className="flex-1">
-              <hr className="line" />
+            <div className="flex justify-center gap-2">
+              <Button className="xl:w-[90%] bg-gray-100 rounded-3xl">
+                <Google className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
+                Google
+              </Button>
+              <Button className=" xl:w-[90%] bg-gray-100 rounded-3xl">
+                <Microsoft className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
+                Microsoft
+              </Button>
             </div>
-          </div>
-          <div className="flex justify-center gap-2">
-            <Button className="xl:w-[90%] bg-gray-100 rounded-3xl">
-              <Google className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
-              Google
-            </Button>
-            <Button className=" xl:w-[90%] bg-gray-100 rounded-3xl">
-              <Microsoft className="xl:w-[1rem] xl:h-[1rem] mr-2 w-[1rem] h-[1rem]" />
-              Microsoft
-            </Button>
-          </div>
           </div>
         </form>
       </div>

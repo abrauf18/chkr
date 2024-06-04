@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "next-auth/react";
 
-const myFont = localFont({ src: '../fonts/LufgaRegular.ttf' })
+const myFont = localFont({ src: "../fonts/LufgaRegular.ttf" });
 
 export const metadata: Metadata = {
   title: "CHKR",
@@ -16,7 +19,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={myFont.className}>{children}</body>
+      <body className={myFont.className}>
+        <ToastContainer
+          position="top-right"
+          autoClose={1500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
+

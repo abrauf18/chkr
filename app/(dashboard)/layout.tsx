@@ -5,6 +5,9 @@ import Sidebar from "@/components/shared/sidebar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MobileNav from "@/components/shared/mobile-nav";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -13,6 +16,12 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const { width } = useWindowDimensions();
+
+  // const session: any = useSession();
+  // console.log(session);
+  // if (!session?.data?.user) {
+  //   return redirect("/login");
+  // }
 
   return (
     <section className="h-screen md:overflow-hidden">
