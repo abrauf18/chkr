@@ -6,14 +6,34 @@ import { Label } from "@/components/ui/label";
 import { ForgetPasswordSchema } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ForgetPasswordAction } from "@/actions/auth/auth-action";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function ForgetPassword() {
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(ForgetPasswordSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const { email } = data;
+      const result = await ForgetPasswordAction({
+        email,
+      });
+      if (result.statusCode === 200) {
+        toast.success(result.message);
+        return push("/reset-password");
+      }
+      toast.error(result.message);
+    } catch (error) {
+      return toast.error("Something went wrong");
+    }
   });
 
   return (
@@ -26,7 +46,7 @@ export default function ForgetPassword() {
       <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
         <form
           className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit((d) => console.log(d))}
+          onSubmit={onSubmit}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Forgot Password
@@ -39,7 +59,7 @@ export default function ForgetPassword() {
               Email Address
             </Label>
             <Input
-              {...register("password")}
+              {...register("email")}
               className="bg-[#F9F8F8]"
               type="email"
               id="email"
@@ -64,5 +84,9 @@ export default function ForgetPassword() {
       </div>
     </div>
   );
+}
+
+function push(arg0: string): unknown {
+  throw new Error("Function not implemented.");
 }
 

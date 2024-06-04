@@ -6,3 +6,7 @@ export interface SignUpInterface {
   password: string;
 }
 
+export interface ForgetPasswordInterface {
+  email: string;
+}
+
