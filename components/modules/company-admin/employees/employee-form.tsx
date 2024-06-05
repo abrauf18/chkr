@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EmployeeSchema } from '@/lib/types';
 import { ArrowRight, Mail, Phone, User } from 'lucide-react';
 import { ErrorMessage } from '@hookform/error-message';
+import { InviteUserAction } from '@/actions/auth/auth-action';
+import { toast } from 'react-toastify';
 
 export default function EmployeeForm() {
-
+  const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,8 +21,26 @@ export default function EmployeeForm() {
     resolver: zodResolver(EmployeeSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+      const { employeeFirstName, employeeLastName, email, phoneNumber } = data;
+      const result = await InviteUserAction({
+        first_name:employeeFirstName,
+        last_name:employeeLastName,
+        email,
+        contact_number:phoneNumber,
+      });
+      if (result.statusCode === 200) {
+        toast.success(result.message);
+      }
+      toast.error(result.message);
+    } catch (error) {
+      console.log(error)
+      return toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
