@@ -59,10 +59,14 @@ export const SignUpSchema = z
 
 
 export const LoginSchema = z.object({
-  email: z.string().email().min(1),
-  password: z
+  email: z.string()
+  .min(1, { message: "Email is required" })
+  .email({ message: "Email is invalid" }),
+    password: z
     .string()
-    .min(8, { message: "Password must contain at least 8 characters" }),
+    .min(1, { message: "Password is required" })
+    .min(8, { message: "Password must contain at least 8 characters" })
+    .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
 });
 
 export const ForgetPasswordSchema = z.object({
@@ -79,10 +83,14 @@ interface FormData {
 export const ResetPasswordSchema = z
   .object({
     password: z
-      .string()
-      .min(8, { message: "Password is too short" })
-      .max(20, { message: "Password is too long" }),
-    confirmPassword: z.string(),
+    .string()
+    .min(1, { message: "Password is required" })
+    .min(8, { message: "Password must contain at least 8 characters" })
+    .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
+    confirmPassword: z.string()
+    .min(1, { message: "Password is required" })
+    .min(8, { message: "Password must contain at least 8 characters" })
+    .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
   })
   .refine((data: FormData) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

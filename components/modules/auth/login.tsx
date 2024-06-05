@@ -15,6 +15,7 @@ import { getSession, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/shared/loader";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(true);
@@ -84,12 +85,10 @@ export default function Login() {
               id="email"
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-500 mt-2">Email is required</p>
-            )}
-            {errors.email && errors.email.type === "pattern" && (
-              <p className="text-red-500 mt-2">Invalid email format</p>
-            )}
+           <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="email" />
+            </p>
           </div>
           <div className="grid w-full items-center gap-1.5">
             <Label
@@ -116,9 +115,10 @@ export default function Login() {
                 {showPassword ? <EyeOff /> : <Eye />}
               </button>
             </div>
-            {typeof errors.password?.message === "string" && (
-              <p className="text-red-500 mt-2">{errors.password?.message}</p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="password" />
+            </p>
           </div>
 
           <div className="flex flex-col md:flex-row mt-6 md:items-center justify-between">
