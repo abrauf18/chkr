@@ -7,6 +7,7 @@ import MobileNav from "@/components/shared/mobile-nav";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Loader from "@/components/shared/loader";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -19,7 +20,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 
   const session: any = useSession();
   if (session.status === "loading") {
-    return <div>loading</div>;
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Loader size={12} />
+      </div>
+    );
   }
   if (session.status === "unauthenticated") push("/login");
   if (session.status === "authenticated") {

@@ -14,10 +14,12 @@ import { ErrorMessage } from "@hookform/error-message";
 import { SignUpAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/shared/loader";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const [isloading, setIsLoading] = useState(false);
   const { push } = useRouter();
   const {
     register,
@@ -29,6 +31,7 @@ export default function Signup() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setIsLoading(true);
       const { firstName, lastName, email, contactNumber, password } = data;
       const result = await SignUpAction({
         first_name: firstName,
@@ -44,6 +47,8 @@ export default function Signup() {
       toast.error(result.message);
     } catch (error) {
       return toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   });
 
@@ -221,7 +226,7 @@ export default function Signup() {
               className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
             >
-              Sign Up
+              {isloading ? <Loader size={6} /> : "Sign Up"}
             </button>
           </div>
         </form>

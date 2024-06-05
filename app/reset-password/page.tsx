@@ -3,6 +3,7 @@ import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import Loader from "@/components/shared/loader";
 
 export const metadata: Metadata = {
   title: "Reset Password",
@@ -26,7 +27,7 @@ export default function page() {
             heading3="SERVICE PROVIDERS"
             url="/images/SignUpLeftSide.svg"
           />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader size={12} />}>
             <ResetPassword />
           </Suspense>
         </div>
