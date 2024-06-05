@@ -12,8 +12,10 @@ import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ErrorMessage } from "@hookform/error-message";
 import Loader from "@/components/shared/loader";
+import { EyeOff, Eye } from "lucide-react";
 
 export default function ResetPassword() {
+  const [showPassword, setShowPassword] = useState(true);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const { push } = useRouter();
@@ -80,13 +82,24 @@ export default function ResetPassword() {
             >
               Password
             </Label>
-            <Input
-              {...register("password")}
-              className="bg-[#F9F8F8]"
-              id="password"
-              type="password"
-              placeholder="**************"
-            />
+            <div className="relative flex items-center">
+              <Input
+                {...register("password")}
+                className="bg-[#F9F8F8] !pt-4"
+                id="password"
+                type={showPassword ? "password" : "text"}
+                placeholder="**************"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPassword((prev) => !prev);
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
             <p className="mobile:text-xs text-sm text-red-500 mt-1">
               <ErrorMessage errors={errors} name="password" />
             </p>
