@@ -26,32 +26,37 @@ export const OnboardingSchema = z.object({
 
 export type Onboarding = z.infer<typeof OnboardingSchema>;
 
+const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])/; 
+
 export const SignUpSchema = z
   .object({
     firstName: z.string()
       .min(1, { message: "First name is required" })
-      .max(50, { message: "First name can have maximum 50 characters" }),
-    lastName: z.string().max(50)
-      .min(1, { message: "Last name is required" }),
+      .max(50, { message: "First name can have a maximum of 50 characters" }),
+    lastName: z.string()
+      .min(1, { message: "Last name is required" })
+      .max(50, { message: "Last name can have a maximum of 50 characters" }),
     email: z.string()
       .min(1, { message: "Email is required" })
       .email({ message: "Email is invalid" }),
-    contactNumber: z
-      .string()
+    contactNumber: z.string()
       .min(1, { message: "Phone number is required" })
-      .regex(phoneRegex, "Invalid Number!"),
+      .regex(phoneRegex, { message: "Invalid Number!" }),
     password: z.string()
       .min(1, { message: "Password is required" })
       .min(8, { message: "Password is too short" })
-      .max(20, { message: "Password is too long" }),
+      .max(20, { message: "Password is too long" })
+      .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
     confirmPassword: z.string()
       .min(1, { message: "Password is required" })
-      .min(8, { message: "Password must have 8 characters" }),
+      .min(8, { message: "Password must have 8 characters" })
+      .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
 
 export const LoginSchema = z.object({
   email: z.string().email().min(1),
