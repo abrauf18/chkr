@@ -8,8 +8,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgetPasswordAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
+import Loader from "@/components/shared/loader";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function ForgetPassword() {
+  const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,6 +23,7 @@ export default function ForgetPassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setIsLoading(true);
       const { email } = data;
       const result = await ForgetPasswordAction({
         email,
@@ -30,6 +34,8 @@ export default function ForgetPassword() {
       toast.error(result.message);
     } catch (error) {
       return toast.error("Something went wrong");
+    } finally{
+      setIsLoading(false);
     }
   });
 
@@ -62,19 +68,17 @@ export default function ForgetPassword() {
               id="email"
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-600 mt-2">Email is required</p>
-            )}
-            {errors.email && errors.email.type === "pattern" && (
-              <p className="text-red-600 mt-2">Invalid email format</p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+                {" "}
+                <ErrorMessage errors={errors} name="email" />
+              </p>
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
               className="w-full bg-primary hover:bg-primaryHover text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-              Send Password
+            {isloading ? <Loader size={6} /> : "Send Password"}
             </button>
           </div>
         </form>

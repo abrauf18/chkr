@@ -61,7 +61,9 @@ export const LoginSchema = z.object({
 });
 
 export const ForgetPasswordSchema = z.object({
-  email: z.string().email().min(1),
+  email: z.string()
+  .min(1, {message: "Email is required"})
+  .email({ message: "Email is invalid" }),
 });
 
 interface FormData {

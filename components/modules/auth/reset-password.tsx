@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordSchema } from "@/lib/types";
@@ -11,11 +11,13 @@ import { ResetPasswordAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ErrorMessage } from "@hookform/error-message";
+import Loader from "@/components/shared/loader";
 
 export default function ResetPassword() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const { push } = useRouter();
+  const [isloading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -27,6 +29,7 @@ export default function ResetPassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setIsLoading(true);
       const { password, confirmPassword } = data;
       const result = await ResetPasswordAction({
         token: token as string,
@@ -47,6 +50,8 @@ export default function ResetPassword() {
     } catch (error) {
       console.log("Error resetting password:", error);
       toast.error("Something went wrong. Please try again later.");
+    } finally{
+      setIsLoading(false);
     }
   });
 
@@ -61,7 +66,6 @@ export default function ResetPassword() {
         <form
           className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
           onSubmit={onSubmit}
-          // onSubmit={(data) => console.log(data)}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold mb-6">
             Reset Password
@@ -110,7 +114,7 @@ export default function ResetPassword() {
               className="w-full bg-primary text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-              Reset Password
+             {isloading ? <Loader size={6} /> : "Reset Password"}
             </button>
           </div>
         </form>

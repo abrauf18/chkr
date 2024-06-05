@@ -14,9 +14,11 @@ import Microsoft from "@/assets/icons/microsoft-icon";
 import { getSession, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/shared/loader";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(true);
+  const [isloading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -29,6 +31,7 @@ export default function Login() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setIsLoading(true);
       const { email, password } = data;
       await signIn("credentials", {
         email,
@@ -49,6 +52,8 @@ export default function Login() {
       }
     } catch (error) {
       return error;
+    } finally{
+      setIsLoading(false);
     }
   });
 
@@ -136,7 +141,7 @@ export default function Login() {
               className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
             >
-              Sign In with Email
+              {isloading ? <Loader size={6} /> : "Sign In with Email"}
             </button>
           </div>
           <div className="mt-5">
