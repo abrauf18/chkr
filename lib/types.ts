@@ -50,7 +50,6 @@ export const SignUpSchema = z
     confirmPassword: z.string()
       .min(1, { message: "Password is required" })
       .min(8, { message: "Password must have 8 characters" })
-      .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -66,7 +65,6 @@ export const LoginSchema = z.object({
     .string()
     .min(1, { message: "Password is required" })
     .min(8, { message: "Password must contain at least 8 characters" })
-    .regex(passwordRegex, { message: "Password must contain at least one uppercase letter and one special character" }),
 });
 
 export const ForgetPasswordSchema = z.object({
