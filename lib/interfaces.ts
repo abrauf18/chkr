@@ -15,3 +15,10 @@ export interface ResetPasswordInterface {
   password: string;
   confirm_password: string;
 }
+
+export interface InviteUserInterface {
+  first_name: string;
+  last_name: string;
+  email: string;
+  contact_number: string;
+}
