@@ -1,6 +1,7 @@
 // use client (assuming you're using it for code splitting)
 import React from "react";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 interface TabData {
   name: string;
@@ -38,9 +39,13 @@ const Header: React.FC<HeaderProps> = ({
           />
         </div>
       </div>
-      <div className="mt-12 text-center">
-        <h1 className="text-xl font-semibold">{activeData?.name}</h1>
-        <p className="text-gray-500">{activeData?.email}</p>
+      <div className="flex items-center justify-center mt-12 gap-4">
+        <Button className="rounded-3xl bg-gray-300">
+          Remove
+        </Button>
+        <Button className="rounded-3xl text-white">
+          Upload Photo
+        </Button>
       </div>
       {isAdmin && (
         <div className="mt-6 flex justify-center">
