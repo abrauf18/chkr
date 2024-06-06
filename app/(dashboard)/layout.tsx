@@ -28,7 +28,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   }
   if (session.status === "unauthenticated") push("/login");
   if (session.status === "authenticated") {
-    const role = session?.data?.user?.user?.role;
+    const { data } = session;
+    const role = data.user?.role;
     if (role === "admin" || role === "super-admin") {
       push(`/${role}/subscription`);
     } else {

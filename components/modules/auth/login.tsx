@@ -41,7 +41,7 @@ export default function Login() {
       });
       const session: any = await getSession();
       if (session) {
-        const role = session?.user?.user?.role;
+        const role = session?.user?.role;
         if (role) {
           toast.success("Logged in successfully");
           if (role === "admin" || role === "super-admin") {
@@ -49,7 +49,7 @@ export default function Login() {
           }
           return router.push(`/${role}/dashboard`);
         }
-        return toast.error(session?.user?.message);
+        return toast.error(session?.message);
       }
     } catch (error) {
       return toast.error((error as Error)?.message);
