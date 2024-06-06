@@ -5,6 +5,7 @@ import {
   ForgetPasswordInterface,
   ResetPasswordInterface,
   InviteUserInterface,
+  FirmInterface,
 } from "@/lib/interfaces";
 import { auth } from "@/auth";
 
@@ -62,6 +63,40 @@ export const InviteUserAction = async (data: InviteUserInterface) => {
         Authorization: `Bearer ${session?.token}`,
       },
       body: JSON.stringify(data),
+    }
+  );
+  const result = await response.json();
+  return result;
+};
+
+export const FirmsAction = async () => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/firms`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result;
+};
+
+export const CountryAction = async () => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/countries`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
     }
   );
   const result = await response.json();
