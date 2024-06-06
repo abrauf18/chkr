@@ -145,9 +145,9 @@ export default function AdminForm({ isEdit }: { isEdit?: boolean }) {
         </div>
         {!isEdit && (
           <div className="flex justify-end mt-6">
-            <Button type="submit" className="text-white rounded-3xl">
-              <span>Send Invite</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
+            <Button type="submit" className="text-white rounded-3xl w-32">
+              {isloading ? <Loader size={6} /> : "Send Invite"}
+              {!isloading && <ArrowRight className="w-4 h-4 ml-2" />}
             </Button>
           </div>
         )}

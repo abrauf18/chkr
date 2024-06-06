@@ -16,6 +16,7 @@ import { EyeOff, Eye } from "lucide-react";
 
 export default function ResetPassword() {
   const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const { push } = useRouter();
@@ -114,13 +115,28 @@ export default function ResetPassword() {
             >
               Re-Type Password
             </Label>
-            <Input
-              {...register("confirmPassword")}
-              className="bg-[#F9F8F8]"
-              id="confirm_password"
-              type="password"
-              placeholder="**************"
-            />
+            <div className="relative flex items-center">
+              <Input
+                {...register("confirmPassword")}
+                className="bg-[#F9F8F8]"
+                id="confirm_password"
+                type={showConfirmPassword ? "password" : "text"}
+                placeholder="**************"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowConfirmPassword((prev) => !prev);
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
             <p className="mobile:text-xs text-sm text-red-500 mt-1">
               <ErrorMessage errors={errors} name="confirmPassword" />
             </p>
