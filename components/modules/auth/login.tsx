@@ -52,8 +52,8 @@ export default function Login() {
         return toast.error(session?.user?.message);
       }
     } catch (error) {
-      return error;
-    } finally{
+      return toast.error((error as Error)?.message);
+    } finally {
       setIsLoading(false);
     }
   });
@@ -85,7 +85,7 @@ export default function Login() {
               id="email"
               placeholder="Email"
             />
-           <p className="text-sm text-red-500 mt-1">
+            <p className="text-sm text-red-500 mt-1">
               {" "}
               <ErrorMessage errors={errors} name="email" />
             </p>
@@ -112,7 +112,11 @@ export default function Login() {
                 }}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
               </button>
             </div>
             <p className="text-sm text-red-500 mt-1">

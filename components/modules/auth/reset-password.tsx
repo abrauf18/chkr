@@ -44,15 +44,14 @@ export default function ResetPassword() {
       } else {
         //check if result.message is an array
         if (Array.isArray(result.message)) {
-          toast.error(result.message[0]);
+          return toast.error(result.message[0]);
         } else {
-          toast.error(result.message);
+          return toast.error(result.message);
         }
       }
     } catch (error) {
-      console.log("Error resetting password:", error);
-      toast.error("Something went wrong. Please try again later.");
-    } finally{
+      return toast.error((error as Error)?.message);
+    } finally {
       setIsLoading(false);
     }
   });
@@ -97,7 +96,11 @@ export default function ResetPassword() {
                 }}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
               </button>
             </div>
             <p className="mobile:text-xs text-sm text-red-500 mt-1">
@@ -127,7 +130,7 @@ export default function ResetPassword() {
               className="w-full bg-primary text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-             {isloading ? <Loader size={6} /> : "Reset Password"}
+              {isloading ? <Loader size={6} /> : "Reset Password"}
             </button>
           </div>
         </form>

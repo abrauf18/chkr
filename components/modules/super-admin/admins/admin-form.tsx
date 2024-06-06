@@ -11,11 +11,9 @@ import { ErrorMessage } from "@hookform/error-message";
 import { InviteUserAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
-import { useSession } from 'next-auth/react';
 
 export default function AdminForm({ isEdit }: { isEdit?: boolean }) {
   const [isloading, setIsLoading] = useState(false);
-  const { data, status } = useSession();
   const {
     register,
     handleSubmit,
@@ -29,17 +27,17 @@ export default function AdminForm({ isEdit }: { isEdit?: boolean }) {
       setIsLoading(true);
       const { adminFirstName, adminLastName, email, phoneNumber } = data;
       const result = await InviteUserAction({
-        first_name:adminFirstName,
-        last_name:adminLastName,
+        first_name: adminFirstName,
+        last_name: adminLastName,
         email,
-        contact_number:phoneNumber,
+        contact_number: phoneNumber,
       });
       if (result.statusCode === 200) {
-        toast.success(result.message);
+        return toast.success(result.message);
       }
-      toast.error(result.message);
+      return toast.error(result.message);
     } catch (error) {
-      return toast.error("Something went wrong");
+      return toast.error((error as Error)?.message);
     } finally {
       setIsLoading(false);
     }

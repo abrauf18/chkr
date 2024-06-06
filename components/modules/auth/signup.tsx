@@ -44,9 +44,9 @@ export default function Signup() {
         toast.success(result.message);
         return push("/login");
       }
-      toast.error(result.message);
+      return toast.error(result.message);
     } catch (error) {
-      return toast.error("Something went wrong");
+      return toast.error((error as Error)?.message);
     } finally {
       setIsLoading(false);
     }

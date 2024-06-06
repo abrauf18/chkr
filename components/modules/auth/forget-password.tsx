@@ -29,12 +29,12 @@ export default function ForgetPassword() {
         email,
       });
       if (result.statusCode === 200) {
-        toast.success(result.message);
+        return toast.success(result.message);
       }
-      toast.error(result.message);
+      return toast.error(result.message);
     } catch (error) {
-      return toast.error("Something went wrong");
-    } finally{
+      return toast.error((error as Error)?.message);
+    } finally {
       setIsLoading(false);
     }
   });
@@ -69,16 +69,16 @@ export default function ForgetPassword() {
               placeholder="Email"
             />
             <p className="text-sm text-red-500 mt-1">
-                {" "}
-                <ErrorMessage errors={errors} name="email" />
-              </p>
+              {" "}
+              <ErrorMessage errors={errors} name="email" />
+            </p>
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
               className="w-full bg-primary hover:bg-primaryHover text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-            {isloading ? <Loader size={6} /> : "Send Password"}
+              {isloading ? <Loader size={6} /> : "Send Password"}
             </button>
           </div>
         </form>
