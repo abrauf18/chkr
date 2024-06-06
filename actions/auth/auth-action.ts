@@ -1,7 +1,12 @@
 "use server";
 
-import { SignUpInterface, ForgetPasswordInterface, ResetPasswordInterface, InviteUserInterface } from "@/lib/interfaces";
-import { auth } from "@/auth"
+import {
+  SignUpInterface,
+  ForgetPasswordInterface,
+  ResetPasswordInterface,
+  InviteUserInterface,
+} from "@/lib/interfaces";
+import { auth } from "@/auth";
 
 export const SignUpAction = async (data: SignUpInterface) => {
   const response = await fetch(
@@ -46,7 +51,7 @@ export const ResetPasswordAction = async (data: ResetPasswordInterface) => {
 };
 
 export const InviteUserAction = async (data: InviteUserInterface) => {
-  const session = await auth()
+  const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/invite-user`,
     {
@@ -54,11 +59,12 @@ export const InviteUserAction = async (data: InviteUserInterface) => {
       headers: {
         "Content-Type": "application/json",
         //@ts-ignore
-        'Authorization': `Bearer ${session?.user?.token}`
+        Authorization: `Bearer ${session?.token}`,
       },
       body: JSON.stringify(data),
     }
   );
   const result = await response.json();
-  return result
+  return result;
 };
+
