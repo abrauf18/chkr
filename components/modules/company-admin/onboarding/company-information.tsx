@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import User from "@/assets/icons/user-icon";
@@ -10,49 +10,53 @@ import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, File } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { CountryAction, FirmsAction } from "@/actions/auth/auth-action";
+import { FirmInterface } from "@/lib/interfaces";
 
-const countries = [
-  "USA",
-  "Canada",
-  "UK",
-  "Australia",
-  "Pakistan",
-  "Germany",
-  "India",
-];
-const companyTypes = ["Type A", "Type B", "Type C", "Type D"]; // Example list of company types
 
-const CompanyInformation = ({
-  handleNextStep,
-}: {
+interface CompanyInformationProps {
   handleNextStep: () => void;
-}): JSX.Element => {
+}
+
+const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.Element => {
   const { setOnboardingData } = useOnboardingStore();
-  const {
-    register,
-    trigger,
-    formState: { errors },
-    getValues,
-  } = useFormContext();
+  const { register, trigger, watch, formState: { errors }, getValues } = useFormContext();
+  const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
+  const [countries, setCountries] = useState([]);
+
+
+  useEffect(() => {
+    const fetchCompanyTypes = async () => {
+      try {
+        const response:FirmInterface[] = await FirmsAction();
+        setCompanyTypes(response);
+      } catch (error) {
+        console.error("Error fetching company types:", error);
+      }
+    };
+    fetchCompanyTypes();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await CountryAction();
+        setCountries(response);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
   const changeNextStep = async () => {
-    const isValid = await trigger([
-      "company-name",
-      "company-type",
-      "phone-number",
-      "location",
-      "country",
-      "video",
-    ]);
+    const isValid = await trigger(["company-name", "company-type", "phone-number", "location", "country", "video"]);
     if (isValid) {
-      const data = getValues([
-        "company-name",
-        "company-type",
-        "phone-number",
-        "location",
-        "country",
-        "logo",
-      ]);
+      const data = getValues(["company-name", "company-type", "phone-number", "location", "country", "logo"]);
       setOnboardingData({
         "company-name": data[0],
         "company-type": data[1],
@@ -66,13 +70,12 @@ const CompanyInformation = ({
     }
   };
 
+  const selectedFile = watch("logo");
+
   return (
     <div className="flex flex-col w-full justify-center items-center my-4 mx-10">
       <div className="mb-4 w-full">
-        <label
-          htmlFor="fileInput"
-          className="md:text-lg text-sm font-semibold w-full"
-        >
+        <label htmlFor="fileInput" className="md:text-lg text-sm font-semibold w-full">
           Upload Logo
           <input
             type="file"
@@ -81,21 +84,25 @@ const CompanyInformation = ({
             {...register("logo")}
             className="hidden"
           />
-          <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
-            <Upload width={30} height={30} />
-            <span className="text-sm font-medium mt-3">Upload Logo</span>
-          </div>
+          {!selectedFile ? (
+            <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
+              <Upload width={30} height={30} />
+              <span className="text-sm font-medium mt-3">Upload Logo</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 h-20 w-full mt-4 rounded-2xl border-dashed border-2 border-gray-300 p-4">
+              <File />
+              {/* <Image src={URL.createObjectURL(selectedFile[0])} alt="logo" width={5} height={5} className="h-20 w-20"/> */}
+              <span className="whitespace-nowrap text-sm">{selectedFile[0].name}</span>
+            </div>
+          )}
         </label>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="logo" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label
-          htmlFor="companyName"
-          className="md:text-lg text-sm font-semibold"
-        >
+        <Label htmlFor="companyName" className="md:text-lg text-sm font-semibold">
           Company Name
         </Label>
         <div className="relative flex items-center">
@@ -111,15 +118,11 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="company-name" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label
-          htmlFor="companyType"
-          className="md:text-lg text-sm font-semibold"
-        >
+        <Label htmlFor="companyType" className="md:text-lg text-sm font-semibold">
           Company Type
         </Label>
         <div className="relative flex items-center">
@@ -135,9 +138,9 @@ const CompanyInformation = ({
             <option className="text-gray-200" value="">
               Select Company Type
             </option>
-            {companyTypes.map((companyTypes) => (
-              <option key={companyTypes} value={companyTypes}>
-                {companyTypes}
+            {companyTypes?.map((companyType) => (
+              <option key={companyType.id} value={companyType.firm_name}>
+                {companyType.firm_name}
               </option>
             ))}
           </select>
@@ -146,7 +149,6 @@ const CompanyInformation = ({
           </div>
         </div>
         <p className="text-sm text-red-500">
-          {" "}
           <ErrorMessage errors={errors} name="company-type" />
         </p>
       </div>
@@ -167,7 +169,6 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="phone-number" />
         </p>
       </div>
@@ -188,12 +189,11 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="location" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="location" className="md:text-lg text-sm font-semibold">
+        <Label htmlFor="country" className="md:text-lg text-sm font-semibold">
           Country
         </Label>
         <div className="relative flex items-center">
@@ -210,11 +210,11 @@ const CompanyInformation = ({
             <option value="" disabled hidden>
               Select Country
             </option>
-            {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
+           {countries.map((country) => (
+        <option key={country} value={country}>
+          {country}
+        </option>
+      ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <ChevronDown />
@@ -226,14 +226,6 @@ const CompanyInformation = ({
       </div>
 
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
-        {/* <Link href="/" className="hover:text-primary">
-          <button
-            className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl whitespace-nowrap	"
-            type="button"
-          >
-            Back to Home
-          </button>
-        </Link> */}
         <button
           className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
@@ -247,4 +239,3 @@ const CompanyInformation = ({
 };
 
 export default CompanyInformation;
-
