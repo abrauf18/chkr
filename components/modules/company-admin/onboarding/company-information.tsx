@@ -11,7 +11,6 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 
 const countries = [
   "USA",
@@ -128,14 +127,14 @@ const CompanyInformation = ({
             <BuildingIcon />
           </span>
           <select
-          required
+            required
             id="companyType"
             {...register("company-type")}
             className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
-            <option
-            className="text-gray-200"
-            value="">Select Company Type</option>
+            <option className="text-gray-200" value="">
+              Select Company Type
+            </option>
             {companyTypes.map((companyTypes) => (
               <option key={companyTypes} value={companyTypes}>
                 {companyTypes}

@@ -30,10 +30,6 @@ export default function OnboardingSteps() {
     }
   };
 
-  if (typeof window === "undefined") {
-    return <div>loading</div>;
-  }
-
   const handlePreviousStep = () => {
     setCurrentStep(Steps.COMPANY_DETAILS);
   };

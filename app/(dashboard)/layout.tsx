@@ -27,15 +27,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     );
   }
   if (session.status === "unauthenticated") push("/login");
-  if (session.status === "authenticated") {
-    const { data } = session;
-    const role = data.user?.role;
-    if (role === "admin" || role === "super-admin") {
-      push(`/${role}/subscription`);
-    } else {
-      push(`/${role}/dashboard`);
-    }
-  }
 
   return (
     <section className="h-screen md:overflow-hidden">
