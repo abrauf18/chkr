@@ -22,3 +22,8 @@ export interface InviteUserInterface {
   email: string;
   contact_number: string;
 }
+
+export interface FirmInterface {
+  id: number,
+  firm_name: string;
+}
