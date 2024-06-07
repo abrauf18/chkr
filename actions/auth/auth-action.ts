@@ -103,3 +103,20 @@ export const CountryAction = async () => {
   return result;
 };
 
+export const OnboardingAction = async (data: OnboardingInterface) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/invite-user`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  );
+  const result = await response.json();
+  return result;
+};

@@ -27,3 +27,12 @@ export interface FirmInterface {
   id: number,
   firm_name: string;
 }
+
+export interface OnboardingInterface {
+  company_name: string;
+  firm_id: number,
+  phone_number: string;
+  location: string;
+  country: string;
+  plan_id: number;
+}
