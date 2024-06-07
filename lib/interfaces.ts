@@ -36,3 +36,9 @@ export interface OnboardingInterface {
   country: string;
   plan_id: number;
 }
+
+export interface PlanInterface {
+  id: number,
+  plan_type: string;
+  amount: number
+}
