@@ -6,6 +6,7 @@ import {
   ResetPasswordInterface,
   InviteUserInterface,
   FirmInterface,
+  OnboardingInterface,
 } from "@/lib/interfaces";
 import { auth } from "@/auth";
 
@@ -103,18 +104,36 @@ export const CountryAction = async () => {
   return result;
 };
 
-export const OnboardingAction = async (data: OnboardingInterface) => {
+export const OnboardingAction = async (data: FormData) => {
   const session = await auth();
+  console.log(data)
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/invite-user`,
+    `${process.env.NEXT_PUBLIC_API_URL}/company`,
     {
       method: "POST",
+      headers: {
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: data,
+    }
+  );
+  const result = await response.json();
+  console.log(result)
+  return result;
+};
+
+export const PlanAction = async () => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/plans`,
+    {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify(data),
     }
   );
   const result = await response.json();

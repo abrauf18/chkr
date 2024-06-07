@@ -38,6 +38,8 @@ export interface OnboardingInterface {
 }
 
 export interface PlanInterface {
+  features: string[];
+  timePeriod: string;
   id: number,
   plan_type: string;
   amount: number

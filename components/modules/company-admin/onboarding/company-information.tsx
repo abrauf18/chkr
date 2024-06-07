@@ -12,9 +12,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { ChevronDown, File } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { CountryAction, FirmsAction } from "@/actions/auth/auth-action";
+import { CountryAction, FirmsAction, OnboardingAction } from "@/actions/auth/auth-action"; // Import the OnboardingAction
 import { FirmInterface } from "@/lib/interfaces";
-
 
 interface CompanyInformationProps {
   handleNextStep: () => void;
@@ -26,11 +25,10 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
   const [countries, setCountries] = useState([]);
 
-
   useEffect(() => {
     const fetchCompanyTypes = async () => {
       try {
-        const response:FirmInterface[] = await FirmsAction();
+        const response: FirmInterface[] = await FirmsAction();
         setCompanyTypes(response);
       } catch (error) {
         console.error("Error fetching company types:", error);
@@ -38,7 +36,6 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
     };
     fetchCompanyTypes();
   }, []);
-
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -53,23 +50,40 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
     fetchCountries();
   }, []);
 
+
   const changeNextStep = async () => {
-    const isValid = await trigger(["company-name", "company-type", "phone-number", "location", "country", "video"]);
+    const isValid = await trigger(["company-name", "company-type", "phone-number", "location", "country", "logo"]);
     if (isValid) {
       const data = getValues(["company-name", "company-type", "phone-number", "location", "country", "logo"]);
-      setOnboardingData({
-        "company-name": data[0],
-        "company-type": data[1],
-        "phone-number": data[2],
-        location: data[3],
-        country: data[4],
-        logo: data[5],
-        plan: "monthly",
-      });
-      handleNextStep();
+      const firm = companyTypes.find(type => type.firm_name === data[1]);
+  
+      if (!firm) {
+        console.error("Firm not found");
+        return;
+      }
+      const formData = new FormData();
+      formData.set("company_name", data[0]),
+      formData.set("firm_id", firm.id.toString()),
+      formData.set("phone_number", data[2]),
+      formData.set("location", data[3]),
+      formData.set("country", data[4]),
+      formData.set("plan_id", "1")
+      
+      const logoFileList = data[5];
+    if (logoFileList instanceof FileList && logoFileList.length > 0) {
+      formData.set("file", logoFileList[0]);  // Extract the first file from the FileList
+    } 
+
+      try {
+        await OnboardingAction(formData);
+        handleNextStep();
+        console.log("onboadingdata", FormData)
+      } catch (error) {
+        console.error("Error storing company information:", error);
+      }
     }
   };
-
+  
   const selectedFile = watch("logo");
 
   return (
@@ -210,11 +224,11 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
             <option value="" disabled hidden>
               Select Country
             </option>
-           {countries.map((country) => (
-        <option key={country} value={country}>
-          {country}
-        </option>
-      ))}
+            {countries.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <ChevronDown />

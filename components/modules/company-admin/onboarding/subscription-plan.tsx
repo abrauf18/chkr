@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PlanCard from "./plan-card";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
+import { PlanInterface } from "@/lib/interfaces";
+import { PlanAction } from "@/actions/auth/auth-action";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -14,49 +16,50 @@ const SubscriptionPlan = ({
     formState: { errors },
   } = useFormContext();
   const { onboardingData, setOnboardingData } = useOnboardingStore();
+  const [plans, setPlans] = useState<PlanInterface[]>([]);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const response: PlanInterface[] = await PlanAction();
+        const detailedPlans = response.map(plan => ({
+          ...plan,
+          features: [
+            "Curabitur pulvinar nunc nisl, vitae orci pellentesque.",
+            "Curabitur pulvinar nunc orci pellentesque.",
+            "Curabitur pulvinar pellentesque.",
+          ],
+          timePeriod: plan.plan_type === "monthly" ? "month" : "year"
+        }));
+        setPlans(detailedPlans);
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+      }
+    };
+    fetchPlans();
+  }, []);
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-10 gap-6">
-        <div className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
-          <input
-            type="radio"
-            placeholder="Monthly Plan"
-            id="montly-plan"
-            value="monthly"
-            defaultChecked={onboardingData.plan === "monthly"}
-            {...register("plan")}
-          />
-          <PlanCard
-            title="Monthly Plan"
-            price={189.0}
-            features={[
-              " Curabitur pulvinar nunc nisl, vitae  orci pellentesque.",
-              "Curabitur pulvinar nunc orci pellentesque.",
-              "Curabitur pulvinar  pellentesque.",
-            ]}
-            timePeriod="month"
-          />
-        </div>
-        <div className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
-          <input
-            type="radio"
-            placeholder="Yearly Plan"
-            id="yearly-plan"
-            value="yearly"
-            {...register("plan")}
-          />
-          <PlanCard
-            title="Yearly Plan"
-            price={699.0}
-            features={[
-              " Curabitur pulvinar nunc nisl, vitae  orci pellentesque.",
-              "Curabitur pulvinar nunc orci pellentesque.",
-              "Curabitur pulvinar  pellentesque.",
-            ]}
-            timePeriod="year"
-          />{" "}
-        </div>
+      {plans.map(plan => (
+          <div key={plan.id} className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
+            <input
+              type="radio"
+              placeholder={plan.plan_type}
+              id={`plan-${plan.id}`}
+              value={plan.plan_type}
+              defaultChecked={onboardingData.plan === plan.plan_type}
+              {...register("plan")}
+            />
+            <PlanCard
+              title={plan.plan_type === "monthly" ? "Monthly Plan" : "Yearly Plan"}
+              price={plan.amount}
+              features={plan.features}
+              timePeriod={plan.timePeriod}
+            />
+          </div>
+        ))}
         <p className="text-sm text-red-500">
           {" "}
           <ErrorMessage errors={errors} name="plan" />
