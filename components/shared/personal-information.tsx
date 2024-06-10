@@ -1,31 +1,67 @@
+// /components/PersonalInformation.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Mail, Lock, Contact, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Contact, Eye, EyeOff } from "lucide-react";
+import { CompanyAdminAction } from "@/actions/auth/auth-action";
+import { CompanyAdminInterface } from "@/lib/interfaces";
 
 const PersonalInformation: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
+  const [defaultValues, setDefaultValues] = useState<Settings | null>(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Settings>({
     resolver: zodResolver(SettingPersonalInfosSchema),
-    defaultValues: {
-      firstName: "Ayesha",
-      lastName: "Rashid Khan",
-      email: "ayesha@example.com",
-      contactNumber: "+1234 685 8594",
-      password: "helo123",
+    defaultValues: defaultValues || {
+      firstName: "",
+      lastName: "",
+      email: "",
+      contactNumber: "",
+      password: "",
     },
   });
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData: CompanyAdminInterface = await CompanyAdminAction();
+        console.log(userData)
+        setDefaultValues({
+          firstName: userData.first_name,
+          lastName: userData.last_name,
+          email: userData.email,
+          contactNumber: userData.contact_number,
+          password: "", 
+        });
+        reset({
+          firstName: userData.first_name,
+          lastName: userData.last_name,
+          email: userData.email,
+          contactNumber: userData.contact_number,
+          password: "", 
+        });
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    getUserData();
+  }, [reset]);
 
   const onSubmit = (data: Settings) => {
     console.log(data);
   };
+
+  if (!defaultValues) {
+    return <div>Loading...</div>; // Loading state
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto">
