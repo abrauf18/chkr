@@ -57,8 +57,8 @@ export default function OnboardingSteps() {
   });
   const onSubmit = (data: Onboarding) => {
     console.log(data);
-    // removeOnboardingData();
   };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center mt-10 mx-20">

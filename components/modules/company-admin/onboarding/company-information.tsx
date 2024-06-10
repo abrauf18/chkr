@@ -50,40 +50,6 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
     fetchCountries();
   }, []);
 
-
-  const changeNextStep = async () => {
-    const isValid = await trigger(["company-name", "company-type", "phone-number", "location", "country", "logo"]);
-    if (isValid) {
-      const data = getValues(["company-name", "company-type", "phone-number", "location", "country", "logo"]);
-      const firm = companyTypes.find(type => type.firm_name === data[1]);
-  
-      if (!firm) {
-        console.error("Firm not found");
-        return;
-      }
-      const formData = new FormData();
-      formData.set("company_name", data[0]),
-      formData.set("firm_id", firm.id.toString()),
-      formData.set("phone_number", data[2]),
-      formData.set("location", data[3]),
-      formData.set("country", data[4]),
-      formData.set("plan_id", "1")
-      
-      const logoFileList = data[5];
-    if (logoFileList instanceof FileList && logoFileList.length > 0) {
-      formData.set("file", logoFileList[0]);  // Extract the first file from the FileList
-    } 
-
-      try {
-        await OnboardingAction(formData);
-        handleNextStep();
-        console.log("onboadingdata", FormData)
-      } catch (error) {
-        console.error("Error storing company information:", error);
-      }
-    }
-  };
-  
   const selectedFile = watch("logo");
 
   return (
@@ -153,7 +119,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
               Select Company Type
             </option>
             {companyTypes?.map((companyType) => (
-              <option key={companyType.id} value={companyType.firm_name}>
+              <option key={companyType.id} value={companyType.id}>
                 {companyType.firm_name}
               </option>
             ))}
@@ -243,7 +209,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
         <button
           className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
-          onClick={changeNextStep}
+          onClick={handleNextStep}
         >
           Next
         </button>

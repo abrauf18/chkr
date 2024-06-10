@@ -3,8 +3,9 @@ import PlanCard from "./plan-card";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
-import { PlanInterface } from "@/lib/interfaces";
-import { PlanAction } from "@/actions/auth/auth-action";
+import { FirmInterface, PlanInterface } from "@/lib/interfaces";
+import { FirmsAction, OnboardingAction, PlanAction } from "@/actions/auth/auth-action";
+
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -13,6 +14,8 @@ const SubscriptionPlan = ({
 }) => {
   const {
     register,
+    trigger,
+    getValues,
     formState: { errors },
   } = useFormContext();
   const { onboardingData, setOnboardingData } = useOnboardingStore();
@@ -39,6 +42,34 @@ const SubscriptionPlan = ({
     fetchPlans();
   }, []);
 
+  const changeNextStep = async () => {
+    const isValid = await trigger(["company-name", "company-type", "phone-number", "location", "country", "logo", "plan"]);
+    if (isValid) {
+      const data = getValues(["company-name", "company-type", "phone-number", "location", "country", "logo", "plan"]);
+      
+      const formData = new FormData();
+      formData.set("company_name", data[0]),
+      formData.set("firm_id", data[1]),
+      formData.set("phone_number", data[2]),
+      formData.set("location", data[3]),
+      formData.set("country", data[4]),
+      formData.set("plan_id", data[6])
+      
+      const logoFileList = data[5];
+    if (logoFileList instanceof FileList && logoFileList.length > 0) {
+      formData.set("file", logoFileList[0]); 
+    } 
+     console.log(onboardingData)
+      try {
+        await OnboardingAction(formData);
+        console.log("onboadingdata", FormData)
+      } catch (error) {
+        console.error("Error storing company information:", error);
+      }
+    }
+  };
+  
+
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-10 gap-6">
@@ -48,7 +79,7 @@ const SubscriptionPlan = ({
               type="radio"
               placeholder={plan.plan_type}
               id={`plan-${plan.id}`}
-              value={plan.plan_type}
+              value={plan.id}
               defaultChecked={onboardingData.plan === plan.plan_type}
               {...register("plan")}
             />
@@ -77,6 +108,7 @@ const SubscriptionPlan = ({
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="submit"
           id="onboarding-form"
+          onClick={changeNextStep}
         >
           Next
         </button>
