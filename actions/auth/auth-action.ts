@@ -7,6 +7,7 @@ import {
   InviteUserInterface,
   FirmInterface,
   OnboardingInterface,
+  CompanyAdminInterface,
 } from "@/lib/interfaces";
 import { auth } from "@/auth";
 
@@ -138,4 +139,22 @@ export const PlanAction = async () => {
   );
   const result = await response.json();
   return result;
+};
+
+// /lib/server-actions.ts
+export const CompanyAdminAction = async (): Promise<CompanyAdminInterface> => {
+  const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch user data');
+  }
+  const result = await response.json();
+  return result.data;
 };
