@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,13 +6,13 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Label } from '@radix-ui/react-label';
 import { MapPinned, User, BuildingIcon, ChevronDown, Phone } from 'lucide-react';
 import { SettingsCompanyInfoSchema, SettingsCompany } from '@/lib/types';
-import { CompanyAdminAction, CountryAction, FirmsAction } from '@/actions/auth/auth-action';
+import { CompanyAdminAction, CountryAction, FirmsAction, EditCompanyInformationAction } from '@/actions/auth/auth-action';
 import { FirmInterface } from '@/lib/interfaces';
-
+import { toast } from 'react-toastify'; // Assuming you use react-toastify
 
 export default function CompanyInformation() {
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<string[]>([]);
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
   const { register, handleSubmit, formState: { errors }, reset } = useForm<SettingsCompany>({
     resolver: zodResolver(SettingsCompanyInfoSchema),
@@ -26,7 +26,7 @@ export default function CompanyInformation() {
       } catch (error) {
         console.error("Error fetching company types:", error);
       }
-    }; 
+    };
     fetchCompanyTypes();
   }, []);
 
@@ -46,7 +46,6 @@ export default function CompanyInformation() {
     const getUserData = async () => {
       try {
         const userData = await CompanyAdminAction();
-        console.log(userData)
         setDefaultValues({
           companyName: userData.company_name,
           companyType: userData.firm_name,
@@ -69,19 +68,36 @@ export default function CompanyInformation() {
     getUserData();
   }, [reset]);
 
-  const onSubmit = (data: SettingsCompany) => {
-    console.log(data);
+  const onSubmit = async (data: SettingsCompany) => {
+    try {
+      const firmId = getFirmIdByName(data.companyType);
+      if (!firmId) {
+        throw new Error("Invalid company type");
+      }
+
+      await EditCompanyInformationAction({
+        company_name: data.companyName,
+        firm_id: firmId,
+        phone_number: data.phoneNumber,
+        location: data.location,
+        country: data.country,
+      });
+
+      toast.success("Company information updated successfully");
+    } catch (error) {
+      toast.error("Failed to update company information");
+      console.error("Failed to update company information:", error);
+    }
   };
 
   if (!defaultValues) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   const getFirmIdByName = (firmName: string): number | undefined => {
     const firm = companyTypes.find((type) => type.firm_name === firmName);
-    console.log(firm)
     return firm ? firm.id : undefined;
-    };
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -119,7 +135,7 @@ export default function CompanyInformation() {
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none appearance-none"
             >
               <option value="">Select Company Type</option>
-              {companyTypes?.map((companytype) => (
+              {companyTypes.map((companytype) => (
                 <option key={companytype.id} value={companytype.firm_name}>
                   {companytype.firm_name}
                 </option>
@@ -190,9 +206,9 @@ export default function CompanyInformation() {
                 Select Country
               </option>
               {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
+                <option key={country} value={country}>
+                  {country}
+                </option>
               ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -208,6 +224,7 @@ export default function CompanyInformation() {
           <button
             type="button"
             className="py-3 px-6 bg-gray-200 text-gray-700 rounded-3xl text-sm"
+            onClick={() => reset(defaultValues)}
           >
             Discard Changes
           </button>
