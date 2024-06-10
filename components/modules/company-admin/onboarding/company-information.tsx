@@ -33,7 +33,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
       } catch (error) {
         console.error("Error fetching company types:", error);
       }
-    };
+    }; 
     fetchCompanyTypes();
   }, []);
 
@@ -59,7 +59,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
           Upload Logo
           <input
             type="file"
-            id="fileInput"
+            id="fileInput"  
             accept=".pdf, .jpg, .jpeg, .png, .gif"
             {...register("logo")}
             className="hidden"

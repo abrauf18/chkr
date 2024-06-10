@@ -1,34 +1,85 @@
-import { z } from 'zod';
+'use client'
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '@hookform/error-message';
 import { Label } from '@radix-ui/react-label';
 import { MapPinned, User, BuildingIcon, ChevronDown, Phone } from 'lucide-react';
-import React from 'react';
 import { SettingsCompanyInfoSchema, SettingsCompany } from '@/lib/types';
+import { CompanyAdminAction, CountryAction, FirmsAction } from '@/actions/auth/auth-action';
+import { FirmInterface } from '@/lib/interfaces';
 
-const countries = ["USA", "Canada", "UK", "Australia", "Pakistan", "Germany", "India"];
-const companyTypes = ["Type A", "Type B", "Type C", "Type D"];
 
 export default function CompanyInformation() {
-  const { register, handleSubmit, formState: { errors } } = useForm<SettingsCompany>({
+  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
+  const [countries, setCountries] = useState([]);
+  const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<SettingsCompany>({
     resolver: zodResolver(SettingsCompanyInfoSchema),
-    defaultValues: {
-      companyName: 'Khan',
-      companyType: 'Type B',
-      phoneNumber: '098 765',
-      location: 'lhr',
-      country: 'Germany',
-    }
   });
+
+  useEffect(() => {
+    const fetchCompanyTypes = async () => {
+      try {
+        const response: FirmInterface[] = await FirmsAction();
+        setCompanyTypes(response);
+      } catch (error) {
+        console.error("Error fetching company types:", error);
+      }
+    }; 
+    fetchCompanyTypes();
+  }, []);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await CountryAction();
+        setCountries(response);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await CompanyAdminAction();
+        console.log(userData)
+        setDefaultValues({
+          companyName: userData.company_name,
+          companyType: userData.firm_name,
+          phoneNumber: userData.phone_number,
+          location: userData.location,
+          country: userData.country,
+        });
+        reset({
+          companyName: userData.company_name,
+          companyType: userData.firm_name,
+          phoneNumber: userData.phone_number,
+          location: userData.location,
+          country: userData.country,
+        });
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    getUserData();
+  }, [reset]);
 
   const onSubmit = (data: SettingsCompany) => {
     console.log(data);
   };
 
+  if (!defaultValues) {
+    return <div>Loading...</div>; 
+  }
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Form Fields */}
       <div className="flex flex-col w-full justify-center items-center my-4">
         <div className="mb-4 w-full relative">
           <Label htmlFor="companyName" className="md:text-lg text-sm font-semibold">
@@ -63,9 +114,9 @@ export default function CompanyInformation() {
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none appearance-none"
             >
               <option value="">Select Company Type</option>
-              {companyTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
+              {companyTypes?.map((companytype) => (
+                <option key={companytype.id} value={companytype.firm_name}>
+                  {companytype.firm_name}
                 </option>
               ))}
             </select>
@@ -134,9 +185,9 @@ export default function CompanyInformation() {
                 Select Country
               </option>
               {countries.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
+              <option key={country} value={country}>
+                {country}
+              </option>
               ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
