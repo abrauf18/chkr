@@ -1,16 +1,18 @@
-// /components/PersonalInformation.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Mail, Contact, Eye, EyeOff } from "lucide-react";
-import { CompanyAdminAction } from "@/actions/auth/auth-action";
+import { CompanyAdminAction, EditCompanyAdminAction } from "@/actions/auth/auth-action";
 import { CompanyAdminInterface } from "@/lib/interfaces";
+import { toast } from "react-toastify";
+import Loader from "./loader";
 
 const PersonalInformation: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [defaultValues, setDefaultValues] = useState<Settings | null>(null);
+  const [isloading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -32,20 +34,19 @@ const PersonalInformation: React.FC = () => {
     const getUserData = async () => {
       try {
         const userData: CompanyAdminInterface = await CompanyAdminAction();
-        console.log(userData)
         setDefaultValues({
           firstName: userData.first_name,
           lastName: userData.last_name,
           email: userData.email,
           contactNumber: userData.contact_number,
-          password: "", 
+          password: "",
         });
         reset({
           firstName: userData.first_name,
           lastName: userData.last_name,
           email: userData.email,
           contactNumber: userData.contact_number,
-          password: "", 
+          password: "",
         });
       } catch (error) {
         console.error("Failed to fetch user data:", error);
@@ -55,16 +56,32 @@ const PersonalInformation: React.FC = () => {
     getUserData();
   }, [reset]);
 
-  const onSubmit = (data: Settings) => {
-    console.log(data);
-  };
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+      const { firstName, lastName, email, contactNumber, password } = data;
+      const result = await EditCompanyAdminAction({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        contact_number: contactNumber,
+        password,
+      });
+      toast.success("User data updated successfully");
+    } catch (error) {
+      toast.error("Failed to update user data");
+      console.error("Failed to update user data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  });
 
   if (!defaultValues) {
     return <div>Loading...</div>; // Loading state
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto">
+    <form onSubmit={onSubmit} className="w-full mx-auto">
       <div className="flex mobile:flex-col flex-row md:gap-4">
         <div className="mb-4 w-full">
           <label className="text-base font-semibold">First Name</label>
@@ -152,6 +169,7 @@ const PersonalInformation: React.FC = () => {
         <button
           type="button"
           className="mobile:w-full w-36 py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl"
+          onClick={() => reset(defaultValues)}
         >
           Discard
         </button>
@@ -159,7 +177,7 @@ const PersonalInformation: React.FC = () => {
           type="submit"
           className="mobile:w-full w-36 py-2 px-4 bg-primary text-white rounded-3xl"
         >
-          Save
+          {isloading ? <Loader size={6} /> : "Save"}
         </button>
       </div>
     </form>

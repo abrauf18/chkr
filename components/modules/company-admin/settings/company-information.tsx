@@ -77,6 +77,11 @@ export default function CompanyInformation() {
     return <div>Loading...</div>; 
   }
 
+  const getFirmIdByName = (firmName: string): number | undefined => {
+    const firm = companyTypes.find((type) => type.firm_name === firmName);
+    console.log(firm)
+    return firm ? firm.id : undefined;
+    };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
