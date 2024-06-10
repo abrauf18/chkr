@@ -57,3 +57,19 @@ export interface CompanyAdminInterface {
   location: string;
   country: string;
 }
+
+export interface EditCompanyAdminInterface {
+  first_name :string;
+  last_name: string;
+  email: string;
+  contact_number: string;
+  password: string;
+}
+
+export interface EditCompanyInformationInterface {
+  company_name: string;
+  firm_id: number,
+  phone_number: string;
+  location: string;
+  country: string;
+}
