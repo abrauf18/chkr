@@ -44,3 +44,16 @@ export interface PlanInterface {
   plan_type: string;
   amount: number
 }
+
+export interface CompanyAdminInterface {
+  first_name :string;
+  last_name: string;
+  email: string;
+  contact_number: string;
+  company_logo: string;
+  company_name: string;
+  firm_name: string,
+  phone_number: string;
+  location: string;
+  country: string;
+}
