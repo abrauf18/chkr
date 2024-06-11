@@ -16,8 +16,8 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
         isAdmin={isAdmin}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        personalData={{ name: "Ayesha Rashid Khan", email: "asha@gmail.com" }}
-        companyData={{ name: "Company Name", email: "seviceadmin@example.com" }}
+        personalData={{ imageSrc: "/images/companyLogo.svg" }}
+        companyData={{ imageSrc:"/images/Avatar.svg" }}
       />
 
       {!isAdmin ? (

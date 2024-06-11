@@ -20,10 +20,8 @@ export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
       },
     }
   );
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
-  }
   const result = await response.json();
+  console.log(result)
   return result.data;
 };
 

@@ -1,11 +1,9 @@
-// use client (assuming you're using it for code splitting)
 import React from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
 interface TabData {
-  name: string;
-  email: string;
+  imageSrc: string; // New property for the image source URL
 }
 
 interface HeaderProps {
@@ -31,8 +29,8 @@ const Header: React.FC<HeaderProps> = ({
         <div className="bg-[url('/images/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">
           <Image
-            src="/images/companyLogo.svg"
-            alt="company logo"
+            src={activeData.imageSrc}
+            alt="profile image"
             width={5}
             height={5}
             className="w-full h-full rounded-full"
@@ -76,4 +74,3 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
-
