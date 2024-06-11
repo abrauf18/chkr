@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
@@ -22,6 +23,11 @@ const Header: React.FC<HeaderProps> = ({
   isAdmin,
 }) => {
   const activeData = activeTab === "personal" ? personalData : companyData;
+  const [currentImageSrc, setCurrentImageSrc] = useState(activeData.imageSrc);
+
+  const handleRemovePhoto = () => {
+    setCurrentImageSrc("/images/Avatar.svg");
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto bg-white p-4 rounded-2xl">
@@ -29,19 +35,19 @@ const Header: React.FC<HeaderProps> = ({
         <div className="bg-[url('/images/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">
           <Image
-            src={activeData.imageSrc}
+            src={currentImageSrc}
             alt="profile image"
-            width={5}
-            height={5}
-            className="w-full h-full rounded-full"
-          />
+            width={15}
+            height={15}
+            className="rounded-full aspect-square object-cover h-full w-full"
+            />
         </div>
       </div>
       <div className="flex items-center justify-center mt-12 gap-4">
-        <Button className="rounded-3xl bg-gray-300">
+        <Button className="rounded-3xl bg-gray-300 hover:text-white hover:bg-primary px-6" onClick={handleRemovePhoto}>
           Remove
         </Button>
-        <Button className="rounded-3xl text-white">
+        <Button className="rounded-3xl text-white bg-primary px-6">
           Upload Photo
         </Button>
       </div>
@@ -49,7 +55,10 @@ const Header: React.FC<HeaderProps> = ({
         <div className="mt-6 flex justify-center">
           <div className="flex space-x-8">
             <button
-              onClick={() => setActiveTab("personal")}
+              onClick={() => {
+                setActiveTab("personal");
+                setCurrentImageSrc(personalData.imageSrc);
+              }}
               className={`pb-2 mobile:text-xs whitespace-nowrap ${activeTab === "personal"
                 ? "border-b-4 border-red-500 font-bold"
                 : "font-medium"
@@ -58,7 +67,10 @@ const Header: React.FC<HeaderProps> = ({
               Personal Information
             </button>
             <button
-              onClick={() => setActiveTab("company")}
+              onClick={() => {
+                setActiveTab("company");
+                setCurrentImageSrc(companyData.imageSrc);
+              }}
               className={`pb-2 mobile:text-xs whitespace-nowrap ${activeTab === "company"
                 ? "border-b-4 border-red-500 font-bold"
                 : "font-medium"

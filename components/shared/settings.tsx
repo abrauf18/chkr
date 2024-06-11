@@ -28,8 +28,8 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
             isAdmin={isAdmin}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            personalData={{ imageSrc: "/images/Avatar.svg" }} // Update the personalData imageSrc if needed
-            companyData={{ imageSrc: userData.company_logo }} // Use the fetched company logo URL
+            personalData={{ imageSrc: userData.picture }} // Update the personalData imageSrc if needed
+            companyData={{ imageSrc: userData.company_logo }} 
           />
         )}
 
