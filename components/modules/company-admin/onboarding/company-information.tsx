@@ -11,20 +11,60 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { ChevronDown, File } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { CountryAction, FirmsAction, OnboardingAction } from "@/actions/auth/auth-action"; // Import the OnboardingAction
+import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action"; // Import the OnboardingAction
 import { FirmInterface } from "@/lib/interfaces";
 
 interface CompanyInformationProps {
   handleNextStep: () => void;
 }
 
-const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.Element => {
-  const { setOnboardingData } = useOnboardingStore();
-  const { register, trigger, watch, formState: { errors }, getValues } = useFormContext();
+const CompanyInformation = ({
+  handleNextStep,
+}: CompanyInformationProps): JSX.Element => {
+  const { onboardingData, setOnboardingData } = useOnboardingStore();
+  const {
+    register,
+    trigger,
+    watch,
+    formState: { errors },
+    getValues,
+  } = useFormContext();
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
   const [countries, setCountries] = useState([]);
 
+  const changeNextStep = async () => {
+    const isValid = await trigger([
+      "logo",
+      "company-name",
+      "company-type",
+      "phone-number",
+      "location",
+      "country",
+    ]);
+    if (isValid) {
+      const data = getValues([
+        "logo",
+        "company-name",
+        "company-type",
+        "phone-number",
+        "location",
+        "country",
+      ]);
+      setOnboardingData({
+        ...onboardingData,
+        logo: data[0],
+        "company-name": data[1],
+        "company-type": data[2],
+        "phone-number": data[3],
+        location: data[4],
+        country: data[5],
+      });
+      console.log(onboardingData.logo);
+      handleNextStep();
+    }
+  };
+
+  console.log(onboardingData);
   useEffect(() => {
     const fetchCompanyTypes = async () => {
       try {
@@ -33,7 +73,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
       } catch (error) {
         console.error("Error fetching company types:", error);
       }
-    }; 
+    };
     fetchCompanyTypes();
   }, []);
 
@@ -55,12 +95,15 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
   return (
     <div className="flex flex-col w-full justify-center items-center my-4 mx-10">
       <div className="mb-4 w-full">
-        <label htmlFor="fileInput" className="md:text-lg text-sm font-semibold w-full">
+        <label
+          htmlFor="fileInput"
+          className="md:text-lg text-sm font-semibold w-full"
+        >
           Upload Logo
           <input
             type="file"
-            id="fileInput"  
-            accept=".pdf, .jpg, .jpeg, .png, .gif"
+            id="fileInput"
+            accept=".jpg, .jpeg, .png, .gif, .svg"
             {...register("logo")}
             className="hidden"
           />
@@ -73,7 +116,9 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
             <div className="flex items-center gap-3 h-20 w-full mt-4 rounded-2xl border-dashed border-2 border-gray-300 p-4">
               <File />
               {/* <Image src={URL.createObjectURL(selectedFile[0])} alt="logo" width={5} height={5} className="h-20 w-20"/> */}
-              <span className="whitespace-nowrap text-sm">{selectedFile[0].name}</span>
+              <span className="whitespace-nowrap text-sm">
+                {selectedFile[0].name}
+              </span>
             </div>
           )}
         </label>
@@ -82,7 +127,10 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="companyName" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="companyName"
+          className="md:text-lg text-sm font-semibold"
+        >
           Company Name
         </Label>
         <div className="relative flex items-center">
@@ -102,7 +150,10 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="companyType" className="md:text-lg text-sm font-semibold">
+        <Label
+          htmlFor="companyType"
+          className="md:text-lg text-sm font-semibold"
+        >
           Company Type
         </Label>
         <div className="relative flex items-center">
@@ -115,11 +166,15 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
             {...register("company-type")}
             className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
-            <option className="text-gray-200" value="">
+            <option className="text-gray-200 " disabled hidden value="">
               Select Company Type
             </option>
             {companyTypes?.map((companyType) => (
-              <option key={companyType.id} value={companyType.id}>
+              <option
+                key={companyType.id}
+                value={companyType.id}
+                selected={companyType.id === +onboardingData["company-type"]}
+              >
                 {companyType.firm_name}
               </option>
             ))}
@@ -185,13 +240,16 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
             id="country"
             {...register("country")}
             className="w-full pl-10 pr-12 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
-            defaultValue=""
           >
             <option value="" disabled hidden>
               Select Country
             </option>
             {countries.map((country) => (
-              <option key={country} value={country}>
+              <option
+                key={country}
+                value={country}
+                selected={country === onboardingData["country"]}
+              >
                 {country}
               </option>
             ))}
@@ -209,7 +267,7 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
         <button
           className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"
-          onClick={handleNextStep}
+          onClick={changeNextStep}
         >
           Next
         </button>
@@ -219,3 +277,4 @@ const CompanyInformation = ({ handleNextStep }: CompanyInformationProps): JSX.El
 };
 
 export default CompanyInformation;
+

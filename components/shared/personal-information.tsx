@@ -4,7 +4,10 @@ import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Mail, Contact, Eye, EyeOff } from "lucide-react";
-import { CompanyAdminAction, EditCompanyAdminAction } from "@/actions/auth/auth-action";
+import {
+  UserInfoAction,
+  EditCompanyAdminAction,
+} from "@/actions/settings/settings-action";
 import { CompanyAdminInterface } from "@/lib/interfaces";
 import { toast } from "react-toastify";
 import Loader from "./loader";
@@ -33,7 +36,7 @@ const PersonalInformation: React.FC = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData: CompanyAdminInterface = await CompanyAdminAction();
+        const userData: CompanyAdminInterface = await UserInfoAction();
         setDefaultValues({
           firstName: userData.first_name,
           lastName: userData.last_name,
@@ -77,7 +80,11 @@ const PersonalInformation: React.FC = () => {
   });
 
   if (!defaultValues) {
-    return <div>Loading...</div>; // Loading state
+    return (
+      <div className="flex justify-center item-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -93,7 +100,9 @@ const PersonalInformation: React.FC = () => {
             <User className="absolute right-3 top-3 text-gray-500" />
           </div>
           {errors.firstName && (
-            <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.firstName.message}
+            </p>
           )}
         </div>
         <div className="mb-4 w-full">
@@ -106,14 +115,14 @@ const PersonalInformation: React.FC = () => {
             <User className="absolute right-3 top-3 text-gray-500" />
           </div>
           {errors.lastName && (
-            <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.lastName.message}
+            </p>
           )}
         </div>
       </div>
       <div className="mb-4">
-        <label className="text-base font-semibold">
-          Email Address
-        </label>
+        <label className="text-base font-semibold">Email Address</label>
         <div className="relative">
           <input
             {...register("email")}
@@ -126,9 +135,7 @@ const PersonalInformation: React.FC = () => {
         )}
       </div>
       <div className="mb-4">
-        <label className="text-base font-semibold">
-          Contact Number
-        </label>
+        <label className="text-base font-semibold">Contact Number</label>
         <div className="relative">
           <input
             {...register("contactNumber")}
@@ -185,3 +192,4 @@ const PersonalInformation: React.FC = () => {
 };
 
 export default PersonalInformation;
+

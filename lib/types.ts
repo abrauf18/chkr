@@ -4,9 +4,17 @@ const phoneRegex = new RegExp(
 );
 
 export const OnboardingSchema = z.object({
-  logo: z.any().refine((val) => val?.length === 1, {
-    message: "Logo is required",
-  }),
+  logo: z
+    .any()
+    .refine((val) => val?.length === 1, {
+      message: "Logo is required",
+    })
+    .refine((val) => val?.[0]?.type?.includes("image"), {
+      message: "Logo must be an image",
+    })
+    .refine((val) => val?.[0]?.size < 1000000, {
+      message: "Logo must be less than 1MB",
+    }),
   "company-name": z
     .string()
     .min(1, { message: "Company name must not be empty" }),

@@ -1,20 +1,38 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorMessage } from '@hookform/error-message';
-import { Label } from '@radix-ui/react-label';
-import { MapPinned, User, BuildingIcon, ChevronDown, Phone } from 'lucide-react';
-import { SettingsCompanyInfoSchema, SettingsCompany } from '@/lib/types';
-import { CompanyAdminAction, CountryAction, FirmsAction, EditCompanyInformationAction } from '@/actions/auth/auth-action';
-import { FirmInterface } from '@/lib/interfaces';
-import { toast } from 'react-toastify'; // Assuming you use react-toastify
+"use client";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ErrorMessage } from "@hookform/error-message";
+import { Label } from "@radix-ui/react-label";
+import {
+  MapPinned,
+  User,
+  BuildingIcon,
+  ChevronDown,
+  Phone,
+} from "lucide-react";
+import { SettingsCompanyInfoSchema, SettingsCompany } from "@/lib/types";
+import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action";
+import {
+  UserInfoAction,
+  EditCompanyInformationAction,
+} from "@/actions/settings/settings-action";
+import { FirmInterface } from "@/lib/interfaces";
+import { toast } from "react-toastify"; // Assuming you use react-toastify
+import Loader from "@/components/shared/loader";
 
 export default function CompanyInformation() {
-  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
+  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
+    null
+  );
   const [countries, setCountries] = useState<string[]>([]);
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<SettingsCompany>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<SettingsCompany>({
     resolver: zodResolver(SettingsCompanyInfoSchema),
   });
 
@@ -45,7 +63,7 @@ export default function CompanyInformation() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData = await CompanyAdminAction();
+        const userData = await UserInfoAction();
         setDefaultValues({
           companyName: userData.company_name,
           companyType: userData.firm_name,
@@ -91,7 +109,11 @@ export default function CompanyInformation() {
   };
 
   if (!defaultValues) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   const getFirmIdByName = (firmName: string): number | undefined => {
@@ -103,7 +125,10 @@ export default function CompanyInformation() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col w-full justify-center items-center my-4">
         <div className="mb-4 w-full relative">
-          <Label htmlFor="companyName" className="md:text-lg text-sm font-semibold">
+          <Label
+            htmlFor="companyName"
+            className="md:text-lg text-sm font-semibold"
+          >
             Company Name
           </Label>
           <div className="relative flex items-center">
@@ -123,7 +148,10 @@ export default function CompanyInformation() {
         </div>
 
         <div className="mb-4 w-full relative">
-          <Label htmlFor="companyType" className="md:text-lg text-sm font-semibold">
+          <Label
+            htmlFor="companyType"
+            className="md:text-lg text-sm font-semibold"
+          >
             Company Type
           </Label>
           <div className="relative flex items-center">
@@ -151,7 +179,10 @@ export default function CompanyInformation() {
         </div>
 
         <div className="mb-4 w-full relative">
-          <Label htmlFor="phoneNumber" className="md:text-lg text-sm font-semibold">
+          <Label
+            htmlFor="phoneNumber"
+            className="md:text-lg text-sm font-semibold"
+          >
             Phone Number
           </Label>
           <div className="relative flex items-center">
@@ -171,7 +202,10 @@ export default function CompanyInformation() {
         </div>
 
         <div className="mb-4 w-full relative">
-          <Label htmlFor="location" className="md:text-lg text-sm font-semibold">
+          <Label
+            htmlFor="location"
+            className="md:text-lg text-sm font-semibold"
+          >
             Location
           </Label>
           <div className="relative flex items-center">
@@ -239,3 +273,4 @@ export default function CompanyInformation() {
     </form>
   );
 }
+
