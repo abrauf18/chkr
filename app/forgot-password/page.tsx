@@ -2,8 +2,6 @@ import ForgetPassword from "@/components/modules/auth/forget-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 import { Metadata } from "next";
-import { Suspense } from "react";
-import Loader from "@/components/shared/loader";
 
 export const metadata: Metadata = {
   title: "Forgot Password",
@@ -26,9 +24,7 @@ export default function page() {
           heading3="SERVICE PROVIDERS"
           url="/images/loginLeftSide.jpg"
         />
-        <Suspense fallback={<Loader size={12} />}>
-          <ForgetPassword />
-        </Suspense>
+        <ForgetPassword />
       </div>
     </>
   );

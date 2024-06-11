@@ -5,9 +5,6 @@ import Sidebar from "@/components/shared/sidebar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MobileNav from "@/components/shared/mobile-nav";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import Loader from "@/components/shared/loader";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -16,17 +13,6 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const { width } = useWindowDimensions();
-  const { push } = useRouter();
-
-  const session: any = useSession();
-  if (session.status === "loading") {
-    return (
-      <div className="h-screen w-full flex items-center justify-center">
-        <Loader size={12} />
-      </div>
-    );
-  }
-  if (session.status === "unauthenticated") push("/login");
 
   return (
     <section className="h-screen md:overflow-hidden">

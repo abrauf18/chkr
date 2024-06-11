@@ -156,6 +156,7 @@ const PersonalInformation: React.FC = () => {
             {...register("password")}
             id="password"
             type={showPassword ? "password" : "text"}
+            placeholder="********"
             className="w-full p-3 pr-10 bg-neutral-100 rounded-2xl focus:outline-none"
           />
           <button

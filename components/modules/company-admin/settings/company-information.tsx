@@ -13,15 +13,22 @@ import {
 } from "lucide-react";
 import { SettingsCompanyInfoSchema, SettingsCompany } from "@/lib/types";
 import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action";
-import {
-  UserInfoAction,
-  EditCompanyInformationAction,
-} from "@/actions/settings/settings-action";
+import { EditCompanyInformationAction } from "@/actions/settings/settings-action";
 import { FirmInterface } from "@/lib/interfaces";
-import { toast } from "react-toastify"; // Assuming you use react-toastify
+import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
 
-export default function CompanyInformation() {
+export default function CompanyInformation({
+  companyinfo,
+}: {
+  companyinfo: {
+    company_name: string;
+    firm_name: string;
+    phone_number: string;
+    location: string;
+    country: string;
+  };
+}) {
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
     null
   );
@@ -63,20 +70,19 @@ export default function CompanyInformation() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData = await UserInfoAction();
         setDefaultValues({
-          companyName: userData.company_name,
-          companyType: userData.firm_name,
-          phoneNumber: userData.phone_number,
-          location: userData.location,
-          country: userData.country,
+          companyName: companyinfo.company_name,
+          companyType: companyinfo.firm_name,
+          phoneNumber: companyinfo.phone_number,
+          location: companyinfo.location,
+          country: companyinfo.country,
         });
         reset({
-          companyName: userData.company_name,
-          companyType: userData.firm_name,
-          phoneNumber: userData.phone_number,
-          location: userData.location,
-          country: userData.country,
+          companyName: companyinfo.company_name,
+          companyType: companyinfo.firm_name,
+          phoneNumber: companyinfo.phone_number,
+          location: companyinfo.location,
+          country: companyinfo.country,
         });
       } catch (error) {
         console.error("Failed to fetch user data:", error);
@@ -164,7 +170,11 @@ export default function CompanyInformation() {
             >
               <option value="">Select Company Type</option>
               {companyTypes.map((companytype) => (
-                <option key={companytype.id} value={companytype.firm_name}>
+                <option
+                  key={companytype.id}
+                  value={companytype.firm_name}
+                  selected={companytype.firm_name === defaultValues.companyType}
+                >
                   {companytype.firm_name}
                 </option>
               ))}
@@ -240,7 +250,11 @@ export default function CompanyInformation() {
                 Select Country
               </option>
               {countries.map((country) => (
-                <option key={country} value={country}>
+                <option
+                  key={country}
+                  value={country}
+                  selected={country === defaultValues.country}
+                >
                   {country}
                 </option>
               ))}

@@ -29,7 +29,7 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             personalData={{ imageSrc: userData.picture }} // Update the personalData imageSrc if needed
-            companyData={{ imageSrc: userData.company_logo }} 
+            companyData={{ imageSrc: userData.company_logo }}
           />
         )}
 
@@ -38,7 +38,17 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
         ) : (
           <div className="mt-6">
             {activeTab === "personal" && <PersonalInformation />}
-            {activeTab === "company" && <CompanyInformation />}
+            {activeTab === "company" && (
+              <CompanyInformation
+                companyinfo={{
+                  company_name: userData.company_name,
+                  firm_name: userData.firm_name,
+                  phone_number: userData.phone_number,
+                  location: userData.location,
+                  country: userData.country,
+                }}
+              />
+            )}
           </div>
         )}
       </div>
@@ -47,3 +57,4 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
 };
 
 export default Settings;
+

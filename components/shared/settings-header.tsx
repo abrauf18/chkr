@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -24,9 +24,10 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const activeData = activeTab === "personal" ? personalData : companyData;
   const [currentImageSrc, setCurrentImageSrc] = useState(activeData.imageSrc);
-
   const handleRemovePhoto = () => {
-    setCurrentImageSrc("/images/Avatar.svg");
+    setCurrentImageSrc(
+      "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
+    );
   };
 
   return (
@@ -37,21 +38,24 @@ const Header: React.FC<HeaderProps> = ({
           <Image
             src={currentImageSrc}
             alt="profile image"
-            width={15}
-            height={15}
-            className="rounded-full aspect-square object-cover h-full w-full"
-            />
+            width={100}
+            height={100}
+            className="rounded-full aspect-square object-cover"
+          />
         </div>
       </div>
       <div className="flex items-center justify-center mt-12 gap-4">
-        <Button className="rounded-3xl bg-gray-300 hover:text-white hover:bg-primary px-6" onClick={handleRemovePhoto}>
+        <Button
+          className="rounded-3xl bg-gray-300 hover:text-white hover:bg-primary px-6"
+          onClick={handleRemovePhoto}
+        >
           Remove
         </Button>
         <Button className="rounded-3xl text-white bg-primary px-6">
           Upload Photo
         </Button>
       </div>
-      {isAdmin && (
+      {isAdmin && companyData.imageSrc !== null && (
         <div className="mt-6 flex justify-center">
           <div className="flex space-x-8">
             <button
@@ -59,10 +63,11 @@ const Header: React.FC<HeaderProps> = ({
                 setActiveTab("personal");
                 setCurrentImageSrc(personalData.imageSrc);
               }}
-              className={`pb-2 mobile:text-xs whitespace-nowrap ${activeTab === "personal"
-                ? "border-b-4 border-red-500 font-bold"
-                : "font-medium"
-                }`}
+              className={`pb-2 mobile:text-xs whitespace-nowrap ${
+                activeTab === "personal"
+                  ? "border-b-4 border-red-500 font-bold"
+                  : "font-medium"
+              }`}
             >
               Personal Information
             </button>
@@ -71,10 +76,11 @@ const Header: React.FC<HeaderProps> = ({
                 setActiveTab("company");
                 setCurrentImageSrc(companyData.imageSrc);
               }}
-              className={`pb-2 mobile:text-xs whitespace-nowrap ${activeTab === "company"
-                ? "border-b-4 border-red-500 font-bold"
-                : "font-medium"
-                }`}
+              className={`pb-2 mobile:text-xs whitespace-nowrap ${
+                activeTab === "company"
+                  ? "border-b-4 border-red-500 font-bold"
+                  : "font-medium"
+              }`}
             >
               Company Information
             </button>
@@ -86,3 +92,4 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
+
