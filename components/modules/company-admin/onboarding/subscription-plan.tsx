@@ -81,8 +81,6 @@ const SubscriptionPlan = ({
         const result = await OnboardingAction(formData);
         if (result.statusCode === 201) {
           toast.success(result.message);
-          reset();
-          removeOnboardingData();
           return push("/company-admin/dashboard");
         }
         reset();

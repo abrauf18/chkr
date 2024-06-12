@@ -10,9 +10,17 @@ import { ChevronDown, ChevronUp, CircleUserRound, LogOut } from "lucide-react";
 import Image from "next/image";
 import Feedback from "./feedback";
 
-export default function UserOptions() {
+export default function UserOptions({
+  name,
+  role,
+  picture,
+}: {
+  name: string;
+  role: string;
+  picture: string;
+}) {
   const [open, setOpen] = useState(false);
-
+  const userRole = (role ?? "").replace("-", " ");
   const handleLogout = async () => {
     signOut({
       redirect: true,
@@ -25,18 +33,18 @@ export default function UserOptions() {
         <div className="flex items-center bg-white rounded-3xl p-2">
           <div>
             <Image
-              src="/images/user.jpeg"
-              height={8}
-              width={8}
+              src={picture}
+              height={33}
+              width={33}
               alt="user"
-              className="w-8 h-8 rounded-full "
+              className="rounded-full "
             />
           </div>
           <div className="flex flex-col mx-3 text-left mobile:hidden">
-            <h1 className="text-sm lg:text-base whitespace-nowrap">
-              Ayesha Khan
-            </h1>
-            <p className="text-sm text-gray-500">Employee</p>
+            <h1 className="text-sm lg:text-base whitespace-nowrap">{name}</h1>
+            <p className="text-sm text-gray-500">
+              {role === "admin" ? role : userRole}
+            </p>
           </div>
           {!open && <ChevronDown className="w-4 h-4" />}
           {open && <ChevronUp className="w-4 h-4" />}

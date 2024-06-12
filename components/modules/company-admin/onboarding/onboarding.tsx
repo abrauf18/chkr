@@ -12,8 +12,7 @@ import CompanyBuilding from "@/assets/icons/company-building";
 import clsx from "clsx";
 
 export default function OnboardingSteps() {
-  const { currentStep, setCurrentStep, onboardingData, setOnboardingData } =
-    useOnboardingStore();
+  const { currentStep, setCurrentStep, onboardingData } = useOnboardingStore();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -38,12 +37,7 @@ export default function OnboardingSteps() {
       case Steps.COMPANY_DETAILS:
         return <CompanyInformation handleNextStep={handleNextStep} />;
       case Steps.PLAN:
-        return (
-          <SubscriptionPlan
-            // handleNextStep={handleNextStep}
-            handlePreviousStep={handlePreviousStep}
-          />
-        );
+        return <SubscriptionPlan handlePreviousStep={handlePreviousStep} />;
       default:
         return null;
     }

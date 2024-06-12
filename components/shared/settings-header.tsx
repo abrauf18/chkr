@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <div className="max-w-screen-xl mx-auto bg-white p-4 rounded-2xl">
       <div className="relative">
-        <div className="bg-[url('/images/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
+        <div className="bg-[url('https://chkr-buck.s3.amazonaws.com/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">
           <Image
             src={currentImageSrc}
@@ -41,6 +41,7 @@ const Header: React.FC<HeaderProps> = ({
             width={100}
             height={100}
             className="rounded-full aspect-square object-cover"
+            priority
           />
         </div>
       </div>

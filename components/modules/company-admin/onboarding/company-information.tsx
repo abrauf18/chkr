@@ -59,12 +59,10 @@ const CompanyInformation = ({
         location: data[4],
         country: data[5],
       });
-      console.log(onboardingData.logo);
       handleNextStep();
     }
   };
 
-  console.log(onboardingData);
   useEffect(() => {
     const fetchCompanyTypes = async () => {
       try {
@@ -103,7 +101,7 @@ const CompanyInformation = ({
           <input
             type="file"
             id="fileInput"
-            accept=".jpg, .jpeg, .png, .gif, .svg"
+            accept=".jpg, .jpeg, .png, .gif"
             {...register("logo")}
             className="hidden"
           />

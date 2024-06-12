@@ -199,7 +199,9 @@ export const SettingPersonalInfosSchema = z.object({
   password: z
     .string()
     .min(8, { message: "Password is too short" })
-    .max(20, { message: "Password is too long" }),
+    .max(20, { message: "Password is too long" })
+    .optional()
+    .or(z.literal("")),
 });
 
 export type Settings = z.infer<typeof SettingPersonalInfosSchema>;

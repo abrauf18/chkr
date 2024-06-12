@@ -99,18 +99,19 @@ export default function CompanyInformation({
         throw new Error("Invalid company type");
       }
 
-      await EditCompanyInformationAction({
+      const result = await EditCompanyInformationAction({
         company_name: data.companyName,
         firm_id: firmId,
         phone_number: data.phoneNumber,
         location: data.location,
         country: data.country,
       });
-
-      toast.success("Company information updated successfully");
+      if (result.statusCode === 200) {
+        return toast.success(result.message);
+      }
+      return toast.error(result.message);
     } catch (error) {
       toast.error("Failed to update company information");
-      console.error("Failed to update company information:", error);
     }
   };
 

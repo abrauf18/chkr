@@ -21,13 +21,10 @@ export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
     }
   );
   const result = await response.json();
-  console.log(result)
   return result.data;
 };
 
-export const EditCompanyAdminAction = async (
-  data: EditCompanyAdminInterface
-) => {
+export const EditUserinfoAction = async (data: EditCompanyAdminInterface) => {
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/user/profile`,
@@ -41,11 +38,8 @@ export const EditCompanyAdminAction = async (
       body: JSON.stringify(data),
     }
   );
-  if (!response.ok) {
-    throw new Error("Failed to fetch user data");
-  }
   const result = await response.json();
-  return result.data;
+  return result;
 };
 
 export const EditCompanyInformationAction = async (
