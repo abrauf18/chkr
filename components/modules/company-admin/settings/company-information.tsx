@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "@hookform/error-message";
 import { Label } from "@radix-ui/react-label";
@@ -17,6 +17,7 @@ import { EditCompanyInformationAction } from "@/actions/settings/settings-action
 import { FirmInterface } from "@/lib/interfaces";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
+import clsx from "clsx";
 
 export default function CompanyInformation({
   companyinfo,
@@ -29,9 +30,7 @@ export default function CompanyInformation({
     country: string;
   };
 }) {
-  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
-    null
-  );
+  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
   const [countries, setCountries] = useState<string[]>([]);
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
   const {
@@ -39,9 +38,14 @@ export default function CompanyInformation({
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm<SettingsCompany>({
     resolver: zodResolver(SettingsCompanyInfoSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",    
   });
+
+  const currentValues = useWatch({ control });
 
   useEffect(() => {
     const fetchCompanyTypes = async () => {
@@ -127,6 +131,9 @@ export default function CompanyInformation({
     const firm = companyTypes.find((type) => type.firm_name === firmName);
     return firm ? firm.id : undefined;
   };
+
+  const hasChanges =
+  JSON.stringify(defaultValues) !== JSON.stringify(currentValues);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -279,8 +286,14 @@ export default function CompanyInformation({
           </button>
           <button
             type="submit"
-            className="py-3 px-6 bg-primary text-white rounded-3xl text-sm"
-          >
+            className={clsx(
+            "mobile:w-full w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
+            {
+              "bg-primary text-white": hasChanges,
+              "bg-gray-200 text-gray-700": !hasChanges,
+            }
+          )}
+          disabled={!hasChanges}          >
             Save Changes
           </button>
         </div>
