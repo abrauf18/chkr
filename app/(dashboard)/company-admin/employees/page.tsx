@@ -1,6 +1,7 @@
 import React from 'react'
 import Employees from '@/components/modules/company-admin/employees/employees'
 import { Metadata } from 'next';
+import DashboardHeader from '@/components/shared/dashboard-header';
 
 export const metadata: Metadata = {
   title: "Employees",
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  return <Employees />
+  return (
+    <>
+      <DashboardHeader title=""/>
+      <Employees />
+    </>
+  );
 }

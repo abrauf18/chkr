@@ -1,6 +1,7 @@
 import React from "react";
 import Settings from "@/components/shared/settings";
 import { Metadata } from "next";
+import DashboardHeader from "@/components/shared/dashboard-header";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  return <Settings isAdmin />;
+  return (
+    <>
+      <DashboardHeader title="Profile" />
+      <Settings isAdmin />    </>
+  );
 }
-

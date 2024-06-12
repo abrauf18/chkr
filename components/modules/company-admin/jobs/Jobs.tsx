@@ -145,7 +145,6 @@ const Jobs = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <DashboardHeader title="" />
       <AdminHeader title="All Jobs" isAdmin={true} isSuperAdmin={false} page="createJob" />
       <div className="flex gap-2 items-center my-3 w-full mx-auto">
         {tabData.map((tab) => (

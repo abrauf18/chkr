@@ -21,7 +21,6 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
 
   return (
     <>
-      <DashboardHeader title="Profile" />
       <div className="max-w-screen-xl mx-auto mt-8 bg-white my-4 p-6 rounded-2xl">
         {userData && (
           <Header

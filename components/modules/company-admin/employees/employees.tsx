@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import AddEmployee from "./add-employee";
 import EmployeeTable from "./employe-table";
-import Feedback from "@/components/shared/feedback";
 import DashboardHeader from "@/components/shared/dashboard-header";
 import AdminHeader from "@/components/shared/admin-header";
 
@@ -122,7 +121,6 @@ export default function Employees() {
 
   return (
     <>
-      <DashboardHeader title="" />
       <AdminHeader title="Dashboard" isAdmin={true} isSuperAdmin={false} page="addEmployee" />
       <div className="border rounded-2xl my-3">
         <EmployeeTable

@@ -1,4 +1,5 @@
 import Feedback from '@/components/modules/super-admin/feedback/feedback'
+import DashboardHeader from '@/components/shared/dashboard-header';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -8,5 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function FeedbackPage() {
-  return <Feedback />
+  return (
+    <><DashboardHeader title='Feedback' /><Feedback /></>
+  )
 }

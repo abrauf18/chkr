@@ -1,6 +1,5 @@
 import React from "react";
 import CompanyCard from "./company-card";
-import DashboardHeader from "@/components/shared/dashboard-header";
 import CompanyHeader from "./company-header";
 
 const recentlyAddedCompanies = [
@@ -82,7 +81,6 @@ const allCompanies = [
 export default function Companies() {
   return (
     <>
-      <DashboardHeader title="Companies" />
       <CompanyHeader title="List of Companies Onboarded" />
       <div className="flex flex-col gap-4 my-8">
         <h1>Recently added</h1>

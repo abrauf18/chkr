@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { CircleChevronRight, MailPlus, MoveDownLeft, MoveDownRight, MoveUpLeft, MoveUpRight, Receipt, StickyNote } from 'lucide-react';
 import JobRequestCard from './job-request-card';
 import Summary from './summary';
-import DashboardHeader from '@/components/shared/dashboard-header';
 import {
   Pagination,
   PaginationContent,
@@ -86,7 +85,6 @@ export default function Dashboard() {
 
   return (
     <div className='flex flex-col mx-auto gap-4'>
-      <DashboardHeader title='Dashboard' />
       <h1 className='text-xl font-semibold'>Overview</h1>
       <div className='flex flex-col lg:flex-row gap-4 w-full mx-auto'>
         {/* Overview cards here */}
