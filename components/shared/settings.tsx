@@ -15,6 +15,7 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
     const fetchUserData = async () => {
       const data = await UserInfoAction();
       setUserData(data);
+      console.log(data)
     };
     fetchUserData();
   }, []);
@@ -45,6 +46,7 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
                   phone_number: userData.phone_number,
                   location: userData.location,
                   country: userData.country,
+                  company_logo: userData.company_logo,
                 }}
               />
             )}

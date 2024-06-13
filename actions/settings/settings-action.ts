@@ -43,7 +43,7 @@ export const EditUserinfoAction = async (data: EditCompanyAdminInterface) => {
 };
 
 export const EditCompanyInformationAction = async (
-  data: EditCompanyInformationInterface
+  data: EditCompanyInformationInterface | FormData
 ) => {
   const session = await auth();
   const response = await fetch(

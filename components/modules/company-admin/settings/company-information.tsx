@@ -28,6 +28,7 @@ export default function CompanyInformation({
     phone_number: string;
     location: string;
     country: string;
+    company_logo: string;
   };
 }) {
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
@@ -70,6 +71,8 @@ export default function CompanyInformation({
     };
     fetchCountries();
   }, []);
+
+
 
   useEffect(() => {
     const getUserData = async () => {
@@ -293,7 +296,7 @@ export default function CompanyInformation({
               "bg-gray-200 text-gray-700": !hasChanges,
             }
           )}
-          disabled={!hasChanges}          >
+          disabled={!hasChanges}>
             Save Changes
           </button>
         </div>

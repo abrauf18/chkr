@@ -26,6 +26,7 @@ export default function EditCompanyProfile() {
               phone_number: "Phone Number",
               location: "Location",
               country: "Pakistan",
+              company_logo: "",
             }}
           />
         </div>

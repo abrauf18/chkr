@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { EditCompanyInformationAction } from "@/actions/settings/settings-action";
+import { toast } from "react-toastify";
 
 interface TabData {
-  imageSrc: string; // New property for the image source URL
+  imageSrc: string; 
 }
 
 interface HeaderProps {
@@ -24,10 +26,40 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const activeData = activeTab === "personal" ? personalData : companyData;
   const [currentImageSrc, setCurrentImageSrc] = useState(activeData.imageSrc);
+
   const handleRemovePhoto = () => {
     setCurrentImageSrc(
       "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
     );
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCurrentImageSrc(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+
+      const formData = new FormData();
+      formData.set("file", file);
+      console.log("Uploading file:", file);
+      
+
+      try {
+        const result = await EditCompanyInformationAction(formData);
+        console.log("Server response:", result);
+        if (result.statusCode === 201) {
+          return toast.success(result.message);
+        } else {
+          toast.error(result.message);
+        }
+      } catch (error) {
+        console.error("Error uploading file:", error); 
+        return toast.error((error as Error)?.message);
+      }
+    }
   };
 
   return (
@@ -52,9 +84,19 @@ const Header: React.FC<HeaderProps> = ({
         >
           Remove
         </Button>
-        <Button className="rounded-3xl text-white bg-primary px-6">
+        <Button
+          className="rounded-3xl text-white bg-primary px-6"
+          onClick={() => (document.getElementById("fileInput")!).click()}
+        >
           Upload Photo
         </Button>
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/png, image/jpeg, image/jpg, image/gif"
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </div>
       {isAdmin && companyData.imageSrc !== null && (
         <div className="mt-6 flex justify-center">
@@ -93,4 +135,3 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
-
