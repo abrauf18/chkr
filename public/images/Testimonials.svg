@@ -3,11 +3,11 @@
 <rect x="1286" y="768" width="1286" height="768" rx="29.8376" transform="rotate(-180 1286 768)" fill="url(#paint1_linear_1158_8858)"/>
 <g clip-path="url(#clip0_1158_8858)">
 <mask id="mask0_1158_8858" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1286" height="768">
-<rect x="1285.63" y="767.627" width="1285.25" height="767.254" rx="29.4646" transform="rotate(-180 1285.63 767.627)" fill="white" stroke="white" stroke-width="0.745939"/>
+<rect x="1285.63" y="767.627" width="1285.25" height="767.254" rx="29.4646" transform="rotate(-180 1285.63 767.627)" fill="white" stroke="white" strokeWidth="0.745939"/>
 </mask>
 <g mask="url(#mask0_1158_8858)">
 <path d="M1230.33 48.5892C1251.16 -6.33927 1283.58 -64.9872 1306.31 -3.51539C1313.41 15.673 1276.57 37.3899 1230.33 48.5892Z" fill="url(#paint2_linear_1158_8858)"/>
-<path d="M1529.79 167.493C1374.52 319.955 1185.09 242.032 1210.46 112.586C1216.48 81.8462 1272.26 -95.5955 1306.31 -3.51539C1326.2 50.2728 1000.85 123.929 1091.11 -69.9054" stroke="white" stroke-width="10"/>
+<path d="M1529.79 167.493C1374.52 319.955 1185.09 242.032 1210.46 112.586C1216.48 81.8462 1272.26 -95.5955 1306.31 -3.51539C1326.2 50.2728 1000.85 123.929 1091.11 -69.9054" stroke="white" strokeWidth="10"/>
 </g>
 </g>
 <defs>

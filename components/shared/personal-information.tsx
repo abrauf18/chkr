@@ -4,19 +4,25 @@ import { SettingPersonalInfosSchema, Settings } from "@/lib/types";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Mail, Contact, Eye, EyeOff } from "lucide-react";
-import {
-  UserInfoAction,
-  EditUserinfoAction,
-} from "@/actions/settings/settings-action";
-import { CompanyAdminInterface } from "@/lib/interfaces";
+import { EditUserinfoAction } from "@/actions/settings/settings-action";
 import { toast } from "react-toastify";
 import Loader from "./loader";
 import clsx from "clsx";
+import action from "@/app/action";
+import { useSession } from "next-auth/react";
+import { camelToSnakeCase } from "@/lib/utils";
 
-const PersonalInformation: React.FC = () => {
+const PersonalInformation = ({
+  userData,
+  currentImage,
+}: {
+  userData: any;
+  currentImage: any;
+}) => {
   const [showPassword, setShowPassword] = useState(true);
   const [defaultValues, setDefaultValues] = useState<Settings | null>(null);
   const [isloading, setIsLoading] = useState(false);
+  const { data: session, update } = useSession();
 
   const {
     register,
@@ -41,50 +47,68 @@ const PersonalInformation: React.FC = () => {
 
   useEffect(() => {
     const getUserData = async () => {
-      try {
-        const userData: CompanyAdminInterface = await UserInfoAction();
-        const initialValues = {
-          firstName: userData.first_name,
-          lastName: userData.last_name,
-          email: userData.email,
-          contactNumber: userData.contact_number,
-          password: "",
-        };
-        setDefaultValues(initialValues);
-        reset(initialValues);
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-      }
+      const initialValues = {
+        firstName: userData.first_name,
+        lastName: userData.last_name,
+        email: userData.email,
+        contactNumber: userData.contact_number,
+        password: "",
+      };
+      setDefaultValues(initialValues);
+      reset(initialValues);
     };
 
     getUserData();
-  }, [reset]);
+  }, [reset, userData]);
 
-  const onSubmit = handleSubmit(async (data) => {
+  const getChangedFields = (initialValues: any, currentValues: any) => {
+    const changedFields: any = {};
+    for (const key in initialValues) {
+      if (
+        initialValues[key] !== currentValues[key] &&
+        currentValues[key] !== ""
+      ) {
+        changedFields[key] = currentValues[key];
+      }
+    }
+    return changedFields;
+  };
+
+  const onSubmit = handleSubmit(async (formValues) => {
     try {
       setIsLoading(true);
-      const { firstName, lastName, email, contactNumber, password } = data;
-      let result;
-      if (password === "") {
-        result = await EditUserinfoAction({
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          contact_number: contactNumber,
-        });
-      } else {
-        result = await EditUserinfoAction({
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          contact_number: contactNumber,
-          password,
-        });
+      const changedFields = getChangedFields(defaultValues, formValues);
+
+      const formData = new FormData();
+      Object.keys(changedFields).forEach((key) => {
+        formData.append(camelToSnakeCase(key), changedFields[key]);
+      });
+
+      if (typeof currentImage !== "string") {
+        formData.append("file", currentImage);
+      } else if (currentImage !== userData.picture) {
+        formData.append("picture", currentImage);
       }
+
+      const result = await EditUserinfoAction(formData);
       if (result.statusCode === 200) {
-        return toast.success(result.message);
+        action("userInfo");
+        //update user session
+        if (!changedFields.password) {
+          const value = await update({
+            ...session,
+            token: result.token,
+            user: {
+              ...session?.user,
+              ...result?.user,
+            },
+          });
+          console.log(value);
+        }
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
       }
-      return toast.error(result.message);
     } catch (error) {
       toast.error("Failed to update user data");
     } finally {
@@ -94,7 +118,7 @@ const PersonalInformation: React.FC = () => {
 
   if (!defaultValues) {
     return (
-      <div className="flex justify-center item-center">
+      <div className="flex justify-center items-center">
         <Loader />
       </div>
     );
@@ -202,13 +226,15 @@ const PersonalInformation: React.FC = () => {
           className={clsx(
             "mobile:w-full w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
             {
-              "bg-primary text-white": hasChanges,
-              "bg-gray-200 text-gray-700": !hasChanges,
+              "bg-primary text-white":
+                hasChanges || currentImage !== userData.picture,
+              "bg-gray-200 text-gray-700":
+                !hasChanges || currentImage === userData.picture,
             }
           )}
-          disabled={!hasChanges}
+          disabled={currentImage === userData.picture && !hasChanges}
         >
-          {isloading ? <Loader size={6} /> : "Save"}
+          {isloading ? <Loader size={6} /> : "Save Changes"}
         </button>
       </div>
     </form>

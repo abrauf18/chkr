@@ -33,11 +33,12 @@ export default function UserOptions({
         <div className="flex items-center bg-white rounded-3xl p-2">
           <div>
             <Image
+              key={picture + Math.random()}
               src={picture}
-              height={33}
-              width={33}
+              height={100}
+              width={100}
               alt="user"
-              className="rounded-full "
+              className="rounded-full max-w-12 max-h-12"
             />
           </div>
           <div className="flex flex-col mx-3 text-left mobile:hidden">

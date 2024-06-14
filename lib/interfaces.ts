@@ -59,6 +59,7 @@ export interface CompanyAdminInterface {
 }
 
 export interface EditCompanyAdminInterface {
+  picture?: string | File;
   first_name?: string;
   last_name?: string;
   email?: string;

@@ -18,9 +18,12 @@ import { FirmInterface } from "@/lib/interfaces";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
 import clsx from "clsx";
+import action from "@/app/action";
+import { camelToSnakeCase } from "@/lib/utils";
 
 export default function CompanyInformation({
   companyinfo,
+  currentImage,
 }: {
   companyinfo: {
     company_name: string;
@@ -30,8 +33,12 @@ export default function CompanyInformation({
     country: string;
     company_logo: string;
   };
+  currentImage: string;
 }) {
-  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(null);
+  const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
+    null
+  );
+  const [isloading, setIsLoading] = useState<boolean>(false);
   const [countries, setCountries] = useState<string[]>([]);
   const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
   const {
@@ -43,7 +50,7 @@ export default function CompanyInformation({
   } = useForm<SettingsCompany>({
     resolver: zodResolver(SettingsCompanyInfoSchema),
     mode: "onChange",
-    reValidateMode: "onChange",    
+    reValidateMode: "onChange",
   });
 
   const currentValues = useWatch({ control });
@@ -72,8 +79,6 @@ export default function CompanyInformation({
     fetchCountries();
   }, []);
 
-
-
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -99,26 +104,52 @@ export default function CompanyInformation({
     getUserData();
   }, [reset]);
 
+  const changedFields: any = {};
+  const getChangedFields = (initialValues: any, currentValues: any) => {
+    const changedFields: any = {};
+    for (const key in initialValues) {
+      if (
+        initialValues[key] !== currentValues[key] &&
+        currentValues[key] !== ""
+      ) {
+        changedFields[key] = currentValues[key];
+      }
+    }
+    return changedFields;
+  };
+
   const onSubmit = async (data: SettingsCompany) => {
     try {
+      setIsLoading(true);
       const firmId = getFirmIdByName(data.companyType);
       if (!firmId) {
         throw new Error("Invalid company type");
       }
+      const changedFields = getChangedFields(defaultValues, data);
 
-      const result = await EditCompanyInformationAction({
-        company_name: data.companyName,
-        firm_id: firmId,
-        phone_number: data.phoneNumber,
-        location: data.location,
-        country: data.country,
+      const formData = new FormData();
+      Object.keys(changedFields).forEach((key) => {
+        formData.append(camelToSnakeCase(key), changedFields[key]);
       });
+
+      // Append firm_id instead of companyType
+      formData.append("firm_id", firmId.toString());
+
+      if (typeof currentImage !== "string") {
+        formData.append("file", currentImage);
+      } else if (currentImage !== companyinfo.company_logo) {
+        formData.append("company_logo", currentImage);
+      }
+      const result = await EditCompanyInformationAction(formData);
       if (result.statusCode === 200) {
+        action("userInfo");
         return toast.success(result.message);
       }
       return toast.error(result.message);
     } catch (error) {
       toast.error("Failed to update company information");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -136,7 +167,7 @@ export default function CompanyInformation({
   };
 
   const hasChanges =
-  JSON.stringify(defaultValues) !== JSON.stringify(currentValues);
+    JSON.stringify(defaultValues) !== JSON.stringify(currentValues);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -180,7 +211,7 @@ export default function CompanyInformation({
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none appearance-none"
             >
               <option value="">Select Company Type</option>
-              {companyTypes.map((companytype) => (
+              {companyTypes?.map((companytype) => (
                 <option
                   key={companytype.id}
                   value={companytype.firm_name}
@@ -290,14 +321,17 @@ export default function CompanyInformation({
           <button
             type="submit"
             className={clsx(
-            "mobile:w-full w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
-            {
-              "bg-primary text-white": hasChanges,
-              "bg-gray-200 text-gray-700": !hasChanges,
-            }
-          )}
-          disabled={!hasChanges}>
-            Save Changes
+              "mobile:w-full w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
+              {
+                "bg-primary text-white":
+                  hasChanges || currentImage !== companyinfo.company_logo,
+                "bg-gray-200 text-gray-700":
+                  !hasChanges || currentImage === companyinfo.company_logo,
+              }
+            )}
+            disabled={currentImage === companyinfo.company_logo && !hasChanges}
+          >
+            {isloading ? <Loader size={6} /> : "Save Changes"}
           </button>
         </div>
       </div>

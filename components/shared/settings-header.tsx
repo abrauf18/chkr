@@ -1,17 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { EditCompanyInformationAction } from "@/actions/settings/settings-action";
-import { toast } from "react-toastify";
 
 interface TabData {
-  imageSrc: string; 
+  imageSrc: string;
 }
 
 interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  setCurrentImage: (image: any) => void;
   personalData: TabData;
   companyData: TabData;
   isAdmin?: boolean;
@@ -20,15 +19,25 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   activeTab,
   setActiveTab,
+  setCurrentImage,
   personalData,
   companyData,
   isAdmin,
 }) => {
   const activeData = activeTab === "personal" ? personalData : companyData;
-  const [currentImageSrc, setCurrentImageSrc] = useState(activeData.imageSrc);
+  const [currentImageSrc, setCurrentImageSrc] = useState(
+    activeData.imageSrc ||
+      "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
+  );
 
+  useEffect(() => {
+    setCurrentImage(activeData.imageSrc);
+  }, []);
   const handleRemovePhoto = () => {
     setCurrentImageSrc(
+      "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
+    );
+    setCurrentImage(
       "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
     );
   };
@@ -41,24 +50,7 @@ const Header: React.FC<HeaderProps> = ({
         setCurrentImageSrc(reader.result as string);
       };
       reader.readAsDataURL(file);
-
-      const formData = new FormData();
-      formData.set("file", file);
-      console.log("Uploading file:", file);
-      
-
-      try {
-        const result = await EditCompanyInformationAction(formData);
-        console.log("Server response:", result);
-        if (result.statusCode === 201) {
-          return toast.success(result.message);
-        } else {
-          toast.error(result.message);
-        }
-      } catch (error) {
-        console.error("Error uploading file:", error); 
-        return toast.error((error as Error)?.message);
-      }
+      setCurrentImage(file);
     }
   };
 
@@ -66,13 +58,18 @@ const Header: React.FC<HeaderProps> = ({
     <div className="max-w-screen-xl mx-auto bg-white p-4 rounded-2xl">
       <div className="relative">
         <div className="bg-[url('https://chkr-buck.s3.amazonaws.com/Profile_bg.svg')] h-32 rounded-2xl bg-no-repeat bg-cover"></div>
-        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-white rounded-full border-4 border-white">
+        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-white rounded-full border-4 border-white">
           <Image
-            src={currentImageSrc}
+            key={`${currentImageSrc}`}
+            src={
+              currentImageSrc?.startsWith("https")
+                ? `${currentImageSrc}?${new Date().getTime()}`
+                : currentImageSrc
+            }
             alt="profile image"
             width={100}
             height={100}
-            className="rounded-full aspect-square object-cover"
+            className="rounded-full aspect-square object-cover max-h-24 max-w-24"
             priority
           />
         </div>
@@ -86,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({
         </Button>
         <Button
           className="rounded-3xl text-white bg-primary px-6"
-          onClick={() => (document.getElementById("fileInput")!).click()}
+          onClick={() => document.getElementById("fileInput")!.click()}
         >
           Upload Photo
         </Button>
@@ -135,3 +132,4 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
+

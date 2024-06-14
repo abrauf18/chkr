@@ -1,24 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./settings-header";
 import PersonalInformation from "./personal-information";
 import CompanyInformation from "../modules/company-admin/settings/company-information";
-import DashboardHeader from "./dashboard-header";
-import { UserInfoAction } from "@/actions/settings/settings-action";
 
-const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
+const Settings: React.FC<{ isAdmin?: boolean; data: any }> = ({
+  isAdmin,
+  data,
+}) => {
   const [activeTab, setActiveTab] = useState<string>("personal");
-  const [userData, setUserData] = useState<any>(null); // State to store user data
-
-  // Fetch user data when the component mounts
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const data = await UserInfoAction();
-      setUserData(data);
-      console.log(data)
-    };
-    fetchUserData();
-  }, []);
+  const userData = data;
+  const [currentImage, setCurrentImage] = useState("");
 
   return (
     <>
@@ -28,16 +20,27 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
             isAdmin={isAdmin}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            personalData={{ imageSrc: userData.picture }} // Update the personalData imageSrc if needed
+            setCurrentImage={setCurrentImage}
+            personalData={{ imageSrc: userData.picture }}
             companyData={{ imageSrc: userData.company_logo }}
           />
         )}
 
         {!isAdmin ? (
-          <PersonalInformation />
+          userData && (
+            <PersonalInformation
+              userData={userData}
+              currentImage={currentImage}
+            />
+          )
         ) : (
           <div className="mt-6">
-            {activeTab === "personal" && <PersonalInformation />}
+            {activeTab === "personal" && userData && (
+              <PersonalInformation
+                userData={userData}
+                currentImage={currentImage}
+              />
+            )}
             {activeTab === "company" && (
               <CompanyInformation
                 companyinfo={{
@@ -48,6 +51,7 @@ const Settings: React.FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
                   country: userData.country,
                   company_logo: userData.company_logo,
                 }}
+                currentImage={currentImage}
               />
             )}
           </div>

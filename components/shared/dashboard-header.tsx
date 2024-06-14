@@ -9,7 +9,6 @@ interface DashboardHeaderProps {
 
 export default async function DashboardHeader({ title }: DashboardHeaderProps) {
   const session: any = await auth();
-  console.log(session.user.firstName);
   return (
     <>
       <div className="flex w-full justify-between items-center mt-3">

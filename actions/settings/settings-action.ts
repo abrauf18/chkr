@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  CompanyAdminInterface,
-  EditCompanyAdminInterface,
-  EditCompanyInformationInterface,
-} from "@/lib/interfaces";
+import { CompanyAdminInterface } from "@/lib/interfaces";
 import { auth } from "@/auth";
 
 export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
@@ -18,44 +14,43 @@ export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
+      next: {
+        tags: ["userInfo"],
+      },
     }
   );
   const result = await response.json();
   return result.data;
 };
 
-export const EditUserinfoAction = async (data: EditCompanyAdminInterface) => {
+export const EditUserinfoAction = async (data: FormData) => {
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/user/profile`,
     {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     }
   );
   const result = await response.json();
   return result;
 };
 
-export const EditCompanyInformationAction = async (
-  data: EditCompanyInformationInterface | FormData
-) => {
+export const EditCompanyInformationAction = async (data: FormData) => {
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/user/company-profile`,
     {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     }
   );
   const result = await response.json();
