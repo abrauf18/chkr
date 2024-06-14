@@ -12,7 +12,7 @@ import { InviteUserAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
 
-export default function EmployeeForm() {
+export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
   const [isloading, setIsLoading] = useState(false);
   const {
     register,
@@ -144,15 +144,24 @@ export default function EmployeeForm() {
             <ErrorMessage errors={errors} name="phoneNumber" />
           </p>
         </div>
-        <div className="flex justify-end mt-6">
-          <Button
-            type="submit"
-            className="text-white rounded-3xl flex items-center gap-2 w-32"
-          >
-            {isloading ? <Loader size={6} /> : "Send Invite"}
-            {!isloading && <ArrowRight className="w-4 h-4" />}
-          </Button>
-        </div>
+        {!isEdit && (
+          <div className="flex justify-end mt-6">
+            <Button type="submit" className="text-white rounded-3xl w-32">
+              {isloading ? <Loader size={6} /> : "Send Invite"}
+              {!isloading && <ArrowRight className="w-4 h-4 ml-2" />}
+            </Button>
+          </div>
+        )}
+        {isEdit && (
+          <div className="flex justify-between items-center mt-3">
+            <Button className="bg-gray-100 text-black rounded-3xl">
+              Discard Changes
+            </Button>
+            <Button className="rounded-3xl text-white" type="submit">
+              {isloading ? <Loader size={6} /> : "Save Changes"}
+            </Button>
+          </div>
+        )}
       </div>
     </form>
   );
