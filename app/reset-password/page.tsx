@@ -2,30 +2,35 @@ import ResetPassword from "@/components/modules/auth/reset-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import Loader from "@/components/shared/loader";
 
 export const metadata: Metadata = {
   title: "Reset Password",
-  description: "Reset your password for your CHKR account. Choose a new strong password and regain access",
+  description:
+    "Reset your password for your CHKR account. Choose a new strong password and regain access",
 };
 
 export default function page() {
   return (
     <>
-    <div className="bg-gray-100">
-      <Navbar
-        buttonText="Register Now"
-        textBeforeButton="Don't have an account?"
-        url="signup"
-      />
-      <div className="grid xl:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 md:mx-6 md:p-4">
-        <AuthLeftSide
-          heading1="YOUR HUB"
-          heading2="FOR FINDING THE BEST"
-          heading3="SERVICE PROVIDERS"
-          url="/images/SignUpLeftSide.svg"
+      <div className="bg-gray-100">
+        <Navbar
+          buttonText="Register Now"
+          textBeforeButton="Don't have an account?"
+          url="signup"
         />
-        <ResetPassword />
-      </div>
+        <div className="grid xl:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 md:mx-6 md:p-4">
+          <AuthLeftSide
+            heading1="YOUR HUB"
+            heading2="FOR FINDING THE BEST"
+            heading3="SERVICE PROVIDERS"
+            url="/images/SignUpLeftSide.svg"
+          />
+          <Suspense fallback={<Loader size={12} />}>
+            <ResetPassword />
+          </Suspense>
+        </div>
       </div>
     </>
   );

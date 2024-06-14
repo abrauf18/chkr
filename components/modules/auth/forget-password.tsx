@@ -6,14 +6,37 @@ import { Label } from "@/components/ui/label";
 import { ForgetPasswordSchema } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ForgetPasswordAction } from "@/actions/auth/auth-action";
+import { toast } from "react-toastify";
+import Loader from "@/components/shared/loader";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function ForgetPassword() {
+  const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(ForgetPasswordSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+      const { email } = data;
+      const result = await ForgetPasswordAction({
+        email,
+      });
+      if (result.statusCode === 200) {
+        return toast.success(result.message);
+      }
+      return toast.error(result.message);
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -26,7 +49,7 @@ export default function ForgetPassword() {
       <div className="flex w-[85%] md:w-full py-6 justify-center items-center">
         <form
           className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit((d) => console.log(d))}
+          onSubmit={onSubmit}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Forgot Password
@@ -39,30 +62,32 @@ export default function ForgetPassword() {
               Email Address
             </Label>
             <Input
-              {...register("password")}
+              {...register("email")}
               className="bg-[#F9F8F8]"
               type="email"
               id="email"
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-600 mt-2">Email is required</p>
-            )}
-            {errors.email && errors.email.type === "pattern" && (
-              <p className="text-red-600 mt-2">Invalid email format</p>
-            )}
+            <p className="text-sm text-red-500 mt-1">
+              {" "}
+              <ErrorMessage errors={errors} name="email" />
+            </p>
           </div>
           <div className="flex items-center justify-center mt-6">
             <button
               className="w-full bg-primary hover:bg-primaryHover text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
             >
-              Send Password
+              {isloading ? <Loader size={6} /> : "Send Password"}
             </button>
           </div>
         </form>
       </div>
     </div>
   );
+}
+
+function push(arg0: string): unknown {
+  throw new Error("Function not implemented.");
 }
 

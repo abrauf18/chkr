@@ -51,7 +51,7 @@ const LandingPageNavbar: React.FC = () => {
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                strokeWidth="2"
                 d="M1 1h15M1 7h15M1 13h15"
               />
             </svg>
@@ -80,12 +80,18 @@ const LandingPageNavbar: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="#testimonials" className={getLinkClass("#testimonials")}>
+              <Link
+                href="#testimonials"
+                className={getLinkClass("#testimonials")}
+              >
                 Testimonials
               </Link>
             </li>
             <li>
-              <Link href="#subscription" className={getLinkClass("#subscription")}>
+              <Link
+                href="#subscription"
+                className={getLinkClass("#subscription")}
+              >
                 Subscription
               </Link>
             </li>
@@ -97,3 +103,4 @@ const LandingPageNavbar: React.FC = () => {
 };
 
 export default LandingPageNavbar;
+

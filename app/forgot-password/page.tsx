@@ -5,9 +5,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Forgot Password",
-  description: "Forgot your password? Enter your email address and we'll guide you through the recovery process."
+  description:
+    "Forgot your password? Enter your email address and we'll guide you through the recovery process.",
 };
-
 
 export default function page() {
   return (

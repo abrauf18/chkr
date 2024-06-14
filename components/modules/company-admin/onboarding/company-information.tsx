@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import User from "@/assets/icons/user-icon";
@@ -10,62 +10,85 @@ import Upload from "@/assets/icons/upload-icon";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
-import { ChevronDown } from "lucide-react";
-import Link from "next/link";
+import { ChevronDown, File } from "lucide-react";
+import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action"; // Import the OnboardingAction
+import { FirmInterface } from "@/lib/interfaces";
 
-const countries = [
-  "USA",
-  "Canada",
-  "UK",
-  "Australia",
-  "Pakistan",
-  "Germany",
-  "India",
-];
-const companyTypes = ["Type A", "Type B", "Type C", "Type D"]; // Example list of company types
+interface CompanyInformationProps {
+  handleNextStep: () => void;
+}
 
 const CompanyInformation = ({
   handleNextStep,
-}: {
-  handleNextStep: () => void;
-}): JSX.Element => {
-  const { setOnboardingData } = useOnboardingStore();
+}: CompanyInformationProps): JSX.Element => {
+  const { onboardingData, setOnboardingData } = useOnboardingStore();
   const {
     register,
     trigger,
+    watch,
     formState: { errors },
     getValues,
   } = useFormContext();
+  const [companyTypes, setCompanyTypes] = useState<FirmInterface[]>([]);
+  const [countries, setCountries] = useState([]);
+
   const changeNextStep = async () => {
     const isValid = await trigger([
+      "logo",
       "company-name",
       "company-type",
       "phone-number",
       "location",
       "country",
-      "video",
     ]);
     if (isValid) {
       const data = getValues([
+        "logo",
         "company-name",
         "company-type",
         "phone-number",
         "location",
         "country",
-        "logo",
       ]);
       setOnboardingData({
-        "company-name": data[0],
-        "company-type": data[1],
-        "phone-number": data[2],
-        location: data[3],
-        country: data[4],
-        logo: data[5],
-        plan: "monthly",
+        ...onboardingData,
+        logo: data[0],
+        "company-name": data[1],
+        "company-type": data[2],
+        "phone-number": data[3],
+        location: data[4],
+        country: data[5],
       });
       handleNextStep();
     }
   };
+
+  useEffect(() => {
+    const fetchCompanyTypes = async () => {
+      try {
+        const response: FirmInterface[] = await FirmsAction();
+        setCompanyTypes(response);
+      } catch (error) {
+        console.error("Error fetching company types:", error);
+      }
+    };
+    fetchCompanyTypes();
+  }, []);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await CountryAction();
+        setCountries(response);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  const selectedFile = watch("logo");
 
   return (
     <div className="flex flex-col w-full justify-center items-center my-4 mx-10">
@@ -78,17 +101,26 @@ const CompanyInformation = ({
           <input
             type="file"
             id="fileInput"
-            accept=".pdf, .jpg, .jpeg, .png, .gif"
+            accept=".jpg, .jpeg, .png, .gif"
             {...register("logo")}
             className="hidden"
           />
-          <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
-            <Upload width={30} height={30} />
-            <span className="text-sm font-medium mt-3">Upload Logo</span>
-          </div>
+          {!selectedFile ? (
+            <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
+              <Upload width={30} height={30} />
+              <span className="text-sm font-medium mt-3">Upload Logo</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 h-20 w-full mt-4 rounded-2xl border-dashed border-2 border-gray-300 p-4">
+              <File />
+              {/* <Image src={URL.createObjectURL(selectedFile[0])} alt="logo" width={5} height={5} className="h-20 w-20"/> */}
+              <span className="whitespace-nowrap text-sm">
+                {selectedFile[0].name}
+              </span>
+            </div>
+          )}
         </label>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="logo" />
         </p>
       </div>
@@ -112,7 +144,6 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="company-name" />
         </p>
       </div>
@@ -128,17 +159,21 @@ const CompanyInformation = ({
             <BuildingIcon />
           </span>
           <select
-          required
+            required
             id="companyType"
             {...register("company-type")}
             className="w-full pl-10 pr-10 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
-            <option
-            className="text-gray-200"
-            value="">Select Company Type</option>
-            {companyTypes.map((companyTypes) => (
-              <option key={companyTypes} value={companyTypes}>
-                {companyTypes}
+            <option className="text-gray-200 " disabled hidden value="">
+              Select Company Type
+            </option>
+            {companyTypes?.map((companyType) => (
+              <option
+                key={companyType.id}
+                value={companyType.id}
+                selected={companyType.id === +onboardingData["company-type"]}
+              >
+                {companyType.firm_name}
               </option>
             ))}
           </select>
@@ -147,7 +182,6 @@ const CompanyInformation = ({
           </div>
         </div>
         <p className="text-sm text-red-500">
-          {" "}
           <ErrorMessage errors={errors} name="company-type" />
         </p>
       </div>
@@ -168,7 +202,6 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="phone-number" />
         </p>
       </div>
@@ -189,12 +222,11 @@ const CompanyInformation = ({
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {" "}
           <ErrorMessage errors={errors} name="location" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
-        <Label htmlFor="location" className="md:text-lg text-sm font-semibold">
+        <Label htmlFor="country" className="md:text-lg text-sm font-semibold">
           Country
         </Label>
         <div className="relative flex items-center">
@@ -206,13 +238,16 @@ const CompanyInformation = ({
             id="country"
             {...register("country")}
             className="w-full pl-10 pr-12 py-2 bg-[#F9F8F8] text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
-            defaultValue=""
           >
             <option value="" disabled hidden>
               Select Country
             </option>
             {countries.map((country) => (
-              <option key={country} value={country}>
+              <option
+                key={country}
+                value={country}
+                selected={country === onboardingData["country"]}
+              >
                 {country}
               </option>
             ))}
@@ -227,14 +262,6 @@ const CompanyInformation = ({
       </div>
 
       <div className="flex w-full items-center md:justify-end justify-center mt-2 gap-4 px-4 md:px-0">
-        {/* <Link href="/" className="hover:text-primary">
-          <button
-            className="w-full bg-gray-300 font-medium py-3 px-10 rounded-3xl whitespace-nowrap	"
-            type="button"
-          >
-            Back to Home
-          </button>
-        </Link> */}
         <button
           className="w-full mobile:w-[10rem] md:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="button"

@@ -1,7 +1,7 @@
 <svg  viewBox="0 0 720 474" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g filter="url(#filter0_d_879_9670)">
 <rect x="12" y="3" width="696" height="450" rx="20" fill="url(#pattern0_879_9670)" shape-rendering="crispEdges"/>
-<rect x="17" y="8" width="686" height="440" rx="15" stroke="white" stroke-width="10" shape-rendering="crispEdges"/>
+<rect x="17" y="8" width="686" height="440" rx="15" stroke="white" strokeWidth="10" shape-rendering="crispEdges"/>
 </g>
 <defs>
 <filter id="filter0_d_879_9670" x="0" y="0" width="720" height="474" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

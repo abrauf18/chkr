@@ -1,5 +1,4 @@
 "use client";
-import DashboardHeader from "@/components/shared/dashboard-header";
 import React, { useState } from "react";
 import JobRequests from "./job-requests";
 import OngoingJobs from "./ongoing-jobs";
@@ -35,7 +34,6 @@ export default function MyJobs() {
 
   return (
     <div className="flex flex-col mx-auto gap-4">
-      <DashboardHeader title="My Jobs" />
       <Header title="Track your Assigned Services" />
       <div className="flex gap-2 items-center my-4">
         {tabsData.map((tab) => (

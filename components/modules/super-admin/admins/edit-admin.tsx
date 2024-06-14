@@ -7,11 +7,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { CirclePlus } from 'lucide-react'
 import AdminForm from './admin-form'
 import EditIcon from '@/assets/icons/edit-icon'
+import EmployeeForm from '../../company-admin/employees/employee-form';
 
-export default function EditAdmin() {
+interface Editprops{
+  isAdmin: boolean;
+  isEmployee: boolean;
+}
+
+export default function EditAdmin({isAdmin, isEmployee}: Editprops) {
   return (
     <Dialog>
       <DialogTrigger>
@@ -22,11 +27,21 @@ export default function EditAdmin() {
       >
         <DialogHeader>
           <DialogTitle>
-            <span>Edit Admin</span>
+            {
+              isAdmin &&  <span>Edit Admin</span>
+            }
+             {
+              isEmployee &&  <span>Edit Employee</span>
+            }
             <hr className='mt-6' />
           </DialogTitle>
           <DialogDescription>
-            <AdminForm isEdit />
+          {
+              isAdmin && <AdminForm isEdit />
+            }
+             {
+              isEmployee && <EmployeeForm isEdit/>
+            }
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

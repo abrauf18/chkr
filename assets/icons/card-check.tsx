@@ -12,7 +12,7 @@ const Cardcheck: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
       <path
         d="M17.3332 8.66699L9.99991 16.0003L6.6665 12.667"
         stroke="#E4E7EC"
-        stroke-width="3"
+        strokeWidth="3"
         stroke-linecap="round"
         stroke-linejoin="round"
       />

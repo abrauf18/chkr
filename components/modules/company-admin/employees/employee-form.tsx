@@ -1,16 +1,19 @@
-"use client"
-import React from 'react'
+"use client";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EmployeeSchema } from '@/lib/types';
-import { ArrowRight, Mail, Phone, User } from 'lucide-react';
-import { ErrorMessage } from '@hookform/error-message';
+import { EmployeeSchema } from "@/lib/types";
+import { ArrowRight, Mail, Phone, User } from "lucide-react";
+import { ErrorMessage } from "@hookform/error-message";
+import { InviteUserAction } from "@/actions/auth/auth-action";
+import { toast } from "react-toastify";
+import Loader from "@/components/shared/loader";
 
-export default function EmployeeForm() {
-
+export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
+  const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,15 +22,31 @@ export default function EmployeeForm() {
     resolver: zodResolver(EmployeeSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+      const { employeeFirstName, employeeLastName, email, phoneNumber } = data;
+      const result = await InviteUserAction({
+        first_name: employeeFirstName,
+        last_name: employeeLastName,
+        email,
+        contact_number: phoneNumber,
+      });
+      if (result.statusCode === 200) {
+        return toast.success(result.message);
+      }
+      return toast.error(result.message);
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
-    <form onSubmit={onSubmit}
-    >
-      <div className='flex flex-col text-black'>
-        <div className='flex mobile:flex-col flex-row items-center md:gap-4'>
+    <form onSubmit={onSubmit}>
+      <div className="flex flex-col text-black">
+        <div className="flex mobile:flex-col flex-row items-center md:gap-4">
           <div className="mb-4 w-full relative">
             <Label
               htmlFor="employeeFirstName"
@@ -37,7 +56,7 @@ export default function EmployeeForm() {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-                <User color="#636363" className='h-4 w-4' />
+                <User color="#636363" className="h-4 w-4" />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -61,7 +80,7 @@ export default function EmployeeForm() {
             </Label>
             <div className="relative flex items-center">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-                <User color="#636363" className='h-4 w-4' />
+                <User color="#636363" className="h-4 w-4" />
               </span>
               <Input
                 className="pl-10 bg-[#F9F8F8]"
@@ -78,12 +97,15 @@ export default function EmployeeForm() {
           </div>
         </div>
         <div className="mb-4 w-full relative">
-          <Label htmlFor="email" className="flex md:text-medium text-sm font-semibold">
+          <Label
+            htmlFor="email"
+            className="flex md:text-medium text-sm font-semibold"
+          >
             Email
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-              <Mail color="#636363" className='h-4 w-4' />
+              <Mail color="#636363" className="h-4 w-4" />
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
@@ -99,12 +121,15 @@ export default function EmployeeForm() {
           </p>
         </div>
         <div className="mb-4 w-full relative">
-          <Label htmlFor="phoneNumber" className="flex md:text-medium text-sm font-semibold">
+          <Label
+            htmlFor="phoneNumber"
+            className="flex md:text-medium text-sm font-semibold"
+          >
             Phone Number
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-              <Phone color="#636363" className='h-4 w-4' />
+              <Phone color="#636363" className="h-4 w-4" />
             </span>
             <Input
               className="pl-10 bg-[#F9F8F8]"
@@ -119,15 +144,26 @@ export default function EmployeeForm() {
             <ErrorMessage errors={errors} name="phoneNumber" />
           </p>
         </div>
-        <div className='flex justify-end mt-6'>
-          <Button
-            type='submit'
-            className='text-white rounded-3xl flex items-center gap-2'>
-            <span>Send Invite</span>
-            <ArrowRight className='h-4 w-4' />
-          </Button>
-        </div>
+        {!isEdit && (
+          <div className="flex justify-end mt-6">
+            <Button type="submit" className="text-white rounded-3xl w-32">
+              {isloading ? <Loader size={6} /> : "Send Invite"}
+              {!isloading && <ArrowRight className="w-4 h-4 ml-2" />}
+            </Button>
+          </div>
+        )}
+        {isEdit && (
+          <div className="flex justify-between items-center mt-3">
+            <Button className="bg-gray-100 text-black rounded-3xl">
+              Discard Changes
+            </Button>
+            <Button className="rounded-3xl text-white" type="submit">
+              {isloading ? <Loader size={6} /> : "Save Changes"}
+            </Button>
+          </div>
+        )}
       </div>
-    </form >
-  )
+    </form>
+  );
 }
+

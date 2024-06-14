@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/pagination";
 import { ArrowDown } from "lucide-react";
 import { Employee } from "./employees"; // Import the Employee type
+import DisableModal from "@/components/shared/disable-modal";
+import DeleteModal from "../../super-admin/admins/delete-modal";
+import EditAdmin from "../../super-admin/admins/edit-admin";
 
 const EmployeeTable = ({
   employees,
@@ -39,7 +42,9 @@ const EmployeeTable = ({
       <Table>
         <TableHeader>
           <TableRow className="bg-white">
-            <TableHead className="text-black font-semibold whitespace-nowrap">Employee Name</TableHead>
+            <TableHead className="text-black font-semibold whitespace-nowrap">
+              Employee Name
+            </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
                 <span className="text-black font-semibold">Email</span>
@@ -48,13 +53,15 @@ const EmployeeTable = ({
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span className="text-black font-semibold whitespace-nowrap">Phone Number</span>
+                <span className="text-black font-semibold whitespace-nowrap">
+                  Phone Number
+                </span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2 p-1">
-                <span className="text-black font-semibold">Availability</span>
+                <span className="text-black font-semibold">Action</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
@@ -66,18 +73,15 @@ const EmployeeTable = ({
               key={employee.name}
               className={index % 2 === 1 ? "bg-white" : "bg-gray-100"}
             >
-              <TableCell className="font-medium whitespace-nowrap">{employee.name}</TableCell>
+              <TableCell className="font-medium whitespace-nowrap">
+                {employee.name}
+              </TableCell>
               <TableCell>{employee.email}</TableCell>
               <TableCell>{employee.phone}</TableCell>
               <TableCell className="w-32">
-                <div className="flex items-center justify-center pl-2 gap-2 border rounded-lg py-1">
-                  <span
-                    className={`${employee.availability === "Available"
-                      ? "bg-green-500"
-                      : "bg-primary"
-                      } rounded-full w-2 h-2`}
-                  ></span>
-                  <span>{employee.availability}</span>
+                <div className="flex gap-2">
+                  <EditAdmin isEmployee={true} isAdmin={false} />
+                  <DeleteModal />
                 </div>
               </TableCell>
             </TableRow>

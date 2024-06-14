@@ -2,7 +2,6 @@
 
 import React from "react";
 import CompanyInformation from "@/components/modules/company-admin/onboarding/company-information";
-import Navbar from "@/components/shared/navbar";
 import useOnboardingStore, { Steps } from "@/store/onboarding-store";
 import SubscriptionPlan from "@/components/modules/company-admin/onboarding/subscription-plan";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,8 +12,7 @@ import CompanyBuilding from "@/assets/icons/company-building";
 import clsx from "clsx";
 
 export default function OnboardingSteps() {
-  const { currentStep, setCurrentStep, onboardingData, setOnboardingData } =
-    useOnboardingStore();
+  const { currentStep, setCurrentStep, onboardingData } = useOnboardingStore();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -30,10 +28,6 @@ export default function OnboardingSteps() {
     }
   };
 
-  if (typeof window === "undefined") {
-    return <div>loading</div>;
-  }
-
   const handlePreviousStep = () => {
     setCurrentStep(Steps.COMPANY_DETAILS);
   };
@@ -43,12 +37,7 @@ export default function OnboardingSteps() {
       case Steps.COMPANY_DETAILS:
         return <CompanyInformation handleNextStep={handleNextStep} />;
       case Steps.PLAN:
-        return (
-          <SubscriptionPlan
-            // handleNextStep={handleNextStep}
-            handlePreviousStep={handlePreviousStep}
-          />
-        );
+        return <SubscriptionPlan handlePreviousStep={handlePreviousStep} />;
       default:
         return null;
     }
@@ -61,8 +50,8 @@ export default function OnboardingSteps() {
   });
   const onSubmit = (data: Onboarding) => {
     console.log(data);
-    // removeOnboardingData();
   };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center mt-10 mx-20">

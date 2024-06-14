@@ -15,7 +15,7 @@ interface JobStore {
   jobData: Jobs;
   setCurrentStep: (step: string) => void;
   setJobData: (data: Partial<Jobs>) => void;
-  removeOnboardingData: () => void;
+  removeCreateJobData: () => void;
 }
 
 const useJobStore = create(
@@ -38,7 +38,7 @@ const useJobStore = create(
           jobData: { ...state.jobData, ...data },
         }));
       },
-      removeOnboardingData: () =>
+      removeCreateJobData: () =>
         set({
           currentStep: Steps.Create_Job_First_Step,
           jobData: {

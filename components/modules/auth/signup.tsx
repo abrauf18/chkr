@@ -9,15 +9,18 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/lib/types";
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from "lucide-react";
 import { ErrorMessage } from "@hookform/error-message";
-
+import { SignUpAction } from "@/actions/auth/auth-action";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/shared/loader";
 
 export default function Signup() {
-
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
-
+  const [isloading, setIsLoading] = useState(false);
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -26,8 +29,27 @@ export default function Signup() {
     resolver: zodResolver(SignUpSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+      const { firstName, lastName, email, contactNumber, password } = data;
+      const result = await SignUpAction({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        contact_number: contactNumber,
+        password,
+      });
+      if (result.statusCode === 201) {
+        toast.success(result.message);
+        return push("/login");
+      }
+      return toast.error(result.message);
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -204,11 +226,12 @@ export default function Signup() {
               className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
             >
-              Sign Up
+              {isloading ? <Loader size={6} /> : "Sign Up"}
             </button>
           </div>
         </form>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
+

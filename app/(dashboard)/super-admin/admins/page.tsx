@@ -1,4 +1,5 @@
 import Admins from '@/components/modules/super-admin/admins/admins'
+import DashboardHeader from '@/components/shared/dashboard-header';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -8,5 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ManageAdminsPage() {
-  return <Admins />
+  return(
+    <><DashboardHeader title='Manage Admins' /><Admins /></>
+  )
 }

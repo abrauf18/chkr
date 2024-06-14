@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import FeedbackCard from './feedback-card';
 import RatingSummary from './feedback-summary';
-import DashboardHeader from '@/components/shared/dashboard-header';
 import Header from '@/components/shared/header';
 import {
   Pagination,
@@ -90,7 +89,6 @@ const Feedback: React.FC = () => {
 
   return (
     <>
-      <DashboardHeader title='Feedback' />
       <Header title='Manage Customers Feedback' />
       <div className='flex mobile:flex-col-reverse md:flex-row gap-4 mt-3'>
         <div className="space-y-4 md:w-[60%]">

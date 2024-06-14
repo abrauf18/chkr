@@ -28,19 +28,18 @@ interface Admin {
   id: number;
   name: string;
   email: string;
-  status: string;
+  phoneNumber: string;
 }
 
 const adminData: Admin[] = [
-  { id: 1, name: "Ralph Edwards", email: "dolores.chambers@example.com", status: "Active" },
-  { id: 2, name: "Floyd Miles", email: "debbie.baker@example.com", status: "In Active" },
-  { id: 3, name: "Darrell Steward", email: "nevaeh.simmons@example.com", status: "Active" },
-  { id: 4, name: "Jane Cooper", email: "willie.jennings@example.com", status: "Active" },
-  { id: 5, name: "Kristin Watson", email: "willie.jennings@example.com", status: "In Active" },
-  { id: 6, name: "Albert Flores", email: "nevaeh.simmons@example.com", status: "Active" },
-  { id: 7, name: "Devon Lane", email: "nathan.roberts@example.com", status: "In Active" },
-  { id: 8, name: "Arlene McCoy", email: "jessica.hanson@example.com", status: "Active" },
-  { id: 9, name: "Ralph Edwards", email: "felicia.reid@example.com", status: "Active" },
+  { id: 1, name: "Ralph Edwards", email: "dolores.chambers@example.com", phoneNumber:"(123) 9449494" },
+  { id: 2, name: "Floyd Miles", email: "debbie.baker@example.com", phoneNumber:"74839202"},
+  { id: 3, name: "Darrell Steward", email: "nevaeh.simmons@example.com", phoneNumber:"74839202" },
+  { id: 4, name: "Jane Cooper", email: "willie.jennings@example.com", phoneNumber:"74839202" },
+  { id: 5, name: "Kristin Watson", email: "willie.jennings@example.com", phoneNumber:"74839202" },
+  { id: 6, name: "Albert Flores", email: "nevaeh.simmons@example.com", phoneNumber:"74839202" },
+  { id: 7, name: "Devon Lane", email: "nathan.roberts@example.com", phoneNumber:"74839202" },
+  { id: 8, name: "Arlene McCoy", email: "jessica.hanson@example.com", phoneNumber:"74839202" },
 ];
 
 const AdminTable: React.FC = () => {
@@ -87,7 +86,7 @@ const AdminTable: React.FC = () => {
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span className="text-black font-semibold">Status</span>
+                <span className="text-black font-semibold">Phone Number</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>
@@ -109,15 +108,16 @@ const AdminTable: React.FC = () => {
                 </div>
               </TableCell>
               <TableCell>{admin.email}</TableCell>
-              <TableCell>
+              <TableCell>{admin.phoneNumber}</TableCell>
+              {/* <TableCell>
                 <div className={`flex justify-center items-center gap-2 border-2 p-1 w-[6rem] rounded-lg bg-white ${admin.status === "Active" ? 'bg-green-500' : 'bg-red-500'}`}>
                   <div className={`rounded-full w-2 h-2 ${admin.status === "Active" ? 'bg-green-500' : 'bg-red-500'}`}></div>
                   <span>{admin.status}</span>
                 </div>
-              </TableCell>
+              </TableCell> */}
               <TableCell>
                 <div className='flex gap-2'>
-                  <EditAdmin/>
+                  <EditAdmin isAdmin={true} isEmployee={false} />
                  <DeleteModal/>
                 <DisableModal/>
                 </div>
