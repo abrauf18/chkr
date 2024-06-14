@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,20 @@ import { ErrorMessage } from "@hookform/error-message";
 import { InviteUserAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
+import { Users } from "@/lib/interfaces";
 
-export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
+export default function EmployeeForm({
+  isEdit,
+  currentUser,
+}: {
+  isEdit?: boolean;
+  currentUser?: Users;
+}) {
   const [isloading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EmployeeSchema),
@@ -42,6 +50,17 @@ export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
       setIsLoading(false);
     }
   });
+  const setUserValue = () => {
+    setValue("employeeFirstName", currentUser?.first_name);
+    setValue("employeeLastName", currentUser?.last_name);
+    setValue("email", currentUser?.email);
+    setValue("phoneNumber", currentUser?.contact_number);
+  };
+  useEffect(() => {
+    if (isEdit) {
+      setUserValue();
+    }
+  }, []);
 
   return (
     <form onSubmit={onSubmit}>
@@ -154,7 +173,11 @@ export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
         )}
         {isEdit && (
           <div className="flex justify-between items-center mt-3">
-            <Button className="bg-gray-100 text-black rounded-3xl">
+            <Button
+              className="bg-gray-100 text-black rounded-3xl"
+              type="button"
+              onClick={() => setUserValue()}
+            >
               Discard Changes
             </Button>
             <Button className="rounded-3xl text-white" type="submit">

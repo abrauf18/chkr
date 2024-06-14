@@ -9,3 +9,5 @@ export const camelToSnakeCase = (str: string) => {
   return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 };
 
+export const ITEMS_PER_PAGE = 6;
+

@@ -1,111 +1,28 @@
 "use client";
 import React, { useState } from "react";
-import AddEmployee from "./add-employee";
 import EmployeeTable from "./employe-table";
-import DashboardHeader from "@/components/shared/dashboard-header";
-import AdminHeader from "@/components/shared/admin-header";
+import { ITEMS_PER_PAGE } from "@/lib/utils";
+import { Users } from "@/lib/interfaces";
 
-export interface Employee {
-  name: string;
-  email: string;
-  phone: string;
-}
-
-const employees: Employee[] = [
-  {
-    name: "Ayesha Khan",
-    email: "asha@gmai.com",
-    phone: "(629) 555-0129",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "(555) 555-5555",
-  },
-  {
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "(555) 555-1234",
-  },
-  {
-    name: "Michael Lee",
-    email: "michael.lee@example.com",
-    phone: "(555) 555-6789",
-  },
-  {
-    name: "Emma Brown",
-    email: "emma.brown@example.com",
-    phone: "(555) 555-9876",
-  },
-  {
-    name: "David Johnson",
-    email: "david.johnson@example.com",
-    phone: "(555) 555-3456",
-  },
-  {
-    name: "Sophia Wilson",
-    email: "sophia.wilson@example.com",
-    phone: "(555) 555-7890",
-  },
-  {
-    name: "William Anderson",
-    email: "william.anderson@example.com",
-    phone: "(555) 555-2345",
-  },
-  {
-    name: "Olivia Martinez",
-    email: "olivia.martinez@example.com",
-    phone: "(555) 555-5678",
-  },
-  {
-    name: "James Taylor",
-    email: "james.taylor@example.com",
-    phone: "(555) 555-4321",
-  },
-  {
-    name: "David Johnson",
-    email: "david.johnson@example.com",
-    phone: "(555) 555-3456",
-  },
-  {
-    name: "Sophia Wilson",
-    email: "sophia.wilson@example.com",
-    phone: "(555) 555-7890",
-  },
-  {
-    name: "William Anderson",
-    email: "william.anderson@example.com",
-    phone: "(555) 555-2345",
-  },
-  {
-    name: "Olivia Martinez",
-    email: "olivia.martinez@example.com",
-    phone: "(555) 555-5678",
-  },
-  {
-    name: "James Taylor",
-    email: "james.taylor@example.com",
-    phone: "(555) 555-4321",
-  },
-  // Add more employee objects as needed
-];
-
-const ITEMS_PER_PAGE = 10;
-
-export default function Employees() {
+export default function Employees({ employees }: { employees: Users[] }) {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const totalPageCount = Math.ceil(employees.length / ITEMS_PER_PAGE);
+  if (employees?.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <p className="text-2xl">No Employees</p>
+      </div>
+    );
+  }
+  const totalPageCount = Math.ceil(employees?.length / ITEMS_PER_PAGE);
   const indexOfLastEmployee = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstEmployee = indexOfLastEmployee - ITEMS_PER_PAGE;
-  const currentEmployees = employees.slice(
+  const currentEmployees = employees?.slice(
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
 
   return (
     <>
-      <AdminHeader title="Dashboard" isAdmin={true} isSuperAdmin={false} page="addEmployee" />
       <div className="border rounded-2xl my-3">
         <EmployeeTable
           employees={employees}

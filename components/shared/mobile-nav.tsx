@@ -17,10 +17,8 @@ import {
   Receipt,
   Timer,
 } from "lucide-react";
-import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import UserOptions from "./user-options";
-import ChkrLogo from "@/assets/icons/chkr-logo";
 
 const MobileNav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -149,7 +147,6 @@ const MobileNav = () => {
     setActivePath(path);
   };
 
-
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -174,12 +171,13 @@ const MobileNav = () => {
               <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
               </div>
-              <UserOptions/>
+              {/* <UserOptions /> */}
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 w-full ${sidebarOpen ? "block" : "hidden"
-              }`}
+            className={`z-10 absolute top-24 w-full ${
+              sidebarOpen ? "block" : "hidden"
+            }`}
             id="navbar-cta"
           >
             <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
@@ -215,3 +213,4 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+

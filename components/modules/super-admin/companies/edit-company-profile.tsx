@@ -19,7 +19,7 @@ export default function EditCompanyProfile() {
             Fill out the Company Information
           </h1>
           <hr className="my-3" />
-          <CompanyInformation
+          {/* <CompanyInformation
             companyinfo={{
               company_name: "Company Name",
               firm_name: "A",
@@ -28,7 +28,7 @@ export default function EditCompanyProfile() {
               country: "Pakistan",
               company_logo: "",
             }}
-          />
+          /> */}
         </div>
       </div>
     </>

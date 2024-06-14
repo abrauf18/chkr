@@ -75,3 +75,11 @@ export interface EditCompanyInformationInterface {
   country: string;
 }
 
+export interface Users {
+  first_name: string;
+  last_name: string;
+  email: string;
+  contact_number: string;
+  picture?: string;
+}
+
