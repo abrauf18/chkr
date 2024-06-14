@@ -20,7 +20,7 @@ export default function DeleteModal() {
   return (
     <Dialog>
       <DialogTrigger>
-        {pathname === '/company-admin/jobs' || pathname === '/super-admin/admins' ? (
+        {pathname === '/company-admin/jobs' || pathname === '/super-admin/admins' || pathname === '/company-admin/employees' ? (
           <DeleteIcon />
         ) : pathname === '/super-admin/companies' ? (
           <div className="flex items-center p-2 gap-2 hover:bg-gray-100">

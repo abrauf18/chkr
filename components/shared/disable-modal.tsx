@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import CancelCircle from '@/assets/icons/cancel-circle-half-dot'
 import { Button } from '@/components/ui/button'
-import { Ban, Trash2 } from 'lucide-react'
+import { Ban } from 'lucide-react'
 
 export default function DisableModal() {
   const pathname = usePathname();
@@ -24,11 +24,11 @@ export default function DisableModal() {
             <span className="text-gray-600">Disable Company</span>          
           </div>
         )}
-        {pathname === '/super-admin/admins' && (
+        {pathname === '/super-admin/admins'  || pathname === '/company-admin/employees' ? (
           <div className='bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center'>
             <Ban color='#ff8a00' className='w-5 h-5'/>
           </div>
-        )}
+        ): (<></>)}
       </DialogTrigger>
       <DialogContent className="bg-white md:max-w-1/2 mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
