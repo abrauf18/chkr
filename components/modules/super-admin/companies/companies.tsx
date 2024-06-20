@@ -1,6 +1,6 @@
 import React from "react";
 import CompanyCard from "./company-card";
-import CompanyHeader from "./company-header";
+import Header from "@/components/shared/header";
 
 const recentlyAddedCompanies = [
   {
@@ -81,7 +81,7 @@ const allCompanies = [
 export default function Companies() {
   return (
     <>
-      <CompanyHeader title="List of Companies Onboarded" />
+      <Header title="List of Companies Onboarded" />
       <div className="flex flex-col gap-4 my-8">
         <h1>Recently added</h1>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
