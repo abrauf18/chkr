@@ -85,7 +85,7 @@ export default function Dashboard() {
 
   return (
     <div className='flex flex-col mx-auto gap-4'>
-      <h1 className='text-xl font-semibold'>Overview</h1>
+      <h1 className='text-xl font-semibold mt-2'>Overview</h1>
       <div className='flex flex-col lg:flex-row gap-4 w-full mx-auto'>
         {/* Overview cards here */}
         <div className='flex flex-col w-full bg-white rounded-3xl py-8 px-6 gap-6'>
