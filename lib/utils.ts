@@ -11,3 +11,8 @@ export const camelToSnakeCase = (str: string) => {
 
 export const ITEMS_PER_PAGE = 6;
 
+export const commonFilterQueries = {
+  'Oldest-Newest' : {order: 'oldest'},
+  'Newest-Oldest' : {order: 'newest'},
+  'a-z' : {sort: 'a-z'}
+}

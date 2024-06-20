@@ -11,8 +11,10 @@ export const metadata: Metadata = {
     "Manage your employees on CHKR. View employee information, add employees, and track performance from your company admin dashboard.",
 };
 
-export default async function page() {
-  const employees = await UsersAction();
+export default async function page({ searchParams }: { searchParams: { order: string, sort: string } })
+  { 
+  const {order, sort} = searchParams
+  const employees = await UsersAction({ order, sort }); 
   return (
     <>
       <DashboardHeader title="" />

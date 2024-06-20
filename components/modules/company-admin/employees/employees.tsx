@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import EmployeeTable from "./employe-table";
-import { ITEMS_PER_PAGE } from "@/lib/utils";
+import { ITEMS_PER_PAGE, commonFilterQueries } from "@/lib/utils";
 import { Users } from "@/lib/interfaces";
 
 export default function Employees({ employees }: { employees: Users[] }) {

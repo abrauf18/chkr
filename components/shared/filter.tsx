@@ -7,24 +7,37 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 type OptionType = 'alphabetically' | 'old' | 'new';
 
-export default function Filter() {
+export default function Filter({ searchParams }: { searchParams: { order: string, sort: string }}) {
   const [open, setOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<{ [key in OptionType]: boolean }>({
-    alphabetically: false,
-    old: false,
-    new: false
-  });
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
+  const params = new URLSearchParams(searchParams);
+  const {push} = useRouter();
 
-  const toggleOption = (option: OptionType) => {
-    setSelectedOptions({
-      alphabetically: false,
-      old: false,
-      new: false,
-      [option]: true,
-    });
+  const toggleOption = async (option: OptionType) => {
+    setSelectedOption(option);
+
+    params.delete('order');
+    params.delete('sort');
+
+    switch (option) {
+      case 'alphabetically':
+        params.set('sort', 'a-z');
+        break;
+      case 'new':
+        params.set('order', 'newest');
+        break;
+      case 'old':
+        params.set('order', 'oldest');
+        break;
+      default:
+        break;
+    }
+
+    await push(`?${params.toString()}`);
   };
 
   return (
@@ -46,7 +59,7 @@ export default function Filter() {
           <div
             className={cn(
               'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.alphabetically && 'bg-primary'
+              selectedOption === "alphabetically" && 'bg-primary'
             )}
           >
             <Check className='w-3 h-3' color='white' strokeWidth={5} />
@@ -60,7 +73,7 @@ export default function Filter() {
           <div
             className={cn(
               'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.new && 'bg-primary'
+              selectedOption === "new" && 'bg-primary'
             )}
           >
             <Check className='w-3 h-3' color='white' strokeWidth={5} />
@@ -74,7 +87,7 @@ export default function Filter() {
           <div
             className={cn(
               'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.old && 'bg-primary'
+              selectedOption === 'old' && 'bg-primary'
             )}
           >
             <Check className='w-3 h-3' color='white' strokeWidth={5} />
