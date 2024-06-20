@@ -2,9 +2,9 @@
 
 import { auth } from "@/auth";
 
-export const UsersAction = async () => {
+export const UsersAction = async ({ order, sort } : {order : string, sort : string}) => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user?order=${order}&sort=${sort}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
