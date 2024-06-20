@@ -55,7 +55,7 @@ export default auth(async (req) => {
 
   if (isPublicRoute && isAuthenticated) {
     const targetUrl = new URL(`/${role}/dashboard`, nextUrl);
-    if (role === "admin" || role === "superadmin") {
+    if (role === "admin" || role === "super-admin") {
       targetUrl.pathname = `/${role}/subscription`;
     }
     if (nextUrl.pathname !== targetUrl.pathname) {

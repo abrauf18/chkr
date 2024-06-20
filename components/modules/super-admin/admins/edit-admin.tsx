@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -23,8 +25,13 @@ export default function EditAdmin({
   isEmployee,
   currentUser,
 }: Editprops) {
+  const [open, setOpen] = useState(false);
+  const handleSetState = (newState: boolean) => {
+    setOpen(newState);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <EditIcon />
       </DialogTrigger>
@@ -36,8 +43,20 @@ export default function EditAdmin({
             <hr className="mt-6" />
           </DialogTitle>
           <DialogDescription>
-            {isAdmin && <AdminForm isEdit currentUser={currentUser} />}
-            {isEmployee && <EmployeeForm currentUser={currentUser} isEdit />}
+            {isAdmin && (
+              <AdminForm
+                isEdit
+                currentUser={currentUser}
+                handleSetState={handleSetState}
+              />
+            )}
+            {isEmployee && (
+              <EmployeeForm
+                isEdit
+                currentUser={currentUser}
+                handleSetState={handleSetState}
+              />
+            )}
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

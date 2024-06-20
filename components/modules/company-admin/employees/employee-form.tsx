@@ -16,9 +16,11 @@ import { Users } from "@/lib/interfaces";
 export default function EmployeeForm({
   isEdit,
   currentUser,
+  handleSetState,
 }: {
   isEdit?: boolean;
   currentUser?: Users;
+  handleSetState?: (value: boolean) => void;
 }) {
   const [isloading, setIsLoading] = useState(false);
   const {
@@ -47,6 +49,7 @@ export default function EmployeeForm({
     } catch (error) {
       return toast.error((error as Error)?.message);
     } finally {
+      handleSetState && handleSetState(false);
       setIsLoading(false);
     }
   });
@@ -176,7 +179,10 @@ export default function EmployeeForm({
             <Button
               className="bg-gray-100 text-black rounded-3xl"
               type="button"
-              onClick={() => setUserValue()}
+              onClick={() => {
+                setUserValue();
+                handleSetState && handleSetState(false);
+              }}
             >
               Discard Changes
             </Button>
