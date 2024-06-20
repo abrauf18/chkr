@@ -11,8 +11,9 @@ export const metadata: Metadata = {
     "A central location to manage all admin users within your system. Grant permissions, control access, and oversee admin activity.",
 };
 
-export default async function ManageAdminsPage() {
-  const admins = await UsersAction();
+export default async function ManageAdminspage({ searchParams }: { searchParams: { order: string, sort: string } }){
+  const {order, sort} = searchParams
+  const admins = await  UsersAction({ order, sort });
   return (
     <>
       <DashboardHeader title="Manage Admins" />
