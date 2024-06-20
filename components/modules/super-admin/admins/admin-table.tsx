@@ -17,8 +17,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ArrowDown, Ban } from "lucide-react";
-import DeleteIcon from "@/assets/icons/delete-icon";
-import EditIcon from "@/assets/icons/edit-icon";
 import Image from "next/image";
 import DeleteModal from "./delete-modal";
 import EditAdmin from "./edit-admin";

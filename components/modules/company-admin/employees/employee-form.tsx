@@ -12,6 +12,8 @@ import { InviteUserAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
 import { Users } from "@/lib/interfaces";
+import { EditUserAction } from "@/actions/users/user-actions";
+import action from "@/app/action";
 
 export default function EmployeeForm({
   isEdit,
@@ -23,18 +25,71 @@ export default function EmployeeForm({
   handleSetState?: (value: boolean) => void;
 }) {
   const [isloading, setIsLoading] = useState(false);
+  const [initialValues, setInitialValues] = useState<any>({});
   const {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EmployeeSchema),
   });
 
+  const setUserValue = () => {
+    const initialData = {
+      employeeFirstName: currentUser?.first_name,
+      employeeLastName: currentUser?.last_name,
+      email: currentUser?.email,
+      phoneNumber: currentUser?.contact_number,
+    };
+    setValue("employeeFirstName", initialData.employeeFirstName);
+    setValue("employeeLastName", initialData?.employeeLastName);
+    setValue("email", initialData?.email);
+    setValue("phoneNumber", initialData?.phoneNumber);
+    setInitialValues(initialData);
+  };
+  useEffect(() => {
+    if (isEdit && currentUser) {
+      setUserValue();
+    }
+  }, []);
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsLoading(true);
+      if(isEdit && currentUser){
+        const changes: any = {};
+        const currentValues = getValues()
+     
+
+      const fieldMapping: any = {
+        employeeFirstName: "first_name",
+        employeeLastName: "last_name",
+        email: "email",
+        phoneNumber: "contact_number",
+      };
+
+      Object.keys(currentValues).forEach((key)=> {
+        const mappedKey = fieldMapping[key];
+        if (currentValues[key] !== initialValues[key]) {
+          changes[mappedKey] = currentValues[key];
+        }
+      });
+
+      if (Object.keys(changes).length === 0) {
+        setIsLoading(false);
+        return toast.error("No changes detected.");
+      }
+
+        const result = await EditUserAction(currentUser.id, changes);
+        if (result.statusCode === 200) {
+          action("allUsers");
+          return toast.success(result.message);
+        }
+        return toast.error(result.message);
+      }
+    
       const { employeeFirstName, employeeLastName, email, phoneNumber } = data;
       const result = await InviteUserAction({
         first_name: employeeFirstName,
@@ -43,6 +98,7 @@ export default function EmployeeForm({
         contact_number: phoneNumber,
       });
       if (result.statusCode === 200) {
+        action("allUsers")
         return toast.success(result.message);
       }
       return toast.error(result.message);
@@ -53,17 +109,8 @@ export default function EmployeeForm({
       setIsLoading(false);
     }
   });
-  const setUserValue = () => {
-    setValue("employeeFirstName", currentUser?.first_name);
-    setValue("employeeLastName", currentUser?.last_name);
-    setValue("email", currentUser?.email);
-    setValue("phoneNumber", currentUser?.contact_number);
-  };
-  useEffect(() => {
-    if (isEdit) {
-      setUserValue();
-    }
-  }, []);
+
+
 
   return (
     <form onSubmit={onSubmit}>
