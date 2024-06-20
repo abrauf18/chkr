@@ -8,20 +8,23 @@ import {
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown } from 'lucide-react';
 
-type OptionType = 'alphabetically' | 'time';
+type OptionType = 'alphabetically' | 'old' | 'new';
 
 export default function Filter() {
   const [open, setOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<{ [key in OptionType]: boolean }>({
     alphabetically: false,
-    time: false,
+    old: false,
+    new: false
   });
 
   const toggleOption = (option: OptionType) => {
-    setSelectedOptions(prevState => ({
-      ...prevState,
-      [option]: !prevState[option]
-    }));
+    setSelectedOptions({
+      alphabetically: false,
+      old: false,
+      new: false,
+      [option]: true,
+    });
   };
 
   return (
@@ -52,17 +55,31 @@ export default function Filter() {
         </div>
         <div
           className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
-          onClick={() => toggleOption('time')}
+          onClick={() => toggleOption('new')}
         >
           <div
             className={cn(
               'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.time && 'bg-primary'
+              selectedOptions.new && 'bg-primary'
             )}
           >
             <Check className='w-3 h-3' color='white' strokeWidth={5} />
           </div>
           Newest - Oldest
+        </div>
+        <div
+          className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
+          onClick={() => toggleOption('old')}
+        >
+          <div
+            className={cn(
+              'w-4 h-4 rounded-md border flex items-center px-[2px]',
+              selectedOptions.old && 'bg-primary'
+            )}
+          >
+            <Check className='w-3 h-3' color='white' strokeWidth={5} />
+          </div>
+          Oldest - Newest
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
