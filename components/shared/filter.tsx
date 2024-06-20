@@ -8,13 +8,13 @@ import {
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown } from 'lucide-react';
 
-type OptionType = 'alphabetically' | 'subscription';
+type OptionType = 'alphabetically' | 'time';
 
 export default function Filter() {
   const [open, setOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<{ [key in OptionType]: boolean }>({
     alphabetically: false,
-    subscription: false,
+    time: false,
   });
 
   const toggleOption = (option: OptionType) => {
@@ -35,7 +35,7 @@ export default function Filter() {
         <span>Filter</span>
         <ChevronDown className='w-4 h-4' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border z-[10] menu-shadow rounded-[16px]'>
+      <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border z-[10] menu-shadow rounded-[16px] mr-2'>
         <div
           className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
           onClick={() => toggleOption('alphabetically')}
@@ -52,17 +52,17 @@ export default function Filter() {
         </div>
         <div
           className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
-          onClick={() => toggleOption('subscription')}
+          onClick={() => toggleOption('time')}
         >
           <div
             className={cn(
               'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.subscription && 'bg-primary'
+              selectedOptions.time && 'bg-primary'
             )}
           >
             <Check className='w-3 h-3' color='white' strokeWidth={5} />
           </div>
-          Subscription Type
+          Newest - Oldest
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
