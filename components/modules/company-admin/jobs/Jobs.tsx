@@ -93,11 +93,11 @@ const Jobs = () => {
     },
   ];
 
-  const pendingJobsData = [
+  const completedJobsData = [
     {
       userName: "Jane Smith",
       location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
+      status: "Completed",
       phoneNumber: "(987) 654-3210",
       dateTime: "25 May 2024 10:00 am",
       service: "Office Cleaning",
@@ -135,7 +135,7 @@ const Jobs = () => {
   const tabData = [
     { id: 1, text: "All Jobs", content: allJobsData },
     { id: 2, text: "Ongoing", content: ongoingJobsData },
-    { id: 3, text: "Pending", content: pendingJobsData },
+    { id: 3, text: "Completed", content: completedJobsData },
     { id: 4, text: "Cancelled", content: cancelledJobsData },
   ];
 
