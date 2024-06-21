@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
@@ -15,8 +15,9 @@ import {
 import { useFormContext, useFieldArray } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { ErrorMessage } from "@hookform/error-message";
-import { UsersAction } from "@/actions/users/user-actions";
+import { SearchUserAction, UsersAction } from "@/actions/users/user-actions";
 import { Users } from "@/lib/interfaces";
+import { useStateDebounced } from "@/hooks/use-state-debounced";
 
 export interface User {
   id: number;
@@ -24,7 +25,6 @@ export interface User {
   status: string;
   amount?: number;
 }
-
 
 const users: User[] = [
   { id: 1, username: "John Doe", status: "Available" },
@@ -51,12 +51,12 @@ export default function AssignJob({
     clearErrors,
   } = useFormContext<Record<string, any>>();
 
-  const[employees, setEmployees] = useState<Users[]>([])
+  const [employees, setEmployees] = useState<Users[]>([]);
 
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await UsersAction({ order: '', sort: '' });
+        const response = await UsersAction({ order: "", sort: "" });
         setEmployees(response);
       } catch (error) {
         console.error("Error fetching services:", error);
@@ -64,10 +64,14 @@ export default function AssignJob({
     };
     fetchEmployees();
   }, []);
-  console.log(employees)
+  console.log(employees);
 
   const selectedUsers = watch("selectedUsers");
   const { jobData, setJobData } = useJobStore();
+  const [inputValue, debouncedInputValue, setInputValue] = useStateDebounced(
+    "",
+    100
+  );
 
   const handleCheckboxChange = async () => {
     const isValid = await trigger(["selectedUsers"]);
@@ -91,13 +95,17 @@ export default function AssignJob({
     );
   };
 
+  useEffect(() => {
+    if (debouncedInputValue) {
+      SearchUserAction(debouncedInputValue).then((response) => {
+        setEmployees(response);
+      });
+    }
+  }, [debouncedInputValue]);
+
   function handleSearch(term: string) {
-    const regex = new RegExp(term, 'i'); 
-    const filteredEmployees =  employees.filter(employee => {
-        return regex.test(employee.first_name);
-    });
-    setEmployees(filteredEmployees);
-} 
+    setInputValue(term);
+  }
 
   const handleChange = (user: User) => {
     const users = getValues("selectedUsers");
@@ -121,7 +129,6 @@ export default function AssignJob({
     }
   };
 
-  
   return (
     <div>
       <div className="flex flex-row mobile:flex-col justify-between w-full mb-5 mx-auto">
@@ -130,11 +137,11 @@ export default function AssignJob({
             className="bg-[#F9F8F8] pr-10"
             id="text"
             type="text"
+            value={inputValue}
             placeholder="Search by Employee name"
-            onChange= {(e) => {
+            onChange={(e) => {
               handleSearch(e.target.value);
             }}
-          
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <Search />
@@ -177,9 +184,9 @@ export default function AssignJob({
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
                   <div
-                    // className={`rounded-full h-2 w-2 ${
-                    //   user.status == "Available" ? "bg-green-500" : "bg-primary"
-                    // }`}
+                  // className={`rounded-full h-2 w-2 ${
+                  //   user.status == "Available" ? "bg-green-500" : "bg-primary"
+                  // }`}
                   ></div>
                   <span className="font-medium text-sm mobile:hidden">
                     {/* {user.status} */}
