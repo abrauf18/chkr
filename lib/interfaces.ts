@@ -84,3 +84,8 @@ export interface Users {
   picture?: string;
 }
 
+export interface ServicesInterface {
+  id: number;
+  service_name: string;
+  firm_id: number;
+}
