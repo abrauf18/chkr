@@ -53,24 +53,23 @@ export default function AssignJob({
 
   const [employees, setEmployees] = useState<Users[]>([]);
 
+  const fetchEmployees = async () => {
+    try {
+      const response = await UsersAction({ order: "", sort: "" });
+      setEmployees(response);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await UsersAction({ order: "", sort: "" });
-        setEmployees(response);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
-    };
     fetchEmployees();
   }, []);
-  console.log(employees);
 
   const selectedUsers = watch("selectedUsers");
   const { jobData, setJobData } = useJobStore();
   const [inputValue, debouncedInputValue, setInputValue] = useStateDebounced(
     "",
-    100
+    300
   );
 
   const handleCheckboxChange = async () => {
@@ -100,6 +99,8 @@ export default function AssignJob({
       SearchUserAction(debouncedInputValue).then((response) => {
         setEmployees(response);
       });
+    } else {
+      fetchEmployees();
     }
   }, [debouncedInputValue]);
 

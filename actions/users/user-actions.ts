@@ -51,6 +51,7 @@ export const EditUserAction = async (id: number, data: any) => {
 
 export const SearchUserAction = async (search: string) => {
   const session = await auth();
+  console.log(search);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/user/search`,
     {
