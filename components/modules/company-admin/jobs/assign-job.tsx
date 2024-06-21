@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Calendar, ChevronDown, Search } from "lucide-react";
@@ -14,6 +15,8 @@ import {
 import { useFormContext, useFieldArray } from "react-hook-form";
 import useJobStore from "@/store/job-store";
 import { ErrorMessage } from "@hookform/error-message";
+import { UsersAction } from "@/actions/users/user-actions";
+import { Users } from "@/lib/interfaces";
 
 export interface User {
   id: number;
@@ -21,6 +24,7 @@ export interface User {
   status: string;
   amount?: number;
 }
+
 
 const users: User[] = [
   { id: 1, username: "John Doe", status: "Available" },
@@ -47,6 +51,21 @@ export default function AssignJob({
     clearErrors,
   } = useFormContext<Record<string, any>>();
 
+  const[employees, setEmployees] = useState<Users[]>([])
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await UsersAction({ order: '', sort: '' });
+        setEmployees(response);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+    fetchEmployees();
+  }, []);
+  console.log(employees)
+
   const selectedUsers = watch("selectedUsers");
   const { jobData, setJobData } = useJobStore();
 
@@ -61,7 +80,6 @@ export default function AssignJob({
 
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const indexOfLastUser = currentPage * itemsPerPage;
   const indexOfFirstUser = indexOfLastUser - itemsPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
@@ -72,6 +90,14 @@ export default function AssignJob({
       (selectedUser: { id: number }) => selectedUser.id === id
     );
   };
+
+  function handleSearch(term: string) {
+    const regex = new RegExp(term, 'i'); 
+    const filteredEmployees =  employees.filter(employee => {
+        return regex.test(employee.first_name);
+    });
+    setEmployees(filteredEmployees);
+} 
 
   const handleChange = (user: User) => {
     const users = getValues("selectedUsers");
@@ -94,29 +120,25 @@ export default function AssignJob({
       }
     }
   };
+
+  
   return (
     <div>
       <div className="flex flex-row mobile:flex-col justify-between w-full mb-5 mx-auto">
-        <div className="relative flex items-center w-1/2 mobile:w-full">
+        <div className="relative flex items-center w-full mobile:w-full">
           <Input
             className="bg-[#F9F8F8] pr-10"
             id="text"
             type="text"
             placeholder="Search by Employee name"
+            onChange= {(e) => {
+              handleSearch(e.target.value);
+            }}
+          
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <Search />
           </div>
-        </div>
-        <div className="flex items-center gap-2 mobile:mt-4">
-          <Button className="bg-white mobile:w-full border rounded-xl p-4 text-sm lg:text-base">
-            Select Date
-            <Calendar className="ml-2" />
-          </Button>
-          <Button className="bg-white mobile:w-full border rounded-xl p-4 text-sm lg:text-base">
-            Filter
-            <ChevronDown className="ml-2 md:w-[1rem] md:h-[1rem] w-[1rem] h-[1rem]" />
-          </Button>
         </div>
       </div>
       <p className="text-sm text-red-500 text-right">
@@ -124,10 +146,10 @@ export default function AssignJob({
         <ErrorMessage errors={errors} name="selectedUsers" />
       </p>
       <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl">
-        {currentUsers.map((user, index) => (
+        {employees.map((employees, index) => (
           <>
             <div
-              key={user.id}
+              key={employees.id}
               className={`px-4 ${
                 index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
               }`}
@@ -136,30 +158,31 @@ export default function AssignJob({
                 <div className="flex justify-center items-center">
                   <input
                     type="checkbox"
-                    onChange={() => handleChange(user)}
-                    checked={isUserSelected(user.id)}
-                    value={user.username}
+                    // onChange={() => handleChange(employees)}
+                    // checked={isUserSelected(user.id)}
+                    // value={user.username}
                   />
-                  <div className="h-10 w-10 ml-10 mr-2">
+                  <div className="ml-10 mr-2 rounded-full">
                     <Image
-                      src="/images/avatar.svg"
+                      src={employees?.picture as string}
                       alt="user"
-                      width={3}
-                      height={3}
+                      width={30}
+                      height={30}
+                      className="rounded-full"
                     />
                   </div>
                   <span className="font-semibold whitespace-nowrap">
-                    {user.username}
+                    {employees.first_name} {employees.last_name}
                   </span>
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
                   <div
-                    className={`rounded-full h-2 w-2 ${
-                      user.status == "Available" ? "bg-green-500" : "bg-primary"
-                    }`}
+                    // className={`rounded-full h-2 w-2 ${
+                    //   user.status == "Available" ? "bg-green-500" : "bg-primary"
+                    // }`}
                   ></div>
                   <span className="font-medium text-sm mobile:hidden">
-                    {user.status}
+                    {/* {user.status} */}
                   </span>
                 </div>
               </div>
