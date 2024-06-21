@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -14,12 +14,14 @@ import {
 import useJobStore from "@/store/job-store";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { ServiceAction } from "@/actions/jobs/job-action";
+import { ServicesInterface } from "@/lib/interfaces";
 
-const service = ["A", "B", " C", "D"]; // Example list of company types
 interface Props {
   handleNextStep: () => void;
 }
 const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
+  const [services, setServices] = useState<ServicesInterface[]>([]);
   const { setJobData } = useJobStore();
   const {
     register,
@@ -62,6 +64,18 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
     }
   };
 
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await ServiceAction();
+        setServices(response.data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+    fetchServices();
+  }, []);
+
   return (
     <>
       <div className="mb-4 w-full relative">
@@ -72,9 +86,9 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             className="w-full pl-3 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
             <option value="">Select Service</option>
-            {service.map((service) => (
-              <option key={service} value={service}>
-                {service}
+            {services.map((service) => (
+              <option key={service.id} value={service.id}>
+                {service.service_name}
               </option>
             ))}
           </select>
