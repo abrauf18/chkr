@@ -104,3 +104,4 @@ export interface JobsInterface {
     price: number;
   }[];
 }
+

@@ -47,7 +47,7 @@ export default function AssignJob({
     fetchEmployees();
   }, []);
 
-  const selectedUsers = watch("selectedUsers");
+  const selectedUsers = watch("selected_users");
   const { jobData, setJobData } = useJobStore();
   const [inputValue, debouncedInputValue, setInputValue] = useStateDebounced(
     "",
@@ -55,10 +55,10 @@ export default function AssignJob({
   );
 
   const handleCheckboxChange = async () => {
-    const isValid = await trigger(["selectedUsers"]);
+    const isValid = await trigger(["selected_users"]);
     if (isValid) {
-      const data = getValues("selectedUsers");
-      setJobData({ ...jobData, selectedUsers: data });
+      const data = getValues("selected_users");
+      setJobData({ ...jobData, selected_users: data });
       handleNextStep();
     }
   };
@@ -91,23 +91,23 @@ export default function AssignJob({
   }
 
   const handleChange = (user: Users) => {
-    const users = getValues("selectedUsers");
+    const users = getValues("selected_users");
     if (isUserSelected(user.id)) {
       setValue(
-        "selectedUsers",
+        "selected_users",
         users.filter(
           (selectedUser: { id: number }) => selectedUser.id !== user.id
         )
       );
     } else {
-      setValue("selectedUsers", [
+      setValue("selected_users", [
         ...users,
         {
           ...user,
         },
       ]);
       if (errors.selectedUsers) {
-        clearErrors("selectedUsers");
+        clearErrors("selected_users");
       }
     }
   };
@@ -133,7 +133,7 @@ export default function AssignJob({
       </div>
       <p className="text-sm text-red-500 text-right">
         {" "}
-        <ErrorMessage errors={errors} name="selectedUsers" />
+        <ErrorMessage errors={errors} name="selected_users" />
       </p>
       <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl">
         {employees.map((employees, index) => (
@@ -147,7 +147,7 @@ export default function AssignJob({
               <div className="flex justify-between py-2 px-4">
                 <div className="flex justify-center items-center">
                   <input
-                    className = 'custom-check'
+                    className="custom-check"
                     type="checkbox"
                     onChange={() => handleChange(employees)}
                     checked={isUserSelected(employees.id)}

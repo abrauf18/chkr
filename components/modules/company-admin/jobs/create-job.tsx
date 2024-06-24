@@ -16,13 +16,12 @@ import JobPayment from "./job-payment";
 import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { Jobs, JobSchema } from "@/lib/types";
+import { JobSchema } from "@/lib/types";
 import { CreateJobAction } from "@/actions/jobs/job-action";
 import { toast } from "react-toastify";
-import { JobsInterface } from "@/lib/interfaces";
 
 export default function CreateJob() {
-  const { currentStep, setCurrentStep, jobData, removeCreateJobData} =
+  const { currentStep, setCurrentStep, jobData, removeCreateJobData } =
     useJobStore();
 
   const methods = useForm({
@@ -114,21 +113,20 @@ export default function CreateJob() {
     }
   };
 
-  const onSubmit = async (data: JobsInterface) => {
+  const onSubmit = async (data: any) => {
     try {
       const result = await CreateJobAction(data);
       if (result && result.statusCode === 201) {
-        toast.success(result.message);
-        // methods.reset();
-        // removeCreateJobData();
+        return toast.success(result.message);
       } else {
-        toast.error(
-          result?.message || "Failed to create job. Please try again."
-        );
+        toast.error(result?.message);
       }
     } catch (error) {
       console.error("Error creating job:", error);
       toast.error("An error occurred while creating the job.");
+    } finally {
+      methods.reset();
+      removeCreateJobData();
     }
   };
 
@@ -174,3 +172,4 @@ export default function CreateJob() {
     </>
   );
 }
+

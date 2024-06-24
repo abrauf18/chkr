@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { auth } from "@/auth";
 import { JobsInterface } from "@/lib/interfaces";
 
@@ -17,6 +17,7 @@ export const ServiceAction = async () => {
 };
 
 export const CreateJobAction = async (data: JobsInterface) => {
+  console.log(data);
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/job/create`,
@@ -27,9 +28,13 @@ export const CreateJobAction = async (data: JobsInterface) => {
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        service_id: +data.service_id,
+      }),
     }
   );
   const result = await response.json();
-  return result.data;
+  return result;
 };
+
