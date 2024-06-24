@@ -109,8 +109,8 @@ export default function CreateJob() {
 
   const onSubmit = (data: Jobs) => {
     console.log(data);
-    methods.reset();
-    removeCreateJobData();
+    // methods.reset();
+    // removeCreateJobData();
   };
 
   return (

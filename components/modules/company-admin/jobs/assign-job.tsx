@@ -147,6 +147,7 @@ export default function AssignJob({
               <div className="flex justify-between py-2 px-4">
                 <div className="flex justify-center items-center">
                   <input
+                    className = 'custom-check'
                     type="checkbox"
                     onChange={() => handleChange(employees)}
                     checked={isUserSelected(employees.id)}
