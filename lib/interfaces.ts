@@ -90,3 +90,17 @@ export interface ServicesInterface {
   service_name: string;
   firm_id: number;
 }
+
+export interface JobsInterface {
+  service_id: string;
+  customer_name: string;
+  location: string;
+  phone_number: string;
+  date_time: string;
+  price: number; // Can be improved to number if the price is always numeric
+  description: string;
+  selected_users: {
+    user_id: number;
+    price: number;
+  }[];
+}
