@@ -17,10 +17,24 @@ import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Jobs, JobSchema } from "@/lib/types";
+import { CreateJobAction } from "@/actions/jobs/job-action";
+import { toast } from "react-toastify";
+import { JobsInterface } from "@/lib/interfaces";
 
 export default function CreateJob() {
-  const { currentStep, setCurrentStep, jobData, removeCreateJobData } =
+  const { currentStep, setCurrentStep, jobData, removeCreateJobData} =
     useJobStore();
+
+  const methods = useForm({
+    resolver: zodResolver(JobSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: jobData,
+  });
+
+  const { handleSubmit, watch } = methods;
+
+  const watchFormData = watch();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -100,17 +114,22 @@ export default function CreateJob() {
     }
   };
 
-  const methods = useForm({
-    resolver: zodResolver(JobSchema),
-    mode: "onChange",
-    reValidateMode: "onChange",
-    defaultValues: jobData,
-  });
-
-  const onSubmit = (data: Jobs) => {
-    console.log(data);
-    // methods.reset();
-    // removeCreateJobData();
+  const onSubmit = async (data: JobsInterface) => {
+    try {
+      const result = await CreateJobAction(data);
+      if (result && result.statusCode === 201) {
+        toast.success(result.message);
+        // methods.reset();
+        // removeCreateJobData();
+      } else {
+        toast.error(
+          result?.message || "Failed to create job. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("Error creating job:", error);
+      toast.error("An error occurred while creating the job.");
+    }
   };
 
   return (
@@ -144,10 +163,7 @@ export default function CreateJob() {
             </DialogTitle>
             <DialogDescription className="text-black">
               <FormProvider {...methods}>
-                <form
-                  id="create-job-form"
-                  onSubmit={methods.handleSubmit(onSubmit)}
-                >
+                <form id="create-job-form" onSubmit={handleSubmit(onSubmit)}>
                   {renderStep()}
                 </form>
               </FormProvider>
@@ -158,4 +174,3 @@ export default function CreateJob() {
     </>
   );
 }
-
