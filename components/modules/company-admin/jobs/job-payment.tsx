@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, DollarSign } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { User } from "./assign-job";
 import { ErrorMessage } from "@hookform/error-message";
+import { Users } from "@/lib/interfaces";
 
 export default function JobPayment({
   handlePreviousStep,
@@ -22,7 +22,7 @@ export default function JobPayment({
   } = useFormContext();
   const users = watch("selectedUsers");
 
-  const handleChange = (user: User, e: any) => {
+  const handleChange = (user: Users, e: any) => {
     const list = users.map((u: any) => {
       if (u.id === user.id) {
         return { ...u, amount: Number(e.target.value) };
@@ -34,11 +34,12 @@ export default function JobPayment({
     });
   };
   return (
-    <div className="overflow-y-auto max-h-[400px] mt-10 border-2 rounded-xl">
-      <p className="text-sm text-red-500 text-right">
+    <>
+     <p className="text-sm text-red-500 text-right">
         {" "}
         <ErrorMessage errors={errors} name="selectedUsers" />
       </p>
+    <div className="overflow-y-auto max-h-[400px] mt-2 border-2 rounded-xl">
       {Array.isArray(users) &&
         users.map((user) => (
           <div key={user.id} className=" px-4">
@@ -51,14 +52,15 @@ export default function JobPayment({
                 <div className="flex items-center py-4 gap-3">
                   <div className="rounded-full w-12 h-12 mr-2">
                     <Image
-                      src="/images/avatar.svg"
+                      src={user.picture}
                       alt="user"
-                      width={3}
-                      height={3}
+                      width={30}
+                      height={30}
+                      className="rounded-full"
                     />
                   </div>
                   <span className="font-semibold whitespace-nowrap">
-                    {user.username}
+                    {user.first_name} {user.last_name} 
                   </span>
                 </div>
                 <div className="relative flex justify-center items-center">
@@ -72,6 +74,10 @@ export default function JobPayment({
                     placeholder="Enter amount"
                     onChange={(e) => handleChange(user, e)}
                   />
+                  <p className="text-sm text-red-500 mt-1">
+                    {" "}
+                    <ErrorMessage errors={errors} name="amount" />
+                  </p>
                 </div>
               </div>
             </div>
@@ -85,6 +91,7 @@ export default function JobPayment({
         <ArrowRight color="white" size={15} />
       </div>
     </div>
+    </>
   );
 }
 
