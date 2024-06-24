@@ -172,11 +172,17 @@ export const JobSchema = z.object({
         last_name: z.string(),
         picture: z.string(),
         // status: z.string(),
-        amount: z.number().optional(),
+        amount: z.number().optional()
       })
     )
     .min(1, { message: "Select at least one user" }),
-});
+}).refine(data => {
+  const totalAmount = data.selectedUsers.reduce((sum, user) => sum + (user.amount || 0), 0);
+  return totalAmount <= data.payment;
+}, { message: "The total amount assigned exceeds the payment.",
+    path: ["selectedUsers"]  // Custom error path
+ },
+);
 
 export type Jobs = z.infer<typeof JobSchema>;
 
