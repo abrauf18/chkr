@@ -179,3 +179,10 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+
+input[type=checkbox]:checked {
+  background-color: #FF2600 !important;
+  color: #ffffff !important;
+}
+
+.custom-check { filter: hue-rotate(150deg) }
