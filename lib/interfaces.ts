@@ -82,6 +82,7 @@ export interface Users {
   email: string;
   contact_number: string;
   picture?: string;
+  amount?: number;
 }
 
 export interface ServicesInterface {

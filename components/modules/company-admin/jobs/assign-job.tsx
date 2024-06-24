@@ -19,24 +19,6 @@ import { SearchUserAction, UsersAction } from "@/actions/users/user-actions";
 import { Users } from "@/lib/interfaces";
 import { useStateDebounced } from "@/hooks/use-state-debounced";
 
-export interface User {
-  id: number;
-  username: string;
-  status: string;
-  amount?: number;
-}
-
-const users: User[] = [
-  { id: 1, username: "John Doe", status: "Available" },
-  { id: 2, username: "Jane Smith", status: "Assigned" },
-  { id: 3, username: "Michael Lee", status: "Available" },
-  { id: 4, username: "Ayesha Khan", status: "Assigned" },
-  { id: 5, username: "John", status: "Available" },
-  { id: 6, username: "Jane", status: "Assigned" },
-  { id: 7, username: "Michael", status: "Available" },
-  { id: 8, username: "Ayesha ", status: "Assigned" },
-];
-
 export default function AssignJob({
   handleNextStep,
 }: {
@@ -85,7 +67,7 @@ export default function AssignJob({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const indexOfLastUser = currentPage * itemsPerPage;
   const indexOfFirstUser = indexOfLastUser - itemsPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = employees.slice(indexOfFirstUser, indexOfLastUser);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const isUserSelected = (id: number) => {
@@ -108,7 +90,7 @@ export default function AssignJob({
     setInputValue(term);
   }
 
-  const handleChange = (user: User) => {
+  const handleChange = (user: Users) => {
     const users = getValues("selectedUsers");
     if (isUserSelected(user.id)) {
       setValue(
@@ -166,9 +148,9 @@ export default function AssignJob({
                 <div className="flex justify-center items-center">
                   <input
                     type="checkbox"
-                    // onChange={() => handleChange(employees)}
-                    // checked={isUserSelected(user.id)}
-                    // value={user.username}
+                    onChange={() => handleChange(employees)}
+                    checked={isUserSelected(employees.id)}
+                    value={employees.first_name}
                   />
                   <div className="ml-10 mr-2 rounded-full">
                     <Image
@@ -202,7 +184,7 @@ export default function AssignJob({
           <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
           <PaginationContent>
             {Array.from(
-              { length: Math.ceil(users.length / itemsPerPage) },
+              { length: Math.ceil(employees.length / itemsPerPage) },
               (_, i) => (
                 <PaginationItem key={i}>
                   <PaginationLink

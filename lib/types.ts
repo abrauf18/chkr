@@ -168,8 +168,10 @@ export const JobSchema = z.object({
     .array(
       z.object({
         id: z.number(),
-        username: z.string(),
-        status: z.string(),
+        first_name: z.string(),
+        last_name: z.string(),
+        picture: z.string(),
+        // status: z.string(),
         amount: z.number().optional(),
       })
     )
