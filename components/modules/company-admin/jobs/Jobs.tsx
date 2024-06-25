@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AssignedJobCard from "../dashboard/assigned-job-card";
-import DashboardHeader from "@/components/shared/dashboard-header";
 import {
   Pagination,
   PaginationContent,
@@ -11,12 +10,14 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import AdminHeader from "@/components/shared/admin-header";
+import { GetJobsAction } from "@/actions/jobs/job-action";
 
 const ITEMS_PER_PAGE = 2;
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [jobData, setJobData] = useState<any[]>([]);
 
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
@@ -32,111 +33,33 @@ const Jobs = () => {
     return data.slice(startIndex, startIndex + itemsPerPage);
   };
 
-  const allJobsData = [
-    {
-      userName: "Guy Hawkins",
-      location: "4140 Parker Rd. Allentown, New Mexico 31134",
-      status: "Checked-in",
-      phoneNumber: "(603) 555-0123",
-      dateTime: "15 March 2023 7:00 pm",
-      service: "Room Cleaning",
-      payment: "230.00",
-      employeeName: "Ralph Edwards",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Albert Flores",
-      location: "2972 Westheimer Rd. Santa Ana, Illinois 85486 ",
-      status: "Checked-out",
-      phoneNumber: "(603) 555-0123",
-      dateTime: "24 May 2024 8:00 pm",
-      service: "Room Cleaning",
-      payment: "260.00",
-      employeeName: "Roy Edwards",
-      imageurl: "/images/Avatar.svg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await GetJobsAction();
+        console.log(response);
+        setJobData(response);
+      } catch (error) {
+        console.error("Error fetching job data:", error);
+      }
+    };
+    fetchJobs();
+  }, []);
 
-  const ongoingJobsData = [
-    {
-      userName: "John Doe",
-      location: "1234 Elm St. Springfield, IL 62701",
-      status: "Ongoing",
-      phoneNumber: "(123) 456-7890",
-      dateTime: "25 May 2024 9:00 am",
-      service: "House Cleaning",
-      payment: "150.00",
-      employeeName: "Jane Smith",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
+  const filterJobsByStatus = (status: string) => {
+    return jobData.filter(job => job.status === status);
+  };
 
-  const completedJobsData = [
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Completed",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
-
-  const cancelledJobsData = [
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
+  const allJobs = jobData;
+  const ongoingJobs = filterJobsByStatus("pending");
+  const completedJobs = filterJobsByStatus("completed");
+  const cancelledJobs = filterJobsByStatus("cancelled");
 
   const tabData = [
-    { id: 1, text: "All Jobs", content: allJobsData },
-    { id: 2, text: "Ongoing", content: ongoingJobsData },
-    { id: 3, text: "Completed", content: completedJobsData },
-    { id: 4, text: "Cancelled", content: cancelledJobsData },
+    { id: 1, text: "All Jobs", content: allJobs },
+    { id: 2, text: "Ongoing", content: ongoingJobs },
+    { id: 3, text: "Completed", content: completedJobs },
+    { id: 4, text: "Cancelled", content: cancelledJobs },
   ];
 
   const activeTabData = tabData.find((tab) => tab.id === activeTab)?.content || [];
@@ -154,7 +77,7 @@ const Jobs = () => {
             className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
               } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
-             {activeTab === tab.id && (
+            {activeTab === tab.id && (
               <div className="rounded-full w-2 h-2 bg-primary" />
             )}
             <div>
@@ -169,18 +92,18 @@ const Jobs = () => {
         ))}
       </div>
       <div>
-        {paginatedData.map((jobData, index) => (
+        {paginatedData.map((job, index) => (
           <AssignedJobCard
             key={index}
-            userName={jobData.userName}
-            location={jobData.location}
-            status={jobData.status}
-            phoneNumber={jobData.phoneNumber}
-            dateTime={jobData.dateTime}
-            service={jobData.service}
-            payment={jobData.payment}
-            employeeName={jobData.employeeName}
-            imageurl={jobData.imageurl}
+            customer_name={job.customer_name}
+            location={job.location}
+            status={job.status}
+            phone_number={job.phone_number}
+            date_time={job.date_time}
+            service={job.service.service_name}
+            price={job.price}
+            employeeName={job.assigned_jobs[0]?.user ? `${job.assigned_jobs[0].user.first_name} ${job.assigned_jobs[0].user.last_name}` : "Unassigned"}
+            imageurl={job.assigned_jobs[0]?.user?.picture || "/images/user.jpeg"}
           />
         ))}
       </div>

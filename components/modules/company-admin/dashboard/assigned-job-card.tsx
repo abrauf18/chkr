@@ -6,25 +6,25 @@ import ShowJobDetails from "../../../shared/show-job-details";
 import DeleteModal from "../../super-admin/admins/delete-modal";
 
 interface AssignedJobCardProps {
-  userName: string;
+  customer_name: string;
   location: string;
   status: string;
-  phoneNumber: string;
-  dateTime: string;
+  phone_number: string;
+  date_time: string;
   service: string;
-  payment: string;
+  price: number;
   employeeName: string;
   imageurl: string;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
-  userName,
+  customer_name,
   location,
   status,
-  phoneNumber,
-  dateTime,
+  phone_number,
+  date_time,
   service,
-  payment,
+  price,
   employeeName,
   imageurl,
 }) => {
@@ -32,7 +32,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
     <div className="mt-4 bg-white rounded-3xl p-4">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
-          <h1 className="font-bold text-xl mb-3">{userName}</h1>
+          <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center">
             <Location className="h-6 w-6" />
             <span className="font-semibold text-lg text-gray-700 ml-2">
@@ -60,13 +60,13 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Phone number:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {phoneNumber}
+              {phone_number}
             </span>
           </div>
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {dateTime}
+              {new Date(date_time).toLocaleString()}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -78,7 +78,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">To Pay:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base ">
-              $ {payment} USD
+              $ {price} USD
             </span>
           </div>
         </div>
@@ -86,15 +86,13 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
           <div className="flex mt-2 relative">
             <Image
-              src={
-                "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
-              }
+              src={imageurl || "/images/user.jpeg"}
               alt="user-image"
               height={33}
               width={33}
               className="rounded-full w-10 h-10 absolute left-2"
             />
-            <Image
+             <Image
               src={
                 "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
               }
@@ -103,9 +101,8 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
               width={33}
               className="rounded-full w-10 h-10 absolute left-6"
             />
-
             <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
-              {employeeName} and 2 more
+              {employeeName}
             </span>
           </div>
         </div>
@@ -115,4 +112,3 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
-
