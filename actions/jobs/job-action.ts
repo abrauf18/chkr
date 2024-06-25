@@ -37,3 +37,19 @@ export const CreateJobAction = async (data: JobsInterface) => {
   return result;
 };
 
+export const GetJobsAction = async () => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  return result;
+};
