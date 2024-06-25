@@ -12,7 +12,7 @@ import {
 import AdminHeader from "@/components/shared/admin-header";
 import { GetJobsAction } from "@/actions/jobs/job-action";
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 3;
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -47,7 +47,13 @@ const Jobs = () => {
   }, []);
 
   const filterJobsByStatus = (status: string) => {
-    return jobData.filter(job => job.status === status);
+    if (status === "cancelled") {
+      return jobData.filter(job =>
+        job.assigned_jobs.some((assignedJob: { request_status: string; }) => assignedJob.request_status === status)
+      );
+    } else {
+      return jobData.filter(job => job.status === status);
+    }
   };
 
   const allJobs = jobData;
@@ -102,8 +108,7 @@ const Jobs = () => {
             date_time={job.date_time}
             service={job.service.service_name}
             price={job.price}
-            employeeName={job.assigned_jobs[0]?.user ? `${job.assigned_jobs[0].user.first_name} ${job.assigned_jobs[0].user.last_name}` : "Unassigned"}
-            imageurl={job.assigned_jobs[0]?.user?.picture || "/images/user.jpeg"}
+            assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)} // Extract users from assigned_jobs
           />
         ))}
       </div>
