@@ -13,8 +13,7 @@ interface AssignedJobCardProps {
   date_time: string;
   service: string;
   price: number;
-  employeeName: string;
-  imageurl: string;
+  assignedUsers: Array<{ first_name: string, last_name: string, picture: string }>;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
@@ -25,9 +24,18 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   date_time,
   service,
   price,
-  employeeName,
-  imageurl,
+  assignedUsers,
 }) => {
+  const displayEmployeeName = () => {
+    if (assignedUsers.length > 1) {
+      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${assignedUsers.length - 1} more`;
+    } else if (assignedUsers.length === 1) {
+      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name}`;
+    } else {
+      return "Unassigned";
+    }
+  };
+
   return (
     <div className="mt-4 bg-white rounded-3xl p-4">
       <div className="flex flex-wrap justify-between">
@@ -85,24 +93,18 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
           <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
           <div className="flex mt-2 relative">
-            <Image
-              src={imageurl || "/images/user.jpeg"}
-              alt="user-image"
-              height={33}
-              width={33}
-              className="rounded-full w-10 h-10 absolute left-2"
-            />
-             <Image
-              src={
-                "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
-              }
-              alt="user-image"
-              height={33}
-              width={33}
-              className="rounded-full w-10 h-10 absolute left-6"
-            />
+            {assignedUsers.slice(0, 2).map((user, index) => (
+              <Image
+                key={index}
+                src={user.picture || "/images/user.jpeg"}
+                alt="user-image"
+                height={33}
+                width={33}
+                className={`rounded-full w-10 h-10 absolute ${index === 0 ? "left-2" : "left-6"}`}
+              />
+            ))}
             <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
-              {employeeName}
+              {displayEmployeeName()}
             </span>
           </div>
         </div>
