@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import AssignedJobCard from "../dashboard/assigned-job-card";
 import {
   Pagination,
   PaginationContent,
@@ -10,7 +9,16 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import AdminHeader from "@/components/shared/admin-header";
+import dynamic from "next/dynamic";
+import Loader from "@/components/shared/loader";
 
+const AssignedJobCard = dynamic(
+  () => import("../dashboard/assigned-job-card"),
+  {
+    ssr: false,
+    loading: () => <Loader />,
+  }
+);
 const ITEMS_PER_PAGE = 3;
 
 interface JobsProps {
@@ -37,11 +45,14 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
 
   const filterJobsByStatus = (status: string) => {
     if (status === "cancelled") {
-      return jobs.filter(job =>
-        job.assigned_jobs.some((assignedJob: { request_status: string; }) => assignedJob.request_status === status)
+      return jobs.filter((job) =>
+        job.assigned_jobs.some(
+          (assignedJob: { request_status: string }) =>
+            assignedJob.request_status === status
+        )
       );
     } else {
-      return jobs.filter(job => job.status === status);
+      return jobs.filter((job) => job.status === status);
     }
   };
 
@@ -57,28 +68,36 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
     { id: 4, text: "Cancelled", content: cancelledJobs },
   ];
 
-  const activeTabData = tabData.find((tab) => tab.id === activeTab)?.content || [];
+  const activeTabData =
+    tabData.find((tab) => tab.id === activeTab)?.content || [];
   const paginatedData = paginate(activeTabData, currentPage, ITEMS_PER_PAGE);
   const totalPages = Math.ceil(activeTabData.length / ITEMS_PER_PAGE);
 
   return (
     <div className="flex flex-col w-full">
-      <AdminHeader title="All Jobs" isAdmin={true} isSuperAdmin={false} page="createJob" />
+      <AdminHeader
+        title="All Jobs"
+        isAdmin={true}
+        isSuperAdmin={false}
+        page="createJob"
+      />
       <div className="flex gap-2 items-center my-3 w-full mx-auto">
         {tabData.map((tab) => (
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
-              } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
+            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
+              activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+            } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
             {activeTab === tab.id && (
               <div className="rounded-full w-2 h-2 bg-primary" />
             )}
             <div>
               <span
-                className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"
-                  } `}
+                className={`whitespace-nowrap mobile:text-sm ${
+                  activeTab === tab.id ? "font-bold" : "font-medium"
+                } `}
               >
                 {tab.text}
               </span>
@@ -100,7 +119,9 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
               date_time={job.date_time}
               service={job.service.service_name}
               price={job.price}
-              assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)}
+              assignedUsers={job.assigned_jobs.map(
+                (assignedJob: { user: any }) => assignedJob.user
+              )}
             />
           ))}
         </div>
@@ -109,7 +130,11 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
         <Pagination className="bg-white my-6 rounded-xl p-4">
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} />
+              <PaginationPrevious
+                onClick={() =>
+                  handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+                }
+              />
             </PaginationItem>
             {Array.from({ length: totalPages }, (_, i) => (
               <PaginationItem key={i + 1}>
@@ -119,7 +144,13 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
               </PaginationItem>
             ))}
             <PaginationItem>
-              <PaginationNext onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} />
+              <PaginationNext
+                onClick={() =>
+                  handlePageChange(
+                    currentPage < totalPages ? currentPage + 1 : totalPages
+                  )
+                }
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
@@ -129,3 +160,4 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
 };
 
 export default Jobs;
+

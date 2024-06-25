@@ -13,7 +13,11 @@ interface AssignedJobCardProps {
   date_time: string;
   service: string;
   price: number;
-  assignedUsers: Array<{ first_name: string, last_name: string, picture: string }>;
+  assignedUsers: Array<{
+    first_name: string;
+    last_name: string;
+    picture: string;
+  }>;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
@@ -28,7 +32,9 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 }) => {
   const displayEmployeeName = () => {
     if (assignedUsers.length > 1) {
-      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${assignedUsers.length - 1} more`;
+      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${
+        assignedUsers.length - 1
+      } more`;
     } else if (assignedUsers.length === 1) {
       return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name}`;
     } else {
@@ -100,7 +106,9 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
                 alt="user-image"
                 height={33}
                 width={33}
-                className={`rounded-full w-10 h-10 absolute ${index === 0 ? "left-2" : "left-6"}`}
+                className={`rounded-full w-10 h-10 absolute ${
+                  index === 0 ? "left-2" : "left-6"
+                }`}
               />
             ))}
             <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
@@ -114,3 +122,4 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
+
