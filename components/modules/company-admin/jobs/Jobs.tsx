@@ -97,38 +97,44 @@ const Jobs = () => {
           </div>
         ))}
       </div>
-      <div>
-        {paginatedData.map((job, index) => (
-          <AssignedJobCard
-            key={index}
-            customer_name={job.customer_name}
-            location={job.location}
-            status={job.status}
-            phone_number={job.phone_number}
-            date_time={job.date_time}
-            service={job.service.service_name}
-            price={job.price}
-            assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)}
-          />
-        ))}
-      </div>
-      <Pagination className="bg-white my-6 rounded-xl p-4">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <PaginationItem key={i + 1}>
-              <PaginationLink onClick={() => handlePageChange(i + 1)}>
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
+      {activeTabData.length === 0 ? (
+        <p className="text-center text-gray-700 mt-6">No jobs to show</p>
+      ) : (
+        <div>
+          {paginatedData.map((job, index) => (
+            <AssignedJobCard
+              key={index}
+              customer_name={job.customer_name}
+              location={job.location}
+              status={job.status}
+              phone_number={job.phone_number}
+              date_time={job.date_time}
+              service={job.service.service_name}
+              price={job.price}
+              assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)}
+            />
           ))}
-          <PaginationItem>
-            <PaginationNext onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+        </div>
+      )}
+      {activeTabData.length > 0 && (
+        <Pagination className="bg-white my-6 rounded-xl p-4">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i + 1}>
+                <PaginationLink onClick={() => handlePageChange(i + 1)}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };
