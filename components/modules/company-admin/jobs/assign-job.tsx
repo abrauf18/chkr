@@ -167,13 +167,9 @@ export default function AssignJob({
                   </span>
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
-                  <div
-                  // className={`rounded-full h-2 w-2 ${
-                  //   user.status == "Available" ? "bg-green-500" : "bg-primary"
-                  // }`}
-                  ></div>
+                  <div className="rounded-full h-2 w-2 bg-primary"></div>
                   <span className="font-medium text-sm mobile:hidden">
-                    {/* {user.status} */}
+                    {employees.email}
                   </span>
                 </div>
               </div>

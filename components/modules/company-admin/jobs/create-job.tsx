@@ -31,9 +31,7 @@ export default function CreateJob() {
     defaultValues: jobData,
   });
 
-  const { handleSubmit, watch } = methods;
-
-  const watchFormData = watch();
+  const { handleSubmit } = methods;
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -125,7 +123,7 @@ export default function CreateJob() {
       console.error("Error creating job:", error);
       toast.error("An error occurred while creating the job.");
     } finally {
-      methods.reset();
+      await methods.reset();
       removeCreateJobData();
     }
   };

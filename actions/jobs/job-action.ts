@@ -17,7 +17,6 @@ export const ServiceAction = async () => {
 };
 
 export const CreateJobAction = async (data: JobsInterface) => {
-  console.log(data);
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/job/create`,

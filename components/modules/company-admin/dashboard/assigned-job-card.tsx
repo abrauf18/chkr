@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
-import DeleteIcon from "@/assets/icons/delete-icon";
 import ShowJobDetails from "../../../shared/show-job-details";
 import DeleteModal from "../../super-admin/admins/delete-modal";
 
@@ -52,7 +51,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             <span>{status}</span>
           </div>
           <EditIcon />
-          <DeleteModal/>
+          <DeleteModal />
           <ShowJobDetails />
         </div>
       </div>
@@ -86,25 +85,29 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
           <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
           <div className="flex mt-2 relative">
-  <Image
-    src={imageurl}
-    alt="user-image"
-    height={6}
-    width={6}
-    className="rounded-full h-10 w-10 absolute left-0"
-  />
-  <Image
-    src={imageurl}
-    alt="user-image"
-    height={6}
-    width={6}
-    className="rounded-full h-10 w-10 absolute left-4"
-  />
-  <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
-    {employeeName}
-  </span>
-</div>
+            <Image
+              src={
+                "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
+              }
+              alt="user-image"
+              height={33}
+              width={33}
+              className="rounded-full w-10 h-10 absolute left-2"
+            />
+            <Image
+              src={
+                "https://chkr-buck.s3.amazonaws.com/user-profile/defaultImage.webp"
+              }
+              alt="user-image"
+              height={33}
+              width={33}
+              className="rounded-full w-10 h-10 absolute left-6"
+            />
 
+            <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
+              {employeeName} and 2 more
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -112,3 +115,4 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
+
