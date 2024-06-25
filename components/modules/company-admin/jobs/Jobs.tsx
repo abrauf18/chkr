@@ -53,7 +53,7 @@ const Jobs = () => {
       service: "Room Cleaning",
       payment: "260.00",
       employeeName: "Roy Edwards",
-      imageurl: "/images/user.jpeg",
+      imageurl: "/images/Avatar.svg",
     },
     {
       userName: "Jane Smith",

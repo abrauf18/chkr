@@ -85,18 +85,26 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
           <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
-          <div className="flex mt-2">
-            <Image
-              src={imageurl}
-              alt="user-image"
-              height={6}
-              width={6}
-              className="rounded-full h-10 w-10"
-            />
-            <span className="mt-2 ml-2 font-semibold text-sm  text-[#232324]">
-              {employeeName}
-            </span>
-          </div>
+          <div className="flex mt-2 relative">
+  <Image
+    src={imageurl}
+    alt="user-image"
+    height={6}
+    width={6}
+    className="rounded-full h-10 w-10 absolute left-0"
+  />
+  <Image
+    src={imageurl}
+    alt="user-image"
+    height={6}
+    width={6}
+    className="rounded-full h-10 w-10 absolute left-4"
+  />
+  <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
+    {employeeName}
+  </span>
+</div>
+
         </div>
       </div>
     </div>
