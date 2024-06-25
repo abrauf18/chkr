@@ -57,7 +57,7 @@ const Jobs = () => {
   };
 
   const allJobs = jobData;
-  const ongoingJobs = filterJobsByStatus("pending");
+  const ongoingJobs = filterJobsByStatus("ongoing");
   const completedJobs = filterJobsByStatus("completed");
   const cancelledJobs = filterJobsByStatus("cancelled");
 
@@ -108,7 +108,7 @@ const Jobs = () => {
             date_time={job.date_time}
             service={job.service.service_name}
             price={job.price}
-            assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)} // Extract users from assigned_jobs
+            assignedUsers={job.assigned_jobs.map((assignedJob: { user: any; }) => assignedJob.user)}
           />
         ))}
       </div>
