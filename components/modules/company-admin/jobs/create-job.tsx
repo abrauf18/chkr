@@ -19,6 +19,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { JobSchema } from "@/lib/types";
 import { CreateJobAction } from "@/actions/jobs/job-action";
 import { toast } from "react-toastify";
+import action from "@/app/action";
 
 export default function CreateJob() {
   const { currentStep, setCurrentStep, jobData, removeCreateJobData } =
@@ -115,9 +116,10 @@ export default function CreateJob() {
     try {
       const result = await CreateJobAction(data);
       if (result && result.statusCode === 201) {
+        action("getJobs");
         return toast.success(result.message);
       } else {
-        toast.error(result?.message);
+        return toast.error(result?.message);
       }
     } catch (error) {
       console.error("Error creating job:", error);
