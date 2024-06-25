@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AssignedJobCard from "../dashboard/assigned-job-card";
 import {
   Pagination,
@@ -10,14 +10,16 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import AdminHeader from "@/components/shared/admin-header";
-import { GetJobsAction } from "@/actions/jobs/job-action";
 
 const ITEMS_PER_PAGE = 3;
 
-const Jobs = () => {
+interface JobsProps {
+  jobs: any[];
+}
+
+const Jobs: React.FC<JobsProps> = ({ jobs }) => {
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [jobData, setJobData] = useState<any[]>([]);
 
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
@@ -33,30 +35,17 @@ const Jobs = () => {
     return data.slice(startIndex, startIndex + itemsPerPage);
   };
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await GetJobsAction();
-        console.log(response);
-        setJobData(response);
-      } catch (error) {
-        console.error("Error fetching job data:", error);
-      }
-    };
-    fetchJobs();
-  }, []);
-
   const filterJobsByStatus = (status: string) => {
     if (status === "cancelled") {
-      return jobData.filter(job =>
+      return jobs.filter(job =>
         job.assigned_jobs.some((assignedJob: { request_status: string; }) => assignedJob.request_status === status)
       );
     } else {
-      return jobData.filter(job => job.status === status);
+      return jobs.filter(job => job.status === status);
     }
   };
 
-  const allJobs = jobData;
+  const allJobs = jobs;
   const ongoingJobs = filterJobsByStatus("ongoing");
   const completedJobs = filterJobsByStatus("completed");
   const cancelledJobs = filterJobsByStatus("cancelled");
