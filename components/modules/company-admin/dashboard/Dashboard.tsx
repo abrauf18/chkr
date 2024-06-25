@@ -1,21 +1,34 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import TotalJobs from "@/assets/icons/TotalJobs";
 import OngoingJobs from "@/assets/icons/OngoingJobs";
 import PendingJobs from "@/assets/icons/PendingJobs";
 import Employees from "@/assets/icons/Employees";
-import AssignedJobCard from "./assigned-job-card";
+import AssignedJobCard from "../dashboard/assigned-job-card"; // Adjust import path if needed
 import { CircleArrowRight } from "lucide-react";
 import Header from "@/components/shared/header";
 import Link from "next/link";
-import useOnboardingStore from "@/store/onboarding-store";
+import { GetJobsAction } from "@/actions/jobs/job-action";
+
 const Dashboard = () => {
-  const { removeOnboardingData } = useOnboardingStore();
+  const [assignedJobs, setAssignedJobs] = useState<any[]>([]);
+
   useEffect(() => {
-    removeOnboardingData();
+    const fetchAssignedJobs = async () => {
+      try {
+        // Assuming GetJobsAction fetches the assigned jobs data
+        const response = await GetJobsAction();
+        console.log(response); // Verify the structure of response
+        setAssignedJobs(response);
+      } catch (error) {
+        console.error("Error fetching assigned jobs:", error);
+      }
+    };
+    fetchAssignedJobs();
   }, []);
+
   return (
     <div className="flex flex-col w-full">
       <Header title="Dashboard" />
@@ -85,32 +98,25 @@ const Dashboard = () => {
             <Button className="rounded-3xl text-white">View All</Button>
           </Link>
         </div>
-        <AssignedJobCard
-          userName="Guy Hawkins"
-          location="4140 Parker Rd. Allentown, New Mexico 31134"
-          status="Checked-in"
-          phoneNumber="(603) 555-0123"
-          dateTime="15 March 2023 7:00 pm"
-          service="Room Cleaning"
-          payment="230.00"
-          employeeName="Ralph Edwards"
-          imageurl="/images/user.jpeg"
-        />
-        <AssignedJobCard
-          userName="Albert Flores"
-          location="2972 Westheimer Rd. Santa Ana, Illinois 85486 "
-          status="Checked-out"
-          phoneNumber="(603) 555-0123"
-          dateTime="24 May 2024 8:00 pm"
-          service="Room Cleaning"
-          payment="260.00"
-          employeeName="Roy Edwards"
-          imageurl="/images/user.jpeg"
-        />
+        {/* Render assigned job cards */}
+        {assignedJobs.map((job, index) => (
+          <AssignedJobCard
+            key={index}
+            customer_name={job.customer_name}
+            location={job.location}
+            status={job.status}
+            phone_number={job.phone_number}
+            date_time={job.date_time}
+            service={job.service.service_name}
+            price={job.price}
+            assignedUsers={job.assigned_jobs.map(
+              (assignedJob: { user: any }) => assignedJob.user
+            )}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-
