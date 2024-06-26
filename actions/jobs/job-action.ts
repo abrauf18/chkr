@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/auth";
-import { JobsInterface } from "@/lib/interfaces";
+import { JobRequestInterface, JobsInterface } from "@/lib/interfaces";
 
 export const ServiceAction = async () => {
   const session = await auth();
@@ -64,6 +64,24 @@ export const GetUserJobsAction = async () => {
       Authorization: `Bearer ${session?.token}`,
     }
   });
+  const result = await response.json();
+  return result;
+};
+
+export const JobRequestAction = async (data: JobRequestInterface) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/job-request`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  );
   const result = await response.json();
   return result;
 };
