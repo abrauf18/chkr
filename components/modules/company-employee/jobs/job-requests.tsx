@@ -18,7 +18,10 @@ const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  const totalPages = Math.ceil(jobs.length / itemsPerPage);
+  // Filter jobs with request_status === 'pending'
+  const filteredJobs = jobs.filter(job => job.request_status === 'pending');
+
+  const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
   const handleClickPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -37,7 +40,7 @@ const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = jobs.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div>
@@ -47,8 +50,8 @@ const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
             key={job.job.id}
             customer_name={job.job.customer_name}
             location={job.job.location}
-            description={job.job.deescription}
-            status={job.paymentStatus}
+            description={job.job.description}
+            status={job.request_status}
             date_time={job.job.date_time}
             service={job.job.service.service_name}
             price={job.price}
