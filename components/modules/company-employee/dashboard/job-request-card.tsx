@@ -1,9 +1,13 @@
+"use client";
+import React from "react";
+import { JobRequestAction } from "@/actions/jobs/job-action";
 import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { toast } from "react-toastify";
 
 interface CardProps {
+  job_id: number;
   customer_name: string;
   location: string;
   description: string;
@@ -14,6 +18,7 @@ interface CardProps {
 }
 
 const JobRequestCard: React.FC<CardProps> = ({
+  job_id,
   customer_name,
   location,
   description,
@@ -22,6 +27,25 @@ const JobRequestCard: React.FC<CardProps> = ({
   service,
   price,
 }) => {
+
+  const onSubmit = async (accept: boolean) => {
+    try {
+      const data = {
+        job_request: accept,
+        job_id,
+      };
+      const result = await JobRequestAction(data);
+      console.log(result)
+      if (result.statusCode === 201) {
+        return toast.success(result.message);
+      } else {
+        return toast.error(result.message);
+      }
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    }
+  };
+
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
       <div className="flex flex-wrap justify-between items-center">
@@ -41,21 +65,29 @@ const JobRequestCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
-          <Button className="rounded-3xl text-white">Accept</Button>
-          <Button className="rounded-3xl text-black bg-gray-100">
+          <Button
+            className="rounded-3xl text-white"
+            type="submit"
+            onClick={() => onSubmit(true)}
+          >
+            Accept
+          </Button>
+          <Button
+            className="rounded-3xl text-black bg-gray-100"
+            type="submit"
+            onClick={() => onSubmit(false)}
+          >
             Decline
           </Button>
         </div>
       </div>
-      <p className="mt-4 text-base text-gray-600">
-        {description}    
-      </p>
+      <p className="mt-4 text-base text-gray-600">{description}</p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap xl:gap-10 gap-4">
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {date_time}
+            {new Date(date_time).toLocaleString()}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -81,4 +113,3 @@ const JobRequestCard: React.FC<CardProps> = ({
 };
 
 export default JobRequestCard;
-

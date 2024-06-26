@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import JobRequestCard from '../dashboard/job-request-card';
 import {
   Pagination,
   PaginationContent,
@@ -9,16 +8,25 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
+import dynamic from 'next/dynamic';
+import Loader from '@/components/shared/loader';
 
-interface JobsProps {
+interface JobRequestsProps {
   jobs: any[];
 }
 
-const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
+const JobRequestCard = dynamic(
+  () => import("../dashboard/job-request-card"),
+  {
+    ssr: false,
+    loading: () => <Loader />,
+  }
+);
+
+const JobRequests: React.FC<JobRequestsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  // Filter jobs with request_status === 'pending'
   const filteredJobs = jobs.filter(job => job.request_status === 'pending');
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
@@ -48,6 +56,7 @@ const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
         {paginatedData.map((job) => (
           <JobRequestCard
             key={job.job.id}
+            job_id={job.job.id}
             customer_name={job.job.customer_name}
             location={job.job.location}
             description={job.job.description}
