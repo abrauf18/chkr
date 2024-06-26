@@ -25,16 +25,15 @@ const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
   const renderContent = () => {
     switch (activeTab) {
       case 1:
-        return <JobRequests jobs ={jobs}/>;
+        return <JobRequests jobs = {jobs}/>;
       case 2:
-        return <OngoingJobs />;
+        return <OngoingJobs jobs = {jobs}/>;
       case 3:
         return <CompletedJobs />;
       default:
         return null;
     }
   };
-
 
   return (
     <div className="flex flex-col mx-auto gap-4">

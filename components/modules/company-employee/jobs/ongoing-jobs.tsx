@@ -10,76 +10,19 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 
-const OngoingJobsData = [
-  {
-    id: 1,
-    name: "Guy Hawkins",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    id: 2,
-    name: "Ayesha",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    id: 3,
-    name: "Joe",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    id: 4,
-    name: "Zyaima",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    id: 5,
-    name: "Usama",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Delivery",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-  {
-    id: 6,
-    name: "Ali",
-    address: "4140 Parker Rd. Allentown, New Mexico 31134",
-    zipCode: "10001",
-    dateTime: "15 March 2023 7:00 pm",
-    service: "Room Cleaning",
-    paymentStatus: "Verified",
-    amount: "230.00"
-  },
-];
 
-const ITEMS_PER_PAGE = 2;
+interface JobsProps {
+  jobs: any[];
+}
 
-export default function OngoingJobs() {
+const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
+  console.log(jobs)
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 3;
+  const itemsPerPage = 2;
+  // Filter jobs with request_status === 'pending'
+  const filteredJobs = jobs.filter(job => job.request_status === 'accepted');
 
-  const totalPages = Math.ceil(OngoingJobsData.length / jobsPerPage);
+  const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
   const handleClickPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -97,26 +40,35 @@ export default function OngoingJobs() {
     }
   };
 
-  const [completedJobIds, setCompletedJobIds] = useState<number[]>([]);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
 
-  useEffect(() => {
-    const storedCompletedJobs = localStorage.getItem('completedJobIds');
-    if (storedCompletedJobs) {
-      setCompletedJobIds(JSON.parse(storedCompletedJobs));
-    }
-  }, []);
+  // const [completedJobIds, setCompletedJobIds] = useState<number[]>([]);
 
-  const displayedJobs = OngoingJobsData.filter((job) => !completedJobIds.includes(job.id)).slice(
-    (currentPage - 1) * jobsPerPage,
-    currentPage * jobsPerPage
-  );
+  // useEffect(() => {
+  //   const storedCompletedJobs = localStorage.getItem('completedJobIds');
+  //   if (storedCompletedJobs) {
+  //     setCompletedJobIds(JSON.parse(storedCompletedJobs));
+  //   }
+  // }, []);
+
+  // const displayedJobs = OngoingJobsData.filter((job) => !completedJobIds.includes(job.id)).slice(
+  //   (currentPage - 1) * jobsPerPage,
+  //   currentPage * jobsPerPage
+  // );
 
   return (
     <div className='flex flex-col mx-auto gap-4'>
-      {displayedJobs.map((job) => (
+      {paginatedData.map((job) => (
         <OngoingJobCard
-          key={job.id}
-          {...job}
+          key={job.job.id}
+          customer_name={job.job.customer_name}
+          location={job.job.location}
+          description={job.job.description}
+          status={job.request_status}
+          date_time={job.job.date_time}
+          service={job.job.service.service_name}
+          price={job.price}
         />
       ))}
       <Pagination className='bg-white my-6 rounded-xl p-4'>
@@ -139,3 +91,5 @@ export default function OngoingJobs() {
     </div>
   );
 }
+
+export default OngoingJobs;
