@@ -105,3 +105,7 @@ export interface JobsInterface {
   }[];
 }
 
+export interface JobRequestInterface {
+  job_request: boolean,
+  job_id: number,
+}
