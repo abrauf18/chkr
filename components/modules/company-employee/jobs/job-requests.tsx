@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import JobRequestCard from '../dashboard/job-request-card';
 import {
@@ -10,50 +10,15 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 
-const DUMMY_DATA = [
-  {
-    name: 'Jerome Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380',
-    service: 'ihdd',
-    paymentStatus: 'done',
-    dateTime: '15 March 2023 7:00 pm',
-    zipCode: '10010',
-    amount: '990',
-  },
-  {
-    name: 'Chris Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380',
-    service: 'ihdd',
-    paymentStatus: 'done',
-    dateTime: '15 March 2023 7:00 pm',
-    zipCode: '10010',
-    amount: '990',
-  },
-  {
-    name: 'Joe Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380',
-    service: 'ihdd',
-    paymentStatus: 'done',
-    dateTime: '15 March 2023 7:00 pm',
-    zipCode: '10010',
-    amount: '990',
-  },
-  {
-    name: ' Bell',
-    address: '8502 Preston Rd. Inglewood, Maine 98380',
-    service: 'ihdd',
-    paymentStatus: 'done',
-    dateTime: '15 March 2023 7:00 pm',
-    zipCode: '10010',
-    amount: '990',
-  },
-];
+interface JobsProps {
+  jobs: any[];
+}
 
-export default function JobRequests() {
+const JobRequests: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  const totalPages = Math.ceil(DUMMY_DATA.length / itemsPerPage);
+  const totalPages = Math.ceil(jobs.length / itemsPerPage);
 
   const handleClickPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -72,13 +37,22 @@ export default function JobRequests() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = DUMMY_DATA.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = jobs.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div>
       <div className='flex flex-col gap-6'>
         {paginatedData.map((job) => (
-          <JobRequestCard key={job.name} {...job} />
+          <JobRequestCard
+            key={job.job.id}
+            customer_name={job.job.customer_name}
+            location={job.job.location}
+            description={job.job.deescription}
+            status={job.paymentStatus}
+            date_time={job.job.date_time}
+            service={job.job.service.service_name}
+            price={job.price}
+          />
         ))}
       </div>
       <Pagination className='bg-white my-6 rounded-xl p-4'>
@@ -101,3 +75,5 @@ export default function JobRequests() {
     </div>
   );
 }
+
+export default JobRequests;

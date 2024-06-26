@@ -11,7 +11,11 @@ const tabsData = [
   { id: 3, text: "Completed Jobs" },
 ];
 
-export default function MyJobs() {
+interface JobsProps {
+  jobs: any[];
+}
+
+const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
   const [activeTab, setActiveTab] = useState<number>(1);
 
   const handleTabClick = (tabId: number) => {
@@ -21,7 +25,7 @@ export default function MyJobs() {
   const renderContent = () => {
     switch (activeTab) {
       case 1:
-        return <JobRequests />;
+        return <JobRequests jobs ={jobs}/>;
       case 2:
         return <OngoingJobs />;
       case 3:
@@ -60,3 +64,5 @@ export default function MyJobs() {
     </div>
   );
 }
+
+export default MyJobs;
