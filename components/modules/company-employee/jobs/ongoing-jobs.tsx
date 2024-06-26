@@ -16,10 +16,10 @@ interface JobsProps {
 }
 
 const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
-  console.log(jobs)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-  // Filter jobs with request_status === 'pending'
+
+  // Filter jobs with request_status === 'accepted'
   const filteredJobs = jobs.filter(job => job.request_status === 'accepted');
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);

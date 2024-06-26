@@ -29,7 +29,7 @@ const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
       case 2:
         return <OngoingJobs jobs = {jobs}/>;
       case 3:
-        return <CompletedJobs />;
+        return <CompletedJobs jobs={jobs} />;
       default:
         return null;
     }
