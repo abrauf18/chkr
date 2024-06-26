@@ -56,14 +56,20 @@ export const GetJobsAction = async () => {
 
 export const GetUserJobsAction = async () => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/user-jobs`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/user-jobs`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["GetUserJobs"],
+      },
     }
-  });
+  );
   const result = await response.json();
   return result;
 };
@@ -85,3 +91,4 @@ export const JobRequestAction = async (data: JobRequestInterface) => {
   const result = await response.json();
   return result;
 };
+

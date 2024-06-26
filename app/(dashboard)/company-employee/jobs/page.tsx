@@ -1,12 +1,14 @@
-import MyJobs from '@/components/modules/company-employee/jobs/my-jobs'
-import React from 'react'
-import { Metadata } from 'next';
-import DashboardHeader from '@/components/shared/dashboard-header';
-import { GetUserJobsAction } from '@/actions/jobs/job-action';
+import MyJobs from "@/components/modules/company-employee/jobs/my-jobs";
+import React, { Suspense } from "react";
+import { Metadata } from "next";
+import DashboardHeader from "@/components/shared/dashboard-header";
+import { GetUserJobsAction } from "@/actions/jobs/job-action";
+import Loader from "@/components/shared/loader";
+import JobsPage from "../dashboard/@jobs/page";
 
 export const metadata: Metadata = {
   title: "My Jobs",
-  description: "Manage all of your jobs efficiently."
+  description: "Manage all of your jobs efficiently.",
 };
 
 export default async function page() {
@@ -14,7 +16,16 @@ export default async function page() {
   return (
     <>
       <DashboardHeader title="My Jobs" />
-      <MyJobs jobs = {jobs}/> 
-      </>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-96">
+            <Loader />
+          </div>
+        }
+      >
+        {<JobsPage />}
+      </Suspense>
+    </>
   );
 }
+

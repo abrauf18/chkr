@@ -3,6 +3,7 @@ import Settings from "@/components/shared/settings";
 import { Metadata } from "next";
 import DashboardHeader from "@/components/shared/dashboard-header";
 import { UserInfoAction } from "@/actions/settings/settings-action";
+import Loader from "@/components/shared/loader";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -14,7 +15,13 @@ export default async function page() {
   return (
     <>
       <DashboardHeader title="Profile" />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-96">
+            <Loader />
+          </div>
+        }
+      >
         <Settings isAdmin data={data} />{" "}
       </Suspense>
     </>

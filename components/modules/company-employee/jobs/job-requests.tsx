@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -7,27 +7,25 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
-import dynamic from 'next/dynamic';
-import Loader from '@/components/shared/loader';
+} from "@/components/ui/pagination";
+import dynamic from "next/dynamic";
+import { SkeletonLoader } from "@/components/shared/skeleton-loader";
 
 interface JobRequestsProps {
   jobs: any[];
+  isDashboard?: boolean;
 }
 
-const JobRequestCard = dynamic(
-  () => import("../dashboard/job-request-card"),
-  {
-    ssr: false,
-    loading: () => <Loader />,
-  }
-);
+const JobRequestCard = dynamic(() => import("../dashboard/job-request-card"), {
+  ssr: false,
+  loading: () => <SkeletonLoader />,
+});
 
-const JobRequests: React.FC<JobRequestsProps> = ({ jobs }) => {
+const JobRequests: React.FC<JobRequestsProps> = ({ jobs, isDashboard }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  const filteredJobs = jobs.filter(job => job.request_status === 'pending');
+  const filteredJobs = jobs.filter((job) => job.request_status === "pending");
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
@@ -48,11 +46,14 @@ const JobRequests: React.FC<JobRequestsProps> = ({ jobs }) => {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredJobs.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div>
-      <div className='flex flex-col gap-6'>
+      <div className="flex flex-col gap-6">
         {paginatedData.map((job) => (
           <JobRequestCard
             key={job.job.id}
@@ -67,25 +68,28 @@ const JobRequests: React.FC<JobRequestsProps> = ({ jobs }) => {
           />
         ))}
       </div>
-      <Pagination className='bg-white my-6 rounded-xl p-4'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={handlePreviousPage} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <PaginationItem key={index + 1}>
-              <PaginationLink onClick={() => handleClickPage(index + 1)}>
-                {index + 1}
-              </PaginationLink>
+      {!isDashboard && (
+        <Pagination className="bg-white my-6 rounded-xl p-4">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={handlePreviousPage} />
             </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext onClick={handleNextPage} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <PaginationItem key={index + 1}>
+                <PaginationLink onClick={() => handleClickPage(index + 1)}>
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext onClick={handleNextPage} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
-}
+};
 
 export default JobRequests;
+

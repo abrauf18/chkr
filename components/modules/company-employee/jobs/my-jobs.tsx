@@ -13,9 +13,10 @@ const tabsData = [
 
 interface JobsProps {
   jobs: any[];
+  isDashboard?: boolean;
 }
 
-const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
+const MyJobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
   const [activeTab, setActiveTab] = useState<number>(1);
 
   const handleTabClick = (tabId: number) => {
@@ -25,9 +26,9 @@ const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
   const renderContent = () => {
     switch (activeTab) {
       case 1:
-        return <JobRequests jobs = {jobs}/>;
+        return <JobRequests jobs={jobs} isDashboard={isDashboard} />;
       case 2:
-        return <OngoingJobs jobs = {jobs}/>;
+        return <OngoingJobs jobs={jobs} />;
       case 3:
         return <CompletedJobs jobs={jobs} />;
       default:
@@ -36,32 +37,44 @@ const MyJobs: React.FC<JobsProps> = ({ jobs }) => {
   };
 
   return (
-    <div className="flex flex-col mx-auto gap-4">
-      <Header title="Track your Assigned Services" />
-      <div className="flex gap-2 items-center my-4">
-        {tabsData.map((tab) => (
-          <div
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`flex justify-center items-center text-center bg-white rounded-2xl md:py-3 md:px-6 px-3 py-2 gap-2 cursor-pointer ${activeTab === tab.id
-              ? "bg-primary border-b-2 border-primary font-bold"
-              : " text-gray-600"}`}
-          >
-            {/* Hide circle in inactive tabs */}
-            {activeTab === tab.id && (
-              <div className="rounded-full w-2 h-2 bg-primary" />
-            )}
-            <div className={`flex-grow text-center ${activeTab !== tab.id ? "text-center" : ""}`}>
-              <span className="text-xs md:text-base whitespace-nowrap">
-                {tab.text}
-              </span>
-            </div>
+    <div className="flex flex-col  gap-4">
+      {!isDashboard && (
+        <>
+          <Header title="Track your Assigned Services" />
+          <div className="flex gap-2 items-center my-4">
+            {tabsData.map((tab) => (
+              <div
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                className={`flex justify-center items-center text-center bg-white rounded-2xl md:py-3 md:px-6 px-3 py-2 gap-2 cursor-pointer ${
+                  activeTab === tab.id
+                    ? "bg-primary border-b-2 border-primary font-bold"
+                    : " text-gray-600"
+                }`}
+              >
+                {/* Hide circle in inactive tabs */}
+                {activeTab === tab.id && (
+                  <div className="rounded-full w-2 h-2 bg-primary" />
+                )}
+                <div
+                  className={`flex-grow text-center ${
+                    activeTab !== tab.id ? "text-center" : ""
+                  }`}
+                >
+                  <span className="text-xs md:text-base whitespace-nowrap">
+                    {tab.text}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
+
       <div>{renderContent()}</div>
     </div>
   );
-}
+};
 
 export default MyJobs;
+

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import action from "@/app/action";
 
 interface CardProps {
   job_id: number;
@@ -27,16 +28,15 @@ const JobRequestCard: React.FC<CardProps> = ({
   service,
   price,
 }) => {
-
-  const onSubmit = async (accept: boolean) => {
+  const handleClick = async (accept: boolean) => {
     try {
       const data = {
         job_request: accept,
         job_id,
       };
       const result = await JobRequestAction(data);
-      console.log(result)
-      if (result.statusCode === 201) {
+      if (result.statusCode === 200) {
+        await action("GetUserJobs");
         return toast.success(result.message);
       } else {
         return toast.error(result.message);
@@ -67,15 +67,15 @@ const JobRequestCard: React.FC<CardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <Button
             className="rounded-3xl text-white"
-            type="submit"
-            onClick={() => onSubmit(true)}
+            type="button"
+            onClick={() => handleClick(true)}
           >
             Accept
           </Button>
           <Button
             className="rounded-3xl text-black bg-gray-100"
-            type="submit"
-            onClick={() => onSubmit(false)}
+            type="button"
+            onClick={() => handleClick(false)}
           >
             Decline
           </Button>
@@ -87,7 +87,7 @@ const JobRequestCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            {new Date(date_time).toLocaleString()}
+              {new Date(date_time).toLocaleString()}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -113,3 +113,4 @@ const JobRequestCard: React.FC<CardProps> = ({
 };
 
 export default JobRequestCard;
+

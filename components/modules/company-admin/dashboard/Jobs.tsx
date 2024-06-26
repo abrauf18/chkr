@@ -1,8 +1,8 @@
-"use client"
-import React, { useState } from 'react';
-import AssignedJobCard from './assigned-job-card';
-import DashboardHeader from '@/components/shared/dashboard-header';
-import AdminHeader from '@/components/shared/admin-header';
+"use client";
+import React, { useState } from "react";
+import AssignedJobCard from "./assigned-job-card";
+import DashboardHeader from "@/components/shared/dashboard-header";
+import AdminHeader from "@/components/shared/admin-header";
 
 const Jobs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -21,7 +21,7 @@ const Jobs = () => {
       service: "Room Cleaning",
       payment: "230.00",
       employeeName: "Ralph Edwards",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
     {
       userName: "Albert Flores",
@@ -32,7 +32,7 @@ const Jobs = () => {
       service: "Room Cleaning",
       payment: "260.00",
       employeeName: "Roy Edwards",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
     {
       userName: "Jane Smith",
@@ -43,7 +43,7 @@ const Jobs = () => {
       service: "Office Cleaning",
       payment: "200.00",
       employeeName: "John Doe",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
   ];
 
@@ -57,7 +57,7 @@ const Jobs = () => {
       service: "House Cleaning",
       payment: "150.00",
       employeeName: "Jane Smith",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
     {
       userName: "Jane Smith",
@@ -68,7 +68,7 @@ const Jobs = () => {
       service: "Office Cleaning",
       payment: "200.00",
       employeeName: "John Doe",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
   ];
 
@@ -82,7 +82,7 @@ const Jobs = () => {
       service: "Office Cleaning",
       payment: "200.00",
       employeeName: "John Doe",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
   ];
 
@@ -96,7 +96,7 @@ const Jobs = () => {
       service: "Office Cleaning",
       payment: "200.00",
       employeeName: "John Doe",
-      imageurl: '/images/user.jpeg'
+      imageurl: "/images/user.jpeg",
     },
     {
       userName: "Jane Smith",
@@ -107,35 +107,52 @@ const Jobs = () => {
       service: "Office Cleaning",
       payment: "200.00",
       employeeName: "John Doe",
-      imageurl: '/images/user.jpeg'
-    }];
+      imageurl: "/images/user.jpeg",
+    },
+  ];
 
   const tabData = [
-    { id: 1, text: 'All Jobs', content: allJobsData },
-    { id: 2, text: 'Ongoing', content: ongoingJobsData },
-    { id: 3, text: 'Pending', content: pendingJobsData },
-    { id: 4, text: 'Cancelled', content: cancelledJobsData },
+    { id: 1, text: "All Jobs", content: allJobsData },
+    { id: 2, text: "Ongoing", content: ongoingJobsData },
+    { id: 3, text: "Pending", content: pendingJobsData },
+    { id: 4, text: "Cancelled", content: cancelledJobsData },
   ];
 
   return (
     <div className="flex flex-col w-full">
-      <DashboardHeader title='Here’s all completed & ongoing Jobs !' />
-      <AdminHeader isAdmin={true} isSuperAdmin={false} page="createJob" title='All Jobs' />
+      <DashboardHeader title="Here’s all completed & ongoing Jobs !" />
+      <AdminHeader
+        isAdmin={true}
+        isSuperAdmin={false}
+        page="createJob"
+        title="All Jobs"
+      />
       <div className="flex gap-2 items-center my-4">
-        {tabData.map(tab => (
+        {tabData.map((tab) => (
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? 'bg-primary border-b-2 border-primary' : ''} ${tab.text === "Cancelled" ? "mobile:hidden" : ''}`}
+            className={`flex items-center bg-white rounded-2xl py-3 px-6 gap-2 cursor-pointer ${
+              activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+            } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
           >
-            <div className={`rounded-full w-2 h-2 ${activeTab === tab.id ? 'bg-primary' : 'bg-white'} `}></div>
-            <div><span>{tab.text}</span></div>
+            <div
+              className={`rounded-full w-2 h-2 ${
+                activeTab === tab.id ? "bg-primary" : "bg-white"
+              } `}
+            ></div>
+            <div>
+              <span>{tab.text}</span>
+            </div>
           </div>
         ))}
       </div>
       <div className="mt-4">
-        {tabData.map(tab => (
-          <div key={tab.id} style={{ display: activeTab === tab.id ? 'block' : 'none' }}>
+        {tabData.map((tab) => (
+          <div
+            key={tab.id}
+            style={{ display: activeTab === tab.id ? "block" : "none" }}
+          >
             {tab.content.map((jobData, index) => (
               <AssignedJobCard
                 key={index}
@@ -158,3 +175,4 @@ const Jobs = () => {
 };
 
 export default Jobs;
+

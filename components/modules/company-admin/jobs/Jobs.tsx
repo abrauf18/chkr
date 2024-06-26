@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/pagination";
 import AdminHeader from "@/components/shared/admin-header";
 import dynamic from "next/dynamic";
-import Loader from "@/components/shared/loader";
+import { SkeletonLoader } from "@/components/shared/skeleton-loader";
 
 const AssignedJobCard = dynamic(
   () => import("../dashboard/assigned-job-card"),
   {
     ssr: false,
-    loading: () => <Loader />,
+    loading: () => <SkeletonLoader />,
   }
 );
 const ITEMS_PER_PAGE = 3;
