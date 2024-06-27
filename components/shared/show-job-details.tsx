@@ -38,7 +38,12 @@ export default function ShowJobDetails({jobId}:{jobId:number}) {
             <hr className="my-6" />
           </DialogTitle>
           <DialogDescription>
-            <JobDetails jobId = {jobId} />
+          {pathname === "/company-employee/jobs" && (
+            <JobDetails jobId={jobId}/>
+           )}
+           {pathname === "/company-admin/jobs" && (
+           <JobDetails jobId={jobId} isAdmin/>
+           )}            
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
