@@ -94,3 +94,19 @@ export const JobRequestAction = async (data: JobRequestInterface) => {
   return result;
 };
 
+export const GetJobByIDAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/company-job/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+    next: {
+      tags: ["getJobByID"],
+    },
+  });
+  const result = await response.json();
+  return result;
+};
