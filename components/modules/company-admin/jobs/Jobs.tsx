@@ -23,9 +23,10 @@ const ITEMS_PER_PAGE = 3;
 
 interface JobsProps {
   jobs: any[];
+  isDashboard?: boolean;
 }
 
-const Jobs: React.FC<JobsProps> = ({ jobs }) => {
+const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -75,7 +76,9 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
 
   return (
     <div className="flex flex-col w-full">
-      <AdminHeader
+      {!isDashboard && (
+        <>
+        <AdminHeader
         title="All Jobs"
         isAdmin={true}
         isSuperAdmin={false}
@@ -105,6 +108,9 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
           </div>
         ))}
       </div>
+      </>
+      ) 
+     }
       {activeTabData.length === 0 ? (
         <p className="text-center text-gray-700 mt-6">No jobs to show</p>
       ) : (
