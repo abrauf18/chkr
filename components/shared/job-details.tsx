@@ -10,12 +10,14 @@ import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { GetJobByIDAction } from "@/actions/jobs/job-action";
+import { GetEmployeeJobByIDAction, GetJobByIDAction } from "@/actions/jobs/job-action";
 
-export default function JobDetails({jobId}:{jobId:number}) {
+export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boolean}) {
   const pathname = usePathname();
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
+  const [UserJobDetails, setUserJobDetails] = useState<any>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,18 @@ export default function JobDetails({jobId}:{jobId:number}) {
     fetchData();
   }, [jobId]);
   
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const UserData = await GetEmployeeJobByIDAction(jobId);
+        setUserJobDetails(UserData);
+      } catch (error) {
+        console.error("Error fetching job data:", error);
+      }
+    };
+    fetchData();
+  }, [jobId]);
+
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -58,12 +72,19 @@ export default function JobDetails({jobId}:{jobId:number}) {
     <div className="flex flex-col px-4 gap-4 w-full text-black">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col mobile:text-left">
-          <h1 className="font-bold text-xl mb-3">{jobDetails?.customer_name}</h1>
+        {isAdmin && <h1 className="font-bold text-xl mb-3">{jobDetails?.customer_name}</h1>}
+        {!isAdmin && <h1 className="font-bold text-xl mb-3">{UserJobDetails?.job?.customer_name}</h1>}
           <div className="flex items-center">
             <MapPinned />
+            {isAdmin && 
             <span className="font-semibold text-lg text-gray-700 ml-2">
-              {jobDetails?.location}
+            {jobDetails?.location}
             </span>
+            }
+            {!isAdmin && 
+            <span className="font-semibold text-lg text-gray-700 ml-2">
+            {UserJobDetails?.job?.location}
+             </span>}
           </div>
         </div>
         <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
@@ -83,28 +104,36 @@ export default function JobDetails({jobId}:{jobId:number}) {
       </div>
       <div className="flex flex-col gap-1 mobile:text-left">
         <span className="font-bold text-lg">Description:</span>
-        <p>
-          {jobDetails?.description}
-        </p>
+        {isAdmin && <p>{jobDetails?.description}</p>}
+        {!isAdmin && <p className="text-black"> {UserJobDetails?.job?.description}</p> }
       </div>
       <div className="flex flex-wrap gap-6 mobile:text-left">
         <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
           <span className="font-bold md:text-lg">Date & Time:</span>
-          <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+          {isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
           {new Date(jobDetails?.date_time).toLocaleString()}
-          </span>
+          </span>}
+          {!isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+          {new Date(UserJobDetails?.job.date_time).toLocaleString()}
+          </span>}
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">Service:</span>
-          <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+          {isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
             {jobDetails?.service?.service_name}
-          </span>
+          </span>}
+          {!isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+            {UserJobDetails?.job?.service?.service_name}
+          </span>}
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">To Pay:</span>
-          <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+          {isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
             $ {jobDetails?.price}
-          </span>
+          </span>}
+          {!isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+            $ {UserJobDetails?.price}
+          </span>}
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">Payment:</span>
