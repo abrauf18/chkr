@@ -62,14 +62,15 @@ const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
       {paginatedData.map((job) => (
         <OngoingJobCard
           key={job.job.id}
+          id={job.job.id}   
           customer_name={job.job.customer_name}
           location={job.job.location}
           description={job.job.description}
           status={job.request_status}
           date_time={job.job.date_time}
           service={job.job.service.service_name}
-          price={job.price}
-        />
+          price={job.price}      
+          />
       ))}
       <Pagination className='bg-white my-6 rounded-xl p-4'>
         <PaginationContent>

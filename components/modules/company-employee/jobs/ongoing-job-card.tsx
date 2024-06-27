@@ -7,6 +7,7 @@ import Select from './select-status';
 import ShowJobDetails from '../../../shared/show-job-details';
 
 interface CardProps {
+  id: number;
   customer_name: string;
   location: string;
   description: string;
@@ -17,6 +18,7 @@ interface CardProps {
 }
 
 const OngoingJobCard: React.FC<CardProps> = ({
+  id,
   customer_name,
   location,
   description,
@@ -73,7 +75,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
         </div>
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1 gap-2">
           <span className="font-bold text-xl md:text-3xl">${price} USD</span>
-          <ShowJobDetails />
+          <ShowJobDetails jobId={id} />
         </div>
       </div>
     </div>
