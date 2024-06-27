@@ -18,9 +18,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAssignedJobs = async () => {
       try {
-        // Assuming GetJobsAction fetches the assigned jobs data
         const response = await GetJobsAction();
-        console.log(response); // Verify the structure of response
+        console.log(response); 
         setAssignedJobs(response);
       } catch (error) {
         console.error("Error fetching assigned jobs:", error);
@@ -110,9 +109,8 @@ const Dashboard = () => {
             service={job.service.service_name}
             price={job.price}
             assignedUsers={job.assigned_jobs.map(
-              (assignedJob: { user: any }) => assignedJob.user
-            )}
-          />
+              (assignedJob: { user: any; }) => assignedJob.user
+            )} id={job.id}          />
         ))}
       </div>
     </div>

@@ -112,6 +112,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
           {paginatedData.map((job, index) => (
             <AssignedJobCard
               key={index}
+              id={job.id} 
               customer_name={job.customer_name}
               location={job.location}
               status={job.status}
@@ -120,9 +121,9 @@ const Jobs: React.FC<JobsProps> = ({ jobs }) => {
               service={job.service.service_name}
               price={job.price}
               assignedUsers={job.assigned_jobs.map(
-                (assignedJob: { user: any }) => assignedJob.user
-              )}
-            />
+                (assignedJob: { user: any; }) => assignedJob.user
+              )} 
+             />
           ))}
         </div>
       )}
