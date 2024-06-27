@@ -110,3 +110,20 @@ export const GetJobByIDAction = async (id: number) => {
   const result = await response.json();
   return result;
 };
+
+export const GetEmployeeJobByIDAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/employee-job/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+    next: {
+      tags: ["getUserJobByID"],
+    },
+  });
+  const result = await response.json();
+  return result;
+};
