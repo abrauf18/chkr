@@ -1,4 +1,3 @@
-import MyJobs from "@/components/modules/company-employee/jobs/my-jobs";
 import React, { Suspense } from "react";
 import { Metadata } from "next";
 import DashboardHeader from "@/components/shared/dashboard-header";

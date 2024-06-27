@@ -39,7 +39,7 @@ export const CreateJobAction = async (data: JobsInterface) => {
 
 export const GetJobsAction = async () => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/company-jobs`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const GetJobsAction = async () => {
 export const GetUserJobsAction = async () => {
   const session = await auth();
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/job/user-jobs`,
+    `${process.env.NEXT_PUBLIC_API_URL}/job/employee-jobs`,
     {
       method: "GET",
       headers: {
@@ -73,6 +73,8 @@ export const GetUserJobsAction = async () => {
   const result = await response.json();
   return result;
 };
+
+
 
 export const JobRequestAction = async (data: JobRequestInterface) => {
   const session = await auth();
