@@ -3,17 +3,32 @@
 import { MapPinned } from "lucide-react";
 import EditIcon from "@/assets/icons/edit-icon";
 import DeleteIcon from "@/assets/icons/delete-icon";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Comment, { CommentProps } from "../modules/company-admin/jobs/comments";
 import Select from "../modules/company-employee/jobs/select-status";
 import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { GetJobByIDAction } from "@/actions/jobs/job-action";
 
-export default function JobDetails() {
+export default function JobDetails({jobId}:{jobId:number}) {
   const pathname = usePathname();
   const [text, setText] = useState("");
+  const [jobDetails, setJobDetails] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await GetJobByIDAction(jobId);
+        setJobDetails(data);
+      } catch (error) {
+        console.error("Error fetching job data:", error);
+      }
+    };
+    fetchData();
+  }, [jobId]);
+  
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -31,17 +46,23 @@ export default function JobDetails() {
       content: "Tasks completed on time. Ready for next tasks.",
       user: "Employee",
     },
+    {
+      date: "29/03/2024",
+      time: "4:45 am",
+      content: "tasks should be completed",
+      user: "employee"
+    }
   ];
 
   return (
     <div className="flex flex-col px-4 gap-4 w-full text-black">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col mobile:text-left">
-          <h1 className="font-bold text-xl mb-3">Leslie Alexander</h1>
+          <h1 className="font-bold text-xl mb-3">{jobDetails?.customer_name}</h1>
           <div className="flex items-center">
             <MapPinned />
             <span className="font-semibold text-lg text-gray-700 ml-2">
-              8502 Preston Rd. Inglewood
+              {jobDetails?.location}
             </span>
           </div>
         </div>
@@ -63,36 +84,26 @@ export default function JobDetails() {
       <div className="flex flex-col gap-1 mobile:text-left">
         <span className="font-bold text-lg">Description:</span>
         <p>
-          Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt.
-          Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum
-          tempor Lorem incididunt. Sed fermentum eget velit sit amet sagittis.
-          Sed egestas egestas arcu, quis fermentum justo laoreet non. Maecenas
-          sapien quam, mollis vitae blandit a, blandit vel lectus.
+          {jobDetails?.description}
         </p>
       </div>
       <div className="flex flex-wrap gap-6 mobile:text-left">
         <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-          <span className="font-bold md:text-lg">Zip Code:</span>
-          <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            10010
-          </span>
-        </div>
-        <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
           <span className="font-bold md:text-lg">Date & Time:</span>
           <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            15 March 2023 7:00 pm
+          {new Date(jobDetails?.date_time).toLocaleString()}
           </span>
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">Service:</span>
           <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            Room Cleaning
+            {jobDetails?.service?.service_name}
           </span>
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">To Pay:</span>
           <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            $ 230.00
+            $ {jobDetails?.price}
           </span>
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">

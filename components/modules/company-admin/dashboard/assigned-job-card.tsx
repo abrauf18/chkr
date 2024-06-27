@@ -6,6 +6,7 @@ import ShowJobDetails from "../../../shared/show-job-details";
 import DeleteModal from "../../super-admin/admins/delete-modal";
 
 interface AssignedJobCardProps {
+  id: number;
   customer_name: string;
   location: string;
   status: string;
@@ -21,6 +22,7 @@ interface AssignedJobCardProps {
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
+  id,
   customer_name,
   location,
   status,
@@ -66,7 +68,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           </div>
           <EditIcon />
           <DeleteModal />
-          <ShowJobDetails />
+          <ShowJobDetails jobId={id} />
         </div>
       </div>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
