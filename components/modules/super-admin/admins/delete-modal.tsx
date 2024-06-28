@@ -22,7 +22,6 @@ export default function DeleteModal({ userId }: { userId: number }) {
 
   const handleDelete = async () => {
     const data = await DeleteUserAction(userId);
-    console.log("Delete employee with ID:", userId);
     action("DeleteUser")
     setOpen(false);
   };

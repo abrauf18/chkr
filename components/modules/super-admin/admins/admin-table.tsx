@@ -16,7 +16,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { ArrowDown, Ban } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import DeleteModal from "./delete-modal";
 import EditAdmin from "./edit-admin";
