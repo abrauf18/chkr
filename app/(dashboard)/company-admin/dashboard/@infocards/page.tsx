@@ -1,12 +1,4 @@
 import React from "react";
-import {
-  CircleChevronRight,
-  MailPlus,
-  MoveDownRight,
-  MoveUpRight,
-  Receipt,
-  StickyNote,
-} from "lucide-react";
 import TotalJobs from "@/assets/icons/TotalJobs";
 import OngoingJobs from "@/assets/icons/OngoingJobs";
 import PendingJobs from "@/assets/icons/PendingJobs";

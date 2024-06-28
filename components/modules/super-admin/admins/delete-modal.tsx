@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import {
   Dialog,
@@ -13,13 +13,25 @@ import DeleteIcon from '@/assets/icons/delete-icon'
 import CancelCircle from '@/assets/icons/cancel-circle-half-dot'
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
+import { DeleteUserAction } from '@/actions/users/user-actions'
 
-export default function DeleteModal() {
+export default function DeleteModal({ userId }: { userId: number }) {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = async () => {
+    const data = await DeleteUserAction(userId);
+    console.log("Delete employee with ID:", userId);
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger onClick={() => setOpen(true)}>
         {pathname === '/company-admin/jobs' || pathname === '/super-admin/admins' || pathname === '/company-admin/employees' ? (
           <DeleteIcon />
         ) : pathname === '/super-admin/companies' ? (
@@ -35,14 +47,16 @@ export default function DeleteModal() {
         <DialogHeader>
           <DialogDescription>
             <div className='flex flex-col justify-center items-center mt-10 gap-6'>
-              <CancelCircle/>
+              <CancelCircle />
               <h1 className='text-2xl font-medium text-black'>Are you sure?</h1>
               <p className='font-normal text-lg text-center'>Do you really want to delete this? After deleting you can’t undo this</p>
               <div className='flex w-full justify-between'>
-                <Button className='text-white rounded-3xl px-5'>
+                <Button className='text-white rounded-3xl px-5' onClick={handleCancel}>
                   Cancel
                 </Button>
-                <Button className='bg-transparent border border-green-500 text-green-500 rounded-3xl px-5'>
+                <Button 
+                type='submit'
+                className='bg-transparent border border-green-500 text-green-500 hover:text-white hover:border-primary rounded-3xl px-5' onClick={handleDelete}>
                   Confirm
                 </Button>
               </div>
