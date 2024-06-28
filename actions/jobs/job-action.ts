@@ -74,8 +74,6 @@ export const GetUserJobsAction = async () => {
   return result;
 };
 
-
-
 export const JobRequestAction = async (data: JobRequestInterface) => {
   const session = await auth();
   const response = await fetch(

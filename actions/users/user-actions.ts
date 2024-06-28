@@ -67,3 +67,22 @@ export const SearchUserAction = async (search: string) => {
   return result.data;
 };
 
+export const DeleteUserAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/user/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["DeleteUser"],
+      },
+    }
+  );
+  const result = await response.json();
+  return result;
+};
