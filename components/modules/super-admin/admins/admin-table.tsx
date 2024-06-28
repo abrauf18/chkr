@@ -108,7 +108,7 @@ const AdminTable = ({ admins }: { admins: Users[] }) => {
                     isEmployee={false}
                     currentUser={admin}
                   />
-                  <DeleteModal />
+                  <DeleteModal userId={admin.id} />
                   <DisableModal />
                 </div>
               </TableCell>
