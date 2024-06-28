@@ -14,6 +14,7 @@ import CancelCircle from '@/assets/icons/cancel-circle-half-dot'
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
 import { DeleteUserAction } from '@/actions/users/user-actions'
+import action from '@/app/action'
 
 export default function DeleteModal({ userId }: { userId: number }) {
   const pathname = usePathname();
@@ -22,6 +23,7 @@ export default function DeleteModal({ userId }: { userId: number }) {
   const handleDelete = async () => {
     const data = await DeleteUserAction(userId);
     console.log("Delete employee with ID:", userId);
+    action("DeleteUser")
     setOpen(false);
   };
 
