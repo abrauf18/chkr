@@ -33,7 +33,6 @@ const Select: React.FC = () => {
     }
     setSelectedOption(option);
     setIsOpen(false);
-    console.log(option);
     if (option === "Checkin") {
       // Get current location on Checkin click
       navigator.geolocation.getCurrentPosition(
