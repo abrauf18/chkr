@@ -26,8 +26,8 @@ interface JobsProps {
   isDashboard?: boolean;
 }
 
-const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
-  console.log(jobs)
+const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
+  console.log(jobs);
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -79,39 +79,40 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
     <div className="flex flex-col w-full">
       {!isDashboard && (
         <>
-        <AdminHeader
-        title="All Jobs"
-        isAdmin={true}
-        isSuperAdmin={false}
-        page="createJob"
-      />
-      <div className="flex gap-2 items-center my-3 w-full mx-auto">
-        {tabData.map((tab) => (
-          <div
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
-              activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
-            } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
-          >
-            {activeTab === tab.id && (
-              <div className="rounded-full w-2 h-2 bg-primary" />
-            )}
-            <div>
-              <span
-                className={`whitespace-nowrap mobile:text-sm ${
-                  activeTab === tab.id ? "font-bold" : "font-medium"
-                } `}
+          <AdminHeader
+            title="All Jobs"
+            isAdmin={true}
+            isSuperAdmin={false}
+            page="createJob"
+          />
+          <div className="flex gap-2 items-center my-3 w-full mx-auto">
+            {tabData.map((tab) => (
+              <div
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
+                  activeTab === tab.id
+                    ? "bg-primary border-b-2 border-primary"
+                    : ""
+                } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
               >
-                {tab.text}
-              </span>
-            </div>
+                {activeTab === tab.id && (
+                  <div className="rounded-full w-2 h-2 bg-primary" />
+                )}
+                <div>
+                  <span
+                    className={`whitespace-nowrap mobile:text-sm ${
+                      activeTab === tab.id ? "font-bold" : "font-medium"
+                    } `}
+                  >
+                    {tab.text}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      </>
-      ) 
-     }
+        </>
+      )}
       {activeTabData.length === 0 ? (
         <p className="text-center text-gray-700 mt-6">No jobs to show</p>
       ) : (
@@ -119,7 +120,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
           {paginatedData.map((job, index) => (
             <AssignedJobCard
               key={index}
-              id={job.id} 
+              id={job.id}
               customer_name={job.customer_name}
               location={job.location}
               status={job.status}
@@ -128,9 +129,12 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
               service={job.service.service_name}
               price={job.price}
               assignedUsers={job.assigned_jobs.map(
-                (assignedJob: { user: any; }) => assignedJob.user
-              )} 
-             />
+                (assignedJob: { user: any; request_status: string }) => ({
+                  ...assignedJob.user,
+                  request_statue: assignedJob.request_status,
+                })
+              )}
+            />
           ))}
         </div>
       )}

@@ -3,6 +3,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Calendar, ChevronDown, Search } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -135,7 +143,7 @@ export default function AssignJob({
         {" "}
         <ErrorMessage errors={errors} name="selected_users" />
       </p>
-      <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl">
+      <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl ">
         {employees.map((employees, index) => (
           <>
             <div
@@ -168,15 +176,66 @@ export default function AssignJob({
                 </div>
                 <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
                   <div className="rounded-full h-2 w-2 bg-primary"></div>
-                  <span className="font-medium text-sm mobile:hidden">
-                    {employees.email}
-                  </span>
+                  <span className="font-medium text-sm">{employees.email}</span>
                 </div>
               </div>
               <hr />
             </div>
           </>
         ))}
+
+        {/* <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Select</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="whitespace-nowrap">
+              {employees.map((employee, index) => (
+                <TableRow
+                  key={employee.id}
+                  className={
+                    index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
+                  }
+                >
+                  <TableCell className="text-center">
+                    <input
+                      className="custom-check"
+                      type="checkbox"
+                      onChange={() => handleChange(employee)}
+                      checked={isUserSelected(employee.id)}
+                      value={employee.first_name}
+                    />
+                  </TableCell>
+                  <TableCell className="flex items-center gap-1">
+                    <Image
+                      src={employee?.picture as string}
+                      alt="user"
+                      width={30}
+                      height={30}
+                      className="rounded-full w-8 h-8"
+                    />
+                    <span className="font-semibold whitespace-nowrap">
+                      {employee.first_name} {employee.last_name}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
+                      <div className="rounded-full h-2 w-2 bg-primary"></div>
+                      <span className="font-medium text-sm">
+                        {employee.email}
+                      </span>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div> */}
+
         <Pagination className="px-4 py-2">
           <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
           <PaginationContent>

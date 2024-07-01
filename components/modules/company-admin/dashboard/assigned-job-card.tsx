@@ -18,6 +18,7 @@ interface AssignedJobCardProps {
     first_name: string;
     last_name: string;
     picture: string;
+    request_status: string;
   }>;
 }
 
@@ -43,6 +44,18 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
       return "Unassigned";
     }
   };
+
+  console.log(
+    id,
+    customer_name,
+    location,
+    status,
+    phone_number,
+    date_time,
+    service,
+    price,
+    assignedUsers
+  );
 
   return (
     <div className="mt-4 bg-white rounded-3xl p-4">
