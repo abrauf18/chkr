@@ -1,10 +1,10 @@
-"use client"
-import { MapPinned } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import MarkAsComplete from './mark-as-complete';
-import Select from './select-status';
-import ShowJobDetails from '../../../shared/show-job-details';
+"use client";
+import { MapPinned } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import MarkAsComplete from "./mark-as-complete";
+import Select from "./select-status";
+import ShowJobDetails from "../../../shared/show-job-details";
 
 interface CardProps {
   id: number;
@@ -27,7 +27,6 @@ const OngoingJobCard: React.FC<CardProps> = ({
   service,
   price,
 }) => {
-
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
       <div className="flex flex-wrap justify-between items-center">
@@ -35,15 +34,16 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center gap-2">
             <MapPinned className="h-5 w-5" />
-              <span className="font-semibold md:text-lg text-gray-700">
+            <span className="font-semibold md:text-lg text-gray-700">
               {location}
               <Link
-      href={`https://www.google.com/maps?q=${location}`}
-      className="text-primary text-sm md:text-base font-semibold ml-2"
-    >
-      View Direction
-    </Link>
-  </span>
+                href={`https://www.google.com/maps?q=${location}`}
+                target="_blank"
+                className="text-primary text-sm md:text-base font-semibold ml-2"
+              >
+                View Direction
+              </Link>
+            </span>
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
@@ -51,7 +51,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <Select />
         </div>
       </div>
-      <p className="mt-4 text-base text-gray-600">{description}      </p>
+      <p className="mt-4 text-base text-gray-600">{description} </p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap xl:gap-10 gap-4">
           <div className="flex flex-col text-sm whitespace-nowrap">
