@@ -131,9 +131,10 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
               assignedUsers={job.assigned_jobs.map(
                 (assignedJob: { user: any; request_status: string }) => ({
                   ...assignedJob.user,
-                  request_statue: assignedJob.request_status,
+                  request_status: assignedJob.request_status,
                 })
               )}
+              currentTab={tabData[activeTab - 1].text.toLowerCase()}
             />
           ))}
         </div>
@@ -172,4 +173,3 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
 };
 
 export default Jobs;
-

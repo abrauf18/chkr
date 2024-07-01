@@ -20,6 +20,7 @@ interface AssignedJobCardProps {
     picture: string;
     request_status: string;
   }>;
+  currentTab: string;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
@@ -32,8 +33,24 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   service,
   price,
   assignedUsers,
+  currentTab,
 }) => {
+  const isRejected = assignedUsers.some((user) => user.request_status === "rejected");
+
   const displayEmployeeName = () => {
+    if (currentTab === "cancelled") {
+      const rejectedUsers = assignedUsers.filter(user => user.request_status === "rejected");
+      if (rejectedUsers.length === 1) {
+        return `${rejectedUsers[0].first_name} ${rejectedUsers[0].last_name}`;
+      } else if (rejectedUsers.length > 1) {
+        return `${rejectedUsers[0].first_name} ${rejectedUsers[0].last_name} & ${
+          rejectedUsers.length - 1
+        } more`;
+      } else {
+        return "Unassigned";
+      }
+    }
+    
     if (assignedUsers.length > 1) {
       return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${
         assignedUsers.length - 1
@@ -71,16 +88,10 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
-            {status.toLowerCase() === "checked-in" && (
-              <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
-            )}
-            {status.toLowerCase() === "checked-out" && (
-              <div className="bg-[#748afe] rounded-full h-2 w-2 mr-2"></div>
-            )}
-            <span>{status}</span>
+            <span>{isRejected ? "Rejected" : status}</span>
           </div>
           <EditIcon />
-          <DeleteModal userId={0} />
+          <DeleteModal userId={id} />
           <ShowJobDetails jobId={id} />
         </div>
       </div>
@@ -137,4 +148,3 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
-
