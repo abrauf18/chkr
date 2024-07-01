@@ -1,5 +1,5 @@
 "use client"
-import { CircleArrowRight, MapPinned } from 'lucide-react';
+import { MapPinned } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import MarkAsComplete from './mark-as-complete';
@@ -35,14 +35,15 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center gap-2">
             <MapPinned className="h-5 w-5" />
-            <span className="font-semibold md:text-lg text-gray-700">
+              <span className="font-semibold md:text-lg text-gray-700">
               {location}
-              <Link href='company-employee/dashboard'
-                className='text-primary text-sm md:text-base font-semibold ml-2'>
-                View Direction
-              </Link>
-            </span>
-
+              <Link
+      href={`https://www.google.com/maps?q=${location}`}
+      className="text-primary text-sm md:text-base font-semibold ml-2"
+    >
+      View Direction
+    </Link>
+  </span>
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
@@ -66,7 +67,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
-            <span className="font-bold md:text-lg">Payment:</span>
+            <span className="font-bold md:text-lg">Zip Code:</span>
             <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base ">
               <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
               {status}
