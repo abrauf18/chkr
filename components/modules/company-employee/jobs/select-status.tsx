@@ -1,18 +1,36 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Checkin from "@/assets/icons/checkin";
 import Checkout from "@/assets/icons/checkout";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 const Select: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Checkin");
+  const [selectedOption, setSelectedOption] = useState("Checkout");
   const [currentLocation, setCurrentLocation] =
     useState<GeolocationCoordinates | null>(null);
+  const [isLocationEnabled, setIsLocationEnabled] = useState(true);
+
+  useEffect(() => {
+    if (!("geolocation" in navigator)) {
+      setIsLocationEnabled(false);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        () => setIsLocationEnabled(true),
+        () => setIsLocationEnabled(false)
+      );
+    }
+  }, []);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = (option: string) => {
+    if (option === "Checkin" && !isLocationEnabled) {
+      toast.error("Location services must be enabled to checkin.");
+      return;
+    }
     setSelectedOption(option);
     setIsOpen(false);
     console.log(option);
@@ -40,6 +58,7 @@ const Select: React.FC = () => {
 
   return (
     <div className="relative inline-block text-left">
+      <ToastContainer />
       <div>
         <button
           onClick={toggleDropdown}
@@ -111,4 +130,3 @@ const Select: React.FC = () => {
 };
 
 export default Select;
-
