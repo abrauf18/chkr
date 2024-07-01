@@ -11,13 +11,14 @@ import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { GetEmployeeJobByIDAction, GetJobByIDAction } from "@/actions/jobs/job-action";
+import SmallMap from "./small-map";
 
 export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boolean}) {
   const pathname = usePathname();
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
-
+  const location = isAdmin ? jobDetails?.location : UserJobDetails?.job?.location;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -144,13 +145,14 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
       </div>
       <div className="flex flex-col gap-3 text-left">
         <span className="font-bold text-lg">Map Direction</span>
-        <iframe
+        {/* <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15282225.79979123!2d73.7250245393691!3d20.750301298393563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1587818542745!5m2!1sen!2sin"
           width="100%"
           height="200"
           style={{ border: 0, borderRadius: "1rem" }}
           aria-hidden="false"
-        ></iframe>
+        ></iframe> */}
+        {location && <SmallMap location={location} />}
       </div>
       <div className="text-left">
         <span className="font-bold text-lg text-left">Onsite Progress:</span>
