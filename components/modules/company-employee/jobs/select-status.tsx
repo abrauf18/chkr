@@ -7,12 +7,21 @@ import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 const Select: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Checkin');
+  const [currentLocation, setCurrentLocation] = useState<GeolocationCoordinates | null>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
+    if (option === 'Checkin') {
+      console.log(currentLocation)
+      // Get current location on Checkin click
+      navigator.geolocation.getCurrentPosition(
+        (position) => setCurrentLocation(position.coords),
+        (error) => console.error('Error getting location:', error)
+      );
+    }
   };
 
   const getButtonStyle = () => {

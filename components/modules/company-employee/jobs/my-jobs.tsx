@@ -4,6 +4,7 @@ import JobRequests from "./job-requests";
 import OngoingJobs from "./ongoing-jobs";
 import CompletedJobs from "./completed-jobs";
 import Header from "@/components/shared/header";
+import { Location } from "@/components/shared/location";
 
 const tabsData = [
   { id: 1, text: "New Job Requests" },
