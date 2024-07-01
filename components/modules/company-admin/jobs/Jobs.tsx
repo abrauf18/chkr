@@ -27,6 +27,7 @@ interface JobsProps {
 }
 
 const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
+  console.log(jobs)
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -45,7 +46,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
   };
 
   const filterJobsByStatus = (status: string) => {
-    if (status === "cancelled") {
+    if (status === "rejected") {
       return jobs.filter((job) =>
         job.assigned_jobs.some(
           (assignedJob: { request_status: string }) =>
@@ -60,7 +61,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard}) => {
   const allJobs = jobs;
   const ongoingJobs = filterJobsByStatus("ongoing");
   const completedJobs = filterJobsByStatus("completed");
-  const cancelledJobs = filterJobsByStatus("cancelled");
+  const cancelledJobs = filterJobsByStatus("rejected");
 
   const tabData = [
     { id: 1, text: "All Jobs", content: allJobs },

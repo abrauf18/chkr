@@ -67,7 +67,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             <span>{status}</span>
           </div>
           <EditIcon />
-          <DeleteModal />
+          <DeleteModal userId={0} />
           <ShowJobDetails jobId={id} />
         </div>
       </div>
