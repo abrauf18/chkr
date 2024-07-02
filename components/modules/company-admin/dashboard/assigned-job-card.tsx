@@ -35,22 +35,26 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   assignedUsers,
   currentTab,
 }) => {
-  const isRejected = assignedUsers.some((user) => user.request_status === "rejected");
+  const isRejected = assignedUsers.some(
+    (user) => user.request_status === "rejected"
+  );
 
   const displayEmployeeName = () => {
     if (currentTab === "cancelled") {
-      const rejectedUsers = assignedUsers.filter(user => user.request_status === "rejected");
+      const rejectedUsers = assignedUsers.filter(
+        (user) => user.request_status === "rejected"
+      );
       if (rejectedUsers.length === 1) {
         return `${rejectedUsers[0].first_name} ${rejectedUsers[0].last_name}`;
       } else if (rejectedUsers.length > 1) {
-        return `${rejectedUsers[0].first_name} ${rejectedUsers[0].last_name} & ${
-          rejectedUsers.length - 1
-        } more`;
+        return `${rejectedUsers[0].first_name} ${
+          rejectedUsers[0].last_name
+        } & ${rejectedUsers.length - 1} more`;
       } else {
         return "Unassigned";
       }
     }
-    
+
     if (assignedUsers.length > 1) {
       return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${
         assignedUsers.length - 1
@@ -61,18 +65,6 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
       return "Unassigned";
     }
   };
-
-  console.log(
-    id,
-    customer_name,
-    location,
-    status,
-    phone_number,
-    date_time,
-    service,
-    price,
-    assignedUsers
-  );
 
   return (
     <div className="mt-4 bg-white rounded-3xl p-4">
@@ -148,3 +140,4 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
+

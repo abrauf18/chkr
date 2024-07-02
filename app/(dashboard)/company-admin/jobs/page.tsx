@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 
 export default async function page() {
   const jobs = await GetJobsAction();
-  console.log(jobs)
   return (
     <>
       <DashboardHeader title="" />

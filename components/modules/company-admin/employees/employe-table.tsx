@@ -33,9 +33,7 @@ const EmployeeTable = ({
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   totalPageCount: number;
   currentEmployees: Users[];
-}) => 
-  {
-    console.log(employees)
+}) => {
   const handlePagination = (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPageCount) return;
     setCurrentPage(pageNumber);

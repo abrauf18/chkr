@@ -26,17 +26,14 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
           </h1>
         </div>
         <div className="flex justify-center items-center relative lg:flex-wrap md:flex-wrap mt-1">
-          <h1 className="md:text-5xl text-3xl mr-4 font-medium">
-            {heading3}
-          </h1>
+          <h1 className="md:text-5xl text-3xl mr-4 font-medium">{heading3}</h1>
           <Eclipse className="xl:w-[10rem] xl:h-[6rem] md:w-[6rem] md:h-[4rem] sm:w-[5rem] sm:h-[3rem] w-[5rem] h-[3rem]" />
         </div>
       </div>
       <Image
         className="rounded-2xl mt-20 hidden xl:block"
         src={url}
-        alt="auth Page banner"
-        layout="responsive"
+        alt="Auth Page banner"
         width={800}
         height={500}
         priority

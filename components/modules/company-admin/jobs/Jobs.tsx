@@ -27,7 +27,6 @@ interface JobsProps {
 }
 
 const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
-  console.log(jobs);
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -173,3 +172,4 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
 };
 
 export default Jobs;
+
