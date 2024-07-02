@@ -74,7 +74,7 @@ const JobRequestCard: React.FC<CardProps> = ({
             Accept
           </Button>
           <Button
-            className="rounded-3xl text-black bg-gray-100"
+            className="rounded-3xl text-black bg-gray-100 hover:text-white"
             type="button"
             onClick={() => handleClick(false)}
           >
