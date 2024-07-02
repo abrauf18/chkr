@@ -96,7 +96,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   };
 
   return (
-    <div className="mt-4 bg-white rounded-3xl p-4">
+    <div className="mt-4 bg-white rounded-3xl p-4 shadow-xl">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
