@@ -11,21 +11,37 @@ import {
 } from '@/components/ui/dialog';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CompleteByIDAction } from '@/actions/jobs/job-action';
+import { toast } from 'react-toastify';
+import action from '@/app/action';
 
-export default function MarkAsComplete() {
+interface MarkAsCompleteProps {
+  jobID: number;
+}
+
+export default function MarkAsComplete({ jobID }: MarkAsCompleteProps) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleMarkComplete = () => {
-    setIsCompleted(true);
-    setIsOpen(false);
+  const handleMarkComplete = async () => {
+    try {
+      const result = await CompleteByIDAction(jobID);
+      console.log(result)
+      if (result.statusCode === 200) {
+        await action("GetUserJobs");
+        return toast.success(result.message);
+      } else {
+        return toast.error(result.message);
+      }
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    }
   };
 
   const handleCancel = () => {
     setIsCompleted(false);
     setIsOpen(false);
   };
-
 
   return (
     <>

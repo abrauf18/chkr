@@ -24,7 +24,6 @@ const JobRequestCard = dynamic(() => import("../dashboard/job-request-card"), {
 const JobRequests: React.FC<JobRequestsProps> = ({ jobs, isDashboard }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-
   const filteredJobs = jobs.filter((job) => job.request_status === "pending");
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
