@@ -57,7 +57,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {date_time}
+              {new Date(date_time).toLocaleString()}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
