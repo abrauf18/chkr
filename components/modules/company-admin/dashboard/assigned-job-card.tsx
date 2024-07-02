@@ -35,10 +35,6 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   assignedUsers,
   currentTab,
 }) => {
-  const isRejected = assignedUsers.some(
-    (user) => user.request_status === "rejected"
-  );
-
   const displayEmployeeName = () => {
     if (currentTab === "cancelled") {
       const rejectedUsers = assignedUsers.filter(
@@ -66,6 +62,39 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
     }
   };
 
+  const displayUserImages = () => {
+    if (currentTab === "cancelled") {
+      const rejectedUsers = assignedUsers.filter(
+        (user) => user.request_status === "rejected"
+      );
+      return rejectedUsers.slice(0, 2).map((user, index) => (
+        <Image
+          key={index}
+          src={user.picture || "/images/user.jpeg"}
+          alt="user-image"
+          height={33}
+          width={33}
+          className={`rounded-full w-10 h-10 absolute ${
+            index === 0 ? "left-2" : "left-6"
+          }`}
+        />
+      ));
+    } else {
+      return assignedUsers.slice(0, 2).map((user, index) => (
+        <Image
+          key={index}
+          src={user.picture || "/images/user.jpeg"}
+          alt="user-image"
+          height={33}
+          width={33}
+          className={`rounded-full w-10 h-10 absolute ${
+            index === 0 ? "left-2" : "left-6"
+          }`}
+        />
+      ));
+    }
+  };
+
   return (
     <div className="mt-4 bg-white rounded-3xl p-4">
       <div className="flex flex-wrap justify-between">
@@ -80,7 +109,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
-            <span>{isRejected ? "Rejected" : status}</span>
+            <span>{status}</span>
           </div>
           <EditIcon />
           <DeleteModal userId={id} />
@@ -115,20 +144,11 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           </div>
         </div>
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
-          <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
+          <span className="font-bold text-sm lg:text-lg">
+            {currentTab === "cancelled" ? "Rejected By:" : "Assigned To:"}
+          </span>
           <div className="flex mt-2 relative">
-            {assignedUsers.slice(0, 2).map((user, index) => (
-              <Image
-                key={index}
-                src={user.picture || "/images/user.jpeg"}
-                alt="user-image"
-                height={33}
-                width={33}
-                className={`rounded-full w-10 h-10 absolute ${
-                  index === 0 ? "left-2" : "left-6"
-                }`}
-              />
-            ))}
+            {displayUserImages()}
             <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
               {displayEmployeeName()}
             </span>
@@ -140,4 +160,3 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
-
