@@ -47,7 +47,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
-          <MarkAsComplete />
+          <MarkAsComplete jobID={id} />
           <Select />
         </div>
       </div>

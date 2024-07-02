@@ -90,7 +90,7 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
         </div>
         <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
           {pathname === "/company-employee/jobs" && <Select />}
-          {pathname === "/company-employee/jobs" && <MarkAsComplete />}
+          {pathname === "/company-employee/jobs" && <MarkAsComplete jobID={UserJobDetails?.job?.id} />}
         </div>
         {pathname === "/company-admin/jobs" && (
           <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
