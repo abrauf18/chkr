@@ -125,3 +125,18 @@ export const GetEmployeeJobByIDAction = async (id: number) => {
   const result = await response.json();
   return result;
 };
+
+export const CompleteByIDAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/complete-job/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+  });
+  const result = await response.json();
+  return result;
+};
+
