@@ -98,7 +98,7 @@ const JobRequestCard: React.FC<CardProps> = ({
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
-            <span className="font-bold md:text-lg">Zip Code:</span>
+            <span className="font-bold md:text-lg">Status:</span>
             <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base capitalize">
               <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
               {status}
