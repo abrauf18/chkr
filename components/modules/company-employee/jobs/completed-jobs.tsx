@@ -19,8 +19,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  // Filter jobs with request_status === 'accepted'
-  const filteredJobs = jobs.filter(job => job.request_status === 'completed');
+  const filteredJobs = jobs.filter(job => job.job.status === 'completed');
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
@@ -51,7 +50,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
           customer_name={job.job.customer_name}
           location={job.job.location}
           description={job.job.description}
-          status={job.request_status}
+          status={job.job.status}
           date_time={job.job.date_time}
           service={job.job.service.service_name}
           price={job.price}

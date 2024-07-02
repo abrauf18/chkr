@@ -29,7 +29,6 @@ interface JobsProps {
 const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
     setCurrentPage(1);

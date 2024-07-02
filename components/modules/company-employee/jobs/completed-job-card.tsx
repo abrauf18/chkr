@@ -4,7 +4,6 @@ import Location from "@/assets/icons/location-icon";
 interface CompletedJobCardProps {
   customer_name: string;
   location: string;
-  description: string;
   status: string;
   date_time: string;
   service: string;
@@ -14,7 +13,6 @@ interface CompletedJobCardProps {
 const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
   customer_name,
   location,
-  description,
   status,
   date_time,
   service,
