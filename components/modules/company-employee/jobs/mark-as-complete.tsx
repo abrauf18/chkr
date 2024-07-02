@@ -30,9 +30,8 @@ export default function MarkAsComplete({ jobID }: MarkAsCompleteProps) {
       if (result.statusCode === 200) {
         await action("GetUserJobs");
         return toast.success(result.message);
-      } else {
+      } 
         return toast.error(result.message);
-      }
     } catch (error) {
       return toast.error((error as Error)?.message);
     }
