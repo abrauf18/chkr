@@ -35,7 +35,7 @@ const AuthLeftSide: React.FC<AuthLeftSideProps> = ({
       <Image
         className="rounded-2xl mt-20 hidden xl:block"
         src={url}
-        alt="auth Page banner "
+        alt="auth Page banner"
         layout="responsive"
         width={800}
         height={500}

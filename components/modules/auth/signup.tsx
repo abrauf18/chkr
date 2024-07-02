@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import SignupImg from "@/public/images/SignupRightside.svg";
+import SignupImg from "@/public/images/SignupRightSide.png";
 import Google from "@/assets/icons/google-icon";
 import Microsoft from "@/assets/icons/microsoft-icon";
 import { Input } from "@/components/ui/input";
