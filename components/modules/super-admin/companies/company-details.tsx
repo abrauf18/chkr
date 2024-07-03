@@ -3,33 +3,41 @@ import React from 'react';
 import PlanCard from '../../company-admin/onboarding/plan-card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface CompanyDetailsProps {
-  companyName: string;
-  companyType: string;
-  phoneNumber: string;
+  company_name: string;
+  company_logo: string;
+  phone_number: string;
   country: string;
   location: string;
-  subscriptionPlan: string;
+  plan_type: string;
   price: number;
+  firm_name: string;
+  subscriptionPlan: string;
 }
 
 const CompanyDetails: React.FC<CompanyDetailsProps> = ({
-  companyName,
-  companyType,
-  phoneNumber,
+  company_name,
+  company_logo,
   country,
+  firm_name,
+  plan_type,
   location,
+  phone_number,
+  subscriptionPlan,
 }) => {
   return (
     <div className="flex flex-col mx-auto">
       <div className="flex flex-row mobile:flex-col items-center justify-between">
         <div className="flex items-center">
           <div
-            className="rounded-full bg-yellow-400 h-16 w-16 flex items-center justify-center">
+            className="rounded-full w-16 h-16 flex items-center justify-center">
+              <Image alt='company-logo' width={70} height={70} src={company_logo} 
+                className="rounded-full aspect-square object-cover max-h-24 max-w-24"                          />
           </div>
           <div className="ml-4">
-            <div className="text-xl font-medium text-black">{companyName}</div>
+            <div className="text-xl font-medium text-black">{company_name}</div>
           </div>
         </div>
         <Link href='/super-admin/companies/editprofile'>
@@ -44,13 +52,13 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg mobile:text-left">Company Type:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {companyType}
+              {firm_name}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg mobile:text-left">Phone Number:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {phoneNumber}
+              {phone_number}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
