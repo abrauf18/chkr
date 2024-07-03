@@ -13,6 +13,8 @@ const CompanyCard: React.FC<CompanyInterface> = ({
   plan,
   location,
   staffCount,
+  phone_number,
+  // Add other necessary fields from your API response
 }) => {
   return (
     <div className="max-w-sm rounded-xl overflow-hidden shadow-lg p-5 bg-white">
@@ -26,7 +28,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
             <div className="text-gray-400">{firm_name}</div>
           </div>
         </div>
-        <CardOptions companyId={id}/>
+        <CardOptions companyId={id} companyData={{ id, company_name, company_logo, country, firm_name, plan, location, staffCount, phone_number }} />
       </div>
       <p className="text-gray-600 mobile:text-xs text-sm mb-4">{location}</p>
       <div className=' flex flex-wrap gap-2'>

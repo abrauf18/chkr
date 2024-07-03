@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { usePathname } from 'next/navigation';
 import {
   DropdownMenu,
@@ -7,19 +7,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Ban, EllipsisVertical, Trash2 } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import CompanyDetailsModal from "./company-details-modal";
 import DeleteModal from "../admins/delete-modal";
 import DisableModal from "@/components/shared/disable-modal";
+import { CompanyInterface } from '@/lib/interfaces';
 
 interface CardOptionsProps {
   companyId: number;
+  companyData: CompanyInterface;
 }
 
-const CardOptions: React.FC<CardOptionsProps> = ({ companyId }) => {
+const CardOptions: React.FC<CardOptionsProps> = ({ companyId, companyData }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log(companyId)
+
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>
       <DropdownMenuTrigger
@@ -31,12 +33,10 @@ const CardOptions: React.FC<CardOptionsProps> = ({ companyId }) => {
         <EllipsisVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]'>
-        <div>
-          <CompanyDetailsModal />
-        </div>
+        <CompanyDetailsModal companyId={companyId} companyData={companyData} />
         <DisableModal />
         {pathname !== '/admin/companies' && (
-          <DeleteModal userId={0}/>
+          <DeleteModal userId={0} />
         )}
       </DropdownMenuContent>
     </DropdownMenu>

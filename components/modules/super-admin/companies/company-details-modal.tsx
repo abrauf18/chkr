@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -6,11 +6,20 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { PencilLine } from 'lucide-react'
-import CompanyDetails from './company-details'
+} from "@/components/ui/dialog";
+import { PencilLine } from 'lucide-react';
+import CompanyDetails from './company-details';
+import { CompanyInterface } from '@/lib/interfaces';
 
-export default function CompanyDetailsModal() {
+interface CompanyDetailsModalProps {
+  companyId: number;
+  companyData: CompanyInterface;
+}
+
+const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId, companyData }) => {
+  // You can fetch additional company details using companyId here if needed
+  // For demonstration, using provided companyData
+
   return (
     <div>
       <Dialog>
@@ -29,18 +38,22 @@ export default function CompanyDetailsModal() {
             </DialogTitle>
             <DialogDescription>
               <CompanyDetails
-                companyName="Upyr Ltd"
-                companyType="Room Cleaning"
-                phoneNumber="+123 456 789"
-                country="Singapore"
-                location="4140 Parker Rd. Allentown, New Mexico 31134"
-                subscriptionPlan="Monthly Plan"
-                price={189.00}
+                company_name={companyData.company_name}
+                firm_name={companyData.firm_name}
+                phone_number={companyData.phone_number}
+                country={companyData.country}
+                location={companyData.location}
+                plan_type={companyData.plan.plan_type}
+                price= {93}
+                subscriptionPlan='plan'
+                company_logo={companyData.company_logo}
               />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
+
+export default CompanyDetailsModal;

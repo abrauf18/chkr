@@ -111,6 +111,7 @@ export interface JobRequestInterface {
 }
 
 export interface CompanyInterface {
+  phone_number: string;
   id: number,
   company_logo: string,
   company_name: string,
