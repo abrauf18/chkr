@@ -20,9 +20,10 @@ const CompanyCard: React.FC<CompanyInterface> = ({
     <div className="max-w-sm rounded-xl overflow-hidden shadow-lg p-5 bg-white">
       <div className='flex justify-between'>
         <div className="flex items-center mb-4">
-          <div className="rounded-full flex items-center justify-center text-white">
-            <Image alt='company-logo' width={50} height={50} src={company_logo} />
-          </div>
+          <div className="rounded-full flex items-center justify-center shadow-xl">
+          <Image alt='company-logo' width={40} height={40} src={company_logo} 
+                className="rounded-full aspect-square object-cover max-h-20 max-w-20"/>
+           </div>
           <div className="flex flex-col ml-4 gap-1">
             <div className="font-medium text-lg">{company_name}</div>
             <div className="text-gray-400">{firm_name}</div>
