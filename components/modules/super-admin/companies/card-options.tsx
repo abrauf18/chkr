@@ -12,10 +12,14 @@ import CompanyDetailsModal from "./company-details-modal";
 import DeleteModal from "../admins/delete-modal";
 import DisableModal from "@/components/shared/disable-modal";
 
-export default function AccountDropdown() {
+interface CardOptionsProps {
+  companyId: number;
+}
+
+const CardOptions: React.FC<CardOptionsProps> = ({ companyId }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
+  console.log(companyId)
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>
       <DropdownMenuTrigger
@@ -30,12 +34,13 @@ export default function AccountDropdown() {
         <div>
           <CompanyDetailsModal />
         </div>
-        <DisableModal/>
-      
+        <DisableModal />
         {pathname !== '/admin/companies' && (
-        <DeleteModal/>
+          <DeleteModal userId={0}/>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default CardOptions;

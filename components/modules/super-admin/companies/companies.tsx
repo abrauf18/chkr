@@ -15,7 +15,8 @@ const Companies: React.FC = async () => {
         <h1>Recently added</h1>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
         {data.map((company: CompanyInterface) => (
-            <CompanyCard key={company.id} {...company} />
+            <CompanyCard 
+            key={company.id} {...company} />
           ))}
         </div>
 
