@@ -109,3 +109,16 @@ export interface JobRequestInterface {
   job_request: boolean,
   job_id: number,
 }
+
+export interface CompanyInterface {
+  id: number,
+  company_logo: string,
+  company_name: string,
+  location: string,
+  country: string,
+  firm_name: string,
+  plan: {
+    plan_type: string;
+  };
+  staffCount: number,
+}
