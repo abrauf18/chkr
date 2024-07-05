@@ -35,6 +35,7 @@ export default function CompanyInformation({
   };
   currentImage: string;
 }) {
+  console.log(currentImage);
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
     null
   );

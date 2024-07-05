@@ -7,9 +7,9 @@ import PlanCard from "../../company-admin/onboarding/plan-card";
 import { ErrorMessage } from "@hookform/error-message";
 
 export default function EditCompanyProfile() {
+  console.log("first");
   return (
     <>
-      <DashboardHeader title="Companies" />
       <div className="flex justify-between">
         <h1 className="text-xl mb-2">Edit Company Profile</h1>
       </div>
@@ -19,7 +19,8 @@ export default function EditCompanyProfile() {
             Fill out the Company Information
           </h1>
           <hr className="my-3" />
-          {/* <CompanyInformation
+          <CompanyInformation
+            currentImage="https://via.placeholder.com/150"
             companyinfo={{
               company_name: "Company Name",
               firm_name: "A",
@@ -28,7 +29,7 @@ export default function EditCompanyProfile() {
               country: "Pakistan",
               company_logo: "",
             }}
-          /> */}
+          />
         </div>
       </div>
     </>

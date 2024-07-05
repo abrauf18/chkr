@@ -1,12 +1,7 @@
-import EditCompanyProfile from '@/components/modules/super-admin/companies/edit-company-profile'
-import { Metadata } from 'next';
-import React from 'react'
-
-export const metadata: Metadata = {
-  title: "Edit Profile",
-  description: "Edit the company information."
-};
+import EditCompanyProfile from "@/components/modules/super-admin/companies/edit-company-profile";
+import React from "react";
 
 export default function EditProfilePage() {
-  return <EditCompanyProfile />
+  return <EditCompanyProfile />;
 }
+
