@@ -186,3 +186,7 @@ input[type=checkbox]:checked {
 }
 
 .custom-check { filter: hue-rotate(150deg) }
+
+textarea:focus, input:focus{
+  outline: none;
+}
