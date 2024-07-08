@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface CompanyDetailsProps {
+  id: number;
   company_name: string;
   company_logo: string;
   phone_number: string;
@@ -18,6 +19,7 @@ interface CompanyDetailsProps {
 }
 
 const CompanyDetails: React.FC<CompanyDetailsProps> = ({
+  id,
   company_name,
   company_logo,
   country,
@@ -40,7 +42,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
             <div className="text-xl font-medium text-black">{company_name}</div>
           </div>
         </div>
-        <Link href='/super-admin/companies/editprofile'>
+        <Link href={`/super-admin/companies/editprofile/${id}`}>
           <Button className="text-white p-3 rounded-3xl flex items-center gap-2 mobile:mt-4 mobile:w-full mobile:mx-auto">
             <PencilLine className='lg:w-4 lg:h-4 mobile:w-3 mobile:h-3' />
             <span className='mobile:text-xs lg:text-lg'>Edit Profile</span>

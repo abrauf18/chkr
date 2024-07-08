@@ -26,6 +26,7 @@ export default function CompanyInformation({
   currentImage,
 }: {
   companyinfo: {
+    id: number;
     company_name: string;
     firm_name: string;
     phone_number: string;
@@ -212,7 +213,7 @@ export default function CompanyInformation({
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none appearance-none"
             >
               <option value="">Select Company Type</option>
-              {companyTypes?.map((companytype) => (
+              {/* {companyTypes?.map((companytype) => (
                 <option
                   key={companytype.id}
                   value={companytype.firm_name}
@@ -220,7 +221,7 @@ export default function CompanyInformation({
                 >
                   {companytype.firm_name}
                 </option>
-              ))}
+              ))} */}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <ChevronDown />

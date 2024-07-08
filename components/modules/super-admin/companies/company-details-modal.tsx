@@ -22,6 +22,7 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) 
   if (!companyData) {
     return null; 
   }
+  console.log(companyData)
 
   return (
     <div>
@@ -49,8 +50,9 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) 
                 plan_type={companyData.plan.plan_type}
                 price={93}
                 subscriptionPlan='plan'
-                company_logo={companyData.company_logo}
-              />
+                company_logo={companyData.company_logo} 
+                id={companyData.id}              
+                />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

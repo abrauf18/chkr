@@ -1,13 +1,30 @@
-"use client";
-import DashboardHeader from "@/components/shared/dashboard-header";
-import { Button } from "@/components/ui/button";
 import React from "react";
 import CompanyInformation from "../../company-admin/settings/company-information";
-import PlanCard from "../../company-admin/onboarding/plan-card";
-import { ErrorMessage } from "@hookform/error-message";
+import { useCompanyData } from "./companydata-context";
 
-export default function EditCompanyProfile() {
-  console.log("first");
+type EditCompanyProfileProps = {
+  companyId: number | null;
+};
+
+const EditCompanyProfile: React.FC<EditCompanyProfileProps> = ({ companyId }) => {
+  // console.log(companyId)
+  // const { data } = useCompanyData(); 
+  // const companyData = companyId
+  //   ? data?.find((company) => company.id === companyId)
+  //   : null;
+
+  // if (!companyData) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // console.log(data)
+  const { data } = useCompanyData();
+  const companyData = data?.find((company) => company.id === companyId);
+
+  if (!companyData) {
+    return null; 
+  }
+
   return (
     <>
       <div className="flex justify-between">
@@ -20,19 +37,21 @@ export default function EditCompanyProfile() {
           </h1>
           <hr className="my-3" />
           <CompanyInformation
-            currentImage="https://via.placeholder.com/150"
+            currentImage={companyData.company_logo}
             companyinfo={{
-              company_name: "Company Name",
-              firm_name: "A",
-              phone_number: "Phone Number",
-              location: "Location",
-              country: "Pakistan",
-              company_logo: "",
+              id: companyData.id,
+              company_name: companyData.company_name,
+              firm_name: companyData.firm.firm_name,
+              phone_number: companyData.phone_number,
+              location: companyData.location,
+              country: companyData.country,
+              company_logo: companyData.company_logo,
             }}
           />
         </div>
       </div>
     </>
   );
-}
+};
 
+export default EditCompanyProfile;
