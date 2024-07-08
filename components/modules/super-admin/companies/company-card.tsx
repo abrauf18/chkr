@@ -9,7 +9,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
   company_name,
   company_logo,
   country,
-  firm_name,
+  firm,
   plan,
   location,
   staffCount,
@@ -26,10 +26,10 @@ const CompanyCard: React.FC<CompanyInterface> = ({
            </div>
           <div className="flex flex-col ml-4 gap-1">
             <div className="font-medium text-lg">{company_name}</div>
-            <div className="text-gray-400">{firm_name}</div>
+            <div className="text-gray-400">{firm.firm_name}</div>
           </div>
         </div>
-        <CardOptions companyId={id} companyData={{ id, company_name, company_logo, country, firm_name, plan, location, staffCount, phone_number }} />
+        <CardOptions companyId={id} companyData={{ id, company_name, company_logo, country, firm, plan, location, staffCount, phone_number }} />
       </div>
       <p className="text-gray-600 mobile:text-xs text-sm mb-4">{location}</p>
       <div className=' flex flex-wrap gap-2'>

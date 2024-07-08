@@ -29,12 +29,12 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
 }) => {
   return (
     <div className="flex flex-col mx-auto">
-      <div className="flex flex-row mobile:flex-col items-center justify-between">
+      <div className="flex flex-row items-center justify-between">
         <div className="flex items-center">
           <div
             className="rounded-full w-16 h-16 flex items-center justify-center">
               <Image alt='company-logo' width={70} height={70} src={company_logo} 
-                className="rounded-full aspect-square object-cover max-h-24 max-w-24"                          />
+                className="rounded-full aspect-square object-cover max-h-24 max-w-24"/>
           </div>
           <div className="ml-4">
             <div className="text-xl font-medium text-black">{company_name}</div>
@@ -42,8 +42,8 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
         </div>
         <Link href='/super-admin/companies/editprofile'>
           <Button className="text-white p-3 rounded-3xl flex items-center gap-2 mobile:mt-4 mobile:w-full mobile:mx-auto">
-            <PencilLine className='w-4 h-4' />
-            Edit Profile
+            <PencilLine className='lg:w-4 lg:h-4 mobile:w-3 mobile:h-3' />
+            <span className='mobile:text-xs lg:text-lg'>Edit Profile</span>
           </Button>
         </Link>
       </div>
@@ -77,8 +77,8 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
         </div>
       </div>
       <div className="mt-8">
-        <div className="text-lg font-medium text-black">Subscription Plan</div>
-        <div className="flex items-baseline hover:border-2 p-2 mt-4 text-black hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
+        <div className="text-lg font-medium text-black text-left">Subscription Plan</div>
+        <div className="flex items-baseline hover:border-2 mt-4 text-black hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary">
           <input
             type="radio"
             placeholder="Monthly Plan"
