@@ -111,13 +111,15 @@ export interface JobRequestInterface {
 }
 
 export interface CompanyInterface {
+  firm: {
+    firm_name: string,
+  };
   phone_number: string;
   id: number,
   company_logo: string,
   company_name: string,
   location: string,
   country: string,
-  firm_name: string,
   plan: {
     plan_type: string;
   };
