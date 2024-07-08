@@ -16,6 +16,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { ServiceAction } from '@/actions/jobs/job-action';
 import { ServicesInterface } from '@/lib/interfaces';
 import GooglePlacesAutocomplete from '@/components/shared/autocomplete-input';
+import GoogleMapsGeofencing from '@/components/shared/googlemapfencing';
 
 interface Props {
   handleNextStep: () => void;
@@ -137,14 +138,16 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         >
           Location
         </Label>
-        <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+        <div className="flex items-center">
+          {/* <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
             <MapPinned color="#636363" className="h-4 w-4" />
-          </span>
-          <GooglePlacesAutocomplete
+          </span> */}
+          <GoogleMapsGeofencing name="location" />
+
+          {/* <GooglePlacesAutocomplete
             name="location"
-            placeholder="Enter your location"
-          />
+            placeholder="Customer location"
+          /> */}
         </div>
         <p className="text-sm text-red-500">
           {' '}
