@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { SessionProvider } from "next-auth/react";
+import { CompanyDataProvider } from "@/components/modules/super-admin/companies/companydata-context";
 
 const myFont = localFont({ src: "../fonts/LufgaRegular.ttf" });
 
@@ -32,8 +33,10 @@ export default async function RootLayout({
           pauseOnHover
           theme="dark"
         />
-        <SessionProvider>{children}</SessionProvider>
-      </body>
+        <SessionProvider>
+          <CompanyDataProvider>{children}</CompanyDataProvider>
+        </SessionProvider>     
+        </body>
     </html>
   );
 }
