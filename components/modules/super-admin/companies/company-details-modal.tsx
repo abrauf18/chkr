@@ -9,16 +9,19 @@ import {
 } from "@/components/ui/dialog";
 import { PencilLine } from 'lucide-react';
 import CompanyDetails from './company-details';
-import { CompanyInterface } from '@/lib/interfaces';
+import { useCompanyData } from './companydata-context';
 
 interface CompanyDetailsModalProps {
   companyId: number;
-  companyData: CompanyInterface;
 }
 
-const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId, companyData }) => {
-  // You can fetch additional company details using companyId here if needed
-  // For demonstration, using provided companyData
+const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) => {
+  const { data } = useCompanyData();
+  const companyData = data?.find((company) => company.id === companyId);
+
+  if (!companyData) {
+    return null; 
+  }
 
   return (
     <div>
@@ -39,12 +42,12 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId, co
             <DialogDescription>
               <CompanyDetails
                 company_name={companyData.company_name}
-                firm_name={companyData.firm_name}
+                firm_name={companyData.firm.firm_name}
                 phone_number={companyData.phone_number}
                 country={companyData.country}
                 location={companyData.location}
                 plan_type={companyData.plan.plan_type}
-                price= {93}
+                price={93}
                 subscriptionPlan='plan'
                 company_logo={companyData.company_logo}
               />
