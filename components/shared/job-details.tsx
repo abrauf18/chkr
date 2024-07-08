@@ -10,15 +10,26 @@ import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { GetEmployeeJobByIDAction, GetJobByIDAction } from "@/actions/jobs/job-action";
+import {
+  GetEmployeeJobByIDAction,
+  GetJobByIDAction,
+} from "@/actions/jobs/job-action";
 import SmallMap from "./small-map";
 
-export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boolean}) {
+export default function JobDetails({
+  jobId,
+  isAdmin,
+}: {
+  jobId: number;
+  isAdmin?: boolean;
+}) {
   const pathname = usePathname();
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
-  const location = isAdmin ? jobDetails?.location : UserJobDetails?.job?.location;
+  const location = isAdmin
+    ? jobDetails?.location
+    : UserJobDetails?.job?.location;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +42,7 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
     };
     fetchData();
   }, [jobId]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,7 +54,6 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
     };
     fetchData();
   }, [jobId]);
-
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -65,34 +75,45 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
       date: "29/03/2024",
       time: "4:45 am",
       content: "tasks should be completed",
-      user: "employee"
-    }
+      user: "employee",
+    },
   ];
 
   return (
     <div className="flex flex-col px-4 gap-4 w-full text-black">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col mobile:text-left">
-        {isAdmin && <h1 className="font-bold text-xl mb-3">{jobDetails?.customer_name}</h1>}
-        {!isAdmin && <h1 className="font-bold text-xl mb-3">{UserJobDetails?.job?.customer_name}</h1>}
+          {isAdmin && (
+            <h1 className="font-bold text-xl mb-3">
+              {jobDetails?.customer_name}
+            </h1>
+          )}
+          {!isAdmin && (
+            <h1 className="font-bold text-xl mb-3">
+              {UserJobDetails?.job?.customer_name}
+            </h1>
+          )}
           <div className="flex items-center">
             <MapPinned />
-            {isAdmin && 
-            <span className="font-semibold text-lg text-gray-700 ml-2">
-            {jobDetails?.location}
-            </span>
-            }
-            {!isAdmin && 
-            <span className="font-semibold text-lg text-gray-700 ml-2">
-            {UserJobDetails?.job?.location}
-             </span>}
+            {isAdmin && (
+              <span className="font-semibold text-lg text-gray-700 ml-2">
+                {jobDetails?.location?.name}
+              </span>
+            )}
+            {!isAdmin && (
+              <span className="font-semibold text-lg text-gray-700 ml-2">
+                {UserJobDetails?.job?.location?.name}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
           {pathname === "/company-employee/jobs" && <Select />}
-          {pathname === "/company-employee/jobs" && <MarkAsComplete jobID={UserJobDetails?.job?.id} />}
+          {pathname === "/company-employee/jobs" && (
+            <MarkAsComplete jobID={UserJobDetails?.job?.id} />
+          )}
         </div>
-        {pathname === "/company-admin/jobs" && (
+        {/* {pathname === "/company-admin/jobs" && (
           <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
             <div className="flex items-center bg-gray-100 rounded-xl px-3">
               <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
@@ -101,47 +122,61 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
             <EditIcon />
             <DeleteIcon />
           </div>
-        )}
+        )} */}
       </div>
       <div className="flex flex-col gap-1 mobile:text-left">
         <span className="font-bold text-lg">Description:</span>
         {isAdmin && <p>{jobDetails?.description}</p>}
-        {!isAdmin && <p className="text-black"> {UserJobDetails?.job?.description}</p> }
+        {!isAdmin && (
+          <p className="text-black"> {UserJobDetails?.job?.description}</p>
+        )}
       </div>
       <div className="flex flex-wrap gap-6 mobile:text-left">
         <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
           <span className="font-bold md:text-lg">Date & Time:</span>
-          {isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-          {new Date(jobDetails?.date_time).toLocaleString()}
-          </span>}
-          {!isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-          {new Date(UserJobDetails?.job.date_time).toLocaleString()}
-          </span>}
+          {isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              {new Date(jobDetails?.date_time).toLocaleString()}
+            </span>
+          )}
+          {!isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              {new Date(UserJobDetails?.job.date_time).toLocaleString()}
+            </span>
+          )}
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">Service:</span>
-          {isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            {jobDetails?.service?.service_name}
-          </span>}
-          {!isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            {UserJobDetails?.job?.service?.service_name}
-          </span>}
+          {isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              {jobDetails?.service?.service_name}
+            </span>
+          )}
+          {!isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              {UserJobDetails?.job?.service?.service_name}
+            </span>
+          )}
         </div>
         <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">To Pay:</span>
-          {isAdmin && <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            $ {jobDetails?.price}
-          </span>}
-          {!isAdmin &&  <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            $ {UserJobDetails?.price}
-          </span>}
+          {isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              $ {jobDetails?.price}
+            </span>
+          )}
+          {!isAdmin && (
+            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+              $ {UserJobDetails?.price}
+            </span>
+          )}
         </div>
-        <div className="flex flex-col text-sm whitespace-nowrap">
+        {/* <div className="flex flex-col text-sm whitespace-nowrap">
           <span className="font-bold md:text-lg">Payment:</span>
           <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
             Verified
           </span>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col gap-3 text-left">
         <span className="font-bold text-lg">Map Direction</span>
@@ -152,7 +187,7 @@ export default function JobDetails({jobId, isAdmin}:{jobId:number, isAdmin?: boo
           style={{ border: 0, borderRadius: "1rem" }}
           aria-hidden="false"
         ></iframe> */}
-        {location && <SmallMap location={location} />}
+        {location && <SmallMap location={location?.name} />}
       </div>
       <div className="text-left">
         <span className="font-bold text-lg text-left">Onsite Progress:</span>

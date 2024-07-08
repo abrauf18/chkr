@@ -33,10 +33,10 @@ export default function CompanyInformation({
     location: string;
     country: string;
     company_logo: string;
+    company_admin?: any;
   };
   currentImage: string;
 }) {
-  console.log(currentImage);
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
     null
   );
@@ -136,6 +136,7 @@ export default function CompanyInformation({
 
       // Append firm_id instead of companyType
       formData.append("firm_id", firmId.toString());
+      formData.append("admin_id", companyinfo?.company_admin?.id);
 
       if (typeof currentImage !== "string") {
         formData.append("file", currentImage);
@@ -145,6 +146,7 @@ export default function CompanyInformation({
       const result = await EditCompanyInformationAction(formData);
       if (result.statusCode === 200) {
         action("userInfo");
+        action("getCompanies");
         return toast.success(result.message);
       }
       return toast.error(result.message);
@@ -213,7 +215,7 @@ export default function CompanyInformation({
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none appearance-none"
             >
               <option value="">Select Company Type</option>
-              {/* {companyTypes?.map((companytype) => (
+              {companyTypes?.map((companytype) => (
                 <option
                   key={companytype.id}
                   value={companytype.firm_name}
@@ -221,7 +223,7 @@ export default function CompanyInformation({
                 >
                   {companytype.firm_name}
                 </option>
-              ))} */}
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <ChevronDown />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,38 +7,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PencilLine } from 'lucide-react';
-import CompanyDetails from './company-details';
-import { useCompanyData } from './companydata-context';
+import { PencilLine } from "lucide-react";
+import CompanyDetails from "./company-details";
+import { useCompanyData } from "./companydata-context";
 
 interface CompanyDetailsModalProps {
   companyId: number;
 }
 
-const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) => {
+const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({
+  companyId,
+}) => {
   const { data } = useCompanyData();
   const companyData = data?.find((company) => company.id === companyId);
 
   if (!companyData) {
-    return null; 
+    return null;
   }
-  console.log(companyData)
 
   return (
     <div>
       <Dialog>
-        <DialogTrigger className='flex w-full items-center p-2 gap-2 hover:bg-gray-100'>
-          <PencilLine className='w-4 h-4' color='gray' />
-          <span className='text-gray-600'>Edit Profile</span>
+        <DialogTrigger className="flex w-full items-center p-2 gap-2 hover:bg-gray-100">
+          <PencilLine className="w-4 h-4" color="gray" />
+          <span className="text-gray-600">Edit Profile</span>
         </DialogTrigger>
-        <DialogContent
-          className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
+        <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
           <DialogHeader>
             <DialogTitle>
-              <div className='flex '>
-                Company Details
-              </div>
-              <hr className='my-3' />
+              <div className="flex ">Company Details</div>
+              <hr className="my-3" />
             </DialogTitle>
             <DialogDescription>
               <CompanyDetails
@@ -49,10 +47,10 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) 
                 location={companyData.location}
                 plan_type={companyData.plan.plan_type}
                 price={93}
-                subscriptionPlan='plan'
-                company_logo={companyData.company_logo} 
-                id={companyData.id}              
-                />
+                subscriptionPlan="plan"
+                company_logo={companyData.company_logo}
+                id={companyData.id}
+              />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
@@ -62,3 +60,4 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({ companyId }) 
 };
 
 export default CompanyDetailsModal;
+

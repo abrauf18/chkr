@@ -8,7 +8,11 @@ import DeleteModal from "../../super-admin/admins/delete-modal";
 interface AssignedJobCardProps {
   id: number;
   customer_name: string;
-  location: string;
+  location: {
+    name: string;
+    lat: number;
+    lng: number;
+  };
   status: string;
   phone_number: string;
   date_time: string;
@@ -67,31 +71,35 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
       const rejectedUsers = assignedUsers.filter(
         (user) => user.request_status === "rejected"
       );
-      return rejectedUsers.slice(0, 2).map((user, index) => (
-        <Image
-          key={index}
-          src={user.picture || "/images/user.jpeg"}
-          alt="user-image"
-          height={33}
-          width={33}
-          className={`rounded-full w-10 h-10 absolute ${
-            index === 0 ? "left-2" : "left-6"
-          }`}
-        />
-      ));
+      return rejectedUsers
+        .slice(0, 2)
+        .map((user, index) => (
+          <Image
+            key={index}
+            src={user.picture || "/images/user.jpeg"}
+            alt="user-image"
+            height={33}
+            width={33}
+            className={`rounded-full w-10 h-10 absolute ${
+              index === 0 ? "left-2" : "left-6"
+            }`}
+          />
+        ));
     } else {
-      return assignedUsers.slice(0, 2).map((user, index) => (
-        <Image
-          key={index}
-          src={user.picture || "/images/user.jpeg"}
-          alt="user-image"
-          height={33}
-          width={33}
-          className={`rounded-full w-10 h-10 absolute ${
-            index === 0 ? "left-2" : "left-6"
-          }`}
-        />
-      ));
+      return assignedUsers
+        .slice(0, 2)
+        .map((user, index) => (
+          <Image
+            key={index}
+            src={user.picture || "/images/user.jpeg"}
+            alt="user-image"
+            height={33}
+            width={33}
+            className={`rounded-full w-10 h-10 absolute ${
+              index === 0 ? "left-2" : "left-6"
+            }`}
+          />
+        ));
     }
   };
 
@@ -103,7 +111,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <div className="flex items-center">
             <Location className="h-6 w-6" />
             <span className="font-semibold text-lg text-gray-700 ml-2">
-              {location}
+              {location.name}
             </span>
           </div>
         </div>
@@ -160,3 +168,4 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
+

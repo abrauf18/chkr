@@ -1,14 +1,23 @@
-'use client'
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { GetCompanyAction } from '@/actions/company/company-action';
-import { CompanyInterface } from '@/lib/interfaces';
+"use client";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { GetCompanyAction } from "@/actions/company/company-action";
+import { CompanyInterface } from "@/lib/interfaces";
+import { toast } from "react-toastify";
 
 interface CompanyDataContextProps {
   data: CompanyInterface[] | null;
   loading: boolean;
   error: Error | null;
 }
-const CompanyDataContext = createContext<CompanyDataContextProps | undefined>(undefined);
+const CompanyDataContext = createContext<CompanyDataContextProps | undefined>(
+  undefined
+);
 
 // a provider component
 export const CompanyDataProvider = ({ children }: { children: ReactNode }) => {
@@ -20,6 +29,9 @@ export const CompanyDataProvider = ({ children }: { children: ReactNode }) => {
     const fetchData = async () => {
       try {
         const response = await GetCompanyAction();
+        if (response.statusCode !== 200) {
+          return toast.error(response.message);
+        }
         setData(response.data);
       } catch (err) {
         setError(err as Error);
@@ -41,7 +53,8 @@ export const CompanyDataProvider = ({ children }: { children: ReactNode }) => {
 export const useCompanyData = () => {
   const context = useContext(CompanyDataContext);
   if (context === undefined) {
-    throw new Error('useCompanyData must be used within a CompanyDataProvider');
+    throw new Error("useCompanyData must be used within a CompanyDataProvider");
   }
   return context;
 };
+

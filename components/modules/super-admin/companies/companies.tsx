@@ -1,14 +1,19 @@
-'use client'
+"use client";
 import React from "react";
 import Header from "@/components/shared/header";
 import CompanyCard from "./company-card";
 import { useCompanyData } from "./companydata-context";
+import Loader from "@/components/shared/loader";
 
 const Companies: React.FC = () => {
   const { data, loading, error } = useCompanyData();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-96">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
@@ -38,3 +43,4 @@ const Companies: React.FC = () => {
 };
 
 export default Companies;
+

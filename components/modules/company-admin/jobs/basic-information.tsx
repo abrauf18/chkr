@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React, { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   User,
   MapPinned,
@@ -9,14 +9,14 @@ import {
   CircleDollarSign,
   ArrowRight,
   ChevronDown,
-} from 'lucide-react';
-import useJobStore from '@/store/job-store';
-import { useFormContext } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import { ServiceAction } from '@/actions/jobs/job-action';
-import { ServicesInterface } from '@/lib/interfaces';
-import GooglePlacesAutocomplete from '@/components/shared/autocomplete-input';
-import GoogleMapsGeofencing from '@/components/shared/googlemapfencing';
+} from "lucide-react";
+import useJobStore from "@/store/job-store";
+import { useFormContext } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { ServiceAction } from "@/actions/jobs/job-action";
+import { ServicesInterface } from "@/lib/interfaces";
+import GooglePlacesAutocomplete from "@/components/shared/autocomplete-input";
+import GoogleMapsGeofencing from "@/components/shared/googlemapfencing";
 
 interface Props {
   handleNextStep: () => void;
@@ -34,21 +34,21 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
 
   const changeNextStep = async () => {
     const isValid = await trigger([
-      'customer_name',
-      'price',
-      'phone_number',
-      'date_time',
-      'location',
-      'service_id',
+      "customer_name",
+      "price",
+      "phone_number",
+      "date_time",
+      "location",
+      "service_id",
     ]);
     if (isValid) {
       const data = getValues([
-        'customer_name',
-        'price',
-        'phone_number',
-        'date_time',
-        'location',
-        'service_id',
+        "customer_name",
+        "price",
+        "phone_number",
+        "date_time",
+        "location",
+        "service_id",
       ]);
 
       setJobData({
@@ -58,7 +58,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         date_time: data[3],
         location: data[4],
         service_id: data[5],
-        description: '',
+        description: "",
         selected_users: [],
       });
 
@@ -72,7 +72,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         const response = await ServiceAction();
         setServices(response.data);
       } catch (error) {
-        console.error('Error fetching services:', error);
+        console.error("Error fetching services:", error);
       }
     };
     fetchServices();
@@ -84,7 +84,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         <div className="relative flex items-center">
           <select
             id="service"
-            {...register('service_id')}
+            {...register("service_id")}
             className="w-full pl-3 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
             <option value="">Select Service</option>
@@ -92,7 +92,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
               <option
                 key={service.id}
                 value={service.id}
-                selected={service.id === +getValues('service_id')}
+                selected={service.id === +getValues("service_id")}
               >
                 {service.service_name}
               </option>
@@ -103,7 +103,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           </div>
         </div>
         <p className="text-sm text-red-500">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="service_id" />
         </p>
       </div>
@@ -123,11 +123,11 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="customerName"
             type="text"
             placeholder="Enter customer fullname"
-            {...register('customer_name')}
+            {...register("customer_name")}
           />
         </div>
         <p className="text-sm text-red-500 mt-1">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="customer_name" />
         </p>
       </div>
@@ -138,7 +138,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         >
           Location
         </Label>
-        <div className="flex items-center">
+        <div className="flex items-center relative">
           {/* <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
             <MapPinned color="#636363" className="h-4 w-4" />
           </span> */}
@@ -150,7 +150,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           /> */}
         </div>
         <p className="text-sm text-red-500">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="location" />
         </p>
       </div>
@@ -169,11 +169,11 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             className="pl-10 bg-[#F9F8F8]"
             id="phone"
             placeholder="Enter Phone Number"
-            {...register('phone_number')}
+            {...register("phone_number")}
           />
         </div>
         <p className="text-sm text-red-500">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="phone_number" />
         </p>
       </div>
@@ -193,11 +193,11 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="Date and time"
             type="datetime-local"
             placeholder="Select Date&Time"
-            {...register('date_time')}
+            {...register("date_time")}
           />
         </div>
         <p className="text-sm text-red-500">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="date_time" />
         </p>
       </div>
@@ -217,11 +217,11 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="Payment"
             type="number"
             placeholder="Enter amount"
-            {...register('price')}
+            {...register("price")}
           />
         </div>
         <p className="text-sm text-red-500">
-          {' '}
+          {" "}
           <ErrorMessage errors={errors} name="price" />
         </p>
       </div>
@@ -240,3 +240,4 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
 };
 
 export default CreateJobFirstStep;
+

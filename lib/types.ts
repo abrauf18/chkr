@@ -162,7 +162,15 @@ export const JobSchema = z
     date_time: z
       .string()
       .min(1, { message: "Date and time must not be empty" }),
-    location: z.string().min(1, { message: "Location must not be empty" }),
+    location: z
+      .object({
+        name: z.string(),
+        lat: z.number(),
+        lng: z.number(),
+      })
+      .refine((obj) => obj.lat !== 0 || obj.lng !== 0 || obj.name !== "", {
+        message: "Please select a Correct Location",
+      }),
     service_id: z.string().min(1, { message: "Select a service" }),
     description: z
       .string()

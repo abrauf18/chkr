@@ -10,7 +10,11 @@ import action from "@/app/action";
 interface CardProps {
   job_id: number;
   customer_name: string;
-  location: string;
+  location: {
+    name: string;
+    lat: number;
+    lng: number;
+  };
   description: string;
   status: string;
   date_time: string;
@@ -54,9 +58,9 @@ const JobRequestCard: React.FC<CardProps> = ({
           <div className="flex items-center gap-2">
             <MapPinned className="h-5 w-5" />
             <span className="font-semibold md:text-lg text-gray-700">
-              {location}
+              {location?.name}
               <Link
-                href={`https://www.google.com/maps?q=${location}`}
+                href={`https://www.google.com/maps?q=${location?.name}`}
                 target="_blank"
                 className="text-primary text-sm md:text-base font-semibold ml-2 blank"
               >

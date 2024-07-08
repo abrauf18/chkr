@@ -39,17 +39,20 @@ export const CreateJobAction = async (data: JobsInterface) => {
 
 export const GetJobsAction = async () => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/company-jobs`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
-    },
-    next: {
-      tags: ["getJobs"],
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/company-jobs`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["getJobs"],
+      },
+    }
+  );
   const result = await response.json();
   return result;
 };
@@ -94,48 +97,57 @@ export const JobRequestAction = async (data: JobRequestInterface) => {
 
 export const GetJobByIDAction = async (id: number) => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/company-job/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
-    },
-    next: {
-      tags: ["getJobByID"],
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/company-job/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["getJobByID"],
+      },
+    }
+  );
   const result = await response.json();
   return result;
 };
 
 export const GetEmployeeJobByIDAction = async (id: number) => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/employee-job/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
-    },
-    next: {
-      tags: ["getUserJobByID"],
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/employee-job/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["getUserJobByID"],
+      },
+    }
+  );
   const result = await response.json();
   return result;
 };
 
 export const CompleteByIDAction = async (id: number) => {
   const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/complete-job/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/complete-job/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
   const result = await response.json();
   return result;
 };

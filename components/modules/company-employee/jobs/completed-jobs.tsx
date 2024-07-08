@@ -1,6 +1,6 @@
-"use client"
-import React, { useState } from 'react';
-import CompletedJobCard from './completed-job-card';
+"use client";
+import React, { useState } from "react";
+import CompletedJobCard from "./completed-job-card";
 import {
   Pagination,
   PaginationContent,
@@ -9,8 +9,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
-
+} from "@/components/ui/pagination";
 
 interface JobsProps {
   jobs: any[];
@@ -19,7 +18,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
-  const filteredJobs = jobs.filter(job => job.job.status === 'completed');
+  const filteredJobs = jobs.filter((job) => job.job.status === "completed");
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
@@ -40,7 +39,10 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredJobs.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div>
@@ -56,7 +58,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
           price={job.price}
         />
       ))}
-      <Pagination className='bg-white my-6 rounded-xl p-4'>
+      <Pagination className="bg-white my-6 rounded-xl p-4">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious onClick={handlePreviousPage} />
@@ -75,6 +77,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
       </Pagination>
     </div>
   );
-}
+};
 
 export default CompletedJobs;
+

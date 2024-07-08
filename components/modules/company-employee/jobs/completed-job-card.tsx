@@ -8,6 +8,7 @@ interface CompletedJobCardProps {
   date_time: string;
   service: string;
   price: number;
+  description?: string;
 }
 
 const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
@@ -59,7 +60,9 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
             </span>
           </div>
         </div>
-        <span className="font-bold text-3xl mt-3 whitespace-nowrap">$ {price} USD</span>
+        <span className="font-bold text-3xl mt-3 whitespace-nowrap">
+          $ {price} USD
+        </span>
       </div>
     </div>
   );

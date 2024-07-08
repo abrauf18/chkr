@@ -9,7 +9,11 @@ import ShowJobDetails from "../../../shared/show-job-details";
 interface CardProps {
   id: number;
   customer_name: string;
-  location: string;
+  location: {
+    name: string;
+    lat: number;
+    lng: number;
+  };
   description: string;
   status: string;
   date_time: string;
@@ -35,7 +39,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <div className="flex items-center gap-2">
             <MapPinned className="h-5 w-5" />
             <span className="font-semibold md:text-lg text-gray-700">
-              {location}
+              {location?.name}
               <Link
                 href={`https://www.google.com/maps?q=${location}`}
                 target="_blank"
@@ -84,3 +88,4 @@ const OngoingJobCard: React.FC<CardProps> = ({
 };
 
 export default OngoingJobCard;
+
