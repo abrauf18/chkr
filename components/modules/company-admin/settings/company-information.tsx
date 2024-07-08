@@ -134,7 +134,6 @@ export default function CompanyInformation({
         formData.append(camelToSnakeCase(key), changedFields[key]);
       });
 
-      // Append firm_id instead of companyType
       formData.append("firm_id", firmId.toString());
       formData.append("admin_id", companyinfo?.company_admin?.id);
 

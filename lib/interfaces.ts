@@ -134,5 +134,6 @@ export interface CompanyInterface {
     last_name: string;
     email: string;
   };
+  createdAt: string;
 }
 

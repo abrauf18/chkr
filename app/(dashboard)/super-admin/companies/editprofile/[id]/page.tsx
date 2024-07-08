@@ -12,7 +12,6 @@ const EditProfilePage: React.FC<EditProfilePageProps> = ({ params }) => {
   const [companyId, setCompanyId] = useState<number | null>(null);
 
   useEffect(() => {
-    // Update companyId state when params.id changes
     setCompanyId(params.id);
   }, [params.id]);
 
