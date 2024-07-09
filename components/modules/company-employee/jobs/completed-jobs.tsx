@@ -50,7 +50,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
         <CompletedJobCard
           key={job.job.id}
           customer_name={job.job.customer_name}
-          location={job.job.location}
+          location={job.job.location.name}
           description={job.job.description}
           status={job.job.status}
           date_time={job.job.date_time}
