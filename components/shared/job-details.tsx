@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import {
+  GetCommentByIDAction,
   GetEmployeeJobByIDAction,
   GetJobByIDAction,
 } from "@/actions/jobs/job-action";
@@ -26,6 +27,7 @@ export default function JobDetails({
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
+  const [comments, setComments] = useState<CommentProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = isAdmin
     ? jobDetails?.location
@@ -53,7 +55,7 @@ export default function JobDetails({
         const UserData = await GetEmployeeJobByIDAction(jobId);
         setUserJobDetails(UserData);
       } catch (error) {
-        console.error("Error fetching job data:", error);
+        console.error("Error fetching user job data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -61,29 +63,37 @@ export default function JobDetails({
     fetchData();
   }, [jobId]);
 
-  const handleChange = (event: any) => {
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        setIsLoading(true);
+        const response = await GetCommentByIDAction(jobId);
+        if (response?.statusCode === 200 && Array.isArray(response.result)) {
+          const commentsData: CommentProps[] = response.result.map(
+            (comment: any) => ({
+              createdAt: comment.createdAt,
+              message: comment.message,
+              user: {
+                first_name: comment.user.first_name,
+              },
+            })
+          );
+          setComments(commentsData);
+        } else {
+          console.error("Invalid response format:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchComments();
+  }, [jobId]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
-  const comments: CommentProps[] = [
-    {
-      date: "27/03/2023",
-      time: "03:34 pm",
-      content: "Try to cover tasks asap, we’ve alot of more jobs todo!",
-      user: "You",
-    },
-    {
-      date: "28/03/2023",
-      time: "04:45 am",
-      content: "Tasks completed on time. Ready for next tasks.",
-      user: "Employee",
-    },
-    {
-      date: "29/03/2024",
-      time: "4:45 am",
-      content: "tasks should be completed",
-      user: "employee",
-    },
-  ];
 
   return (
     <>
@@ -188,6 +198,8 @@ export default function JobDetails({
               <Textarea
                 className="min-h-32"
                 placeholder="Write your onsite progress here."
+                value={text}
+                onChange={handleChange}
               />
               <div className="flex items-end justify-end ">
                 <Button className="m-2 text-white" type="button">
@@ -195,10 +207,17 @@ export default function JobDetails({
                 </Button>
               </div>
             </div>
-            {/* Map comments */}
-            {comments.map((comment, index) => (
-              <Comment key={index} {...comment} />
-            ))}
+            <div className="mt-6">
+              {comments.map((comment, index) => (
+                <Comment
+                  key={index}
+                  createdAt={comment.createdAt}
+                  message={comment.message}
+                  user={comment.user}
+                  url={""}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}
