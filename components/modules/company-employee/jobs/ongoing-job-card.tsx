@@ -52,7 +52,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
           <MarkAsComplete jobID={id} />
-          <Select />
+          <Select jobLocation={{ lat: location.lat, lng: location.lng }} />
         </div>
       </div>
       <p className="mt-4 text-base text-gray-600">{description} </p>
@@ -74,7 +74,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
             <span className="font-bold md:text-lg">Status:</span>
             <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base ">
               <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
-              {status}
+              {status?.charAt(0).toUpperCase() + status?.slice(1)}
             </div>
           </div>
         </div>

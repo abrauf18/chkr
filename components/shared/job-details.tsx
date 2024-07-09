@@ -1,8 +1,6 @@
 "use client";
 
 import { MapPinned } from "lucide-react";
-import EditIcon from "@/assets/icons/edit-icon";
-import DeleteIcon from "@/assets/icons/delete-icon";
 import React, { useEffect, useState } from "react";
 import Comment, { CommentProps } from "../modules/company-admin/jobs/comments";
 import Select from "../modules/company-employee/jobs/select-status";
@@ -10,12 +8,12 @@ import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import Location from "./location";
 import {
   GetEmployeeJobByIDAction,
   GetJobByIDAction,
 } from "@/actions/jobs/job-action";
 import SmallMap from "./small-map";
+import Loader from "./loader";
 
 export default function JobDetails({
   jobId,
@@ -28,6 +26,7 @@ export default function JobDetails({
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = isAdmin
     ? jobDetails?.location
     : UserJobDetails?.job?.location;
@@ -35,23 +34,28 @@ export default function JobDetails({
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const data = await GetJobByIDAction(jobId);
         setJobDetails(data);
       } catch (error) {
         console.error("Error fetching job data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
   }, [jobId]);
-  console.log(jobDetails)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const UserData = await GetEmployeeJobByIDAction(jobId);
         setUserJobDetails(UserData);
       } catch (error) {
         console.error("Error fetching job data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -82,135 +86,123 @@ export default function JobDetails({
   ];
 
   return (
-    <div className="flex flex-col px-4 gap-4 w-full text-black">
-      <div className="flex flex-wrap justify-between">
-        <div className="flex flex-col mobile:text-left">
-          {isAdmin && (
-            <h1 className="font-bold text-xl mb-3">
-              {jobDetails?.customer_name}
-            </h1>
-          )}
-          {!isAdmin && (
-            <h1 className="font-bold text-xl mb-3">
-              {UserJobDetails?.job?.customer_name}
-            </h1>
-          )}
-          <div className="flex items-center">
-            <MapPinned />
-            {isAdmin && (
-              <span className="font-semibold text-lg text-gray-700 ml-2">
-                {jobDetails?.location?.name}
-              </span>
-            )}
-            {!isAdmin && (
-              <span className="font-semibold text-lg text-gray-700 ml-2">
-                {UserJobDetails?.job?.location?.name}
-              </span>
-            )}
-          </div>
+    <>
+      {isLoading || !UserJobDetails || !jobDetails ? (
+        <div className="flex items-center justify-center h-96">
+          <Loader />
         </div>
-        <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
-          {pathname === "/company-employee/jobs" && <Select />}
-          {pathname === "/company-employee/jobs" && (
-            <MarkAsComplete jobID={UserJobDetails?.job?.id} />
-          )}
-        </div>
-        {/* {pathname === "/company-admin/jobs" && (
-          <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
-            <div className="flex items-center bg-gray-100 rounded-xl px-3">
-              <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
-              <span>Status</span>
+      ) : (
+        <div className="flex flex-col px-4 gap-4 w-full text-black">
+          <div className="flex flex-wrap justify-between">
+            <div className="flex flex-col mobile:text-left">
+              {isAdmin && (
+                <h1 className="font-bold text-xl mb-3">
+                  {jobDetails?.customer_name}
+                </h1>
+              )}
+              {!isAdmin && (
+                <h1 className="font-bold text-xl mb-3">
+                  {UserJobDetails?.job?.customer_name}
+                </h1>
+              )}
+              <div className="flex items-center">
+                <MapPinned />
+                {isAdmin && (
+                  <span className="font-semibold text-lg text-gray-700 ml-2">
+                    {jobDetails?.location?.name}
+                  </span>
+                )}
+                {!isAdmin && (
+                  <span className="font-semibold text-lg text-gray-700 ml-2">
+                    {UserJobDetails?.job?.location?.name}
+                  </span>
+                )}
+              </div>
             </div>
-            <EditIcon />
-            <DeleteIcon />
+            <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
+              {pathname === "/company-employee/jobs" && (
+                <Select jobLocation={UserJobDetails?.job?.location} />
+              )}
+              {pathname === "/company-employee/jobs" && (
+                <MarkAsComplete jobID={UserJobDetails?.job?.id} />
+              )}
+            </div>
           </div>
-        )} */}
-      </div>
-      <div className="flex flex-col gap-1 mobile:text-left">
-        <span className="font-bold text-lg">Description:</span>
-        {isAdmin && <p>{jobDetails?.description}</p>}
-        {!isAdmin && (
-          <p className="text-black"> {UserJobDetails?.job?.description}</p>
-        )}
-      </div>
-      <div className="flex flex-wrap gap-6 mobile:text-left">
-        <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-          <span className="font-bold md:text-lg">Date & Time:</span>
-          {isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {new Date(jobDetails?.date_time).toLocaleString()}
+          <div className="flex flex-col gap-1 mobile:text-left">
+            <span className="font-bold text-lg">Description:</span>
+            {isAdmin && <p>{jobDetails?.description}</p>}
+            {!isAdmin && (
+              <p className="text-black"> {UserJobDetails?.job?.description}</p>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-6 mobile:text-left">
+            <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
+              <span className="font-bold md:text-lg">Date & Time:</span>
+              {isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  {new Date(jobDetails?.date_time).toLocaleString()}
+                </span>
+              )}
+              {!isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  {new Date(UserJobDetails?.job.date_time).toLocaleString()}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col text-sm whitespace-nowrap">
+              <span className="font-bold md:text-lg">Service:</span>
+              {isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  {jobDetails?.service?.service_name}
+                </span>
+              )}
+              {!isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  {UserJobDetails?.job?.service?.service_name}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col text-sm whitespace-nowrap">
+              <span className="font-bold md:text-lg">To Pay:</span>
+              {isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  $ {jobDetails?.price}
+                </span>
+              )}
+              {!isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  $ {UserJobDetails?.price}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 text-left">
+            <span className="font-bold text-lg">Map Direction</span>
+            {location && <SmallMap location={location?.name} />}
+          </div>
+          <div className="text-left">
+            <span className="font-bold text-lg text-left">
+              Onsite Progress:
             </span>
-          )}
-          {!isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {new Date(UserJobDetails?.job.date_time).toLocaleString()}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-col text-sm whitespace-nowrap">
-          <span className="font-bold md:text-lg">Service:</span>
-          {isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {jobDetails?.service?.service_name}
-            </span>
-          )}
-          {!isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {UserJobDetails?.job?.service?.service_name}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-col text-sm whitespace-nowrap">
-          <span className="font-bold md:text-lg">To Pay:</span>
-          {isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              $ {jobDetails?.price}
-            </span>
-          )}
-          {!isAdmin && (
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              $ {UserJobDetails?.price}
-            </span>
-          )}
-        </div>
-        {/* <div className="flex flex-col text-sm whitespace-nowrap">
-          <span className="font-bold md:text-lg">Payment:</span>
-          <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-            Verified
-          </span>
-        </div> */}
-      </div>
-      <div className="flex flex-col gap-3 text-left">
-        <span className="font-bold text-lg">Map Direction</span>
-        {/* <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15282225.79979123!2d73.7250245393691!3d20.750301298393563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1587818542745!5m2!1sen!2sin"
-          width="100%"
-          height="200"
-          style={{ border: 0, borderRadius: "1rem" }}
-          aria-hidden="false"
-        ></iframe> */}
-        {location && <SmallMap location={location?.name} />}
-        <Location latitude={jobDetails?.location?.lng} longitude={jobDetails?.location?.lng}/>
-      </div>
-      <div className="text-left">
-        <span className="font-bold text-lg text-left">Onsite Progress:</span>
-        <div className="h-full border rounded-lg mt-2">
-          <Textarea
-            className="min-h-32"
-            placeholder="Write your onsite progress here."
-          />
-          <div className="flex items-end justify-end ">
-            <Button className="m-2 text-white" type="button">
-              Share
-            </Button>
+            <div className="h-full border rounded-lg mt-2">
+              <Textarea
+                className="min-h-32"
+                placeholder="Write your onsite progress here."
+              />
+              <div className="flex items-end justify-end ">
+                <Button className="m-2 text-white" type="button">
+                  Share
+                </Button>
+              </div>
+            </div>
+            {/* Map comments */}
+            {comments.map((comment, index) => (
+              <Comment key={index} {...comment} />
+            ))}
           </div>
         </div>
-        {/* Map comments */}
-        {comments.map((comment, index) => (
-          <Comment key={index} {...comment} />
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

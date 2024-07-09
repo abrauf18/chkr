@@ -14,7 +14,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
   location,
   staffCount,
   phone_number,
-  // Add other necessary fields from your API response
+  createdAt,
 }) => {
   return (
     <div className="max-w-sm rounded-xl overflow-hidden shadow-lg p-5 bg-white">
@@ -46,6 +46,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
             location,
             staffCount,
             phone_number,
+            createdAt,
           }}
         />
       </div>

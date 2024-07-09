@@ -1,12 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Checkin from "@/assets/icons/checkin";
 import Checkout from "@/assets/icons/checkout";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
-const Select: React.FC = () => {
+interface JobLocation {
+  jobLocation: {
+    lat: number;
+    lng: number;
+  };
+}
+
+const Select: React.FC<JobLocation> = ({ jobLocation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Checkout");
   const [currentLocation, setCurrentLocation] =
@@ -17,10 +24,25 @@ const Select: React.FC = () => {
     if (!("geolocation" in navigator)) {
       setIsLocationEnabled(false);
     } else {
-      navigator.geolocation.getCurrentPosition(
-        () => setIsLocationEnabled(true),
-        () => setIsLocationEnabled(false)
-      );
+      navigator.geolocation.getCurrentPosition((position) => {
+        setIsLocationEnabled(true);
+        setCurrentLocation(position.coords);
+        const userCoords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        const jobCoords = {
+          lat: jobLocation.lat,
+          lng: jobLocation.lng,
+        };
+        const distance = calculateDistance(userCoords, jobCoords);
+        if (distance <= 500) {
+          setSelectedOption("Checkin");
+          // return toast.info("User is within 500 meter of job location");
+        } else {
+          setSelectedOption("Checkout");
+        }
+      });
     }
   }, []);
 
@@ -28,21 +50,47 @@ const Select: React.FC = () => {
 
   const handleOptionClick = (option: string) => {
     if (option === "Checkin" && !isLocationEnabled) {
-      toast.error("Location services must be enabled to checkin.");
-      return;
+      return toast.error("Location must be enabled to Checkin.");
     }
     setSelectedOption(option);
     setIsOpen(false);
-    if (option === "Checkin") {
-      // Get current location on Checkin click
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentLocation(position.coords);
-          console.log("Current location:", position.coords);
-        },
-        (error) => console.error("Error getting location:", error)
-      );
-    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      setCurrentLocation(position.coords);
+      console.log("Current location:", position.coords);
+      const userCoords = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      const jobCoords = {
+        lat: jobLocation.lat,
+        lng: jobLocation.lng,
+      };
+      const distance = calculateDistance(userCoords, jobCoords);
+      console.log(distance);
+      if (distance <= 500) {
+        setSelectedOption("Checkin");
+        return toast.info("User is within 500 meter of job location");
+      } else {
+        setSelectedOption("Checkout");
+        return toast.error("You are not within the allowed range to Checkin.");
+      }
+    });
+  };
+
+  const calculateDistance = (coords1: any, coords2: any) => {
+    // Function to calculate distance between two coordinates
+    const R = 6371e3; // metres
+    const φ1 = (coords1.lat * Math.PI) / 180; // φ, λ in radians
+    const φ2 = (coords2.lat * Math.PI) / 180;
+    const Δφ = ((coords2.lat - coords1.lat) * Math.PI) / 180;
+    const Δλ = ((coords2.lng - coords1.lng) * Math.PI) / 180;
+
+    const a =
+      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c; // in metres
   };
 
   const getButtonStyle = () => {
@@ -129,3 +177,4 @@ const Select: React.FC = () => {
 };
 
 export default Select;
+

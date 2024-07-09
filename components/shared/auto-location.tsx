@@ -4,13 +4,13 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import Script from "next/script";
 import Autocomplete from "react-google-autocomplete";
-import { MapPin } from "lucide-react";
+import { MapPinned } from "lucide-react";
 
 interface Props {
   name: string;
 }
 
-const GoogleMapsGeofencing: React.FC<Props> = ({ name }) => {
+const AutoLocation: React.FC<Props> = ({ name }) => {
   const { setValue, watch } = useFormContext();
 
   const onPlaceSelectedHandler = (place: any) => {
@@ -35,7 +35,7 @@ const GoogleMapsGeofencing: React.FC<Props> = ({ name }) => {
       <div className="flex flex-col w-full">
         <div className="relative w-full ">
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <MapPin className="h-5 w-5" color="#636363" />
+            <MapPinned className="h-5 w-5" color="#636363" />
           </span>
           <Autocomplete
             apiKey="AIzaSyA3zX2wfM59W4JRCgja_k7Mbup0wuUXPTw"
@@ -52,5 +52,5 @@ const GoogleMapsGeofencing: React.FC<Props> = ({ name }) => {
   );
 };
 
-export default GoogleMapsGeofencing;
+export default AutoLocation;
 
