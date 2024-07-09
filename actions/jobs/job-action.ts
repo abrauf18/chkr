@@ -1,6 +1,10 @@
 "use server";
 import { auth } from "@/auth";
-import { JobRequestInterface, JobsInterface } from "@/lib/interfaces";
+import {
+  JobRequestInterface,
+  JobsInterface,
+  MessageInterface,
+} from "@/lib/interfaces";
 
 export const ServiceAction = async () => {
   const session = await auth();
@@ -177,6 +181,27 @@ export const GetCommentByIDAction = async (id: number) => {
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
+      next: {
+        revalidate: 10,
+      },
+    }
+  );
+  const result = await response.json();
+  return result;
+};
+
+export const CreateMessageAction = async (data: MessageInterface) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/message/create`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify(data),
     }
   );
   const result = await response.json();
