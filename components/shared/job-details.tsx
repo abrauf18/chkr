@@ -9,12 +9,15 @@ import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import {
+  CreateMessageAction,
   GetCommentByIDAction,
   GetEmployeeJobByIDAction,
   GetJobByIDAction,
 } from "@/actions/jobs/job-action";
 import SmallMap from "./small-map";
 import Loader from "./loader";
+import { toast } from "react-toastify";
+import { MessageInterface } from "@/lib/interfaces";
 
 export default function JobDetails({
   jobId,
@@ -93,6 +96,32 @@ export default function JobDetails({
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
+  };
+
+  console.log(comments);
+
+  const onSubmit = async (data: MessageInterface) => {
+    try {
+      const result = await CreateMessageAction(data);
+      if (result && result.statusCode === 201) {
+        return toast.success(result.message);
+      } else {
+        return toast.error(result?.message);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("An error occurred while creating commenting.");
+    }
+  };
+
+  const handleSubmit = async () => {
+    const messageData: MessageInterface = {
+      job_id: jobId,
+      user_id: 1, // Replace with the actual user ID
+      message: text,
+    };
+    await onSubmit(messageData);
+    setText("");
   };
 
   return (
@@ -202,21 +231,29 @@ export default function JobDetails({
                 onChange={handleChange}
               />
               <div className="flex items-end justify-end ">
-                <Button className="m-2 text-white" type="button">
+                <Button
+                  className="m-2 text-white"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
                   Share
                 </Button>
               </div>
             </div>
             <div className="mt-6">
-              {comments.map((comment, index) => (
-                <Comment
-                  key={index}
-                  createdAt={comment.createdAt}
-                  message={comment.message}
-                  user={comment.user}
-                  url={""}
-                />
-              ))}
+              {comments.length === 0 ? (
+                <p className="text-center">No messages to display</p>
+              ) : (
+                comments.map((comment, index) => (
+                  <Comment
+                    key={index}
+                    createdAt={comment.createdAt}
+                    message={comment.message}
+                    user={comment.user}
+                    url={""}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>
