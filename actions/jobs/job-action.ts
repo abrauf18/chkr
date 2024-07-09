@@ -154,10 +154,24 @@ export const CompleteByIDAction = async (id: number) => {
 
 export const DeleteJobAction = async (id: number) => {
   const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/job/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+  });
+  const result = await response.json();
+  return result;
+};
+
+export const GetCommentByIDAction = async (id: number) => {
+  const session = await auth();
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/job/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/message/${id}`,
     {
-      method: "DELETE",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         //@ts-ignore
