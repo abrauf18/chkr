@@ -1,52 +1,80 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
+import Autocomplete from 'react-google-autocomplete';
 
-interface LocationProps {
-  lat: number;
-  lng: number;
+declare global {
+  interface Window {
+    google: any;
+  }
 }
 
-export const Location: React.FC = () => {
-  const [location, setLocation] = useState<LocationProps | null>(null);
+interface LocationProps {
+  latitude: number;
+  longitude: number;
+}
+
+const Location: React.FC<LocationProps> = ({ latitude, longitude }) => {
+  const [map, setMap] = useState<google.maps.Map | null>(null);
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  console.log('Props passed to Location:', { latitude, longitude });
+
+  const isValidCoordinate = (coord: number) => !isNaN(coord) && isFinite(coord);
+
+  const initializeMap = () => {
+    if (window.google && mapRef.current) {
+      if (isValidCoordinate(latitude) && isValidCoordinate(longitude)) {
+        const initialCenter = new window.google.maps.LatLng(latitude, longitude);
+        const mapInstance = new window.google.maps.Map(mapRef.current, {
+          center: initialCenter,
+          zoom: 10,
+        });
+        setMap(mapInstance);
+      } else {
+        console.error('Invalid latitude or longitude:', latitude, longitude);
+      }
+    }
+  };
 
   useEffect(() => {
-    if (location && mapRef.current) {
-      const map = new window.google.maps.Map(mapRef.current, {
-        center: location,
-        zoom: 15,
-      });
-
-      const marker = new window.google.maps.Marker({
-        position: location,
-        map: map,
-        draggable: true,
-      });
-
-      marker.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-        if (event.latLng) {
-          setLocation({
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-          });
-          console.log(`Latitude: ${event.latLng.lat()}, Longitude: ${event.latLng.lng()}`);
-        }
-      });
+    if (window.google && mapRef.current && !map) {
+      initializeMap();
     }
-  }, [location]);
+  }, [mapRef, map, latitude, longitude]);
 
-  const initializeAutocomplete = () => {
-    if (inputRef.current) {
-      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current);
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place.geometry && place.geometry.location) {
-          const lat = place.geometry.location.lat();
-          const lng = place.geometry.location.lng();
-          setLocation({ lat, lng });
-          console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-        }
+  const onPlaceSelectedHandler = (place: google.maps.places.PlaceResult) => {
+    if (!place.geometry) return;
+
+    const newAddress = {
+      lat: place.geometry.location?.lat() || 0,
+      lng: place.geometry.location?.lng() || 0,
+    };
+
+    const center = new window.google.maps.LatLng(latitude, longitude);
+    console.log('center', center)
+    const to = new window.google.maps.LatLng(
+      place.geometry.location?.lat() || 0,
+      place.geometry.location?.lng() || 0
+    );
+    
+    console.log('Center point:', center);
+
+    const contains =
+      window.google.maps.geometry.spherical.computeDistanceBetween(center, to) <= 80467.2;
+
+    if (contains) {
+      console.log('Go ahead, how can we help you');
+    } else {
+      console.log('Sorry, we do not offer our service yet');
+    }
+
+    if (map) {
+      map.setCenter(newAddress);
+      new window.google.maps.Marker({
+        position: newAddress,
+        map,
       });
     }
   };
@@ -54,31 +82,21 @@ export const Location: React.FC = () => {
   return (
     <>
       <Script
-        id="google-maps"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRix4QiKpNFYN5uXI0jMZQHYEBEQrepBw&libraries=places"
-        onLoad={() => {
-          initializeAutocomplete();
-          if (mapRef.current) {
-            new google.maps.Map(mapRef.current, {
-              center: { lat: -34.397, lng: 150.644 },
-              zoom: 8,
-            });
-          }
+        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zX2wfM59W4JRCgja_k7Mbup0wuUXPTw&libraries=geometry,places`}
+        strategy="beforeInteractive"
+        onLoad={initializeMap}
+      />
+      <Autocomplete
+        apiKey="AIzaSyA3zX2wfM59W4JRCgja_k7Mbup0wuUXPTw"
+        onPlaceSelected={onPlaceSelectedHandler}
+        componentRestrictions={{ country: '*' }}
+        options={{
+          types: ['geocode', 'establishment'],
         }}
       />
-      <div className="p-4">
-        <p className="mb-4 text-lg">Hi</p>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Search location"
-          className="px-4 py-2 border rounded"
-        />
-        <div
-          ref={mapRef}
-          className="w-full h-96 mt-4"
-        ></div>
-      </div>
+      {/* <div ref={mapRef} style={{ height: '500px', width: '100%' }} /> */}
     </>
   );
 };
+
+export default Location;

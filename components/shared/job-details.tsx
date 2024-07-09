@@ -10,6 +10,7 @@ import MarkAsComplete from "../modules/company-employee/jobs/mark-as-complete";
 import { usePathname } from "next/navigation";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import Location from "./location";
 import {
   GetEmployeeJobByIDAction,
   GetJobByIDAction,
@@ -42,6 +43,7 @@ export default function JobDetails({
     };
     fetchData();
   }, [jobId]);
+  console.log(jobDetails)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -188,6 +190,7 @@ export default function JobDetails({
           aria-hidden="false"
         ></iframe> */}
         {location && <SmallMap location={location?.name} />}
+        <Location latitude={jobDetails?.location?.lng} longitude={jobDetails?.location?.lng}/>
       </div>
       <div className="text-left">
         <span className="font-bold text-lg text-left">Onsite Progress:</span>
