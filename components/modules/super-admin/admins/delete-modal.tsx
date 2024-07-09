@@ -15,14 +15,21 @@ import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
 import { DeleteUserAction } from '@/actions/users/user-actions'
 import action from '@/app/action'
+import { DeleteJobAction } from '@/actions/jobs/job-action'
 
-export default function DeleteModal({ userId }: { userId: number }) {
+export default function DeleteModal({ userId, jobId }: { userId: number, jobId: number }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
-    const data = await DeleteUserAction(userId);
-    action("DeleteUser")
+    if (pathname.startsWith('/super-admin')){
+      const data = await DeleteUserAction(userId);
+      action("DeleteUser")
+    }
+    else if (pathname.startsWith('/company-admin')){
+      const data = await DeleteJobAction(jobId)
+      action('getJobs')
+    }
     setOpen(false);
   };
 
