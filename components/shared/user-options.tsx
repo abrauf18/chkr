@@ -28,6 +28,7 @@ export default function UserOptions({
       callbackUrl: "/login",
     });
   };
+  console.log(userRole);
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>
       <DropdownMenuTrigger>
@@ -53,13 +54,15 @@ export default function UserOptions({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px] cursor-pointer">
-      <Link href={`/${userRole.toLowerCase().replace(/\s+/g, '-')}/settings`}>
-        <div className="flex items-center p-2 gap-2 hover:bg-gray-100 ">
-          <CircleUserRound className="w-5 h-5" color="black" />
-          <span className="text-[#292D32]">Profile Settings</span>
-        </div>
+        <Link href={`/${userRole.toLowerCase().replace(/\s+/g, "-")}/settings`}>
+          <div className="flex items-center p-2 gap-2 hover:bg-gray-100 ">
+            <CircleUserRound className="w-5 h-5" color="black" />
+            <span className="text-[#292D32]">Profile Settings</span>
+          </div>
         </Link>
-        <Feedback />
+        {(role === "company-admin" || role === "company-employee") && (
+          <Feedback />
+        )}
         <div
           className="flex items-center p-2 gap-2 hover:bg-gray-100 cursor-pointer"
           onClick={handleLogout}
