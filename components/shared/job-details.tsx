@@ -32,7 +32,6 @@ export default function JobDetails({
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
   const [comments, setComments] = useState<CommentProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [messageLoading, setMessageLoading] = useState(false);
   const location = isAdmin
     ? jobDetails?.location
     : UserJobDetails?.job?.location;
@@ -69,7 +68,6 @@ export default function JobDetails({
 
   const fetchComments = async () => {
     try {
-      setMessageLoading(true);
       const response = await GetCommentByIDAction(jobId);
       if (response?.statusCode === 200 && Array.isArray(response.result)) {
         const commentsData: CommentProps[] = response.result.map(
@@ -85,19 +83,26 @@ export default function JobDetails({
       }
     } catch (error) {
       console.error("Error fetching comments:", error);
-    } finally {
-      setMessageLoading(false);
     }
   };
   useEffect(() => {
+    // Initial fetch
     fetchComments();
+
+    // Set up the interval to fetch comments every 5 seconds
+    const intervalId = setInterval(() => {
+      fetchComments();
+    }, 5000);
+
+    // Cleanup interval on component unmount or jobId change
+    return () => clearInterval(intervalId);
   }, [jobId]);
+
+  console.log(comments);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
-
-  console.log(comments);
 
   const onSubmit = async (data: MessageInterface) => {
     try {
@@ -249,7 +254,6 @@ export default function JobDetails({
                     createdAt={comment.createdAt}
                     message={comment.message}
                     user={comment.user}
-                    url={""}
                   />
                 ))
               )}

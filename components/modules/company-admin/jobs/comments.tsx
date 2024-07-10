@@ -4,7 +4,6 @@ import Image from "next/image";
 export interface CommentProps {
   createdAt: string;
   message: string;
-  url: string;
   user: {
     first_name: string;
     last_name: string;
@@ -13,7 +12,7 @@ export interface CommentProps {
   };
 }
 
-const Comment: React.FC<CommentProps> = ({ message, createdAt, user, url }) => {
+const Comment: React.FC<CommentProps> = ({ message, createdAt, user }) => {
   return (
     <div className="mt-6">
       <div className="flex justify-between font-semibold">

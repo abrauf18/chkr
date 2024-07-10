@@ -182,12 +182,11 @@ export const GetCommentByIDAction = async (id: number) => {
         Authorization: `Bearer ${session?.token}`,
       },
       next: {
-        revalidate: 2,
+        tags: ["getMesssages"],
       },
     }
   );
   const result = await response.json();
-  console.log(response);
   return result;
 };
 
