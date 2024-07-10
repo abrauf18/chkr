@@ -53,8 +53,13 @@ export default function JobDetails({
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await GetJobByIDAction(jobId);
-        setJobDetails(data);
+        if (isAdmin) {
+          const data = await GetJobByIDAction(jobId);
+          setJobDetails(data);
+        } else {
+          const UserData = await GetEmployeeJobByIDAction(jobId);
+          setUserJobDetails(UserData);
+        }
       } catch (error) {
         console.error("Error fetching job data:", error);
       } finally {
@@ -62,22 +67,7 @@ export default function JobDetails({
       }
     };
     fetchData();
-  }, [jobId]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const UserData = await GetEmployeeJobByIDAction(jobId);
-        setUserJobDetails(UserData);
-      } catch (error) {
-        console.error("Error fetching user job data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [jobId]);
+  }, [jobId, isAdmin]);
 
   const fetchComments = async () => {
     try {
@@ -99,15 +89,12 @@ export default function JobDetails({
     }
   };
   useEffect(() => {
-    // Initial fetch
     fetchComments();
-
     // Set up the interval to fetch comments every 5 seconds
     const intervalId = setInterval(() => {
       fetchComments();
     }, 5000);
 
-    // Cleanup interval on component unmount or jobId change
     return () => clearInterval(intervalId);
   }, [jobId]);
 
@@ -134,7 +121,7 @@ export default function JobDetails({
 
   return (
     <>
-      {isLoading || !UserJobDetails || !jobDetails ? (
+      {isLoading || (!UserJobDetails && !jobDetails) ? (
         <div className="flex items-center justify-center h-96">
           <Loader />
         </div>
