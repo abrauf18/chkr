@@ -20,7 +20,22 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
     }
   );
   const result = await response.json();
-  console.log("API response:", result);
+  return result;
+};
+
+export const GetAllFeedbacksAction = async () => {
+  const session = await auth();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+    next: {
+      tags: ["getFeedbacks"],
+    },
+  });
+  const result = await response.json();
   return result;
 };
 

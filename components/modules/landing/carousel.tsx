@@ -1,77 +1,34 @@
 "use client";
-interface Slide {
+interface Feedbacks {
   id: number;
-  feedback: string;
-  authorName: string;
-  companyName: string;
+  comment: string;
+  user: {
+    first_name: string;
+    last_name: string;
+    picture: string;
+    role: string;
+    email: string;
+    company: {
+      company_name: string;
+    };
+  };
   rating: string;
 }
 
 import React, { useEffect, useState } from "react";
 import TestimonialsCard from "./testimonials-card";
 
-function Carousel() {
-  const slides: Slide[] = [
-    {
-      id: 1,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "John Smith",
-      companyName: "XYZ Company",
-      rating: "4",
-    },
-    {
-      id: 2,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "john doe",
-      companyName: "abc Company",
-      rating: "4",
-    },
-    {
-      id: 3,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "john doe",
-      companyName: "XYZ Company",
-      rating: "4",
-    },
-    {
-      id: 4,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "john doe",
-      companyName: "abc Company",
-      rating: "4",
-    },
-    {
-      id: 5,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "john doe",
-      companyName: "XYZ Company",
-      rating: "4",
-    },
-    {
-      id: 6,
-      feedback:
-      "“CKHR is a game-changer! Highly recommend!“",
-      authorName: "john doe",
-      companyName: "abc Company",
-      rating: "4",
-    },
-  ];
-
+function Carousel({ feedbacks }: { feedbacks: Feedbacks[] }) {
   const totalSlides = 3; // Total number of slides
   const dots = Array.from({ length: 3 }); // Array of dots
   const [transitioning, setTransitioning] = useState(false); // State to control transition
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [shuffledSlides, setShuffledSlides] = useState<Slide[]>([]);
+  const [shuffledSlides, setShuffledSlides] = useState<Feedbacks[]>([]);
 
   useEffect(() => {
     // Shuffle the slides array to get random testimonials
-    setShuffledSlides(slides.sort(() => Math.random() - 0.5));
+    setShuffledSlides(feedbacks.sort(() => Math.random() - 0.5));
   }, []);
 
   const nextSlide = () => {
@@ -112,16 +69,18 @@ function Carousel() {
                 key={index}
                 className={`lg:self-${index === 0 ? "start" : "center"} 
                 lg:ml-${index === 0 ? "2" : "0"} 
-                ${transitioning ? "opacity-0" : "opacity-100"
-                  }`}
+                ${transitioning ? "opacity-0" : "opacity-100"}`}
                 style={{
                   transition: "opacity 1s ease-in",
                 }}
               >
                 <TestimonialsCard
-                  authorName={slide.authorName}
-                  feedback={slide.feedback}
-                  companyName={slide.companyName}
+                  authorName={
+                    slide.user.first_name + " " + slide.user.last_name
+                  }
+                  feedback={slide.comment}
+                  companyName={slide.user.company.company_name}
+                  picture={slide.user.picture}
                 />
               </div>
             ))}
@@ -131,8 +90,9 @@ function Carousel() {
         {dots.map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-gray-300"
-              }`}
+            className={`w-4 h-4 mx-2 rounded-full cursor-pointer ${
+              currentIndex === index ? "bg-primary" : "bg-gray-300"
+            }`}
             onClick={() => goToSlide(index)}
           ></div>
         ))}
