@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import OngoingJobCard from './ongoing-job-card';
+import React, { useState, useEffect } from "react";
+import OngoingJobCard from "./ongoing-job-card";
 import {
   Pagination,
   PaginationContent,
@@ -8,8 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
-
+} from "@/components/ui/pagination";
 
 interface JobsProps {
   jobs: any[];
@@ -18,7 +17,7 @@ interface JobsProps {
 const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-  const filteredJobs = jobs.filter(job => job.job.status === 'ongoing');
+  const filteredJobs = jobs.filter((job) => job.job.status === "ongoing");
 
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
@@ -39,7 +38,10 @@ const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredJobs.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   // const [completedJobIds, setCompletedJobIds] = useState<number[]>([]);
 
@@ -56,39 +58,46 @@ const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
   // );
 
   return (
-    <div className='flex flex-col mx-auto gap-4'>
-      {paginatedData.map((job) => (
-        <OngoingJobCard
-          key={job.job.id}
-          id={job.job.id}   
-          customer_name={job.job.customer_name}
-          location={job.job.location}
-          description={job.job.description}
-          status={job.request_status}
-          date_time={job.job.date_time}
-          service={job.job.service.service_name}
-          price={job.price}      
-          />
-      ))}
-      <Pagination className='bg-white my-6 rounded-xl p-4'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={handlePreviousPage} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <PaginationItem key={index + 1}>
-              <PaginationLink onClick={() => handleClickPage(index + 1)}>
-                {index + 1}
-              </PaginationLink>
-            </PaginationItem>
+    <>
+      {filteredJobs.length === 0 ? (
+        <div className="text-center mt-12">No jobs to display</div>
+      ) : (
+        <div className="flex flex-col mx-auto gap-4">
+          {paginatedData.map((job) => (
+            <OngoingJobCard
+              key={job.job.id}
+              id={job.job.id}
+              customer_name={job.job.customer_name}
+              location={job.job.location}
+              description={job.job.description}
+              status={job.request_status}
+              date_time={job.job.date_time}
+              service={job.job.service.service_name}
+              price={job.price}
+            />
           ))}
-          <PaginationItem>
-            <PaginationNext onClick={handleNextPage} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </div>
+          <Pagination className="bg-white my-6 rounded-xl p-4">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious onClick={handlePreviousPage} />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <PaginationItem key={index + 1}>
+                  <PaginationLink onClick={() => handleClickPage(index + 1)}>
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext onClick={handleNextPage} />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      )}
+    </>
   );
-}
+};
 
 export default OngoingJobs;
+
