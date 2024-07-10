@@ -143,6 +143,14 @@ export interface MessageInterface {
 }
 
 export interface FeedbackInterface {
+  id: number;
   rating: number;
   comment: string;
+  user: {
+    first_name: string;
+    last_name: string;
+    picture: string;
+  };
+  createdAt: string;
 }
+
