@@ -8,9 +8,7 @@ export default function Employees({ employees }: { employees: Users[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   if (employees?.length === 0) {
     return (
-      <div className="flex justify-center items-center h-96">
-        <p className="text-2xl">No Employees</p>
-      </div>
+      <p className="text-center text-gray-700 mt-6">No Employees to show</p>
     );
   }
   const totalPageCount = Math.ceil(employees?.length / ITEMS_PER_PAGE);

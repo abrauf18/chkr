@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import StarRating from "./star-rating";
 import { useForm } from "react-hook-form";
@@ -29,16 +28,15 @@ export default function FeedbackForm() {
 
   const onSubmit = async (data: any) => {
     try {
+      if (rating === 0) {
+        return toast.error("Rating is Required");
+      }
       const messageData: FeedbackInterface = {
         rating: rating, // Use rating from state
         comment: data.comment,
       };
 
-      console.log("Message data:", messageData);
-
       const result = await CreateFeedbackAction(messageData);
-
-      console.log("Result:", result);
 
       if (result && result.statusCode === 201) {
         return toast.success(result.message);
