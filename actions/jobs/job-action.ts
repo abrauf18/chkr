@@ -182,11 +182,12 @@ export const GetCommentByIDAction = async (id: number) => {
         Authorization: `Bearer ${session?.token}`,
       },
       next: {
-        revalidate: 10,
+        revalidate: 2,
       },
     }
   );
   const result = await response.json();
+  console.log(response);
   return result;
 };
 
@@ -201,9 +202,14 @@ export const CreateMessageAction = async (data: MessageInterface) => {
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        user_id: session?.user?.id,
+        job_id: data.job_id,
+        message: data.message,
+      }),
     }
   );
   const result = await response.json();
   return result;
 };
+

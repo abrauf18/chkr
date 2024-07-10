@@ -32,6 +32,7 @@ export default function JobDetails({
   const [UserJobDetails, setUserJobDetails] = useState<any>(null);
   const [comments, setComments] = useState<CommentProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [messageLoading, setMessageLoading] = useState(false);
   const location = isAdmin
     ? jobDetails?.location
     : UserJobDetails?.job?.location;
@@ -66,31 +67,29 @@ export default function JobDetails({
     fetchData();
   }, [jobId]);
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        setIsLoading(true);
-        const response = await GetCommentByIDAction(jobId);
-        if (response?.statusCode === 200 && Array.isArray(response.result)) {
-          const commentsData: CommentProps[] = response.result.map(
-            (comment: any) => ({
-              createdAt: comment.createdAt,
-              message: comment.message,
-              user: {
-                first_name: comment.user.first_name,
-              },
-            })
-          );
-          setComments(commentsData);
-        } else {
-          console.error("Invalid response format:", response);
-        }
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-      } finally {
-        setIsLoading(false);
+  const fetchComments = async () => {
+    try {
+      setMessageLoading(true);
+      const response = await GetCommentByIDAction(jobId);
+      if (response?.statusCode === 200 && Array.isArray(response.result)) {
+        const commentsData: CommentProps[] = response.result.map(
+          (comment: any) => ({
+            createdAt: comment.createdAt,
+            message: comment.message,
+            user: comment.user,
+          })
+        );
+        setComments(commentsData);
+      } else {
+        console.error("Invalid response format:", response);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    } finally {
+      setMessageLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchComments();
   }, [jobId]);
 
@@ -104,6 +103,7 @@ export default function JobDetails({
     try {
       const result = await CreateMessageAction(data);
       if (result && result.statusCode === 201) {
+        await fetchComments();
         return toast.success(result.message);
       } else {
         return toast.error(result?.message);
@@ -117,7 +117,6 @@ export default function JobDetails({
   const handleSubmit = async () => {
     const messageData: MessageInterface = {
       job_id: jobId,
-      user_id: 1, // Replace with the actual user ID
       message: text,
     };
     await onSubmit(messageData);

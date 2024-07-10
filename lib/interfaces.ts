@@ -139,6 +139,6 @@ export interface CompanyInterface {
 
 export interface MessageInterface {
   job_id: number;
-  user_id: number;
   message: string;
 }
+

@@ -7,6 +7,9 @@ export interface CommentProps {
   url: string;
   user: {
     first_name: string;
+    last_name: string;
+    picture: string;
+    email: string;
   };
 }
 
@@ -18,14 +21,18 @@ const Comment: React.FC<CommentProps> = ({ message, createdAt, user, url }) => {
         <span>{new Date(createdAt).toLocaleTimeString()}</span>
       </div>
       <div className="flex justify-between items-center mt-6">
-        <div className="flex justify-center items-center">
-          <div className="w-12 h-12 mr-3">
-            <Image src={url} width={3} height={3} alt="user" />
-          </div>
+        <div className="flex items-center gap-3">
+          <Image
+            src={user?.picture}
+            width={33}
+            height={33}
+            className="w-10 h-10 rounded-full"
+            alt="user"
+          />
           <span>{message}</span>
         </div>
         <div className="bg-[#748AFE] px-4 py-1 rounded-2xl h-1/2 text-white">
-          {user.first_name}
+          {user?.first_name}
         </div>
       </div>
       <hr className="my-4" />
