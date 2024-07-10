@@ -142,7 +142,7 @@ export const EmployeeSchema = z.object({
 
 export const FeedbackSchema = z.object({
   comment: z.string().max(50).min(1, { message: "Comment must not be empty" }),
-  // rating: z.number().min(1, { message: "Rating is required" })
+  rating: z.number().min(1, { message: "Rating is required" }),
   //   .max(5, { message: "Rating must be between 1 and 5" }),
 });
 export const JobSchema = z

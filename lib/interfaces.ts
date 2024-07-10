@@ -142,3 +142,7 @@ export interface MessageInterface {
   message: string;
 }
 
+export interface FeedbackInterface {
+  rating: number;
+  comment: string;
+}
