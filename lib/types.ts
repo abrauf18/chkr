@@ -266,3 +266,12 @@ export const AdminSchema = z.object({
     .email({ message: "Email is invalid" }),
 });
 
+export const MessageSchema = z.object({
+  message: z
+    .string()
+    .min(1, {
+      message: "Message is required",
+    })
+    .max(150, { message: "Message can have a maximum of 150 characters" }),
+});
+

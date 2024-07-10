@@ -18,6 +18,10 @@ import SmallMap from "./small-map";
 import Loader from "./loader";
 import { toast } from "react-toastify";
 import { MessageInterface } from "@/lib/interfaces";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MessageSchema } from "@/lib/types";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function JobDetails({
   jobId,
@@ -26,6 +30,15 @@ export default function JobDetails({
   jobId: number;
   isAdmin?: boolean;
 }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(MessageSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
   const pathname = usePathname();
   const [text, setText] = useState("");
   const [jobDetails, setJobDetails] = useState<any>(null);
@@ -98,15 +111,13 @@ export default function JobDetails({
     return () => clearInterval(intervalId);
   }, [jobId]);
 
-  console.log(comments);
-
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  };
-
-  const onSubmit = async (data: MessageInterface) => {
+  const onSubmit = async (data: any) => {
     try {
-      const result = await CreateMessageAction(data);
+      const messageData: MessageInterface = {
+        job_id: jobId,
+        message: data.message,
+      };
+      const result = await CreateMessageAction(messageData);
       if (result && result.statusCode === 201) {
         await fetchComments();
         return toast.success(result.message);
@@ -116,16 +127,9 @@ export default function JobDetails({
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("An error occurred while creating commenting.");
+    } finally {
+      setText("");
     }
-  };
-
-  const handleSubmit = async () => {
-    const messageData: MessageInterface = {
-      job_id: jobId,
-      message: text,
-    };
-    await onSubmit(messageData);
-    setText("");
   };
 
   return (
@@ -227,23 +231,24 @@ export default function JobDetails({
             <span className="font-bold text-lg text-left">
               Onsite Progress:
             </span>
-            <div className="h-full border rounded-lg mt-2">
-              <Textarea
-                className="min-h-32"
-                placeholder="Write your onsite progress here."
-                value={text}
-                onChange={handleChange}
-              />
-              <div className="flex items-end justify-end ">
-                <Button
-                  className="m-2 text-white"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Share
-                </Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="h-full rounded-lg mt-2">
+                <Textarea
+                  className="min-h-32"
+                  placeholder="Write your onsite progress here."
+                  {...register("message")}
+                />
+                <p className="text-sm text-red-500 mt-1">
+                  {" "}
+                  <ErrorMessage errors={errors} name="message" />
+                </p>
+                <div className="flex items-end justify-end ">
+                  <Button className="mt-1 rounded-lg text-white" type="submit">
+                    Share
+                  </Button>
+                </div>
               </div>
-            </div>
+            </form>
             <div className="mt-6">
               {comments.length === 0 ? (
                 <p className="text-center">No messages to display</p>
