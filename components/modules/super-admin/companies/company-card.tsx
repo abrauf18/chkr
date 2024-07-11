@@ -15,6 +15,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
   staffCount,
   phone_number,
   createdAt,
+  disable,
 }) => {
   return (
     <div className="max-w-sm rounded-xl overflow-hidden shadow-lg p-5 bg-white">
@@ -47,6 +48,7 @@ const CompanyCard: React.FC<CompanyInterface> = ({
             staffCount,
             phone_number,
             createdAt,
+            disable,
           }}
         />
       </div>

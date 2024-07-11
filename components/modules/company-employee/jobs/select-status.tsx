@@ -56,7 +56,6 @@ const Select: React.FC<JobLocation> = ({ jobLocation }) => {
     setIsOpen(false);
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation(position.coords);
-      console.log("Current location:", position.coords);
       const userCoords = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -66,7 +65,6 @@ const Select: React.FC<JobLocation> = ({ jobLocation }) => {
         lng: jobLocation.lng,
       };
       const distance = calculateDistance(userCoords, jobCoords);
-      console.log(distance);
       if (distance <= 500) {
         setSelectedOption("Checkin");
         return toast.info("User is within 500 meter of job location");

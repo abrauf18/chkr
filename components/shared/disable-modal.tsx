@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -10,27 +10,31 @@ import {
 } from "@/components/ui/dialog";
 import CancelCircle from "@/assets/icons/cancel-circle-half-dot";
 import { Button } from "@/components/ui/button";
-import { Ban } from "lucide-react";
+import { Ban, CirclePlus } from "lucide-react";
 
-export default function DisableModal() {
-  const pathname = usePathname();
+export default function DisableModal({ isDisable }: { isDisable?: boolean }) {
+  // const pathname = usePathname();
 
   return (
     <Dialog>
       <DialogTrigger>
-        {pathname === "/super-admin/companies" && (
-          <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
-            <Ban className="w-4 h-4" color="gray" />
-            <span className="text-gray-600">Disable Company</span>
-          </div>
-        )}
-        {pathname === "/super-admin/admins" ? (
+        {/* {pathname === "/super-admin/companies" && ( */}
+        <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
+          {isDisable ? (
+            <CirclePlus color="gray" className="w-5 h-5" />
+          ) : (
+            <Ban color="gray" className="w-5 h-5" />
+          )}
+          <span className="text-gray-600">
+            {isDisable ? "Enable Company" : "Disable Company"}
+          </span>
+        </div>
+        {/* )} */}
+        {/* {pathname === "/super-admin/admins" && (
           <div className="bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center">
             <Ban color="#ff8a00" className="w-5 h-5" />
           </div>
-        ) : (
-          <></>
-        )}
+        )} */}
       </DialogTrigger>
       <DialogContent className="bg-white md:max-w-1/2 mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>

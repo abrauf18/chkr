@@ -34,6 +34,8 @@ export default function EmployeeForm({
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EmployeeSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const setUserValue = () => {
@@ -58,29 +60,28 @@ export default function EmployeeForm({
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsLoading(true);
-      if(isEdit && currentUser){
+      if (isEdit && currentUser) {
         const changes: any = {};
-        const currentValues = getValues()
-     
+        const currentValues = getValues();
 
-      const fieldMapping: any = {
-        employeeFirstName: "first_name",
-        employeeLastName: "last_name",
-        email: "email",
-        phoneNumber: "contact_number",
-      };
+        const fieldMapping: any = {
+          employeeFirstName: "first_name",
+          employeeLastName: "last_name",
+          email: "email",
+          phoneNumber: "contact_number",
+        };
 
-      Object.keys(currentValues).forEach((key)=> {
-        const mappedKey = fieldMapping[key];
-        if (currentValues[key] !== initialValues[key]) {
-          changes[mappedKey] = currentValues[key];
+        Object.keys(currentValues).forEach((key) => {
+          const mappedKey = fieldMapping[key];
+          if (currentValues[key] !== initialValues[key]) {
+            changes[mappedKey] = currentValues[key];
+          }
+        });
+
+        if (Object.keys(changes).length === 0) {
+          setIsLoading(false);
+          return toast.error("No changes detected.");
         }
-      });
-
-      if (Object.keys(changes).length === 0) {
-        setIsLoading(false);
-        return toast.error("No changes detected.");
-      }
 
         const result = await EditUserAction(currentUser.id, changes);
         if (result.statusCode === 200) {
@@ -89,7 +90,7 @@ export default function EmployeeForm({
         }
         return toast.error(result.message);
       }
-    
+
       const { employeeFirstName, employeeLastName, email, phoneNumber } = data;
       const result = await InviteUserAction({
         first_name: employeeFirstName,
@@ -98,7 +99,7 @@ export default function EmployeeForm({
         contact_number: phoneNumber,
       });
       if (result.statusCode === 200) {
-        action("allUsers")
+        action("allUsers");
         return toast.success(result.message);
       }
       return toast.error(result.message);
@@ -109,8 +110,6 @@ export default function EmployeeForm({
       setIsLoading(false);
     }
   });
-
-
 
   return (
     <form onSubmit={onSubmit}>

@@ -28,7 +28,6 @@ export default function UserOptions({
       callbackUrl: "/login",
     });
   };
-  console.log(userRole);
   return (
     <DropdownMenu onOpenChange={(e) => setOpen(e)} open={open}>
       <DropdownMenuTrigger>

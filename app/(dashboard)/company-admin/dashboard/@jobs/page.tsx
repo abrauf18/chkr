@@ -9,15 +9,15 @@ async function JobsPage({ isDashboard }: { isDashboard?: boolean }) {
   const jobs = await GetJobsAction();
   return (
     <>
-     <div className="flex justify-between items-center my-6">
-          <span className="text-xl font-semibold">Recent Assigned Jobs</span>
-          <Link href="/company-admin/jobs">
-            <Button className="rounded-3xl text-white">View All</Button>
-          </Link>
-        </div>
-    <div className={clsx(isDashboard && "mb-6")}>
-      <Jobs jobs={jobs} isDashboard/>
-    </div>
+      <div className="flex justify-between items-center my-6">
+        <span className="text-xl font-semibold">Recent Assigned Jobs</span>
+        <Link href="/company-admin/jobs">
+          <Button className="rounded-3xl text-white">View All</Button>
+        </Link>
+      </div>
+      <div className={clsx(isDashboard && "mb-6")}>
+        <Jobs jobs={jobs} isDashboard />
+      </div>
     </>
   );
 }

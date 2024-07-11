@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const GetCompanyAction = async () => {
   const session = await auth();
@@ -16,6 +17,9 @@ export const GetCompanyAction = async () => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 

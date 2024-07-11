@@ -5,6 +5,7 @@ import {
   JobsInterface,
   MessageInterface,
 } from "@/lib/interfaces";
+import { redirect } from "next/navigation";
 
 export const ServiceAction = async () => {
   const session = await auth();
@@ -17,6 +18,9 @@ export const ServiceAction = async () => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -38,6 +42,9 @@ export const CreateJobAction = async (data: JobsInterface) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -58,6 +65,9 @@ export const GetJobsAction = async () => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -78,6 +88,9 @@ export const GetUserJobsAction = async () => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -96,6 +109,9 @@ export const JobRequestAction = async (data: JobRequestInterface) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -116,6 +132,9 @@ export const GetJobByIDAction = async (id: number) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -136,6 +155,9 @@ export const GetEmployeeJobByIDAction = async (id: number) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -153,6 +175,9 @@ export const CompleteByIDAction = async (id: number) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -167,6 +192,9 @@ export const DeleteJobAction = async (id: number) => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -187,6 +215,9 @@ export const GetCommentByIDAction = async (id: number) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -209,6 +240,9 @@ export const CreateMessageAction = async (data: MessageInterface) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 

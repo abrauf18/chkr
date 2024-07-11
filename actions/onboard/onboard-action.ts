@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 export const FirmsAction = async () => {
   const session = await auth();
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/firms`, {
@@ -12,6 +13,9 @@ export const FirmsAction = async () => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -26,6 +30,9 @@ export const CountryAction = async () => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -40,6 +47,9 @@ export const OnboardingAction = async (data: FormData) => {
     body: data,
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -54,6 +64,9 @@ export const PlanAction = async () => {
     },
   });
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 

@@ -1,6 +1,7 @@
 "use server";
 import { auth } from "@/auth";
 import { FeedbackInterface } from "@/lib/interfaces";
+import { redirect } from "next/navigation";
 
 export const CreateFeedbackAction = async (data: FeedbackInterface) => {
   const session = await auth();
@@ -20,16 +21,16 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
 export const GetAllFeedbacksAction = async () => {
-  const session = await auth();
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
     headers: {
       "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
     },
     next: {
       tags: ["getFeedbacks"],

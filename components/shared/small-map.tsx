@@ -32,7 +32,7 @@ const SmallMap: React.FC<SmallMapProps> = ({ location }) => {
             setPlaceId(data.places[0].id);
           }
         } catch (err) {
-          console.log(err);
+          console.error(err);
         } finally {
           setLoader(false);
         }

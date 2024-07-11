@@ -27,6 +27,10 @@ interface JobsProps {
 }
 
 const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
+  if (typeof window !== "undefined" && isDashboard) {
+    window.localStorage.removeItem("onboarding-store");
+  }
+
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const handleTabClick = (tabId: number) => {

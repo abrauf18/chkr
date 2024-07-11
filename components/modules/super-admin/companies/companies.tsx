@@ -49,3 +49,4 @@ const Companies: React.FC = () => {
 };
 
 export default Companies;
+

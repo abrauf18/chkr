@@ -28,6 +28,8 @@ export default function ResetPassword() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(ResetPasswordSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = handleSubmit(async (data) => {

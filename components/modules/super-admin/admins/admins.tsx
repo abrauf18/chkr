@@ -4,11 +4,7 @@ import { Users } from "@/lib/interfaces";
 
 export default function Admins({ admins }: { admins: Users[] }) {
   if (admins?.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <p className="text-2xl">No Admins</p>
-      </div>
-    );
+    return <p className="text-center text-gray-700 mt-6">No Admins to show</p>;
   }
   return (
     <div>

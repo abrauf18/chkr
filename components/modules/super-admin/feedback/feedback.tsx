@@ -15,18 +15,23 @@ import {
 import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 import { FeedbackInterface } from "@/lib/interfaces";
 import action from "@/app/action";
+import Loader from "@/components/shared/loader";
 
 const Feedback: React.FC = () => {
   const [feedback, setFeedback] = useState<FeedbackInterface[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
+        setIsLoading(true);
         const response: FeedbackInterface[] = await GetAllFeedbacksAction();
         setFeedback(response);
         action("getFeedbacks");
       } catch (error) {
         console.error("Error fetching feedback:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchFeedback();
@@ -53,12 +58,15 @@ const Feedback: React.FC = () => {
   feedback.forEach((review) => {
     ratingDistribution[5 - review.rating]++;
   });
+
   return (
     <>
       <Header title="Manage Customers Feedback" />
-      {currentReviews.length === 0 ? (
-        <div className="text-center mt-12">No feedback to display</div>
-      ) : (
+      {isLoading ? (
+        <div className="flex items-center justify-center h-96">
+          <Loader />
+        </div>
+      ) : feedback.length > 0 ? (
         <div className="flex mobile:flex-col-reverse md:flex-row gap-4 mt-3">
           <div className="space-y-4 md:w-[60%]">
             {currentReviews.map((review) => (
@@ -71,29 +79,38 @@ const Feedback: React.FC = () => {
                 rating={review.rating}
               />
             ))}
-            <Pagination>
-              <PaginationPrevious
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                Previous
-              </PaginationPrevious>
-              <PaginationContent>
-                {[...Array(totalPages)].map((_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      isActive={currentPage === index + 1}
-                      onClick={() => handlePageChange(index + 1)}
-                    >
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                {totalPages > 5 && <PaginationEllipsis>...</PaginationEllipsis>}
-              </PaginationContent>
-              <PaginationNext onClick={() => handlePageChange(currentPage + 1)}>
-                Next
-              </PaginationNext>
-            </Pagination>
+            {feedback.length > reviewsPerPage && (
+              <Pagination>
+                <PaginationPrevious
+                  className="cursor-pointer"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  Previous
+                </PaginationPrevious>
+                <PaginationContent>
+                  {[...Array(totalPages)].map((_, index) => (
+                    <PaginationItem key={index}>
+                      <PaginationLink
+                        isActive={currentPage === index + 1}
+                        className="cursor-pointer"
+                        onClick={() => handlePageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  {totalPages > 5 && (
+                    <PaginationEllipsis>...</PaginationEllipsis>
+                  )}
+                </PaginationContent>
+                <PaginationNext
+                  className="cursor-pointer"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
+                  Next
+                </PaginationNext>
+              </Pagination>
+            )}
           </div>
           <div className="md:w-[40%]">
             <RatingSummary
@@ -102,6 +119,8 @@ const Feedback: React.FC = () => {
             />
           </div>
         </div>
+      ) : (
+        <div className="text-center mt-12">No feedback to display</div>
       )}
     </>
   );

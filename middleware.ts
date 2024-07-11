@@ -15,7 +15,12 @@ export default auth(async (req) => {
   const user = req.auth?.user as IUserInterface | undefined;
   const role = user?.role;
 
-  const isAuthenticated = !!req.auth;
+  let isAuthenticated;
+  if (!role) {
+    isAuthenticated = false;
+  } else {
+    isAuthenticated = !!req.auth;
+  }
   const isPublicRoute = PUBLIC_ROUTES.includes(nextUrl.pathname);
 
   const rolePaths = {
@@ -24,6 +29,7 @@ export default auth(async (req) => {
       `/${role}/settings`,
       `/${role}/jobs`,
       `/${role}/employees`,
+      `/logout`,
     ],
   };
 
@@ -44,6 +50,11 @@ export default auth(async (req) => {
       const dashboardUrl = new URL(`/${role}/dashboard`, nextUrl);
       if (!rolePaths[role].includes(nextUrl.pathname)) {
         return Response.redirect(dashboardUrl);
+      }
+    } else if (result.statusCode === 401) {
+      if (nextUrl.pathname !== "/logout") {
+        const logoutUrl = new URL("/logout", nextUrl);
+        return Response.redirect(logoutUrl);
       }
     } else {
       const onboardingUrl = new URL("/onboarding", nextUrl);

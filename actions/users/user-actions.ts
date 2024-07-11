@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const UsersAction = async ({
   order,
@@ -46,6 +47,9 @@ export const EditUserAction = async (id: number, data: any) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -64,6 +68,9 @@ export const SearchUserAction = async (search: string) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result.data;
 };
 
@@ -84,5 +91,9 @@ export const DeleteUserAction = async (id: number) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
+

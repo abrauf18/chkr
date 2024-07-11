@@ -31,8 +31,8 @@ export default function FeedbackForm() {
       if (rating === 0) {
         return toast.error("Rating is Required");
       }
-      const messageData: FeedbackInterface = {
-        rating: rating, // Use rating from state
+      const messageData: any = {
+        rating: rating,
         comment: data.comment,
       };
 

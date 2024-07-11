@@ -34,6 +34,8 @@ export default function AdminForm({
     formState: { errors },
   } = useForm({
     resolver: zodResolver(AdminSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const setUserValue = () => {

@@ -109,7 +109,7 @@ const AdminTable = ({ admins }: { admins: Users[] }) => {
                     currentUser={admin}
                   />
                   <DeleteModal userId={admin.id} />
-                  <DisableModal />
+                  {/* <DisableModal /> */}
                 </div>
               </TableCell>
             </TableRow>
