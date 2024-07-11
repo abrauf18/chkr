@@ -69,7 +69,7 @@ export default function Signup() {
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
             Create an account
           </h2>
-          <p className="md:w-full text-center mb-6 text-sm ">
+          {/* <p className="md:w-full text-center mb-6 text-sm ">
             Continue with one of the following services:
           </p>
           <div className="flex justify-center gap-2">
@@ -90,7 +90,7 @@ export default function Signup() {
             <div className="flex-1">
               <hr className="line" />
             </div>
-          </div>
+          </div> */}
           <div className="flex gap-4">
             <div className="mb-4 w-full items-center">
               <Label
