@@ -29,22 +29,24 @@ const Companies: React.FC = () => {
   return (
     <>
       <Header title="List of Companies Onboarded" />
-      <div className="flex flex-col gap-4 my-8">
-        <h1>Recently added</h1>
-
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-          {recentlyAddedCompanies?.map((company) => (
-            <CompanyCard key={company.id} {...company} />
-          ))}
+      {data?.length == 0 ? (
+        <div className="text-center mt-16">No companies to display</div>
+      ) : (
+        <div className="flex flex-col gap-4 my-8">
+          <h1>Recently added</h1>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+            {recentlyAddedCompanies?.map((company) => (
+              <CompanyCard key={company.id} {...company} />
+            ))}
+          </div>
+          <h1>All Companies</h1>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+            {data?.map((company) => (
+              <CompanyCard key={company.id} {...company} />
+            ))}
+          </div>
         </div>
-
-        <h1>All Companies</h1>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-          {data?.map((company) => (
-            <CompanyCard key={company.id} {...company} />
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 };
