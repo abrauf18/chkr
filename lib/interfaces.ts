@@ -155,3 +155,8 @@ export interface FeedbackInterface {
   createdAt: string;
 }
 
+export interface DisableCompanyInterface {
+  company_id: number;
+  disable: boolean | undefined;
+}
+
