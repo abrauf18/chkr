@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Ban, CirclePlus } from "lucide-react";
 import { DiableCompanyAction } from "@/actions/company/company-action";
 import { toast } from "react-toastify";
+import Loader from "./loader";
 
 export default function DisableModal({
   isDisable,
@@ -19,7 +20,9 @@ export default function DisableModal({
   isDisable?: boolean;
   companyId: number;
 }) {
+  const [loading, setLoading] = useState(false);
   const handleConfirm = async () => {
+    setLoading(true);
     const data = {
       disable: !isDisable ? true : false,
       company_id: companyId,
@@ -30,6 +33,8 @@ export default function DisableModal({
       location.reload();
     } catch (error) {
       console.error("Failed to disable the company:", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -58,10 +63,10 @@ export default function DisableModal({
               <div className="flex w-full justify-between">
                 <Button className="text-white rounded-3xl px-5">Cancel</Button>
                 <Button
-                  className="bg-transparent border border-green-500 text-green-500 rounded-3xl px-5"
+                  className="w-24 bg-transparent border border-green-500 hover:border-white hover:text-white text-green-500 rounded-3xl px-5"
                   onClick={handleConfirm}
                 >
-                  Confirm
+                  {loading ? <Loader size={6} /> : "Confirm"}
                 </Button>
               </div>
             </div>
