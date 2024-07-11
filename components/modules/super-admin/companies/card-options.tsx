@@ -22,7 +22,6 @@ const CardOptions: React.FC<CardOptionsProps> = ({
   companyId,
   companyData,
 }) => {
-  console.log(companyData);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -38,7 +37,7 @@ const CardOptions: React.FC<CardOptionsProps> = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]">
         <CompanyDetailsModal companyId={companyId} />
-        <DisableModal isDisable={companyData.disable} />
+        <DisableModal isDisable={companyData.disable} companyId={companyId} />
         {pathname !== "/admin/companies" && <DeleteModal userId={0} />}
       </DropdownMenuContent>
     </DropdownMenu>

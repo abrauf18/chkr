@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import React, { useState } from "react";
 // import { usePathname } from "next/navigation";
 import {
   Dialog,
@@ -10,11 +9,33 @@ import {
 } from "@/components/ui/dialog";
 import CancelCircle from "@/assets/icons/cancel-circle-half-dot";
 import { Button } from "@/components/ui/button";
-import { Ban, CirclePlus } from "lucide-react";
-
-export default function DisableModal({ isDisable }: { isDisable?: boolean }) {
+import { Ban, CirclePlus, Rotate3D } from "lucide-react";
+import { DiableCompanyAction } from "@/actions/company/company-action";
+import { toast } from "react-toastify";
+import action from "@/app/action";
+export default function DisableModal({
+  isDisable,
+  companyId,
+}: {
+  isDisable?: boolean;
+  companyId: number;
+}) {
   // const pathname = usePathname();
-
+  const handleConfirm = async () => {
+    const data = {
+      disable: !isDisable,
+      company_id: companyId,
+    };
+    try {
+      const result = await DiableCompanyAction(data);
+      await action("getCompanies");
+      console.log(result);
+      return toast.success(result.message);
+    } catch (error) {
+      console.error("Failed to disable the company:", error);
+    }
+  };
+  console.log(isDisable);
   return (
     <Dialog>
       <DialogTrigger>
@@ -47,7 +68,10 @@ export default function DisableModal({ isDisable }: { isDisable?: boolean }) {
               </p>
               <div className="flex w-full justify-between">
                 <Button className="text-white rounded-3xl px-5">Cancel</Button>
-                <Button className="bg-transparent border border-green-500 text-green-500 rounded-3xl px-5">
+                <Button
+                  className="bg-transparent border border-green-500 text-green-500 rounded-3xl px-5"
+                  onClick={handleConfirm}
+                >
                   Confirm
                 </Button>
               </div>
@@ -57,5 +81,12 @@ export default function DisableModal({ isDisable }: { isDisable?: boolean }) {
       </DialogContent>
     </Dialog>
   );
+}
+
+function DisableCompanyAction(data: {
+  disable: boolean; // Toggle the disable status
+  company_id: string;
+}) {
+  throw new Error("Function not implemented.");
 }
 

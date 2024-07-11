@@ -36,7 +36,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-3">
             <MapPinned className="h-5 w-5" />
             <span className="font-semibold md:text-lg text-gray-700">
               {location?.name}
@@ -55,7 +55,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <Select jobLocation={{ lat: location.lat, lng: location.lng }} />
         </div>
       </div>
-      <p className="mt-4 text-base text-gray-600">{description} </p>
+      <p className="mt-3 text-base text-gray-600">{description} </p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap xl:gap-10 gap-4">
           <div className="flex flex-col text-sm whitespace-nowrap">
