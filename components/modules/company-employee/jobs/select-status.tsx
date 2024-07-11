@@ -18,7 +18,7 @@ const Select: React.FC<JobLocation> = ({ jobLocation }) => {
   const [selectedOption, setSelectedOption] = useState("Checkout");
   const [currentLocation, setCurrentLocation] =
     useState<GeolocationCoordinates | null>(null);
-  const [isLocationEnabled, setIsLocationEnabled] = useState(true);
+  const [isLocationEnabled, setIsLocationEnabled] = useState(false);
 
   useEffect(() => {
     if (!("geolocation" in navigator)) {
