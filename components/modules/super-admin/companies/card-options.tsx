@@ -9,7 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import { EllipsisVertical } from "lucide-react";
 import CompanyDetailsModal from "./company-details-modal";
-import DeleteModal from "../admins/delete-modal";
+import DeleteModal from "../../../shared/delete-modal";
 import DisableModal from "@/components/shared/disable-modal";
 import { CompanyInterface } from "@/lib/interfaces";
 
@@ -38,7 +38,9 @@ const CardOptions: React.FC<CardOptionsProps> = ({
       <DropdownMenuContent className="flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px]">
         <CompanyDetailsModal companyId={companyId} />
         <DisableModal isDisable={companyData.disable} companyId={companyId} />
-        {pathname !== "/admin/companies" && <DeleteModal userId={0} />}
+        {pathname !== "/admin/companies" && (
+          <DeleteModal userId={0} companyId={companyId} />
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

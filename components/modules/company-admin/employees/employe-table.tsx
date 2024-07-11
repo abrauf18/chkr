@@ -16,7 +16,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ArrowDown } from "lucide-react";
-import DeleteModal from "../../super-admin/admins/delete-modal";
+import DeleteModal from "../../../shared/delete-modal";
 import EditAdmin from "../../super-admin/admins/edit-admin";
 import { ITEMS_PER_PAGE } from "@/lib/utils";
 import { Users } from "@/lib/interfaces";

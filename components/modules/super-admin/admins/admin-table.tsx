@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/pagination";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
-import DeleteModal from "./delete-modal";
+import DeleteModal from "../../../shared/delete-modal";
 import EditAdmin from "./edit-admin";
 import DisableModal from "../../../shared/disable-modal";
 import { Users } from "@/lib/interfaces";

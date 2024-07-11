@@ -9,7 +9,7 @@ import {
 import CancelCircle from "@/assets/icons/cancel-circle-half-dot";
 import { Button } from "@/components/ui/button";
 import { Ban, CirclePlus } from "lucide-react";
-import { DiableCompanyAction } from "@/actions/company/company-action";
+import { DisableCompanyAction } from "@/actions/company/company-action";
 import { toast } from "react-toastify";
 import Loader from "./loader";
 
@@ -28,7 +28,7 @@ export default function DisableModal({
       company_id: companyId,
     };
     try {
-      const result = await DiableCompanyAction(data);
+      const result = await DisableCompanyAction(data);
       toast.success(result.message);
       location.reload();
     } catch (error) {

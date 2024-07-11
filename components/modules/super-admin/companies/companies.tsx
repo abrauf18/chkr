@@ -31,6 +31,7 @@ const Companies: React.FC = () => {
       <Header title="List of Companies Onboarded" />
       <div className="flex flex-col gap-4 my-8">
         <h1>Recently added</h1>
+
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
           {recentlyAddedCompanies?.map((company) => (
             <CompanyCard key={company.id} {...company} />

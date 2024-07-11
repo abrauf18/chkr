@@ -3,7 +3,7 @@ import Image from "next/image";
 import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
 import ShowJobDetails from "../../../shared/show-job-details";
-import DeleteModal from "../../super-admin/admins/delete-modal";
+import DeleteModal from "../../../shared/delete-modal";
 
 interface AssignedJobCardProps {
   id: number;
