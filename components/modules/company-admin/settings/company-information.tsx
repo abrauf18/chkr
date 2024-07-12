@@ -314,28 +314,28 @@ export default function CompanyInformation({
           </p>
         </div>
 
-        <div className="flex w-full justify-between mt-4">
+        <div className="flex w-full justify-between mt-4 gap-4">
           <button
             type="button"
-            className="py-3 px-6 bg-gray-200 text-gray-700 rounded-3xl text-sm"
+            className="py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl text-sm mobile:w-1/2 w-36 "
             onClick={() => reset(defaultValues)}
           >
-            Discard Changes
+            Discard
           </button>
           <button
             type="submit"
             className={clsx(
-              "mobile:w-full w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
+              "mobile:w-1/2 w-36 py-2 px-4 rounded-3xl text-sm cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
               {
                 "bg-primary text-white":
                   hasChanges || currentImage !== companyinfo.company_logo,
-                "bg-gray-200 text-gray-700":
+                "bg-gray-100 text-gray-700":
                   !hasChanges || currentImage === companyinfo.company_logo,
               }
             )}
             disabled={currentImage === companyinfo.company_logo && !hasChanges}
           >
-            {isloading ? <Loader size={6} /> : "Save Changes"}
+            {isloading ? <Loader size={6} /> : "Save"}
           </button>
         </div>
       </div>

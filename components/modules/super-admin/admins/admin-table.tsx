@@ -70,7 +70,9 @@ const AdminTable = ({ admins }: { admins: Users[] }) => {
             </TableHead>
             <TableHead>
               <div className="flex items-center gap-2">
-                <span className="text-black font-semibold">Phone Number</span>
+                <span className="text-black font-semibold whitespace-nowrap">
+                  Phone Number
+                </span>
                 <ArrowDown className="h-4 w-4" />
               </div>
             </TableHead>

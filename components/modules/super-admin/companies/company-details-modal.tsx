@@ -30,7 +30,7 @@ const CompanyDetailsModal: React.FC<CompanyDetailsModalProps> = ({
       <Dialog>
         <DialogTrigger className="flex w-full items-center p-2 gap-2 hover:bg-gray-100">
           <PencilLine className="w-4 h-4" color="gray" />
-          <span className="text-gray-600">Edit Profile</span>
+          <span className="text-gray-600">Edit Company</span>
         </DialogTrigger>
         <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
           <DialogHeader>

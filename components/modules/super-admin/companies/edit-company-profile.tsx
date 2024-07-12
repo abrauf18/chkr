@@ -23,7 +23,7 @@ const EditCompanyProfile: React.FC<EditCompanyProfileProps> = ({
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="text-xl mb-2">Edit Company Profile</h1>
+        <h1 className="text-xl mt-4">Edit Company Profile</h1>
       </div>
       <div className="grid grid-cols-1 gap-4 my-4">
         <div className="bg-white rounded-xl p-3">

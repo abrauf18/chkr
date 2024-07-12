@@ -21,10 +21,12 @@ const AutoLocation: React.FC<Props> = ({ name }) => {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
     };
-
-    // Log or set the selected location coordinates
     setValue(name, newAddress);
   };
+
+  React.useEffect(() => {
+    setTimeout(() => (document.body.style.pointerEvents = ""), 0);
+  });
 
   return (
     <>

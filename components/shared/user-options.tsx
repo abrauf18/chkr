@@ -21,7 +21,11 @@ export default function UserOptions({
   picture: string;
 }) {
   const [open, setOpen] = useState(false);
-  const userRole = (role ?? "").replace("-", " ");
+  const capitalize = (str: string) => {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+  const userRole = capitalize((role ?? "").replace("-", " "));
   const handleLogout = async () => {
     signOut({
       redirect: true,
