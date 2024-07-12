@@ -168,6 +168,7 @@ export default function CreateJob({
 
   const onSubmit = async (data: any) => {
     try {
+      methods.setValue("loading", true);
       if (jobId) {
         // Update existing job
         const result = await UpdateJobAction(jobId, data);
@@ -200,6 +201,18 @@ export default function CreateJob({
     <>
       <Dialog open={open} onOpenChange={onClose}>
         <DialogContent
+          onInteractOutside={(e) => {
+            const classes: Array<Array<string>> = [];
+
+            e.composedPath().forEach((el: any) => {
+              if (el.classList) {
+                classes.push(Array.from(el.classList));
+              }
+            });
+            if (classes.join("-").includes("pac-container")) {
+              e.preventDefault();
+            }
+          }}
           className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >

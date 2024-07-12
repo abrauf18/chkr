@@ -49,8 +49,8 @@ export default function MarkAsComplete({ jobID }: MarkAsCompleteProps) {
             isCompleted ? "bg-green-500" : ""
           }`}
         >
-          <Check className="w-4 h-4" color="white" />
-          <span className="text-white">
+          <Check className="w-4 h-4" color="black" />
+          <span className="text-black">
             {isCompleted ? "Completed" : "Mark as Complete"}
           </span>
         </DialogTrigger>

@@ -6,6 +6,7 @@ import { MapPinned } from "lucide-react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import action from "@/app/action";
+import { format } from "date-fns";
 
 interface CardProps {
   job_id: number;
@@ -56,8 +57,8 @@ const JobRequestCard: React.FC<CardProps> = ({
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center gap-2">
-            <MapPinned className="h-5 w-5" />
-            <span className="font-semibold md:text-lg text-gray-700">
+            <MapPinned className="md:h-5 md:w-5 w-10 h-10" />
+            <span className="font-semibold text-base md:text-lg text-gray-700">
               {location?.name}
               <Link
                 href={`https://www.google.com/maps?q=${location?.name}`}
@@ -92,7 +93,7 @@ const JobRequestCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {new Date(date_time).toLocaleString()}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -104,7 +105,7 @@ const JobRequestCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Status:</span>
             <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base capitalize">
-              <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
+              <span className="bg-red-500 w-2 h-2 rounded-full mr-2"></span>
               {status}
             </div>
           </div>

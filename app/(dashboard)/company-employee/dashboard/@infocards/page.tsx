@@ -62,7 +62,7 @@ const InfoCardPage = () => {
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="text-sm whitespace-nowrap">See Jobs</span>
+              <span className="text-sm whitespace-nowrap">View More</span>
               <button>
                 <CircleChevronRight className="h-4 w-4" />
               </button>
@@ -93,7 +93,7 @@ const InfoCardPage = () => {
             </div>
             <div className="flex items-center gap-1">
               <span className="whitespace-nowrap lg:text-sm text-base">
-                See Requests
+                View More
               </span>
               <button>
                 <CircleChevronRight className="h-4 w-4" />

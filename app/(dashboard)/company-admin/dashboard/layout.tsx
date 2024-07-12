@@ -36,10 +36,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <InfoCardPage />
       </Suspense>
-      <div className="flex justify-between items-center my-6">
+      <div className="flex justify-between items-center my-4">
         <span className="text-xl font-semibold">Recent Assigned Jobs</span>
         <Link href="/company-admin/jobs">
-          <Button className="rounded-3xl text-white">View All</Button>
+          <Button className="rounded-3xl text-white hover:bg-primaryHover">
+            View All
+          </Button>
         </Link>
       </div>
       <Suspense

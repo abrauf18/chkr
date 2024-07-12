@@ -1,5 +1,6 @@
 import React from "react";
 import Location from "@/assets/icons/location-icon";
+import { format } from "date-fns";
 
 interface CompletedJobCardProps {
   customer_name: string;
@@ -34,7 +35,7 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl p-3">
             <div className="bg-green-500 rounded-full h-2 w-2 mr-2"></div>
-            <span>{status}</span>
+            <span>{status?.charAt(0).toUpperCase() + status?.slice(1)}</span>
           </div>
         </div>
       </div>
@@ -43,7 +44,7 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {date_time}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -56,7 +57,7 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
             <span className="font-bold md:text-lg">Payment:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base flex items-center">
               <div className="bg-green-500 rounded-full h-2 w-2 mr-2"></div>
-              {status}
+              Pending
             </span>
           </div>
         </div>

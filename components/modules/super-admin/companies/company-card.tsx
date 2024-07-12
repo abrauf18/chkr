@@ -57,7 +57,10 @@ const CompanyCard: React.FC<CompanyInterface> = ({
         <div className="flex items-center gap-2 py-2 px-5 rounded-xl bg-gray-100">
           <div className="rounded-full bg-green-500 h-3 w-3"></div>
           <p className="whitespace-nowrap text-xs">
-            {plan.plan_type} subscription plan
+            {plan.plan_type.charAt(0).toUpperCase() +
+              plan.plan_type?.slice(1) +
+              " " +
+              "subscription"}
           </p>
         </div>
         <div className="flex items-center bg-gray-100 py-2 px-5 rounded-xl gap-2">

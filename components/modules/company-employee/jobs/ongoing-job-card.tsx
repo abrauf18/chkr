@@ -5,6 +5,7 @@ import React from "react";
 import MarkAsComplete from "./mark-as-complete";
 import Select from "./select-status";
 import ShowJobDetails from "../../../shared/show-job-details";
+import { format } from "date-fns";
 
 interface CardProps {
   id: number;
@@ -61,7 +62,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {new Date(date_time).toLocaleString()}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -73,7 +74,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Status:</span>
             <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base ">
-              <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
+              <span className="bg-blue-500 w-2 h-2 rounded-full mr-2"></span>
               {status?.charAt(0).toUpperCase() + status?.slice(1)}
             </div>
           </div>

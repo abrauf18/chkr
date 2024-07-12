@@ -230,10 +230,10 @@ export default function EmployeeForm({
                 handleSetState && handleSetState(false);
               }}
             >
-              Discard Changes
+              Discard
             </Button>
             <Button className="w-32 rounded-3xl text-white" type="submit">
-              {isloading ? <Loader size={6} /> : "Save Changes"}
+              {isloading ? <Loader size={6} /> : "Save"}
             </Button>
           </div>
         )}

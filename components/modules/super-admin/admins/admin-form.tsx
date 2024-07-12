@@ -233,10 +233,10 @@ export default function AdminForm({
                 handleSetState && handleSetState(false);
               }}
             >
-              Discard Changes
+              Discard
             </Button>
             <Button className="rounded-3xl text-white" type="submit">
-              {isloading ? <Loader size={6} /> : "Save Changes"}
+              {isloading ? <Loader size={6} /> : "Save"}
             </Button>
           </div>
         )}

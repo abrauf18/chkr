@@ -199,7 +199,7 @@ const SideBar = ({
             </div>
           ))}
         </div>
-        <div
+        {/* <div
           className={clsx(
             "flex w-full absolute xl:bottom-10 bottom-6",
             !open && "justify-center items-center"
@@ -208,7 +208,7 @@ const SideBar = ({
           <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-full hover:animate-bounce cursor-pointer">
             <CircleHelp />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

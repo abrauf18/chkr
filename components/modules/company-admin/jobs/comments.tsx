@@ -9,6 +9,7 @@ export interface CommentProps {
     last_name: string;
     picture: string;
     email: string;
+    role: string;
   };
 }
 
@@ -30,7 +31,11 @@ const Comment: React.FC<CommentProps> = ({ message, createdAt, user }) => {
           />
           <span>{message}</span>
         </div>
-        <div className="bg-[#748AFE] px-4 py-1 rounded-2xl h-1/2 text-white">
+        <div
+          className={`px-4 py-1 rounded-2xl h-1/2 text-white ${
+            user.role === "company-admin" ? "bg-slate-500" : "bg-[#748AFE]"
+          }`}
+        >
           {user?.first_name}
         </div>
       </div>

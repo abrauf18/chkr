@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
           className="rounded-3xl text-white bg-primary px-6"
           onClick={() => document.getElementById("fileInput")!.click()}
         >
-          Upload Photo
+          Upload
         </Button>
         <input
           id="fileInput"

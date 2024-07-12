@@ -35,6 +35,7 @@ const useJobStore = create(
         service_id: "",
         description: "",
         selected_users: [],
+        loading: false,
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
       setJobData: (data: Partial<Jobs>) => {
@@ -58,6 +59,7 @@ const useJobStore = create(
             service_id: "",
             description: "",
             selected_users: [],
+            loading: false,
           },
         }),
     }),

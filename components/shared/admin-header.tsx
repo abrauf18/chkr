@@ -13,6 +13,7 @@ interface AdminHeaderProps {
   isSuperAdmin: boolean;
   page?: "addEmployee" | "createJob"; // Add a page prop to specify the current page
   searchParams?: { [key: string]: string };
+  hideFilter?: boolean;
 }
 
 const AdminHeader: React.FC<AdminHeaderProps> = ({
@@ -20,6 +21,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
   isAdmin,
   isSuperAdmin,
   page,
+  hideFilter,
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleModal = () => {
@@ -31,7 +33,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
         <h1 className="text-xl font-bold">{title}</h1>
       </div>
       <div className="flex items-center gap-2 mobile:mt-2 md:mt-2 lg:mt-0 justify-end mobile:justify-start w-full">
-        <Filter searchParams={{ order: "", sort: "" }} />
+        {!hideFilter && <Filter searchParams={{ order: "", sort: "" }} />}
         {isSuperAdmin && <AddAdmin />}
         {isAdmin && page === "addEmployee" && <AddEmployee />}
         {isAdmin && page === "createJob" && (

@@ -227,13 +227,13 @@ const PersonalInformation = ({
             {
               "bg-primary text-white":
                 hasChanges || currentImage !== userData.picture,
-              "bg-gray-200 text-gray-700":
+              "bg-gray-100 text-gray-700":
                 !hasChanges || currentImage === userData.picture,
             }
           )}
           disabled={currentImage === userData.picture && !hasChanges}
         >
-          {isloading ? <Loader size={6} /> : "Save Changes"}
+          {isloading ? <Loader size={6} /> : "Save"}
         </button>
       </div>
     </form>

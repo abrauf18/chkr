@@ -14,9 +14,9 @@ export default async function EmployeesLayout({
 }) {
   return (
     <main>
-      <DashboardHeader title="" />
+      <DashboardHeader title="Employees" />
       <AdminHeader
-        title="Employees"
+        title="All Employees"
         isAdmin={true}
         isSuperAdmin={false}
         page="addEmployee"

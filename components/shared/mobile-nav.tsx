@@ -148,6 +148,7 @@ const MobileNav = () => {
 
   const handleClick = (path: string) => {
     setActivePath(path);
+    setSidebarOpen(!sidebarOpen);
   };
 
   const toggleSidebar = () => {
@@ -182,23 +183,23 @@ const MobileNav = () => {
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 w-full ${
+            className={`z-10 absolute top-28 w-1/2 ml-4 ${
               sidebarOpen ? "block" : "hidden"
             }`}
             id="navbar-cta"
           >
-            <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
-              <li className="mt-6 mb-10">
+            <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-xl bg-white shadow-2xl">
+              {/* <li className="mt-6 mb-10">
                 <SidebarLogo />
-              </li>
+              </li> */}
               {list.map((item) => (
                 <div key={item.path}>
                   <Link href={item.path}>
                     <div
                       className={clsx(
-                        "flex items-center w-full h-12 rounded-3xl px-4",
-                        activePath === item.path && "bg-white text-primary",
-                        activePath !== item.path && "text-white"
+                        "flex items-center w-44 h-12 rounded-3xl px-4",
+                        activePath === item.path && "bg-black text-white",
+                        activePath !== item.path && "text-black"
                       )}
                       onClick={() => handleClick(item.path)}
                     >
@@ -208,9 +209,9 @@ const MobileNav = () => {
                   </Link>
                 </div>
               ))}
-              <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
+              {/* <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
                 <CircleHelp color="white" />
-              </div>
+              </div> */}
             </ul>
           </div>
         </div>
