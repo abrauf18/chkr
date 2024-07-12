@@ -113,8 +113,8 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center">
-            <Location className="h-6 w-6" />
-            <span className="font-semibold text-lg text-gray-700 ml-2">
+            <Location className="md::h-6 md:w-6 w-10 h-10" />
+            <span className="font-semibold text-lg mobile:text-base text-gray-700 ml-2">
               {location.name}
             </span>
           </div>
@@ -164,8 +164,8 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             </span>
           </div>
         </div>
-        <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
-          <span className="font-bold text-sm lg:text-lg">
+        <div className="flex flex-col whitespace-nowrap mr-4 mt-1 mobile:mb-4">
+          <span className="font-bold text-lg">
             {currentTab === "cancelled" ? "Rejected By:" : "Assigned To:"}
           </span>
           <div className="flex gap-2 mt-2 relative">

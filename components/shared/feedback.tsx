@@ -19,7 +19,7 @@ export default function Feedback() {
           <span className="text-gray-800">Submit Feedback</span>
         </div>
       </DialogTrigger>
-      <DialogContent className="bg-white mobile:max-w-[90%] md:max-w-[60%] max-h-[80vh] overflow-y-auto overflow-x-auto rounded-lg">
+      <DialogContent className="bg-white mobile:max-w-[90%] md:max-w-[80%] max-h-[80vh] overflow-y-auto overflow-x-auto rounded-lg">
         <DialogHeader>
           <DialogTitle>
             Submit your feedback

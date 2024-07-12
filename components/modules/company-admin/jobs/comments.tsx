@@ -32,8 +32,8 @@ const Comment: React.FC<CommentProps> = ({ message, createdAt, user }) => {
           <span>{message}</span>
         </div>
         <div
-          className={`px-4 py-1 rounded-2xl h-1/2 text-white bg-${
-            user.role === "company-admin" ? "slate-500" : "[#748AFE]"
+          className={`px-4 py-1 rounded-2xl h-1/2 text-white ${
+            user.role === "company-admin" ? "bg-slate-500" : "bg-[#748AFE]"
           }`}
         >
           {user?.first_name}
