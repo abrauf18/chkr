@@ -1,7 +1,5 @@
 {
     "extends": [
-        "next",
-        "airbnb",
         "airbnb/hooks",
         "eslint:recommended",
         "next/core-web-vitals",
