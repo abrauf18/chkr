@@ -168,6 +168,7 @@ export default function CreateJob({
 
   const onSubmit = async (data: any) => {
     try {
+      methods.setValue("loading", true);
       if (jobId) {
         // Update existing job
         const result = await UpdateJobAction(jobId, data);

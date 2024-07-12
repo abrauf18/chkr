@@ -54,19 +54,20 @@ export default function OnboardingSteps() {
     defaultValues: onboardingData,
   });
   const onSubmit = async (data: Onboarding) => {
-    const formData = new FormData();
-    formData.set("company_name", data["company-name"]),
-      formData.set("firm_id", data["company-type"]),
-      formData.set("phone_number", data["phone-number"]),
-      formData.set("location", data.location),
-      formData.set("country", data.country),
-      formData.set("plan_id", data.plan);
-
-    const logoFileList = data.logo;
-    if (logoFileList instanceof FileList && logoFileList.length > 0) {
-      formData.set("file", logoFileList[0]);
-    }
     try {
+      methods.setValue("loading", true);
+      const formData = new FormData();
+      formData.set("company_name", data["company-name"]),
+        formData.set("firm_id", data["company-type"]),
+        formData.set("phone_number", data["phone-number"]),
+        formData.set("location", data.location),
+        formData.set("country", data.country),
+        formData.set("plan_id", data.plan);
+
+      const logoFileList = data.logo;
+      if (logoFileList instanceof FileList && logoFileList.length > 0) {
+        formData.set("file", logoFileList[0]);
+      }
       const result = await OnboardingAction(formData);
       if (result.statusCode === 201) {
         toast.success(result.message);

@@ -29,6 +29,7 @@ export const OnboardingSchema = z.object({
   location: z.string().min(1, { message: "Location must not be empty" }),
   country: z.string().min(1, { message: "Country must not be empty" }),
   plan: z.string().min(1, { message: "Plan must not be empty" }),
+  loading: z.boolean(),
 });
 
 export type Onboarding = z.infer<typeof OnboardingSchema>;
@@ -173,6 +174,7 @@ export const JobSchema = z
     description: z
       .string()
       .min(1, { message: "Description must not be empty" }),
+    loading: z.boolean(),
     selected_users: z
       .array(
         z.object({

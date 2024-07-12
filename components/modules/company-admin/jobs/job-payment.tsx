@@ -7,6 +7,7 @@ import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { ErrorMessage } from "@hookform/error-message";
 import { Users } from "@/lib/interfaces";
+import Loader from "@/components/shared/loader";
 
 export default function JobPayment({
   handlePreviousStep,
@@ -96,8 +97,9 @@ export default function JobPayment({
           id="create-job-form"
           className="flex items-center text-white justify-center w-32 my-5 gap-2 float-right mr-5 bg-primary rounded-full cursor-pointer"
           type="submit"
+          disabled={watch("loading")}
         >
-          Continue
+          {watch("loading") ? <Loader size={6} /> : "Continue"}
           <ArrowRight color="white" size={15} />
         </Button>
       </div>

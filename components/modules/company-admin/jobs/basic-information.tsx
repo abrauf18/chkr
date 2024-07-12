@@ -152,7 +152,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
           Phone Number
         </Label>
         <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 z-20">
             <Phone color="#636363" className="h-4 w-4" />
           </span>
           <Input
