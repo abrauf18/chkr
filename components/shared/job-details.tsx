@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MessageSchema } from "@/lib/types";
 import { ErrorMessage } from "@hookform/error-message";
+import { format } from "date-fns";
 
 export default function JobDetails({
   jobId,
@@ -68,6 +69,13 @@ export default function JobDetails({
     };
     fetchData();
   }, [jobId, isAdmin]);
+
+  const priceToPay = jobDetails?.assigned_jobs.reduce(
+    (total: number, job: { price: number }) => {
+      return total + job.price;
+    },
+    0
+  ); // Initial value of 0
 
   const fetchComments = async () => {
     try {
@@ -174,7 +182,7 @@ export default function JobDetails({
               <span className="font-bold md:text-lg">Date & Time:</span>
               {isAdmin && (
                 <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-                  {new Date(jobDetails?.date_time).toLocaleString()}
+                  {format(jobDetails?.date_time, "dd MMMM yyyy, h:mm a")}
                 </span>
               )}
               {!isAdmin && (
@@ -197,7 +205,7 @@ export default function JobDetails({
               )}
             </div>
             <div className="flex flex-col text-sm whitespace-nowrap">
-              <span className="font-bold md:text-lg">To Pay:</span>
+              <span className="font-bold md:text-lg">Total Price</span>
               {isAdmin && (
                 <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
                   $ {jobDetails?.price}
@@ -206,6 +214,14 @@ export default function JobDetails({
               {!isAdmin && (
                 <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
                   $ {UserJobDetails?.price}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col text-sm whitespace-nowrap">
+              <span className="font-bold md:text-lg">To Pay:</span>
+              {isAdmin && (
+                <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
+                  $ {priceToPay}
                 </span>
               )}
             </div>

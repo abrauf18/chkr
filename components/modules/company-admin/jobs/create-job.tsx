@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CirclePlus, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { format, parseISO } from "date-fns";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import CreateJobFirstStep from "./basic-information";
 import CreateJobSecondStep from "./description";
@@ -17,13 +17,27 @@ import useJobStore, { Steps } from "@/store/job-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { JobSchema } from "@/lib/types";
-import { CreateJobAction } from "@/actions/jobs/job-action";
+import {
+  CreateJobAction,
+  GetJobByIDAction,
+  UpdateJobAction,
+} from "@/actions/jobs/job-action";
 import { toast } from "react-toastify";
 import action from "@/app/action";
+import Loader from "@/components/shared/loader";
 
-export default function CreateJob() {
+export default function CreateJob({
+  jobId,
+  open,
+  onClose,
+}: {
+  jobId?: number;
+  open: boolean;
+  onClose: any;
+}) {
   const { currentStep, setCurrentStep, jobData, removeCreateJobData } =
     useJobStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const methods = useForm({
     resolver: zodResolver(JobSchema),
@@ -31,6 +45,46 @@ export default function CreateJob() {
     reValidateMode: "onChange",
     defaultValues: jobData,
   });
+
+  useEffect(() => {
+    if (jobId) {
+      const fetchJobData = async () => {
+        try {
+          setIsLoading(true);
+          methods.reset();
+          removeCreateJobData();
+          const companyData = await GetJobByIDAction(jobId);
+          const parsedDate = parseISO(companyData.date_time);
+          const formattedDateString = format(parsedDate, "yyyy-MM-dd'T'HH:mm");
+          const formattedAssignedJobs = companyData.assigned_jobs.map(
+            (assignedJob: any) => ({
+              id: assignedJob.user.id,
+              first_name: assignedJob.user.first_name,
+              last_name: assignedJob.user.last_name,
+              picture: assignedJob.user.picture,
+              price: assignedJob.price,
+            })
+          );
+          methods.setValue("customer_name", companyData.customer_name);
+          methods.setValue("price", companyData.price);
+          methods.setValue("phone_number", companyData.phone_number);
+          methods.setValue("date_time", formattedDateString.toUpperCase());
+          methods.setValue("location", companyData.location);
+          methods.setValue(
+            "service_id",
+            companyData.service_id.toString() as string
+          );
+          methods.setValue("description", companyData.description);
+          methods.setValue("selected_users", formattedAssignedJobs);
+        } catch (error) {
+          console.error("Error fetching job data:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchJobData();
+    }
+  }, []);
 
   const { handleSubmit } = methods;
 
@@ -114,16 +168,29 @@ export default function CreateJob() {
 
   const onSubmit = async (data: any) => {
     try {
-      const result = await CreateJobAction(data);
-      if (result && result.statusCode === 201) {
-        action("getJobs");
-        return toast.success(result.message);
+      if (jobId) {
+        // Update existing job
+        const result = await UpdateJobAction(jobId, data);
+        console.log(result);
+        if (result && result.statusCode === 200) {
+          action("getJobs");
+          toast.success(result.message);
+        } else {
+          toast.error(result?.message || "Failed to update job.");
+        }
       } else {
-        return toast.error(result?.message);
+        // Create new job
+        const result = await CreateJobAction(data);
+        if (result && result.statusCode === 201) {
+          action("getJobs");
+          toast.success(result.message);
+        } else {
+          toast.error(result?.message || "Failed to create job.");
+        }
       }
     } catch (error) {
-      console.error("Error creating job:", error);
-      toast.error("An error occurred while creating the job.");
+      console.error("Error:", error);
+      toast.error("An error occurred while processing the request.");
     } finally {
       await methods.reset();
       removeCreateJobData();
@@ -132,13 +199,7 @@ export default function CreateJob() {
 
   return (
     <>
-      <Dialog>
-        <DialogTrigger>
-          <div className="flex items-center rounded-3xl gap-1 text-white bg-primary p-3 whitespace-nowrap">
-            <CirclePlus className="h-5" />
-            Create new Job
-          </div>
-        </DialogTrigger>
+      <Dialog open={open} onOpenChange={onClose}>
         <DialogContent
           className="bg-white md:max-w-[65%] xl:max-w-[50%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -159,13 +220,19 @@ export default function CreateJob() {
               </div>
               <hr className="my-6" />
             </DialogTitle>
-            <DialogDescription className="text-black">
-              <FormProvider {...methods}>
-                <form id="create-job-form" onSubmit={handleSubmit(onSubmit)}>
-                  {renderStep()}
-                </form>
-              </FormProvider>
-            </DialogDescription>
+            {isLoading ? (
+              <div className="flex items-center justify-center h-96">
+                <Loader />
+              </div>
+            ) : (
+              <DialogDescription className="text-black">
+                <FormProvider {...methods}>
+                  <form id="create-job-form" onSubmit={handleSubmit(onSubmit)}>
+                    {renderStep()}
+                  </form>
+                </FormProvider>
+              </DialogDescription>
+            )}
           </DialogHeader>
         </DialogContent>
       </Dialog>

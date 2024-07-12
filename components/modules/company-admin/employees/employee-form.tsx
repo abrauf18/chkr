@@ -232,7 +232,7 @@ export default function EmployeeForm({
             >
               Discard Changes
             </Button>
-            <Button className="rounded-3xl text-white" type="submit">
+            <Button className="w-32 rounded-3xl text-white" type="submit">
               {isloading ? <Loader size={6} /> : "Save Changes"}
             </Button>
           </div>

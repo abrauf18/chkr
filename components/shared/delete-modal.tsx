@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DeleteIcon from "@/assets/icons/delete-icon";
@@ -26,11 +25,10 @@ export default function DeleteModal({
 }: {
   userId: number;
   jobId?: number;
-  companyId: number;
+  companyId?: number;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  console.log(companyId);
   const handleDelete = async () => {
     try {
       let data;
@@ -41,7 +39,7 @@ export default function DeleteModal({
         data = await DeleteJobAction(jobId || 0);
         await action("getJobs");
       } else if (pathname.startsWith("/super-admin/companies")) {
-        data = await DeleteCompanyAction(companyId);
+        data = await DeleteCompanyAction(companyId || 0);
         toast.success(data.message);
         location.reload();
       }

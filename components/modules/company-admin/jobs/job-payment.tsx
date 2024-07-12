@@ -18,9 +18,16 @@ export default function JobPayment({
   const {
     setValue,
     watch,
+    register,
     formState: { errors },
   } = useFormContext();
   const users = watch("selected_users");
+
+  const getPrice = (id: number) => {
+    // Find the user with the matching id
+    const user = users.find((user: any) => user.id === id);
+    return user ? user.price : null;
+  };
 
   const handleChange = (user: Users, e: any) => {
     const list = users.map((u: any) => {
@@ -71,6 +78,7 @@ export default function JobPayment({
                       className="pl-10 bg-[#F9F8F8]"
                       id="amount"
                       type="text"
+                      value={getPrice(user.id)}
                       placeholder="Enter amount"
                       onChange={(e) => handleChange(user, e)}
                     />
@@ -84,12 +92,14 @@ export default function JobPayment({
               <hr />
             </div>
           ))}
-        <div className="flex items-center text-white justify-center w-32 my-5 gap-2 float-right mr-5 bg-primary rounded-full cursor-pointer">
-          <Button id="create-job-form" className="!p-0" type="submit">
-            Continue
-          </Button>
+        <Button
+          id="create-job-form"
+          className="flex items-center text-white justify-center w-32 my-5 gap-2 float-right mr-5 bg-primary rounded-full cursor-pointer"
+          type="submit"
+        >
+          Continue
           <ArrowRight color="white" size={15} />
-        </div>
+        </Button>
       </div>
     </>
   );

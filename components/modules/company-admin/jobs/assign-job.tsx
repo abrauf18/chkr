@@ -3,14 +3,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Calendar, ChevronDown, Search } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -26,6 +18,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { SearchUserAction, UsersAction } from "@/actions/users/user-actions";
 import { Users } from "@/lib/interfaces";
 import { useStateDebounced } from "@/hooks/use-state-debounced";
+import Loader from "@/components/shared/loader";
 
 export default function AssignJob({
   handleNextStep,
@@ -42,13 +35,17 @@ export default function AssignJob({
   } = useFormContext<Record<string, any>>();
 
   const [employees, setEmployees] = useState<Users[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchEmployees = async () => {
     try {
+      setIsLoading(true);
       const response = await UsersAction({ order: "", sort: "" });
       setEmployees(response);
     } catch (error) {
       console.error("Error fetching services:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -144,97 +141,53 @@ export default function AssignJob({
         <ErrorMessage errors={errors} name="selected_users" />
       </p>
       <div className="overflow-y-auto max-h-[400px] mt-1 border-2 rounded-xl ">
-        {employees.map((employees, index) => (
-          <>
-            <div
-              key={employees.id}
-              className={`px-4 ${
-                index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
-              }`}
-            >
-              <div className="flex justify-between py-2 px-4">
-                <div className="flex justify-center items-center">
-                  <input
-                    className="custom-check"
-                    type="checkbox"
-                    onChange={() => handleChange(employees)}
-                    checked={isUserSelected(employees.id)}
-                    value={employees.first_name}
-                  />
-                  <div className="ml-10 mr-2 rounded-full">
-                    <Image
-                      src={employees?.picture as string}
-                      alt="user"
-                      width={30}
-                      height={30}
-                      className="rounded-full"
-                    />
-                  </div>
-                  <span className="font-semibold whitespace-nowrap">
-                    {employees.first_name} {employees.last_name}
-                  </span>
-                </div>
-                <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
-                  <div className="rounded-full h-2 w-2 bg-primary"></div>
-                  <span className="font-medium text-sm">{employees.email}</span>
-                </div>
-              </div>
-              <hr />
-            </div>
-          </>
-        ))}
-
-        {/* <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Select</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="whitespace-nowrap">
-              {employees.map((employee, index) => (
-                <TableRow
-                  key={employee.id}
-                  className={
-                    index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
-                  }
-                >
-                  <TableCell className="text-center">
+        {isLoading ? (
+          <div className="flex items-center justify-center h-44">
+            <Loader />
+          </div>
+        ) : (
+          employees.map((employees, index) => (
+            <>
+              <div
+                key={employees.id}
+                className={`px-4 ${
+                  index % 4 === 1 || index % 4 === 3 ? "bg-gray-100" : ""
+                }`}
+              >
+                <div className="flex justify-between py-2 px-4">
+                  <div className="flex justify-center items-center">
                     <input
                       className="custom-check"
                       type="checkbox"
-                      onChange={() => handleChange(employee)}
-                      checked={isUserSelected(employee.id)}
-                      value={employee.first_name}
+                      onChange={() => handleChange(employees)}
+                      checked={isUserSelected(employees.id)}
+                      value={employees.first_name}
                     />
-                  </TableCell>
-                  <TableCell className="flex items-center gap-1">
-                    <Image
-                      src={employee?.picture as string}
-                      alt="user"
-                      width={30}
-                      height={30}
-                      className="rounded-full w-8 h-8"
-                    />
-                    <span className="font-semibold whitespace-nowrap">
-                      {employee.first_name} {employee.last_name}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
-                      <div className="rounded-full h-2 w-2 bg-primary"></div>
-                      <span className="font-medium text-sm">
-                        {employee.email}
-                      </span>
+                    <div className="ml-10 mr-2 rounded-full">
+                      <Image
+                        src={employees?.picture as string}
+                        alt="user"
+                        width={30}
+                        height={30}
+                        className="rounded-full"
+                      />
                     </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div> */}
+                    <span className="font-semibold whitespace-nowrap">
+                      {employees.first_name} {employees.last_name}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-center my-3 py-1 px-2 rounded-lg border-2 gap-2">
+                    <div className="rounded-full h-2 w-2 bg-primary"></div>
+                    <span className="font-medium text-sm">
+                      {employees.email}
+                    </span>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            </>
+          ))
+        )}
 
         <Pagination className="px-4 py-2">
           <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />

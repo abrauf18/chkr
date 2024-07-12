@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import {
   Pagination,
@@ -8,17 +9,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import AdminHeader from "@/components/shared/admin-header";
-import dynamic from "next/dynamic";
-import { SkeletonLoader } from "@/components/shared/skeleton-loader";
+import AssignedJobCard from "../dashboard/assigned-job-card";
 
-const AssignedJobCard = dynamic(
-  () => import("../dashboard/assigned-job-card"),
-  {
-    ssr: false,
-    loading: () => <SkeletonLoader />,
-  }
-);
 const ITEMS_PER_PAGE = 3;
 
 interface JobsProps {
@@ -49,14 +41,14 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
 
   const filterJobsByStatus = (status: string) => {
     if (status === "rejected") {
-      return jobs.filter((job) =>
+      return jobs.filter((job: any) =>
         job.assigned_jobs.some(
           (assignedJob: { request_status: string }) =>
             assignedJob.request_status === status
         )
       );
     } else {
-      return jobs.filter((job) => job.status === status);
+      return jobs.filter((job: any) => job.status === status);
     }
   };
 
@@ -80,40 +72,32 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
   return (
     <div className="flex flex-col w-full">
       {!isDashboard && (
-        <>
-          <AdminHeader
-            title="All Jobs"
-            isAdmin={true}
-            isSuperAdmin={false}
-            page="createJob"
-          />
-          <div className="flex gap-2 items-center my-3 w-full mx-auto">
-            {tabData.map((tab) => (
-              <div
-                key={tab.id}
-                onClick={() => handleTabClick(tab.id)}
-                className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-primary border-b-2 border-primary"
-                    : ""
-                } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
-              >
-                {activeTab === tab.id && (
-                  <div className="rounded-full w-2 h-2 bg-primary" />
-                )}
-                <div>
-                  <span
-                    className={`whitespace-nowrap mobile:text-sm ${
-                      activeTab === tab.id ? "font-bold" : "font-medium"
-                    } `}
-                  >
-                    {tab.text}
-                  </span>
-                </div>
+        <div className="flex gap-2 items-center my-3 w-full mx-auto">
+          {tabData.map((tab) => (
+            <div
+              key={tab.id}
+              onClick={() => handleTabClick(tab.id)}
+              className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
+                activeTab === tab.id
+                  ? "bg-primary border-b-2 border-primary"
+                  : ""
+              } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
+            >
+              {activeTab === tab.id && (
+                <div className="rounded-full w-2 h-2 bg-primary" />
+              )}
+              <div>
+                <span
+                  className={`whitespace-nowrap mobile:text-sm ${
+                    activeTab === tab.id ? "font-bold" : "font-medium"
+                  } `}
+                >
+                  {tab.text}
+                </span>
               </div>
-            ))}
-          </div>
-        </>
+            </div>
+          ))}
+        </div>
       )}
       {activeTabData.length === 0 ? (
         <p className="text-center text-gray-700 mt-6">No jobs to show</p>
@@ -141,7 +125,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
           ))}
         </div>
       )}
-      {activeTabData.length > 0 && (
+      {activeTabData.length > 3 && !isDashboard && (
         <Pagination className="bg-white my-6 rounded-xl p-4">
           <PaginationContent>
             <PaginationItem>

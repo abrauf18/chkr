@@ -180,7 +180,6 @@ export const JobSchema = z
           first_name: z.string(),
           last_name: z.string(),
           picture: z.string(),
-          // status: z.string(),
           price: z.number().optional(),
         })
       )

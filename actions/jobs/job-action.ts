@@ -48,6 +48,30 @@ export const CreateJobAction = async (data: JobsInterface) => {
   return result;
 };
 
+export const UpdateJobAction = async (jobId: number, data: JobsInterface) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/${jobId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify({
+        ...data,
+        service_id: +data.service_id,
+      }),
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+
 export const GetJobsAction = async () => {
   const session = await auth();
   const response = await fetch(

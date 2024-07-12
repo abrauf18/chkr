@@ -4,6 +4,9 @@ import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
 import ShowJobDetails from "../../../shared/show-job-details";
 import DeleteModal from "../../../shared/delete-modal";
+import CreateJob from "../jobs/create-job";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { format } from "date-fns";
 
 interface AssignedJobCardProps {
   id: number;
@@ -39,6 +42,11 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   assignedUsers,
   currentTab,
 }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   const displayEmployeeName = () => {
     if (currentTab === "cancelled") {
       const rejectedUsers = assignedUsers.filter(
@@ -104,7 +112,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   };
 
   return (
-    <div className="mt-4 bg-white rounded-3xl p-4 shadow-xl">
+    <div className="mt-6 bg-white rounded-3xl p-4 shadow-xl">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
@@ -117,9 +125,18 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
-            <span>{status}</span>
+            <span>{status?.charAt(0).toUpperCase() + status?.slice(1)}</span>
           </div>
-          <EditIcon />
+          <Dialog>
+            <DialogTrigger asChild>
+              <div className="cursor-pointer" onClick={toggleModal}>
+                <EditIcon />
+              </div>
+            </DialogTrigger>
+          </Dialog>
+          {isOpen && (
+            <CreateJob open={isOpen} onClose={toggleModal} jobId={id} />
+          )}
           <DeleteModal userId={id} jobId={id} />
           <ShowJobDetails jobId={id} />
         </div>
@@ -135,7 +152,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {new Date(date_time).toLocaleString()}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -145,7 +162,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
-            <span className="font-bold md:text-lg">To Pay:</span>
+            <span className="font-bold md:text-lg">Total Price:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base ">
               $ {price} USD
             </span>

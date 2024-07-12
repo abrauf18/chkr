@@ -18,7 +18,7 @@ const page = async () => {
           session?.user?.firstName + " " + session?.user?.lastName
         }!`}
       />
-      <Header title="Dashboard" />
+      <Header title="Dashboard" hideFilter />
     </>
   );
 };
