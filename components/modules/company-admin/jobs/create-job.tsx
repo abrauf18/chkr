@@ -171,7 +171,6 @@ export default function CreateJob({
       if (jobId) {
         // Update existing job
         const result = await UpdateJobAction(jobId, data);
-        console.log(result);
         if (result && result.statusCode === 200) {
           action("getJobs");
           toast.success(result.message);

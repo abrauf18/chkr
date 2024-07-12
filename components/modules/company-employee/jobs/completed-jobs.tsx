@@ -62,23 +62,25 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
               price={job.price}
             />
           ))}
-          <Pagination className="bg-white my-6 rounded-xl p-4">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious onClick={handlePreviousPage} />
-              </PaginationItem>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationItem key={index + 1}>
-                  <PaginationLink onClick={() => handleClickPage(index + 1)}>
-                    {index + 1}
-                  </PaginationLink>
+          {paginatedData?.length > itemsPerPage && (
+            <Pagination className="bg-white my-6 rounded-xl p-4">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={handlePreviousPage} />
                 </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext onClick={handleNextPage} />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <PaginationItem key={index + 1}>
+                    <PaginationLink onClick={() => handleClickPage(index + 1)}>
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext onClick={handleNextPage} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       )}
     </>

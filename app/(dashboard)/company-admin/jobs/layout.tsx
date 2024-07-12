@@ -14,7 +14,7 @@ export default async function JobsLayout({
 }) {
   return (
     <main>
-      <DashboardHeader title="" />
+      <DashboardHeader title="Company Jobs" />
       <AdminHeader
         title="All Jobs"
         isAdmin={true}

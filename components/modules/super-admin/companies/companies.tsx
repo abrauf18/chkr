@@ -28,7 +28,7 @@ const Companies: React.FC = () => {
 
   return (
     <>
-      <Header title="List of Companies Onboarded" />
+      <Header title="List of Companies Onboarded" hideFilter />
       {data?.length == 0 ? (
         <div className="text-center mt-16">No companies to display</div>
       ) : (

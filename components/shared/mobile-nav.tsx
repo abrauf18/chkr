@@ -19,10 +19,13 @@ import {
 } from "lucide-react";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import UserOptions from "./user-options";
+import { useSession } from "next-auth/react";
 
 const MobileNav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePath, setActivePath] = useState("/company-admin/dashboard");
+  const { data: sessionData } = useSession();
+  const data: any = sessionData;
   const pathname = usePathname();
   useEffect(() => {
     setActivePath(pathname);
@@ -168,10 +171,14 @@ const MobileNav = () => {
               </button>
             </div>
             <div className="flex gap-2 justify-center items-center">
-              <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
+              {/* <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
-              </div>
-              {/* <UserOptions /> */}
+              </div> */}
+              <UserOptions
+                name={data?.user?.firstName}
+                role={data?.user?.role}
+                picture={data?.user?.picture}
+              />
             </div>
           </div>
           <div

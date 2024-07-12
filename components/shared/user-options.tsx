@@ -42,7 +42,7 @@ export default function UserOptions({
               className="rounded-full max-w-12 max-h-12"
             />
           </div>
-          <div className="flex flex-col mx-3 text-left mobile:hidden">
+          <div className="flex flex-col mx-3 text-left">
             <h1 className="text-sm lg:text-base whitespace-nowrap">{name}</h1>
             <p className="text-sm text-gray-500">
               {role === "admin" ? role : userRole}

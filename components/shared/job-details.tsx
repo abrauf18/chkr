@@ -34,6 +34,7 @@ export default function JobDetails({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(MessageSchema),
@@ -124,6 +125,7 @@ export default function JobDetails({
       toast.error("An error occurred while creating commenting.");
     } finally {
       setText("");
+      reset();
     }
   };
 
@@ -217,14 +219,14 @@ export default function JobDetails({
                 </span>
               )}
             </div>
-            <div className="flex flex-col text-sm whitespace-nowrap">
-              <span className="font-bold md:text-lg">To Pay:</span>
-              {isAdmin && (
+            {isAdmin && (
+              <div className="flex flex-col text-sm whitespace-nowrap">
+                <span className="font-bold md:text-lg">To Pay:</span>
                 <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
                   $ {priceToPay}
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           <div className="flex flex-col gap-3 text-left">
             <span className="font-bold text-lg">Map Direction</span>

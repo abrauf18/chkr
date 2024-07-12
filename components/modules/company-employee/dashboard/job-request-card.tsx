@@ -40,7 +40,7 @@ const JobRequestCard: React.FC<CardProps> = ({
       };
       const result = await JobRequestAction(data);
       if (result.statusCode === 200) {
-        await action("GetUserJobs");
+        action("GetUserJobs");
         return toast.success(result.message);
       } else {
         return toast.error(result.message);

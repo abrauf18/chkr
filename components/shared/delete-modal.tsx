@@ -37,13 +37,12 @@ export default function DeleteModal({
         await action("DeleteUser");
       } else if (pathname.startsWith("/company-admin")) {
         data = await DeleteJobAction(jobId || 0);
-        await action("getJobs");
+        action("getJobs");
       } else if (pathname.startsWith("/super-admin/companies")) {
         data = await DeleteCompanyAction(companyId || 0);
         toast.success(data.message);
         location.reload();
       }
-      console.log("Delete action result:", data);
       setOpen(false);
     } catch (error) {
       console.error("Failed to delete:", error);

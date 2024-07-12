@@ -10,6 +10,7 @@ import {
   BuildingIcon,
   ChevronDown,
   Phone,
+  MapPin,
 } from "lucide-react";
 import { SettingsCompanyInfoSchema, SettingsCompany } from "@/lib/types";
 import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action";
@@ -265,7 +266,7 @@ export default function CompanyInformation({
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-              <MapPinned />
+              <MapPin />
             </span>
             <input
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none"

@@ -12,7 +12,7 @@ interface Feedbacks {
       company_name: string;
     };
   };
-  rating: string;
+  rating: number;
 }
 
 import React, { useEffect, useState } from "react";
@@ -81,6 +81,7 @@ function Carousel({ feedbacks }: { feedbacks: Feedbacks[] }) {
                   feedback={slide.comment}
                   companyName={slide.user.company.company_name}
                   picture={slide.user.picture}
+                  rating={slide.rating}
                 />
               </div>
             ))}

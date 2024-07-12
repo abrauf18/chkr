@@ -70,7 +70,7 @@ const JobRequests: React.FC<JobRequestsProps> = ({ jobs, isDashboard }) => {
               />
             ))}
           </div>
-          {!isDashboard && (
+          {!isDashboard && paginatedData?.length > itemsPerPage && (
             <Pagination className="bg-white my-6 rounded-xl p-4">
               <PaginationContent>
                 <PaginationItem>

@@ -26,15 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <AnalyticsPage />
       </Suspense>
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-96">
-            <Loader />
-          </div>
-        }
-      >
-        <JobsPage isDashboard />
-      </Suspense>
+      <JobsPage isDashboard />
     </>
   );
 }

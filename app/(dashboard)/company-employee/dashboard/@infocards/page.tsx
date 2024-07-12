@@ -22,7 +22,7 @@ const InfoCardPage = () => {
               <h1 className="font-bold text-3xl lg:text-2xl text-gray-700 whitespace-nowrap">
                 $ 120.8K
               </h1>
-              <p className="text-gray-400 text-xl mobile:whitespace-nowrap">
+              <p className="text-gray-400 text-xl whitespace-nowrap">
                 Total Earnings
               </p>
             </div>

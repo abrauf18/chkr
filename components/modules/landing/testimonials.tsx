@@ -37,7 +37,7 @@ const Testimonials = async () => {
           <Carousel feedbacks={feedbacks} />
         ) : (
           <div className="flex items-start justify-center text-xl text-primary">
-            No Feedbacks to show
+            No Feedback to show
           </div>
         )}
       </div>

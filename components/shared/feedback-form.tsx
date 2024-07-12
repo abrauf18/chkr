@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FeedbackSchema } from "@/lib/types";
 import { ErrorMessage } from "@hookform/error-message";
-import { FeedbackInterface } from "@/lib/interfaces";
 import { CreateFeedbackAction } from "@/actions/feedback/feedback-action";
 import { toast } from "react-toastify";
 

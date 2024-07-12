@@ -61,7 +61,7 @@ const Feedback: React.FC = () => {
 
   return (
     <>
-      <Header title="Manage Customers Feedback" />
+      <Header title="Manage Customers Feedback" hideFilter />
       {isLoading ? (
         <div className="flex items-center justify-center h-96">
           <Loader />

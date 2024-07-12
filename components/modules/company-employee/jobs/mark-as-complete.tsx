@@ -73,7 +73,7 @@ export default function MarkAsComplete({ jobID }: MarkAsCompleteProps) {
               Cancel
             </Button>
             <Button
-              className="bg-green-500 text-white rounded-3xl hover:bg-green-500"
+              className="bg-green-500 text-white rounded-3xl hover:bg-green-700"
               onClick={handleMarkComplete}
             >
               Mark as Complete
