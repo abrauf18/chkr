@@ -20,6 +20,7 @@ export default async function JobsLayout({
         isAdmin={true}
         isSuperAdmin={false}
         page="createJob"
+        hideFilter
       />
       {children}
     </main>

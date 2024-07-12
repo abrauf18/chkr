@@ -75,44 +75,40 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   };
 
   const displayUserImages = () => {
+    let usersToDisplay = [];
+
     if (currentTab === "cancelled") {
-      const rejectedUsers = assignedUsers.filter(
+      usersToDisplay = assignedUsers.filter(
         (user) => user.request_status === "rejected"
       );
-      return rejectedUsers
-        .slice(0, 2)
-        .map((user, index) => (
-          <Image
-            key={index}
-            src={user.picture || "/images/user.jpeg"}
-            alt="user-image"
-            height={33}
-            width={33}
-            className={`rounded-full w-10 h-10 absolute ${
-              index === 0 ? "left-2" : "left-6"
-            }`}
-          />
-        ));
     } else {
-      return assignedUsers
-        .slice(0, 2)
-        .map((user, index) => (
-          <Image
-            key={index}
-            src={user.picture || "/images/user.jpeg"}
-            alt="user-image"
-            height={33}
-            width={33}
-            className={`rounded-full w-10 h-10 absolute ${
-              index === 0 ? "left-2" : "left-6"
-            }`}
-          />
-        ));
+      usersToDisplay = assignedUsers;
     }
+
+    const userCount = usersToDisplay.length;
+
+    return (
+      <>
+        {userCount > 0 && (
+          <Image
+            src={usersToDisplay[0].picture || "/images/user.jpeg"}
+            alt="user-image"
+            height={30}
+            width={30}
+            className="rounded-full w-10 h-10 absolute left-2"
+          />
+        )}
+        {userCount > 1 && (
+          <div className="rounded-full w-10 h-10 absolute left-6 bg-gray-200 flex items-center justify-center">
+            <span className="text-sm">+{userCount - 1}</span>
+          </div>
+        )}
+      </>
+    );
   };
 
   return (
-    <div className="mt-6 bg-white rounded-3xl p-4 shadow-xl">
+    <div className="mb-6 bg-white rounded-3xl p-4 shadow-xl">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
           <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
@@ -172,7 +168,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <span className="font-bold text-sm lg:text-lg">
             {currentTab === "cancelled" ? "Rejected By:" : "Assigned To:"}
           </span>
-          <div className="flex mt-2 relative">
+          <div className="flex gap-2 mt-2 relative">
             {displayUserImages()}
             <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
               {displayEmployeeName()}

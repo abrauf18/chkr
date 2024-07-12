@@ -48,9 +48,7 @@ export default function UserOptions({
           </div>
           <div className="flex flex-col mx-3 text-left">
             <h1 className="text-sm lg:text-base whitespace-nowrap">{name}</h1>
-            <p className="text-sm text-gray-500">
-              {role === "admin" ? role : userRole}
-            </p>
+            <p className="text-sm text-gray-500">{userRole}</p>
           </div>
           {!open && <ChevronDown className="w-4 h-4" />}
           {open && <ChevronUp className="w-4 h-4" />}
