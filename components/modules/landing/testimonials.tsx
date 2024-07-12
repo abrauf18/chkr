@@ -1,10 +1,12 @@
 import React from "react";
 import Carousel from "./carousel";
 import Image from "next/image";
+import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 
-const Testimonials = () => {
+const Testimonials = async () => {
+  const feedbacks = await GetAllFeedbacksAction();
   return (
-    <div id="testimonials" className="mb-12 rounded-2xl relative -z-10">
+    <div id="testimonials" className="rounded-2xl relative -z-10">
       <div className="absolute top-0 right-0 z-50">
         <Image
           src="/images/testimonial-header.svg"
@@ -19,7 +21,7 @@ const Testimonials = () => {
         className="w-full px-8 h-full pt-2 pb-12 rounded-2xl "
         style={{
           background:
-            "linear-gradient(to bottom, #FF4115 0%, #FBEB97 40%, #F9F8F8 100%, #FFFFFF 60%)",
+            "linear-gradient(to top, hsl(0deg 0% 100%) 0%, rgb(255, 65, 21) 100%, rgb(249, 248, 248) 100%, rgb(255, 255, 255) 0%)",
         }}
       >
         <div className="flex flex-col text-white mt-16 lg:mb-20 mb-12 lg:mx-2 mx-5 gap-6">
@@ -31,7 +33,13 @@ const Testimonials = () => {
             customers.
           </p>
         </div>
-        <Carousel />
+        {feedbacks.length > 0 ? (
+          <Carousel feedbacks={feedbacks} />
+        ) : (
+          <div className="flex items-start justify-center text-xl text-primary">
+            No Feedback to show
+          </div>
+        )}
       </div>
     </div>
   );

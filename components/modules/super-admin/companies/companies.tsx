@@ -1,115 +1,55 @@
-import React from 'react';
-import CompanyCard from './company-card';
-import DashboardHeader from '@/components/shared/dashboard-header';
-import CompanyHeader from './company-header';
-import Header from '@/components/shared/header';
+"use client";
+import React from "react";
+import Header from "@/components/shared/header";
+import CompanyCard from "./company-card";
+import { useCompanyData } from "./companydata-context";
+import Loader from "@/components/shared/loader";
 
-const recentlyAddedCompanies = [
-  {
-    companyName: "Upyr Ltd",
-    companyType: "Startup Agency",
-    description: "Lorem ipsum dolor sit amet, Curabitur tempus ac leo eget luctus. Integer et odio id nisi.",
-    subscriptionPlan: "Monthly Subscription Plan",
-    location: "Singapore",
-    staffCount: 3
-  },
-  {
-    companyName: "Tech Solutions",
-    companyType: "Tech Company",
-    description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-    subscriptionPlan: "Annual Subscription Plan",
-    location: "USA",
-    staffCount: 10
+const Companies: React.FC = () => {
+  const { data, loading, error } = useCompanyData();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <Loader />
+      </div>
+    );
   }
-];
 
-const allCompanies = [
-  {
-    companyName: "Upyr Ltd",
-    companyType: "Startup Agency",
-    description: "Lorem ipsum dolor sit amet, Curabitur tempus ac leo eget luctus. Integer et odio id nisi.",
-    subscriptionPlan: "Monthly Subscription Plan",
-    location: "Singapore",
-    staffCount: 3
-  },
-  {
-    companyName: "Tech Solutions",
-    companyType: "Tech Company",
-    description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-    subscriptionPlan: "Annual Subscription Plan",
-    location: "USA",
-    staffCount: 10
-  },
-  {
-    companyName: "Green Energy",
-    companyType: "Energy Solutions",
-    description: "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.",
-    subscriptionPlan: "Annual Subscription Plan",
-    location: "Germany",
-    staffCount: 20
-  },
-  {
-    companyName: "Healthcare Inc.",
-    companyType: "Healthcare Provider",
-    description: "Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.",
-    subscriptionPlan: "Monthly Subscription Plan",
-    location: "Tokyo",
-    staffCount: 15
-  },
-  {
-    companyName: "EduTech",
-    companyType: "Educational Technology",
-    description: "Etiam porta sem malesuada magna mollis euismod.",
-    subscriptionPlan: "Annual Subscription Plan",
-    location: "San Francisco",
-    staffCount: 25
-  },
-  {
-    companyName: "FinCorp",
-    companyType: "Financial Services",
-    description: "Nullam id dolor id nibh ultricies vehicula ut id elit.",
-    subscriptionPlan: "Monthly Subscription Plan",
-    location: "UK",
-    staffCount: 40
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
-];
 
-export default function Companies() {
+  const sortedCompanies = data?.sort(
+    (a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+  );
+
+  const recentlyAddedCompanies = sortedCompanies?.slice(0, 2);
+
   return (
     <>
-      <DashboardHeader title='Companies' />
-      <CompanyHeader title='List of Companies Onboarded' />
-      <div className="flex flex-col gap-4 my-8">
-        <h1>Recently added</h1>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-          {recentlyAddedCompanies.map((company, index) => (
-            <CompanyCard
-              key={index}
-              companyName={company.companyName}
-              companyType={company.companyType}
-              description={company.description}
-              subscriptionPlan={company.subscriptionPlan}
-              location={company.location}
-              staffCount={company.staffCount}
-            />
-          ))}
+      <Header title="List of Companies Onboarded" hideFilter />
+      {data?.length == 0 ? (
+        <div className="text-center mt-16">No companies to display</div>
+      ) : (
+        <div className="flex flex-col gap-4 my-8">
+          <h1>Recently added</h1>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+            {recentlyAddedCompanies?.map((company) => (
+              <CompanyCard key={company.id} {...company} />
+            ))}
+          </div>
+          <h1>All Companies</h1>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+            {data?.map((company) => (
+              <CompanyCard key={company.id} {...company} />
+            ))}
+          </div>
         </div>
-
-        <h1>All Companies</h1>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-          {allCompanies.map((company, index) => (
-            <CompanyCard
-              key={index}
-              companyName={company.companyName}
-              companyType={company.companyType}
-              description={company.description}
-              subscriptionPlan={company.subscriptionPlan}
-              location={company.location}
-              staffCount={company.staffCount}
-            />
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
-}
+};
+
+export default Companies;
+

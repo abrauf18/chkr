@@ -17,14 +17,15 @@ import {
   Receipt,
   Timer,
 } from "lucide-react";
-import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import UserOptions from "./user-options";
-import ChkrLogo from "@/assets/icons/chkr-logo";
+import { useSession } from "next-auth/react";
 
 const MobileNav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePath, setActivePath] = useState("/company-admin/dashboard");
+  const { data: sessionData } = useSession();
+  const data: any = sessionData;
   const pathname = usePathname();
   useEffect(() => {
     setActivePath(pathname);
@@ -147,8 +148,8 @@ const MobileNav = () => {
 
   const handleClick = (path: string) => {
     setActivePath(path);
+    setSidebarOpen(!sidebarOpen);
   };
-
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -171,29 +172,34 @@ const MobileNav = () => {
               </button>
             </div>
             <div className="flex gap-2 justify-center items-center">
-              <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
+              {/* <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
-              </div>
-              <UserOptions/>
+              </div> */}
+              <UserOptions
+                name={data?.user?.firstName}
+                role={data?.user?.role}
+                picture={data?.user?.picture}
+              />
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 w-full ${sidebarOpen ? "block" : "hidden"
-              }`}
+            className={`z-10 absolute top-28 w-1/2 ml-4 ${
+              sidebarOpen ? "block" : "hidden"
+            }`}
             id="navbar-cta"
           >
-            <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
-              <li className="mt-6 mb-10">
+            <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-xl bg-white shadow-2xl">
+              {/* <li className="mt-6 mb-10">
                 <SidebarLogo />
-              </li>
+              </li> */}
               {list.map((item) => (
                 <div key={item.path}>
                   <Link href={item.path}>
                     <div
                       className={clsx(
-                        "flex items-center w-full h-12 rounded-3xl px-4",
-                        activePath === item.path && "bg-white text-primary",
-                        activePath !== item.path && "text-white"
+                        "flex items-center w-44 h-12 rounded-3xl px-4",
+                        activePath === item.path && "bg-black text-white",
+                        activePath !== item.path && "text-black"
                       )}
                       onClick={() => handleClick(item.path)}
                     >
@@ -203,9 +209,9 @@ const MobileNav = () => {
                   </Link>
                 </div>
               ))}
-              <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
+              {/* <div className="flex items-center justify-center w-12 h-12 p-2 bg-primary rounded-full hover:animate-bounce cursor-pointer mt-10">
                 <CircleHelp color="white" />
-              </div>
+              </div> */}
             </ul>
           </div>
         </div>
@@ -215,3 +221,4 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+

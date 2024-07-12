@@ -1,7 +1,6 @@
 "use client";
+
 import React, { useState } from "react";
-import AssignedJobCard from "../dashboard/assigned-job-card";
-import DashboardHeader from "@/components/shared/dashboard-header";
 import {
   Pagination,
   PaginationContent,
@@ -10,14 +9,22 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import AdminHeader from "@/components/shared/admin-header";
+import AssignedJobCard from "../dashboard/assigned-job-card";
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 3;
 
-const Jobs = () => {
+interface JobsProps {
+  jobs: any[];
+  isDashboard?: boolean;
+}
+
+const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
+  if (typeof window !== "undefined" && isDashboard) {
+    window.localStorage.removeItem("onboarding-store");
+  }
+
   const [activeTab, setActiveTab] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
     setCurrentPage(1);
@@ -32,178 +39,124 @@ const Jobs = () => {
     return data.slice(startIndex, startIndex + itemsPerPage);
   };
 
-  const allJobsData = [
-    {
-      userName: "Guy Hawkins",
-      location: "4140 Parker Rd. Allentown, New Mexico 31134",
-      status: "Checked-in",
-      phoneNumber: "(603) 555-0123",
-      dateTime: "15 March 2023 7:00 pm",
-      service: "Room Cleaning",
-      payment: "230.00",
-      employeeName: "Ralph Edwards",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Albert Flores",
-      location: "2972 Westheimer Rd. Santa Ana, Illinois 85486 ",
-      status: "Checked-out",
-      phoneNumber: "(603) 555-0123",
-      dateTime: "24 May 2024 8:00 pm",
-      service: "Room Cleaning",
-      payment: "260.00",
-      employeeName: "Roy Edwards",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
+  const filterJobsByStatus = (status: string) => {
+    if (status === "rejected") {
+      return jobs.filter((job: any) =>
+        job.assigned_jobs.some(
+          (assignedJob: { request_status: string }) =>
+            assignedJob.request_status === status
+        )
+      );
+    } else {
+      return jobs.filter((job: any) => job.status === status);
+    }
+  };
 
-  const ongoingJobsData = [
-    {
-      userName: "John Doe",
-      location: "1234 Elm St. Springfield, IL 62701",
-      status: "Ongoing",
-      phoneNumber: "(123) 456-7890",
-      dateTime: "25 May 2024 9:00 am",
-      service: "House Cleaning",
-      payment: "150.00",
-      employeeName: "Jane Smith",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
-
-  const pendingJobsData = [
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
-
-  const cancelledJobsData = [
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-    {
-      userName: "Jane Smith",
-      location: "5678 Oak St. Springfield, IL 62702",
-      status: "Ongoing",
-      phoneNumber: "(987) 654-3210",
-      dateTime: "25 May 2024 10:00 am",
-      service: "Office Cleaning",
-      payment: "200.00",
-      employeeName: "John Doe",
-      imageurl: "/images/user.jpeg",
-    },
-  ];
+  const allJobs = jobs;
+  const ongoingJobs = filterJobsByStatus("ongoing");
+  const completedJobs = filterJobsByStatus("completed");
+  const cancelledJobs = filterJobsByStatus("rejected");
 
   const tabData = [
-    { id: 1, text: "All Jobs", content: allJobsData },
-    { id: 2, text: "Ongoing", content: ongoingJobsData },
-    { id: 3, text: "Pending", content: pendingJobsData },
-    { id: 4, text: "Cancelled", content: cancelledJobsData },
+    { id: 1, text: "All Jobs", content: allJobs },
+    { id: 2, text: "Ongoing", content: ongoingJobs },
+    { id: 3, text: "Completed", content: completedJobs },
+    { id: 4, text: "Cancelled", content: cancelledJobs },
   ];
 
-  const activeTabData = tabData.find((tab) => tab.id === activeTab)?.content || [];
+  const activeTabData =
+    tabData.find((tab) => tab.id === activeTab)?.content || [];
   const paginatedData = paginate(activeTabData, currentPage, ITEMS_PER_PAGE);
   const totalPages = Math.ceil(activeTabData.length / ITEMS_PER_PAGE);
 
   return (
     <div className="flex flex-col w-full">
-      <DashboardHeader title="" />
-      <AdminHeader title="All Jobs" isAdmin={true} isSuperAdmin={false} page="createJob" />
-      <div className="flex gap-2 items-center my-3 w-full mx-auto">
-        {tabData.map((tab) => (
-          <div
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${activeTab === tab.id ? "bg-primary border-b-2 border-primary" : ""
+      {!isDashboard && (
+        <div className="flex gap-2 items-center my-3 w-full mx-auto">
+          {tabData.map((tab) => (
+            <div
+              key={tab.id}
+              onClick={() => handleTabClick(tab.id)}
+              className={`flex items-center bg-white rounded-2xl py-2 px-6 gap-2 cursor-pointer ${
+                activeTab === tab.id
+                  ? "bg-primary border-b-2 border-primary"
+                  : ""
               } ${tab.text === "Cancelled" ? "mobile:hidden" : ""}`}
-          >
-             {activeTab === tab.id && (
-              <div className="rounded-full w-2 h-2 bg-primary" />
-            )}
-            <div>
-              <span
-                className={`whitespace-nowrap mobile:text-sm ${activeTab === tab.id ? "font-bold" : "font-medium"
+            >
+              {activeTab === tab.id && (
+                <div className="rounded-full w-2 h-2 bg-primary" />
+              )}
+              <div>
+                <span
+                  className={`whitespace-nowrap mobile:text-sm ${
+                    activeTab === tab.id ? "font-bold" : "font-medium"
                   } `}
-              >
-                {tab.text}
-              </span>
+                >
+                  {tab.text}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div>
-        {paginatedData.map((jobData, index) => (
-          <AssignedJobCard
-            key={index}
-            userName={jobData.userName}
-            location={jobData.location}
-            status={jobData.status}
-            phoneNumber={jobData.phoneNumber}
-            dateTime={jobData.dateTime}
-            service={jobData.service}
-            payment={jobData.payment}
-            employeeName={jobData.employeeName}
-            imageurl={jobData.imageurl}
-          />
-        ))}
-      </div>
-      <Pagination className="bg-white my-6 rounded-xl p-4">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <PaginationItem key={i + 1}>
-              <PaginationLink onClick={() => handlePageChange(i + 1)}>
-                {i + 1}
-              </PaginationLink>
-            </PaginationItem>
           ))}
-          <PaginationItem>
-            <PaginationNext onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+        </div>
+      )}
+      {activeTabData.length === 0 ? (
+        <p className="text-center text-gray-700 mt-6">No jobs to show</p>
+      ) : (
+        <div>
+          {paginatedData.map((job, index) => (
+            <AssignedJobCard
+              key={index}
+              id={job.id}
+              customer_name={job.customer_name}
+              location={job.location}
+              status={job.status}
+              phone_number={job.phone_number}
+              date_time={job.date_time}
+              service={job.service.service_name}
+              price={job.price}
+              assignedUsers={job.assigned_jobs.map(
+                (assignedJob: { user: any; request_status: string }) => ({
+                  ...assignedJob.user,
+                  request_status: assignedJob.request_status,
+                })
+              )}
+              currentTab={tabData[activeTab - 1].text.toLowerCase()}
+            />
+          ))}
+        </div>
+      )}
+      {activeTabData.length > 3 && !isDashboard && (
+        <Pagination className="bg-white my-6 rounded-xl p-4">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() =>
+                  handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+                }
+              />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i + 1}>
+                <PaginationLink onClick={() => handlePageChange(i + 1)}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                onClick={() =>
+                  handlePageChange(
+                    currentPage < totalPages ? currentPage + 1 : totalPages
+                  )
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };
 
 export default Jobs;
+

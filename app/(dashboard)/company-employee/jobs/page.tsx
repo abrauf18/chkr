@@ -1,7 +1,13 @@
-import JobDetails from '@/components/shared/job-details'
-import MyJobs from '@/components/modules/company-employee/jobs/my-jobs'
-import React from 'react'
+import React from "react";
+import DashboardHeader from "@/components/shared/dashboard-header";
+import JobsPage from "../dashboard/@jobs/page";
 
-export default function page() {
-  return <MyJobs />
+export default async function page() {
+  return (
+    <>
+      <DashboardHeader title="My Jobs" />
+      {<JobsPage />}
+    </>
+  );
 }
+

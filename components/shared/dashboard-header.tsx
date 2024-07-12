@@ -1,25 +1,35 @@
-import React from 'react';
-import { Bell, ChevronDown } from 'lucide-react';
-import UserOptions from './user-options';
+import React from "react";
+import { Bell } from "lucide-react";
+import UserOptions from "./user-options";
+import { auth } from "@/auth";
 
-// Interface to define the type of props accepted by the component
 interface DashboardHeaderProps {
   title: string; // Type is string to ensure a valid title
 }
 
-export default function DashboardHeader({ title }: DashboardHeaderProps) {
+export default async function DashboardHeader({ title }: DashboardHeaderProps) {
+  const session: any = await auth();
   return (
     <>
-      <div className='flex w-full justify-between items-center mt-3'>
-        <div className='md:w-[60%]'><h1 className='text-xl xl:text-3xl font-bold'>{title}</h1></div>
-        <div className='flex mobile:hidden items-center gap-3 md:w-[40%] justify-end'>
-          <div className='flex justify-center items-center bg-white rounded-full h-14 w-14'>
+      <div className="flex w-full justify-between items-center mt-3">
+        <div className="md:w-[60%]">
+          <h1 className="text-xl xl:text-3xl font-bold">{title}</h1>
+        </div>
+        <div className="flex mobile:hidden items-center gap-3 md:w-[40%] justify-end">
+          {/* <div className="flex justify-center items-center bg-white rounded-full h-14 w-14">
             <Bell />
-          </div>
-          <UserOptions/>
+          </div> */}
+          {session.user && (
+            <UserOptions
+              name={session.user.firstName}
+              role={session.user.role}
+              picture={session.user.picture}
+            />
+          )}
         </div>
       </div>
-      <hr className='mt-2' />
+      <hr className="mt-2" />
     </>
   );
 }
+

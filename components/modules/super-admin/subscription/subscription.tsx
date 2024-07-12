@@ -1,10 +1,9 @@
-import React from 'react'
-import UsersSummaryCard from './users-summary-card'
-import CompaniesSummaryCard from './companies-summary-card';
-import SubscriptionList from './subscription-list';
-import DashboardHeader from '@/components/shared/dashboard-header';
-import Header from '@/components/shared/header';
-import Stripe from '@/components/shared/stripe';
+import React from "react";
+import UsersSummaryCard from "./users-summary-card";
+import CompaniesSummaryCard from "./companies-summary-card";
+import SubscriptionList from "./subscription-list";
+import Header from "@/components/shared/header";
+import Stripe from "@/components/shared/stripe";
 
 export default function Subscription() {
   const userSummaryData = [
@@ -19,9 +18,8 @@ export default function Subscription() {
 
   return (
     <>
-      <div className='flex flex-col gap-4'>
-        <DashboardHeader title='Payments' />
-        <h1 className='text-xl'>Subscription Summary</h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl mt-4">Subscription Summary</h1>
         <div className="grid gap-6 lg:grid-cols-4 md:grid-cols-2">
           <div className="lg:col-span-1">
             <UsersSummaryCard {...userSummaryData[0]} />
@@ -34,9 +32,10 @@ export default function Subscription() {
             <CompaniesSummaryCard {...companySummaryData[1]} />
           </div>
         </div>
-        <Header title='Transaction Summary' />
+        <Header title="Transaction Summary" />
         <SubscriptionList />
       </div>
     </>
   );
 }
+

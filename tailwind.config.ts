@@ -19,7 +19,8 @@ const config = {
       padding: "2rem",
     },
     screens: {
-      mobile: { "max": "767px" },
+      mobile: { max: "767px" },
+      tablet: { min: "768px", max: "1023px" },
       xs: "400px",
       ...defaultTheme.screens,
     },
@@ -87,3 +88,4 @@ const config = {
 } satisfies Config;
 
 export default config;
+

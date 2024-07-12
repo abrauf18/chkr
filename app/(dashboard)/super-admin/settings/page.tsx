@@ -1,8 +1,31 @@
+import { UserInfoAction } from "@/actions/settings/settings-action";
+import DashboardHeader from "@/components/shared/dashboard-header";
+import Loader from "@/components/shared/loader";
 import Settings from "@/components/shared/settings";
-import React from "react";
+import { Metadata } from "next";
+import React, { Suspense } from "react";
 
-const SettingsPage = () => {
-  return <Settings />;
+export const metadata: Metadata = {
+  title: "Settings",
+  description: "Manage your profile settings on CHKR",
+};
+
+const SettingsPage = async () => {
+  const data = await UserInfoAction();
+  return (
+    <>
+      <DashboardHeader title="Profile" />
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-96">
+            <Loader />
+          </div>
+        }
+      >
+        <Settings data={data} />{" "}
+      </Suspense>
+    </>
+  );
 };
 
 export default SettingsPage;

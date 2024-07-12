@@ -1,15 +1,15 @@
-import React from 'react'
-import AdminTable from './admin-table'
-import DashboardHeader from '@/components/shared/dashboard-header'
-import AddAdmin from './add-admin'
-import AdminHeader from '../../../shared/admin-header'
+import React from "react";
+import AdminTable from "./admin-table";
+import { Users } from "@/lib/interfaces";
 
-export default function Admins() {
+export default function Admins({ admins }: { admins: Users[] }) {
+  if (admins?.length === 0) {
+    return <p className="text-center mt-16">No Admins to show</p>;
+  }
   return (
     <div>
-      <DashboardHeader title='Manage Admins' />
-      <AdminHeader title='Admins' isAdmin={false} isSuperAdmin={true} />
-      <AdminTable />
+      <AdminTable admins={admins} />
     </div>
-  )
+  );
 }
+

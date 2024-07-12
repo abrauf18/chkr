@@ -15,7 +15,7 @@ interface JobStore {
   jobData: Jobs;
   setCurrentStep: (step: string) => void;
   setJobData: (data: Partial<Jobs>) => void;
-  removeOnboardingData: () => void;
+  removeCreateJobData: () => void;
 }
 
 const useJobStore = create(
@@ -23,14 +23,19 @@ const useJobStore = create(
     (set) => ({
       currentStep: Steps.Create_Job_First_Step,
       jobData: {
-        "customer-name": "",
-        payment: 0,
-        "phone-number": "",
-        "date-time": "",
-        location: "",
-        service: "",
+        customer_name: "",
+        price: 0,
+        phone_number: "",
+        date_time: "",
+        location: {
+          name: "",
+          lat: 0,
+          lng: 0,
+        },
+        service_id: "",
         description: "",
-        selectedUsers: [],
+        selected_users: [],
+        loading: false,
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
       setJobData: (data: Partial<Jobs>) => {
@@ -38,18 +43,23 @@ const useJobStore = create(
           jobData: { ...state.jobData, ...data },
         }));
       },
-      removeOnboardingData: () =>
+      removeCreateJobData: () =>
         set({
           currentStep: Steps.Create_Job_First_Step,
           jobData: {
-            "customer-name": "",
-            payment: 0,
-            "phone-number": "",
-            "date-time": "",
-            location: "",
-            service: "",
+            customer_name: "",
+            price: 0,
+            phone_number: "",
+            date_time: "",
+            location: {
+              name: "",
+              lat: 0,
+              lng: 0,
+            },
+            service_id: "",
             description: "",
-            selectedUsers: [],
+            selected_users: [],
+            loading: false,
           },
         }),
     }),

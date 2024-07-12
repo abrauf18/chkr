@@ -2,58 +2,139 @@ import React from "react";
 import Image from "next/image";
 import Location from "@/assets/icons/location-icon";
 import EditIcon from "@/assets/icons/edit-icon";
-import DeleteIcon from "@/assets/icons/delete-icon";
 import ShowJobDetails from "../../../shared/show-job-details";
-import DeleteModal from "../../super-admin/admins/delete-modal";
+import DeleteModal from "../../../shared/delete-modal";
+import CreateJob from "../jobs/create-job";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { format } from "date-fns";
 
 interface AssignedJobCardProps {
-  userName: string;
-  location: string;
+  id: number;
+  customer_name: string;
+  location: {
+    name: string;
+    lat: number;
+    lng: number;
+  };
   status: string;
-  phoneNumber: string;
-  dateTime: string;
+  phone_number: string;
+  date_time: string;
   service: string;
-  payment: string;
-  employeeName: string;
-  imageurl: string;
+  price: number;
+  assignedUsers: Array<{
+    first_name: string;
+    last_name: string;
+    picture: string;
+    request_status: string;
+  }>;
+  currentTab: string;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
-  userName,
+  id,
+  customer_name,
   location,
   status,
-  phoneNumber,
-  dateTime,
+  phone_number,
+  date_time,
   service,
-  payment,
-  employeeName,
-  imageurl,
+  price,
+  assignedUsers,
+  currentTab,
 }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const displayEmployeeName = () => {
+    if (currentTab === "cancelled") {
+      const rejectedUsers = assignedUsers.filter(
+        (user) => user.request_status === "rejected"
+      );
+      if (rejectedUsers.length === 1) {
+        return `${rejectedUsers[0].first_name} ${rejectedUsers[0].last_name}`;
+      } else if (rejectedUsers.length > 1) {
+        return `${rejectedUsers[0].first_name} ${
+          rejectedUsers[0].last_name
+        } & ${rejectedUsers.length - 1} more`;
+      } else {
+        return "Unassigned";
+      }
+    }
+
+    if (assignedUsers.length > 1) {
+      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name} & ${
+        assignedUsers.length - 1
+      } more`;
+    } else if (assignedUsers.length === 1) {
+      return `${assignedUsers[0].first_name} ${assignedUsers[0].last_name}`;
+    } else {
+      return "Unassigned";
+    }
+  };
+
+  const displayUserImages = () => {
+    let usersToDisplay = [];
+
+    if (currentTab === "cancelled") {
+      usersToDisplay = assignedUsers.filter(
+        (user) => user.request_status === "rejected"
+      );
+    } else {
+      usersToDisplay = assignedUsers;
+    }
+
+    const userCount = usersToDisplay.length;
+
+    return (
+      <>
+        {userCount > 0 && (
+          <Image
+            src={usersToDisplay[0].picture || "/images/user.jpeg"}
+            alt="user-image"
+            height={30}
+            width={30}
+            className="rounded-full w-10 h-10 absolute left-2"
+          />
+        )}
+        {userCount > 1 && (
+          <div className="rounded-full w-10 h-10 absolute left-6 bg-gray-200 flex items-center justify-center">
+            <span className="text-sm">+{userCount - 1}</span>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
-    <div className="mt-4 bg-white rounded-3xl p-4">
+    <div className="mb-6 bg-white rounded-3xl p-4 shadow-xl">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
-          <h1 className="font-bold text-xl mb-3">{userName}</h1>
+          <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center">
-            <Location className="h-6 w-6" />
-            <span className="font-semibold text-lg text-gray-700 ml-2">
-              {location}
+            <Location className="md::h-6 md:w-6 w-10 h-10" />
+            <span className="font-semibold text-lg mobile:text-base text-gray-700 ml-2">
+              {location.name}
             </span>
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
-            {status.toLowerCase() === "checked-in" && (
-              <div className="bg-primary rounded-full h-2 w-2 mr-2"></div>
-            )}
-            {status.toLowerCase() === "checked-out" && (
-              <div className="bg-[#748afe] rounded-full h-2 w-2 mr-2"></div>
-            )}
-            <span>{status}</span>
+            <span>{status?.charAt(0).toUpperCase() + status?.slice(1)}</span>
           </div>
-          <EditIcon />
-          <DeleteModal/>
-          <ShowJobDetails />
+          <Dialog>
+            <DialogTrigger asChild>
+              <div className="cursor-pointer" onClick={toggleModal}>
+                <EditIcon />
+              </div>
+            </DialogTrigger>
+          </Dialog>
+          {isOpen && (
+            <CreateJob open={isOpen} onClose={toggleModal} jobId={id} />
+          )}
+          <DeleteModal userId={id} jobId={id} />
+          <ShowJobDetails jobId={id} />
         </div>
       </div>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
@@ -61,13 +142,13 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Phone number:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {phoneNumber}
+              {phone_number}
             </span>
           </div>
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {dateTime}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -77,24 +158,20 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
-            <span className="font-bold md:text-lg">To Pay:</span>
+            <span className="font-bold md:text-lg">Total Price:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base ">
-              $ {payment} USD
+              $ {price} USD
             </span>
           </div>
         </div>
-        <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
-          <span className="font-bold text-sm lg:text-lg">Assigned To:</span>
-          <div className="flex mt-2">
-            <Image
-              src={imageurl}
-              alt="user-image"
-              height={6}
-              width={6}
-              className="rounded-full h-10 w-10"
-            />
-            <span className="mt-2 ml-2 font-semibold text-sm  text-[#232324]">
-              {employeeName}
+        <div className="flex flex-col whitespace-nowrap mr-4 mt-1 mobile:mb-4">
+          <span className="font-bold text-lg">
+            {currentTab === "cancelled" ? "Rejected By:" : "Assigned To:"}
+          </span>
+          <div className="flex gap-2 mt-2 relative">
+            {displayUserImages()}
+            <span className="mt-2 ml-20 font-semibold text-sm text-[#232324]">
+              {displayEmployeeName()}
             </span>
           </div>
         </div>
@@ -104,3 +181,4 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
 };
 
 export default AssignedJobCard;
+

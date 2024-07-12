@@ -1,39 +1,69 @@
+"use client";
+import React from "react";
+import { JobRequestAction } from "@/actions/jobs/job-action";
 import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { toast } from "react-toastify";
+import action from "@/app/action";
+import { format } from "date-fns";
 
 interface CardProps {
-  name: string;
-  address: string;
-  zipCode: string;
-  dateTime: string;
+  job_id: number;
+  customer_name: string;
+  location: {
+    name: string;
+    lat: number;
+    lng: number;
+  };
+  description: string;
+  status: string;
+  date_time: string;
   service: string;
-  paymentStatus: string;
-  amount: string;
+  price: number;
 }
 
 const JobRequestCard: React.FC<CardProps> = ({
-  name,
-  address,
-  zipCode,
-  dateTime,
+  job_id,
+  customer_name,
+  location,
+  description,
+  status,
+  date_time,
   service,
-  paymentStatus,
-  amount,
+  price,
 }) => {
+  const handleClick = async (accept: boolean) => {
+    try {
+      const data = {
+        job_request: accept,
+        job_id,
+      };
+      const result = await JobRequestAction(data);
+      if (result.statusCode === 200) {
+        action("GetUserJobs");
+        return toast.success(result.message);
+      } else {
+        return toast.error(result.message);
+      }
+    } catch (error) {
+      return toast.error((error as Error)?.message);
+    }
+  };
+
   return (
     <div className="w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden p-6">
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex flex-col">
-          <h1 className="font-bold text-xl mb-3">{name}</h1>
+          <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center gap-2">
-            <MapPinned className="h-5 w-5" />
-            <span className="font-semibold md:text-lg text-gray-700">
-              {address}
+            <MapPinned className="md:h-5 md:w-5 w-10 h-10" />
+            <span className="font-semibold text-base md:text-lg text-gray-700">
+              {location?.name}
               <Link
-                href="#"
-                className="text-primary text-sm md:text-base font-semibold ml-2"
+                href={`https://www.google.com/maps?q=${location?.name}`}
+                target="_blank"
+                className="text-primary text-sm md:text-base font-semibold ml-2 blank"
               >
                 View Direction
               </Link>
@@ -41,31 +71,29 @@ const JobRequestCard: React.FC<CardProps> = ({
           </div>
         </div>
         <div className="flex gap-2 h-3/4 mt-4 xl:mt-0">
-          <Button className="rounded-3xl text-white">Accept</Button>
-          <Button className="rounded-3xl text-black bg-gray-100">
+          <Button
+            className="rounded-3xl text-white"
+            type="button"
+            onClick={() => handleClick(true)}
+          >
+            Accept
+          </Button>
+          <Button
+            className="rounded-3xl text-black bg-gray-100 hover:text-white"
+            type="button"
+            onClick={() => handleClick(false)}
+          >
             Decline
           </Button>
         </div>
       </div>
-      <p className="mt-4 text-base text-gray-600">
-        Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt.
-        Pariatur sint culpa do incididunt eiusmod eiusmod culpa. Laborem tempor
-        Lorem incididunt. Sed fermentum eget velit sit amet sagittis. Sed
-        egestas egestas arcu, quis fermentum justo laoreet non. Maecenas sapien
-        quam, mollis vitae blandit a, blandit vel lectus.
-      </p>
+      <p className="mt-4 text-base text-gray-600">{description}</p>
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap xl:gap-10 gap-4">
-          <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold md:text-lg">Zip Code:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {zipCode}
-            </span>
-          </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {dateTime}
+              {format(date_time, "dd MMMM yyyy, h:mm a")}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -75,15 +103,15 @@ const JobRequestCard: React.FC<CardProps> = ({
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
-            <span className="font-bold md:text-lg">Payment:</span>
-            <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base ">
-              <span className="bg-green-500 w-2 h-2 rounded-full mr-2"></span>
-              {paymentStatus}
+            <span className="font-bold md:text-lg">Status:</span>
+            <div className="bg-gray-100 flex items-center rounded-2xl py-3 px-6 mt-2 md:text-base capitalize">
+              <span className="bg-red-500 w-2 h-2 rounded-full mr-2"></span>
+              {status}
             </div>
           </div>
         </div>
         <div className="flex flex-col whitespace-nowrap mr-4 mt-1">
-          <span className="font-bold text-xl md:text-3xl">${amount} USD</span>
+          <span className="font-bold text-xl md:text-3xl">${price} USD</span>
         </div>
       </div>
     </div>

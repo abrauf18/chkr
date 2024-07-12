@@ -25,7 +25,7 @@ const ChkrLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
         height="46.4"
         rx="1.25405"
         stroke="#232324"
-        stroke-width="0.627027"
+        strokeWidth="0.627027"
       />
       <mask
         id="mask0_651_29331"
@@ -36,8 +36,8 @@ const ChkrLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
         height="32"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M33.7032 10.1455C31.4682 8.98273 28.9195 8.32422 26.2143 8.32422C17.364 8.32422 10.1895 15.3723 10.1895 24.0666C10.1895 32.7609 17.364 39.8091 26.2143 39.8091C28.9195 39.8091 31.4682 39.1506 33.7032 37.9878V28.133C32.2793 30.5223 29.6391 32.127 26.6173 32.127C22.0857 32.127 18.4121 28.5181 18.4121 24.0664C18.4121 19.6147 22.0857 16.0059 26.6173 16.0059C29.6391 16.0059 32.2793 17.6106 33.7032 19.9998V10.1455Z"
           fill="white"
         />

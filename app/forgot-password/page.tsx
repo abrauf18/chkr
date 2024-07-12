@@ -1,6 +1,13 @@
 import ForgetPassword from "@/components/modules/auth/forget-password";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Forgot Password",
+  description:
+    "Forgot your password? Enter your email address and we'll guide you through the recovery process.",
+};
 
 export default function page() {
   return (

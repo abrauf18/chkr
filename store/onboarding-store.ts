@@ -27,6 +27,7 @@ const useOnboardingStore = create(
         location: "",
         country: "",
         plan: "monthly",
+        loading: false,
       },
       setCurrentStep: (step: string) => set({ currentStep: step }),
       setOnboardingData: (data: Partial<Onboarding>) =>
@@ -44,6 +45,7 @@ const useOnboardingStore = create(
             location: "",
             country: "",
             plan: "monthly",
+            loading: false,
           },
         }),
     }),
