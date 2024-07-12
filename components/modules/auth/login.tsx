@@ -28,6 +28,8 @@ export default function Login() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(LoginSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = handleSubmit(async (data) => {
@@ -125,14 +127,14 @@ export default function Login() {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row mt-6 md:items-center justify-between">
-            <label className="inline-flex items-center">
+          <div className="flex flex-col md:flex-row mt-6 md:items-end justify-end">
+            {/* <label className="inline-flex items-center">
               <input
                 type="checkbox"
                 className="form-checkbox accent-primary h-5 w-5"
               />
               <span className="ml-2 text-gray-700">Remember Me</span>
-            </label>
+            </label> */}
             <Link
               className="inline-block align-baseline font-bold text-sm text-primary"
               href="/forgot-password"
@@ -148,7 +150,7 @@ export default function Login() {
               {isloading ? <Loader size={6} /> : "Sign In with Email"}
             </button>
           </div>
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <div className="flex items-center my-4">
               <div className="flex-1">
                 <hr className="line" />
@@ -168,7 +170,7 @@ export default function Login() {
                 Microsoft
               </Button>
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

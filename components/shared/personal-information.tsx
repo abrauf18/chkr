@@ -103,14 +103,13 @@ const PersonalInformation = ({
               ...result?.user,
             },
           });
-          console.log(value);
         }
-        toast.success(result.message);
+        return toast.success(result.message);
       } else {
-        toast.error(result.message);
+        return toast.error(result.message);
       }
     } catch (error) {
-      toast.error("Failed to update user data");
+      return toast.error("Failed to update user data");
     } finally {
       setIsLoading(false);
     }

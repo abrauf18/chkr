@@ -1,6 +1,4 @@
-"use client";
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,27 +8,48 @@ import {
 } from "@/components/ui/dialog";
 import CancelCircle from "@/assets/icons/cancel-circle-half-dot";
 import { Button } from "@/components/ui/button";
-import { Ban } from "lucide-react";
+import { Ban, CirclePlus } from "lucide-react";
+import { DisableCompanyAction } from "@/actions/company/company-action";
+import { toast } from "react-toastify";
+import Loader from "./loader";
 
-export default function DisableModal() {
-  const pathname = usePathname();
-
+export default function DisableModal({
+  isDisable,
+  companyId,
+}: {
+  isDisable?: boolean;
+  companyId: number;
+}) {
+  const [loading, setLoading] = useState(false);
+  const handleConfirm = async () => {
+    setLoading(true);
+    const data = {
+      disable: !isDisable ? true : false,
+      company_id: companyId,
+    };
+    try {
+      const result = await DisableCompanyAction(data);
+      toast.success(result.message);
+      location.reload();
+    } catch (error) {
+      console.error("Failed to disable the company:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger>
-        {pathname === "/super-admin/companies" && (
-          <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
-            <Ban className="w-4 h-4" color="gray" />
-            <span className="text-gray-600">Disable Company</span>
-          </div>
-        )}
-        {pathname === "/super-admin/admins" ? (
-          <div className="bg-orange-100 w-10 h-10 rounded-lg flex items-center justify-center">
-            <Ban color="#ff8a00" className="w-5 h-5" />
-          </div>
-        ) : (
-          <></>
-        )}
+        <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
+          {isDisable ? (
+            <CirclePlus color="gray" className="w-5 h-5" />
+          ) : (
+            <Ban color="gray" className="w-5 h-5" />
+          )}
+          <span className="text-gray-600">
+            {isDisable ? "Enable Company" : "Disable Company"}
+          </span>
+        </div>
       </DialogTrigger>
       <DialogContent className="bg-white md:max-w-1/2 mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
@@ -39,12 +58,15 @@ export default function DisableModal() {
               <CancelCircle />
               <h1 className="text-2xl font-medium text-black">Are you sure?</h1>
               <p className="font-normal text-lg text-center">
-                Do you really want to disable this?
+                Do you really want to {!isDisable ? "disable" : "enable"} this?
               </p>
               <div className="flex w-full justify-between">
                 <Button className="text-white rounded-3xl px-5">Cancel</Button>
-                <Button className="bg-transparent border border-green-500 text-green-500 rounded-3xl px-5">
-                  Confirm
+                <Button
+                  className="w-24 bg-transparent border border-green-500 hover:border-white hover:text-white text-green-500 rounded-3xl px-5"
+                  onClick={handleConfirm}
+                >
+                  {loading ? <Loader size={6} /> : "Confirm"}
                 </Button>
               </div>
             </div>

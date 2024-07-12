@@ -22,33 +22,33 @@ const Company: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
           d="M35 24L37.1494 24.6448C38.5226 25.0568 39.2092 25.2628 39.6046 25.7942C40 26.3256 40 27.0425 40 28.4761V36"
           stroke="white"
           strokeWidth="1.5"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
         <path
           d="M27 23H30M27 27H30"
           stroke="white"
           strokeWidth="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M31 36V33C31 32.0572 31 31.5858 30.7071 31.2929C30.4142 31 29.9428 31 29 31H28C27.0572 31 26.5858 31 26.2929 31.2929C26 31.5858 26 32.0572 26 33V36"
           stroke="white"
           strokeWidth="1.5"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
         <path
           d="M21 36H41"
           stroke="white"
           strokeWidth="1.5"
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
         <path
           d="M22 36V20.7172C22 18.2065 22 16.9511 22.7912 16.3282C23.5824 15.7054 24.7474 16.0436 27.0775 16.7199L32.0775 18.1712C33.4836 18.5794 34.1867 18.7834 34.5933 19.3397C35 19.8959 35 20.6534 35 22.1686V36"
           stroke="white"
           strokeWidth="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
@@ -93,3 +93,4 @@ const Company: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
 };
 
 export default Company;
+

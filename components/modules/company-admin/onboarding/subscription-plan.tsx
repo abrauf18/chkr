@@ -4,9 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { PlanInterface } from "@/lib/interfaces";
-import { OnboardingAction, PlanAction } from "@/actions/onboard/onboard-action";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { PlanAction } from "@/actions/onboard/onboard-action";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -20,9 +18,9 @@ const SubscriptionPlan = ({
     getValues,
     formState: { errors },
   } = useFormContext();
-  const { onboardingData, removeOnboardingData } = useOnboardingStore();
+  const { onboardingData } = useOnboardingStore();
   const [plans, setPlans] = useState<PlanInterface[]>([]);
-  const { push } = useRouter();
+
   useEffect(() => {
     const fetchPlans = async () => {
       try {
@@ -43,54 +41,6 @@ const SubscriptionPlan = ({
     };
     fetchPlans();
   }, []);
-
-  const changeNextStep = async () => {
-    const isValid = await trigger([
-      "company-name",
-      "company-type",
-      "phone-number",
-      "location",
-      "country",
-      "logo",
-      "plan",
-    ]);
-    if (isValid) {
-      const data = getValues([
-        "company-name",
-        "company-type",
-        "phone-number",
-        "location",
-        "country",
-        "logo",
-        "plan",
-      ]);
-
-      const formData = new FormData();
-      formData.set("company_name", data[0]),
-        formData.set("firm_id", data[1]),
-        formData.set("phone_number", data[2]),
-        formData.set("location", data[3]),
-        formData.set("country", data[4]),
-        formData.set("plan_id", data[6]);
-
-      const logoFileList = data[5];
-      if (logoFileList instanceof FileList && logoFileList.length > 0) {
-        formData.set("file", logoFileList[0]);
-      }
-      try {
-        const result = await OnboardingAction(formData);
-        if (result.statusCode === 201) {
-          toast.success(result.message);
-          return push("/company-admin/dashboard");
-        }
-        reset();
-        removeOnboardingData();
-        return toast.error(result.message);
-      } catch (error) {
-        console.error("Error storing company information:", error);
-      }
-    }
-  };
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
@@ -135,7 +85,6 @@ const SubscriptionPlan = ({
           className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
           type="submit"
           id="onboarding-form"
-          onClick={changeNextStep}
         >
           Next
         </button>

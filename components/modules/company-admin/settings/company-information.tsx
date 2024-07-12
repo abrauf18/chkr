@@ -10,6 +10,7 @@ import {
   BuildingIcon,
   ChevronDown,
   Phone,
+  MapPin,
 } from "lucide-react";
 import { SettingsCompanyInfoSchema, SettingsCompany } from "@/lib/types";
 import { CountryAction, FirmsAction } from "@/actions/onboard/onboard-action";
@@ -26,12 +27,14 @@ export default function CompanyInformation({
   currentImage,
 }: {
   companyinfo: {
+    id: number;
     company_name: string;
     firm_name: string;
     phone_number: string;
     location: string;
     country: string;
     company_logo: string;
+    company_admin?: any;
   };
   currentImage: string;
 }) {
@@ -132,8 +135,8 @@ export default function CompanyInformation({
         formData.append(camelToSnakeCase(key), changedFields[key]);
       });
 
-      // Append firm_id instead of companyType
       formData.append("firm_id", firmId.toString());
+      formData.append("admin_id", companyinfo?.company_admin?.id);
 
       if (typeof currentImage !== "string") {
         formData.append("file", currentImage);
@@ -143,6 +146,7 @@ export default function CompanyInformation({
       const result = await EditCompanyInformationAction(formData);
       if (result.statusCode === 200) {
         action("userInfo");
+        action("getCompanies");
         return toast.success(result.message);
       }
       return toast.error(result.message);
@@ -262,7 +266,7 @@ export default function CompanyInformation({
           </Label>
           <div className="relative flex items-center">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
-              <MapPinned />
+              <MapPin />
             </span>
             <input
               className="w-full p-3 pl-10 bg-neutral-100 rounded-2xl focus:outline-none"

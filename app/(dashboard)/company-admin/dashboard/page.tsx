@@ -1,18 +1,24 @@
 import React from "react";
-import Dashboard from "@/components/modules/company-admin/dashboard/Dashboard";
 import { Metadata } from "next";
 import DashboardHeader from "@/components/shared/dashboard-header";
+import Header from "@/components/shared/header";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Manage jobs and employees efficiently.",
 };
 
-const page = () => {
+const page = async () => {
+  const session: any = await auth();
   return (
     <>
-      <DashboardHeader title="Welcome, Ayesha Khan!" />
-      <Dashboard />
+      <DashboardHeader
+        title={`Welcome, ${
+          session?.user?.firstName + " " + session?.user?.lastName
+        }!`}
+      />
+      <Header title="Dashboard" hideFilter />
     </>
   );
 };

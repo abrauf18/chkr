@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -11,20 +11,86 @@ import { ErrorMessage } from "@hookform/error-message";
 import { InviteUserAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/loader";
+import { Users } from "@/lib/interfaces";
+import { EditUserAction } from "@/actions/users/user-actions";
+import action from "@/app/action";
 
-export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
+export default function EmployeeForm({
+  isEdit,
+  currentUser,
+  handleSetState,
+}: {
+  isEdit?: boolean;
+  currentUser?: Users;
+  handleSetState?: (value: boolean) => void;
+}) {
   const [isloading, setIsLoading] = useState(false);
+  const [initialValues, setInitialValues] = useState<any>({});
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EmployeeSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
+
+  const setUserValue = () => {
+    const initialData = {
+      employeeFirstName: currentUser?.first_name,
+      employeeLastName: currentUser?.last_name,
+      email: currentUser?.email,
+      phoneNumber: currentUser?.contact_number,
+    };
+    setValue("employeeFirstName", initialData.employeeFirstName);
+    setValue("employeeLastName", initialData?.employeeLastName);
+    setValue("email", initialData?.email);
+    setValue("phoneNumber", initialData?.phoneNumber);
+    setInitialValues(initialData);
+  };
+  useEffect(() => {
+    if (isEdit && currentUser) {
+      setUserValue();
+    }
+  }, []);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsLoading(true);
+      if (isEdit && currentUser) {
+        const changes: any = {};
+        const currentValues = getValues();
+
+        const fieldMapping: any = {
+          employeeFirstName: "first_name",
+          employeeLastName: "last_name",
+          email: "email",
+          phoneNumber: "contact_number",
+        };
+
+        Object.keys(currentValues).forEach((key) => {
+          const mappedKey = fieldMapping[key];
+          if (currentValues[key] !== initialValues[key]) {
+            changes[mappedKey] = currentValues[key];
+          }
+        });
+
+        if (Object.keys(changes).length === 0) {
+          setIsLoading(false);
+          return toast.error("No changes detected.");
+        }
+
+        const result = await EditUserAction(currentUser.id, changes);
+        if (result.statusCode === 200) {
+          action("allUsers");
+          return toast.success(result.message);
+        }
+        return toast.error(result.message);
+      }
+
       const { employeeFirstName, employeeLastName, email, phoneNumber } = data;
       const result = await InviteUserAction({
         first_name: employeeFirstName,
@@ -33,12 +99,14 @@ export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
         contact_number: phoneNumber,
       });
       if (result.statusCode === 200) {
+        action("allUsers");
         return toast.success(result.message);
       }
       return toast.error(result.message);
     } catch (error) {
       return toast.error((error as Error)?.message);
     } finally {
+      handleSetState && handleSetState(false);
       setIsLoading(false);
     }
   });
@@ -154,10 +222,17 @@ export default function EmployeeForm({ isEdit }: { isEdit?: boolean }) {
         )}
         {isEdit && (
           <div className="flex justify-between items-center mt-3">
-            <Button className="bg-gray-100 text-black rounded-3xl">
+            <Button
+              className="bg-gray-100 text-black rounded-3xl"
+              type="button"
+              onClick={() => {
+                setUserValue();
+                handleSetState && handleSetState(false);
+              }}
+            >
               Discard Changes
             </Button>
-            <Button className="rounded-3xl text-white" type="submit">
+            <Button className="w-32 rounded-3xl text-white" type="submit">
               {isloading ? <Loader size={6} /> : "Save Changes"}
             </Button>
           </div>

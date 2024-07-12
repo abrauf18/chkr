@@ -1,6 +1,6 @@
-"use client"
-import React, { useState } from 'react';
-import CompletedJobCard from './completed-job-card';
+"use client";
+import React, { useState } from "react";
+import CompletedJobCard from "./completed-job-card";
 import {
   Pagination,
   PaginationContent,
@@ -9,86 +9,18 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from "@/components/ui/pagination";
 
-const DUMMY_DATA = [
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-  {
-    userName: 'Ayesha Khan',
-    location: '4140 Parker Rd. Allentown, New Mexico 31134',
-    service: 'Delivery',
-    dateTime: '15 March 2023 7:00 pm',
-    status: 'completed',
-    zipCode: '3333',
-    payment: '360.00',
-    paymentStatus: 'Received',
-  },
-];
-
-export default function CompletedJobs() {
+interface JobsProps {
+  jobs: any[];
+}
+const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 3;
+  const itemsPerPage = 2;
 
-  const totalPages = Math.ceil(DUMMY_DATA.length / jobsPerPage);
+  const filteredJobs = jobs.filter((job) => job.job.status === "completed");
+
+  const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
 
   const handleClickPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -106,36 +38,54 @@ export default function CompletedJobs() {
     }
   };
 
-  const displayedJobs = DUMMY_DATA.slice(
-    (currentPage - 1) * jobsPerPage,
-    currentPage * jobsPerPage
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = filteredJobs.slice(
+    startIndex,
+    startIndex + itemsPerPage
   );
 
   return (
-    <div>
-      {displayedJobs.map((job) => (
-        <CompletedJobCard
-          key={job.userName}
-          {...job}
-        />
-      ))}
-      <Pagination className='bg-white my-6 rounded-xl p-4'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={handlePreviousPage} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <PaginationItem key={index + 1}>
-              <PaginationLink onClick={() => handleClickPage(index + 1)}>
-                {index + 1}
-              </PaginationLink>
-            </PaginationItem>
+    <>
+      {filteredJobs.length === 0 ? (
+        <div className="text-center mt-12">No jobs to display</div>
+      ) : (
+        <div>
+          {paginatedData.map((job) => (
+            <CompletedJobCard
+              key={job.job.id}
+              customer_name={job.job.customer_name}
+              location={job.job.location.name}
+              description={job.job.description}
+              status={job.job.status}
+              date_time={job.job.date_time}
+              service={job.job.service.service_name}
+              price={job.price}
+            />
           ))}
-          <PaginationItem>
-            <PaginationNext onClick={handleNextPage} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </div>
+          {paginatedData?.length > itemsPerPage && (
+            <Pagination className="bg-white my-6 rounded-xl p-4">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={handlePreviousPage} />
+                </PaginationItem>
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <PaginationItem key={index + 1}>
+                    <PaginationLink onClick={() => handleClickPage(index + 1)}>
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext onClick={handleNextPage} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
+        </div>
+      )}
+    </>
   );
-}
+};
+
+export default CompletedJobs;
+

@@ -1,10 +1,8 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   User,
-  MapPinned,
   Phone,
   CalendarClock,
   CircleDollarSign,
@@ -14,12 +12,16 @@ import {
 import useJobStore from "@/store/job-store";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { ServiceAction } from "@/actions/jobs/job-action";
+import { ServicesInterface } from "@/lib/interfaces";
+import AutoLocation from "@/components/shared/auto-location";
 
-const service = ["A", "B", " C", "D"]; // Example list of company types
 interface Props {
   handleNextStep: () => void;
 }
+
 const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
+  const [services, setServices] = useState<ServicesInterface[]>([]);
   const { setJobData } = useJobStore();
   const {
     register,
@@ -30,37 +32,49 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
 
   const changeNextStep = async () => {
     const isValid = await trigger([
-      "customer-name",
-      "payment",
-      "phone-number",
-      "date-time",
+      "customer_name",
+      "price",
+      "phone_number",
+      "date_time",
       "location",
-      "service",
+      "service_id",
     ]);
     if (isValid) {
       const data = getValues([
-        "customer-name",
-        "payment",
-        "phone-number",
-        "date-time",
+        "customer_name",
+        "price",
+        "phone_number",
+        "date_time",
         "location",
-        "service",
+        "service_id",
       ]);
 
       setJobData({
-        "customer-name": data[0],
-        payment: data[1],
-        "phone-number": data[2],
-        "date-time": data[3],
+        customer_name: data[0],
+        price: data[1],
+        phone_number: data[2],
+        date_time: data[3],
         location: data[4],
-        service: data[5],
+        service_id: data[5],
         description: "",
-        selectedUsers: [],
+        selected_users: [],
       });
 
       handleNextStep();
     }
   };
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await ServiceAction();
+        setServices(response.data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+    fetchServices();
+  }, []);
 
   return (
     <>
@@ -68,13 +82,17 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         <div className="relative flex items-center">
           <select
             id="service"
-            {...register("service")}
+            {...register("service_id")}
             className="w-full pl-3 pr-10 py-2 bg-[#F9F8F8] border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:border-2 appearance-none"
           >
             <option value="">Select Service</option>
-            {service.map((service) => (
-              <option key={service} value={service}>
-                {service}
+            {services.map((service) => (
+              <option
+                key={service.id}
+                value={service.id}
+                selected={service.id === +getValues("service_id")}
+              >
+                {service.service_name}
               </option>
             ))}
           </select>
@@ -84,7 +102,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         </div>
         <p className="text-sm text-red-500">
           {" "}
-          <ErrorMessage errors={errors} name="service" />
+          <ErrorMessage errors={errors} name="service_id" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
@@ -103,9 +121,13 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="customerName"
             type="text"
             placeholder="Enter customer fullname"
-            {...register("customer-name")}
+            {...register("customer_name")}
           />
         </div>
+        <p className="text-sm text-red-500 mt-1">
+          {" "}
+          <ErrorMessage errors={errors} name="customer_name" />
+        </p>
       </div>
       <div className="mb-4 w-full relative">
         <Label
@@ -114,17 +136,8 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
         >
           Location
         </Label>
-        <div className="relative flex items-center">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400">
-            <MapPinned color="#636363" className="h-4 w-4" />
-          </span>
-          <Input
-            className="pl-10 bg-[#F9F8F8]"
-            id="location"
-            type="text"
-            placeholder="Customer location"
-            {...register("location")}
-          />
+        <div className="flex items-center relative">
+          <AutoLocation name="location" />
         </div>
         <p className="text-sm text-red-500">
           {" "}
@@ -146,12 +159,12 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             className="pl-10 bg-[#F9F8F8]"
             id="phone"
             placeholder="Enter Phone Number"
-            {...register("phone-number")}
+            {...register("phone_number")}
           />
         </div>
         <p className="text-sm text-red-500">
           {" "}
-          <ErrorMessage errors={errors} name="phone-number" />
+          <ErrorMessage errors={errors} name="phone_number" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
@@ -170,12 +183,12 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="Date and time"
             type="datetime-local"
             placeholder="Select Date&Time"
-            {...register("date-time")}
+            {...register("date_time")}
           />
         </div>
         <p className="text-sm text-red-500">
           {" "}
-          <ErrorMessage errors={errors} name="date-time" />
+          <ErrorMessage errors={errors} name="date_time" />
         </p>
       </div>
       <div className="mb-4 w-full relative">
@@ -194,12 +207,12 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
             id="Payment"
             type="number"
             placeholder="Enter amount"
-            {...register("payment")}
+            {...register("price")}
           />
         </div>
         <p className="text-sm text-red-500">
           {" "}
-          <ErrorMessage errors={errors} name="payment" />
+          <ErrorMessage errors={errors} name="price" />
         </p>
       </div>
       <div className="flex justify-end mt-10">

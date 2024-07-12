@@ -141,40 +141,63 @@ export const EmployeeSchema = z.object({
 });
 
 export const FeedbackSchema = z.object({
-  comment: z.string().max(50).min(1, { message: "Comment must not be empty" }),
-  // rating: z.number().min(1, { message: "Rating is required" })
-  //   .max(5, { message: "Rating must be between 1 and 5" }),
+  comment: z.string().max(150).min(1, { message: "Comment must not be empty" }),
 });
-export const JobSchema = z.object({
-  "customer-name": z
-    .string()
-    .min(1, { message: "Company name must not be empty" }),
-  payment: z.coerce
-    .number()
-    .positive()
-    .min(1, { message: "Payment must not be empty" }),
-  "phone-number": z
-    .string()
-    .min(1, { message: "Phone number is required" })
-    .min(8, { message: "Phone Number must contain at least 8 numbers" })
-    .regex(phoneRegex, { message: "Invalid Number!" }),
-  "date-time": z
-    .string()
-    .min(1, { message: "Date and time must not be empty" }),
-  location: z.string().min(1, { message: "Location must not be empty" }),
-  service: z.string().min(1, { message: "Select a service" }),
-  description: z.string().min(1, { message: "Description must not be empty" }),
-  selectedUsers: z
-    .array(
-      z.object({
-        id: z.number(),
-        username: z.string(),
-        status: z.string(),
-        amount: z.number().optional(),
+export const JobSchema = z
+  .object({
+    customer_name: z
+      .string()
+      .min(1, { message: "Company name must not be empty" }),
+    price: z.coerce
+      .number()
+      .positive()
+      .min(1, { message: "Payment must not be empty" }),
+    phone_number: z
+      .string()
+      .min(1, { message: "Phone number is required" })
+      .min(8, { message: "Phone Number must contain at least 8 numbers" })
+      .regex(phoneRegex, { message: "Invalid Number!" }),
+    date_time: z
+      .string()
+      .min(1, { message: "Date and time must not be empty" }),
+    location: z
+      .object({
+        name: z.string(),
+        lat: z.number(),
+        lng: z.number(),
       })
-    )
-    .min(1, { message: "Select at least one user" }),
-});
+      .refine((obj) => obj.lat !== 0 || obj.lng !== 0 || obj.name !== "", {
+        message: "Please select a Correct Location",
+      }),
+    service_id: z.string().min(1, { message: "Select a service" }),
+    description: z
+      .string()
+      .min(1, { message: "Description must not be empty" }),
+    selected_users: z
+      .array(
+        z.object({
+          id: z.number(),
+          first_name: z.string(),
+          last_name: z.string(),
+          picture: z.string(),
+          price: z.number().optional(),
+        })
+      )
+      .min(1, { message: "Select at least one user" }),
+  })
+  .refine(
+    (data) => {
+      const totalAmount = data.selected_users.reduce(
+        (sum, user) => sum + (user.price || 0),
+        0
+      );
+      return totalAmount <= data.price;
+    },
+    {
+      message: "The total amount assigned exceeds the payment.",
+      path: ["selected_users"],
+    }
+  );
 
 export type Jobs = z.infer<typeof JobSchema>;
 
@@ -238,5 +261,14 @@ export const AdminSchema = z.object({
     .string()
     .min(1, { message: "Email is required" })
     .email({ message: "Email is invalid" }),
+});
+
+export const MessageSchema = z.object({
+  message: z
+    .string()
+    .min(1, {
+      message: "Message is required",
+    })
+    .max(150, { message: "Message can have a maximum of 150 characters" }),
 });
 

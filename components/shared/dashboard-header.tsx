@@ -16,9 +16,9 @@ export default async function DashboardHeader({ title }: DashboardHeaderProps) {
           <h1 className="text-xl xl:text-3xl font-bold">{title}</h1>
         </div>
         <div className="flex mobile:hidden items-center gap-3 md:w-[40%] justify-end">
-          <div className="flex justify-center items-center bg-white rounded-full h-14 w-14">
+          {/* <div className="flex justify-center items-center bg-white rounded-full h-14 w-14">
             <Bell />
-          </div>
+          </div> */}
           {session.user && (
             <UserOptions
               name={session.user.firstName}

@@ -9,6 +9,7 @@ import { signOut } from "next-auth/react";
 import { ChevronDown, ChevronUp, CircleUserRound, LogOut } from "lucide-react";
 import Image from "next/image";
 import Feedback from "./feedback";
+import Link from "next/link";
 
 export default function UserOptions({
   name,
@@ -41,7 +42,7 @@ export default function UserOptions({
               className="rounded-full max-w-12 max-h-12"
             />
           </div>
-          <div className="flex flex-col mx-3 text-left mobile:hidden">
+          <div className="flex flex-col mx-3 text-left">
             <h1 className="text-sm lg:text-base whitespace-nowrap">{name}</h1>
             <p className="text-sm text-gray-500">
               {role === "admin" ? role : userRole}
@@ -52,11 +53,15 @@ export default function UserOptions({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-1 mt-2 bg-white p-3 border border-white/10 z-[10] menu-shadow rounded-[16px] cursor-pointer">
-        <div className="flex items-center p-2 gap-2 hover:bg-gray-100 ">
-          <CircleUserRound className="w-5 h-5" color="black" />
-          <span className="text-[#292D32]">Profile Settings</span>
-        </div>
-        <Feedback />
+        <Link href={`/${userRole.toLowerCase().replace(/\s+/g, "-")}/settings`}>
+          <div className="flex items-center p-2 gap-2 hover:bg-gray-100 ">
+            <CircleUserRound className="w-5 h-5" color="black" />
+            <span className="text-[#292D32]">Profile Settings</span>
+          </div>
+        </Link>
+        {(role === "company-admin" || role === "company-employee") && (
+          <Feedback />
+        )}
         <div
           className="flex items-center p-2 gap-2 hover:bg-gray-100 cursor-pointer"
           onClick={handleLogout}

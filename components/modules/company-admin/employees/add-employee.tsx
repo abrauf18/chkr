@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,40 +6,24 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import EmployeeForm from './employee-form'
-import { FormProvider, useForm } from 'react-hook-form'
-import { EmployeeSchema } from '@/lib/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CirclePlus } from 'lucide-react';
-
+} from "@/components/ui/dialog";
+import EmployeeForm from "./employee-form";
+import { CirclePlus } from "lucide-react";
 
 export default function AddEmployee() {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: zodResolver(EmployeeSchema),
-  // });
-
-  // const onSubmit = handleSubmit((data) => {
-  //   console.log(data);
-  // });
-
   return (
     <Dialog>
       <DialogTrigger>
         <div className="flex items-center rounded-3xl text-white bg-primary p-3 whitespace-nowrap">
           <CirclePlus className="md:mr-2 h-5 mobile:h-4" />
-          <span className='mobile:text-xs'>Add Employee</span>
+          <span className="mobile:text-xs">Add Employee</span>
         </div>
       </DialogTrigger>
-      <DialogContent
-        className="bg-white md:max-w-[65%] xl:max-w-[40%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
+      <DialogContent className="bg-white md:max-w-[65%] xl:max-w-[40%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader>
-          <DialogTitle className='text-left'>Add New Employee
-            <hr className='my-6' />
+          <DialogTitle className="text-left">
+            Add New Employee
+            <hr className="my-6" />
           </DialogTitle>
           <DialogDescription>
             <EmployeeForm />
@@ -47,6 +31,6 @@ export default function AddEmployee() {
         </DialogHeader>
       </DialogContent>
     </Dialog>
-
-  )
+  );
 }
+

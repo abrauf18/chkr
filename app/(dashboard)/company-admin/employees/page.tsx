@@ -1,18 +1,14 @@
-import React from 'react'
-import Employees from '@/components/modules/company-admin/employees/employees'
-import { Metadata } from 'next';
-import DashboardHeader from '@/components/shared/dashboard-header';
+import React from "react";
+import Employees from "@/components/modules/company-admin/employees/employees";
+import { UsersAction } from "@/actions/users/user-actions";
 
-export const metadata: Metadata = {
-  title: "Employees",
-  description: "Manage your employees on CHKR. View employee information, add employees, and track performance from your company admin dashboard."
-};
-
-export default function page() {
-  return (
-    <>
-      <DashboardHeader title=""/>
-      <Employees />
-    </>
-  );
+export default async function page({
+  searchParams,
+}: {
+  searchParams: { order: string; sort: string };
+}) {
+  const { order, sort } = searchParams;
+  const employees = await UsersAction({ order, sort });
+  return <Employees employees={employees} />;
 }
+

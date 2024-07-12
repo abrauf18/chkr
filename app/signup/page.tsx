@@ -2,6 +2,7 @@ import Signup from "@/components/modules/auth/signup";
 import Navbar from "@/components/shared/navbar";
 import AuthLeftSide from "@/components/shared/auth-left-side";
 import { Metadata } from "next";
+import leftImg from "@/public/images/SignupLeftSide.png"
 
 export const metadata: Metadata = {
   title: "Sign Up",
@@ -21,7 +22,7 @@ export default function SignupPage() {
           heading1="YOUR GATEWAY"
           heading2="TO EXCEPTIONAL"
           heading3="SERVICE PROVIDERS"
-          url="/images/SignUpLeftSide.svg"
+          url={leftImg}
         />
         <Signup />
       </div>

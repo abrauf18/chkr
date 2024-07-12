@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Header from "./settings-header";
 import PersonalInformation from "./personal-information";
+import Header from "./settings-header";
 import CompanyInformation from "../modules/company-admin/settings/company-information";
 
 const Settings: React.FC<{ isAdmin?: boolean; data: any }> = ({
@@ -44,12 +44,16 @@ const Settings: React.FC<{ isAdmin?: boolean; data: any }> = ({
             {activeTab === "company" && (
               <CompanyInformation
                 companyinfo={{
+                  id: userData.company_id,
                   company_name: userData.company_name,
                   firm_name: userData.firm_name,
                   phone_number: userData.phone_number,
                   location: userData.location,
                   country: userData.country,
                   company_logo: userData.company_logo,
+                  company_admin: {
+                    id: userData.id,
+                  },
                 }}
                 currentImage={currentImage}
               />

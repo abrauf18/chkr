@@ -15,7 +15,12 @@ export default auth(async (req) => {
   const user = req.auth?.user as IUserInterface | undefined;
   const role = user?.role;
 
-  const isAuthenticated = !!req.auth;
+  let isAuthenticated;
+  if (!role) {
+    isAuthenticated = false;
+  } else {
+    isAuthenticated = !!req.auth;
+  }
   const isPublicRoute = PUBLIC_ROUTES.includes(nextUrl.pathname);
 
   const rolePaths = {
@@ -24,6 +29,7 @@ export default auth(async (req) => {
       `/${role}/settings`,
       `/${role}/jobs`,
       `/${role}/employees`,
+      `/logout`,
     ],
   };
 
@@ -45,6 +51,11 @@ export default auth(async (req) => {
       if (!rolePaths[role].includes(nextUrl.pathname)) {
         return Response.redirect(dashboardUrl);
       }
+    } else if (result.statusCode === 401) {
+      if (nextUrl.pathname !== "/logout") {
+        const logoutUrl = new URL("/logout", nextUrl);
+        return Response.redirect(logoutUrl);
+      }
     } else {
       const onboardingUrl = new URL("/onboarding", nextUrl);
       if (nextUrl.pathname !== onboardingUrl.pathname) {
@@ -55,7 +66,7 @@ export default auth(async (req) => {
 
   if (isPublicRoute && isAuthenticated) {
     const targetUrl = new URL(`/${role}/dashboard`, nextUrl);
-    if (role === "admin" || role === "superadmin") {
+    if (role === "admin" || role === "super-admin") {
       targetUrl.pathname = `/${role}/subscription`;
     }
     if (nextUrl.pathname !== targetUrl.pathname) {
@@ -72,6 +83,8 @@ export default auth(async (req) => {
 });
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.svg$).*)",
+  ],
 };
 

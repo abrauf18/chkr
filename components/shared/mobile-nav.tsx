@@ -17,14 +17,15 @@ import {
   Receipt,
   Timer,
 } from "lucide-react";
-import Image from "next/image";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import UserOptions from "./user-options";
-import ChkrLogo from "@/assets/icons/chkr-logo";
+import { useSession } from "next-auth/react";
 
 const MobileNav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePath, setActivePath] = useState("/company-admin/dashboard");
+  const { data: sessionData } = useSession();
+  const data: any = sessionData;
   const pathname = usePathname();
   useEffect(() => {
     setActivePath(pathname);
@@ -149,7 +150,6 @@ const MobileNav = () => {
     setActivePath(path);
   };
 
-
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -171,15 +171,20 @@ const MobileNav = () => {
               </button>
             </div>
             <div className="flex gap-2 justify-center items-center">
-              <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
+              {/* <div className="bg-white flex justify-center items-center rounded-full h-12 w-12">
                 <Bell />
-              </div>
-              <UserOptions/>
+              </div> */}
+              <UserOptions
+                name={data?.user?.firstName}
+                role={data?.user?.role}
+                picture={data?.user?.picture}
+              />
             </div>
           </div>
           <div
-            className={`z-10 absolute top-24 w-full ${sidebarOpen ? "block" : "hidden"
-              }`}
+            className={`z-10 absolute top-24 w-full ${
+              sidebarOpen ? "block" : "hidden"
+            }`}
             id="navbar-cta"
           >
             <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-lg bg-black">
@@ -215,3 +220,4 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+

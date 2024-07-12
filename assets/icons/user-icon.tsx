@@ -14,32 +14,32 @@ const user: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
         d="M5.48131 12.9017C4.30234 13.6037 1.21114 15.0371 3.09389 16.8308C4.01359 17.707 5.03791 18.3337 6.32573 18.3337H13.6743C14.9621 18.3337 15.9864 17.707 16.9061 16.8308C18.7888 15.0371 15.6977 13.6037 14.5187 12.9017C11.754 11.2554 8.24599 11.2554 5.48131 12.9017Z"
         stroke="#7C7C7C"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.48131 12.9017C4.30234 13.6037 1.21114 15.0371 3.09389 16.8308C4.01359 17.707 5.03791 18.3337 6.32573 18.3337H13.6743C14.9621 18.3337 15.9864 17.707 16.9061 16.8308C18.7888 15.0371 15.6977 13.6037 14.5187 12.9017C11.754 11.2554 8.24599 11.2554 5.48131 12.9017Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.48131 12.9017C4.30234 13.6037 1.21114 15.0371 3.09389 16.8308C4.01359 17.707 5.03791 18.3337 6.32573 18.3337H13.6743C14.9621 18.3337 15.9864 17.707 16.9061 16.8308C18.7888 15.0371 15.6977 13.6037 14.5187 12.9017C11.754 11.2554 8.24599 11.2554 5.48131 12.9017Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.48131 12.9017C4.30234 13.6037 1.21114 15.0371 3.09389 16.8308C4.01359 17.707 5.03791 18.3337 6.32573 18.3337H13.6743C14.9621 18.3337 15.9864 17.707 16.9061 16.8308C18.7888 15.0371 15.6977 13.6037 14.5187 12.9017C11.754 11.2554 8.24599 11.2554 5.48131 12.9017Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M13.75 5.41699C13.75 7.48806 12.0711 9.16699 10 9.16699C7.92893 9.16699 6.25 7.48806 6.25 5.41699C6.25 3.34593 7.92893 1.66699 10 1.66699C12.0711 1.66699 13.75 3.34593 13.75 5.41699Z"
@@ -49,19 +49,19 @@ const user: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
       <path
         d="M13.75 5.41699C13.75 7.48806 12.0711 9.16699 10 9.16699C7.92893 9.16699 6.25 7.48806 6.25 5.41699C6.25 3.34593 7.92893 1.66699 10 1.66699C12.0711 1.66699 13.75 3.34593 13.75 5.41699Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
       />
       <path
         d="M13.75 5.41699C13.75 7.48806 12.0711 9.16699 10 9.16699C7.92893 9.16699 6.25 7.48806 6.25 5.41699C6.25 3.34593 7.92893 1.66699 10 1.66699C12.0711 1.66699 13.75 3.34593 13.75 5.41699Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
       />
       <path
         d="M13.75 5.41699C13.75 7.48806 12.0711 9.16699 10 9.16699C7.92893 9.16699 6.25 7.48806 6.25 5.41699C6.25 3.34593 7.92893 1.66699 10 1.66699C12.0711 1.66699 13.75 3.34593 13.75 5.41699Z"
         stroke="black"
-        stroke-opacity="0.2"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
       />
     </svg>
@@ -69,3 +69,4 @@ const user: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
 };
 
 export default user;
+

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordSchema } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import RightsideImg from "@/public/images/SignupRightside.svg";
+import RightsideImg from "@/public/images/SignupRightSide.png";
 import { ResetPasswordAction } from "@/actions/auth/auth-action";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -28,6 +28,8 @@ export default function ResetPassword() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(ResetPasswordSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = handleSubmit(async (data) => {

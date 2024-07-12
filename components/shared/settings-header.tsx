@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({
             key={`${currentImageSrc}`}
             src={
               currentImageSrc?.startsWith("https")
-                ? `${currentImageSrc}?${new Date().getTime()}`
+                ? currentImageSrc
                 : currentImageSrc
             }
             alt="profile image"

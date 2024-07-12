@@ -4,6 +4,7 @@ import AuthLeftSide from "@/components/shared/auth-left-side";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import Loader from "@/components/shared/loader";
+import leftImg from "@/public/images/SignupLeftSide.png"
 
 export const metadata: Metadata = {
   title: "Reset Password",
@@ -25,7 +26,7 @@ export default function page() {
             heading1="YOUR HUB"
             heading2="FOR FINDING THE BEST"
             heading3="SERVICE PROVIDERS"
-            url="/images/SignUpLeftSide.svg"
+            url={leftImg}
           />
           <Suspense fallback={<Loader size={12} />}>
             <ResetPassword />

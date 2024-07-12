@@ -7,6 +7,7 @@ import {
   InviteUserInterface,
 } from "@/lib/interfaces";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const SignUpAction = async (data: SignUpInterface) => {
   const response = await fetch(
@@ -65,6 +66,9 @@ export const InviteUserAction = async (data: InviteUserInterface) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 

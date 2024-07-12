@@ -1,27 +1,47 @@
-'use client'
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Check, ChevronDown } from 'lucide-react';
+import { Check, ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-type OptionType = 'alphabetically' | 'subscription';
+type OptionType = "alphabetically" | "old" | "new";
 
-export default function Filter() {
+export default function Filter({
+  searchParams,
+}: {
+  searchParams?: { order: string; sort: string };
+}) {
   const [open, setOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<{ [key in OptionType]: boolean }>({
-    alphabetically: false,
-    subscription: false,
-  });
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
+  const params = new URLSearchParams(searchParams);
+  const { push } = useRouter();
 
-  const toggleOption = (option: OptionType) => {
-    setSelectedOptions(prevState => ({
-      ...prevState,
-      [option]: !prevState[option]
-    }));
+  const toggleOption = async (option: OptionType) => {
+    setSelectedOption(option);
+
+    params.delete("order");
+    params.delete("sort");
+
+    switch (option) {
+      case "alphabetically":
+        params.set("sort", "a-z");
+        break;
+      case "new":
+        params.set("order", "newest");
+        break;
+      case "old":
+        params.set("order", "oldest");
+        break;
+      default:
+        break;
+    }
+
+    await push(`?${params.toString()}`);
   };
 
   return (
@@ -33,38 +53,53 @@ export default function Filter() {
         )}
       >
         <span>Filter</span>
-        <ChevronDown className='w-4 h-4' />
+        <ChevronDown className="w-4 h-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='flex flex-col gap-1 mt-2 bg-white p-3 border z-[10] menu-shadow rounded-[16px]'>
+      <DropdownMenuContent className="flex flex-col gap-1 mt-2 bg-white p-3 border z-[10] menu-shadow rounded-[16px] mr-2">
         <div
-          className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
-          onClick={() => toggleOption('alphabetically')}
+          className="flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer"
+          onClick={() => toggleOption("alphabetically")}
         >
           <div
             className={cn(
-              'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.alphabetically && 'bg-primary'
+              "w-4 h-4 rounded-md border flex items-center px-[2px]",
+              selectedOption === "alphabetically" && "bg-primary"
             )}
           >
-            <Check className='w-3 h-3' color='white' strokeWidth={5} />
+            <Check className="w-3 h-3" color="white" strokeWidth={5} />
           </div>
           Alphabetically Order (A-Z)
         </div>
         <div
-          className='flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer'
-          onClick={() => toggleOption('subscription')}
+          className="flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer"
+          onClick={() => toggleOption("new")}
         >
           <div
             className={cn(
-              'w-4 h-4 rounded-md border flex items-center px-[2px]',
-              selectedOptions.subscription && 'bg-primary'
+              "w-4 h-4 rounded-md border flex items-center px-[2px]",
+              selectedOption === "new" && "bg-primary"
             )}
           >
-            <Check className='w-3 h-3' color='white' strokeWidth={5} />
+            <Check className="w-3 h-3" color="white" strokeWidth={5} />
           </div>
-          Subscription Type
+          Newest - Oldest
+        </div>
+        <div
+          className="flex items-center gap-2 text-gray-500 p-1 hover:bg-gray-50 rounded-lg cursor-pointer"
+          onClick={() => toggleOption("old")}
+        >
+          <div
+            className={cn(
+              "w-4 h-4 rounded-md border flex items-center px-[2px]",
+              selectedOption === "old" && "bg-primary"
+            )}
+          >
+            <Check className="w-3 h-3" color="white" strokeWidth={5} />
+          </div>
+          Oldest - Newest
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
+

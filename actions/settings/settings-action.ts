@@ -2,6 +2,7 @@
 
 import { CompanyAdminInterface } from "@/lib/interfaces";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
   const session = await auth();
@@ -20,6 +21,9 @@ export const UserInfoAction = async (): Promise<CompanyAdminInterface> => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result.data;
 };
 
@@ -37,6 +41,9 @@ export const EditUserinfoAction = async (data: FormData) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 
@@ -54,6 +61,9 @@ export const EditCompanyInformationAction = async (data: FormData) => {
     }
   );
   const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
   return result;
 };
 

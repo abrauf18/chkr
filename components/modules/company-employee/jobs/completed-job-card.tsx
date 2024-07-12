@@ -2,31 +2,28 @@ import React from "react";
 import Location from "@/assets/icons/location-icon";
 
 interface CompletedJobCardProps {
-  userName: string;
+  customer_name: string;
   location: string;
   status: string;
-  zipCode: string;
-  dateTime: string;
+  date_time: string;
   service: string;
-  paymentStatus: String;
-  payment: string;
+  price: number;
+  description?: string;
 }
 
 const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
-  userName,
+  customer_name,
   location,
   status,
-  zipCode,
-  dateTime,
+  date_time,
   service,
-  paymentStatus,
-  payment,
+  price,
 }) => {
   return (
     <div className="mt-4 bg-white rounded-3xl py-10 px-4">
       <div className="flex flex-wrap justify-between">
         <div className="flex flex-col">
-          <h1 className="font-bold text-xl mb-3">{userName}</h1>
+          <h1 className="font-bold text-xl mb-3">{customer_name}</h1>
           <div className="flex items-center">
             <Location className="h-6 w-6" />
             <span className="font-semibold text-lg text-gray-700 ml-2">
@@ -44,15 +41,9 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
       <div className="flex mt-6 justify-between lg:flex-row flex-col lg:gap-0 gap-5">
         <div className="flex flex-wrap gap-2 xl:gap-8 ">
           <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
-            <span className="font-bold md:text-lg">Zip Code:</span>
-            <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {zipCode}
-            </span>
-          </div>
-          <div className="flex flex-col text-sm lg:text-lg whitespace-nowrap">
             <span className="font-bold md:text-lg">Date & Time:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-              {dateTime}
+              {date_time}
             </span>
           </div>
           <div className="flex flex-col text-sm whitespace-nowrap">
@@ -65,11 +56,13 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
             <span className="font-bold md:text-lg">Payment:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base flex items-center">
               <div className="bg-green-500 rounded-full h-2 w-2 mr-2"></div>
-              {paymentStatus}
+              {status}
             </span>
           </div>
         </div>
-        <span className="font-bold text-3xl mt-3 whitespace-nowrap">$ {payment} USD</span>
+        <span className="font-bold text-3xl mt-3 whitespace-nowrap">
+          $ {price} USD
+        </span>
       </div>
     </div>
   );

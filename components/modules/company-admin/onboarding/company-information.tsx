@@ -106,7 +106,7 @@ const CompanyInformation = ({
             className="hidden"
           />
           {!selectedFile ? (
-            <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4">
+            <div className="w-full h-40 border-dashed border-2 border-gray-300 rounded-2xl flex flex-col justify-center items-center mt-4 cursor-pointer">
               <Upload width={30} height={30} />
               <span className="text-sm font-medium mt-3">Upload Logo</span>
             </div>

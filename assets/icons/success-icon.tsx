@@ -13,11 +13,12 @@ const Success: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
         d="M16.7997 9L10.1998 15.6L7.19971 12.6"
         stroke="white"
         strokeWidth="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
 };
 
 export default Success;
+

@@ -13,7 +13,7 @@ import JobDetails from "./job-details";
 import { CircleArrowRight, Eye } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export default function ShowJobDetails() {
+export default function ShowJobDetails({ jobId }: { jobId: number }) {
   const pathname = usePathname();
 
   return (
@@ -38,7 +38,12 @@ export default function ShowJobDetails() {
             <hr className="my-6" />
           </DialogTitle>
           <DialogDescription>
-            <JobDetails />
+            {pathname === "/company-employee/jobs" && (
+              <JobDetails jobId={jobId} />
+            )}
+            {pathname === "/company-admin/jobs" && (
+              <JobDetails jobId={jobId} isAdmin />
+            )}
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
