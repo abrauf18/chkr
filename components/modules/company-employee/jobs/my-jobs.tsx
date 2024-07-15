@@ -40,7 +40,7 @@ const MyJobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
     <div className="flex flex-col  gap-4">
       {!isDashboard && (
         <>
-          <Header title="Track your Assigned Services" hideFilter />
+          <Header title="Track your Assigned Services" />
           <div className="flex gap-2 items-center my-4">
             {tabsData.map((tab) => (
               <div
