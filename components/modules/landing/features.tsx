@@ -19,7 +19,7 @@ const Features = () => {
           style={{
             backgroundImage: "linear-gradient(to right, #FF2600, #FBEB97)",
           }}
-          className="xl:w-[90%] lg:w-[95%] md:w-[90%] w-3/4 h-full rounded-tr-[12rem] rounded-bl-[12rem]"
+          className="xl:w-[90%] lg:w-[95%] md:w-[90%] w-3/4 h-full rounded-tr-[12rem] rounded-bl-[12rem] hidden md:block"
         >
           <div className="relative xl:w-[420px] lg:w-[300px] md:w-[255px] w-[155px]  border-white border-4 rounded-xl top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Image
