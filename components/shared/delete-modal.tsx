@@ -32,10 +32,13 @@ export default function DeleteModal({
   const handleDelete = async () => {
     try {
       let data;
-      if (pathname.startsWith("/super-admin/admins")) {
+      if (
+        pathname.startsWith("/super-admin/admins") ||
+        pathname.startsWith("/company-admin/employees")
+      ) {
         data = await DeleteUserAction(userId);
         await action("DeleteUser");
-      } else if (pathname.startsWith("/company-admin")) {
+      } else if (pathname.startsWith("/company-admin/jobs")) {
         data = await DeleteJobAction(jobId || 0);
         action("getJobs");
       } else if (pathname.startsWith("/super-admin/companies")) {

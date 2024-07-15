@@ -38,6 +38,7 @@ const EmployeeTable = ({
     if (pageNumber < 1 || pageNumber > totalPageCount) return;
     setCurrentPage(pageNumber);
   };
+
   return (
     <>
       <Table>
