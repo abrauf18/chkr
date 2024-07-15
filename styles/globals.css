@@ -180,13 +180,55 @@ option {
   color: black;
 }
 
-input[type=checkbox]:checked {
-  background-color: #FF2600 !important;
+input[type="checkbox"]:checked {
+  background-color: #ff2600 !important;
   color: #ffffff !important;
 }
 
-.custom-check { filter: hue-rotate(150deg) }
+.custom-check {
+  filter: hue-rotate(150deg);
+}
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
   outline: none;
 }
+
+.scroll-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.scroll-content {
+  display: inline-flex;
+  animation: scroll 20s linear infinite;
+}
+
+.partner-image {
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .partner-image {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .partner-image {
+    width: 9rem;
+    height: 9rem;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
