@@ -72,10 +72,16 @@ export const UpdateJobAction = async (jobId: number, data: JobsInterface) => {
   return result;
 };
 
-export const GetJobsAction = async () => {
+export const GetJobsAction = async ({
+  order,
+  sort,
+}: {
+  order: string;
+  sort: string;
+}) => {
   const session = await auth();
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/job/company-jobs`,
+    `${process.env.NEXT_PUBLIC_API_URL}/job/company-jobs?order=${order}&sort=${sort}`,
     {
       method: "GET",
       headers: {
@@ -95,10 +101,16 @@ export const GetJobsAction = async () => {
   return result;
 };
 
-export const GetUserJobsAction = async () => {
+export const GetUserJobsAction = async ({
+  order,
+  sort,
+}: {
+  order: string;
+  sort: string;
+}) => {
   const session = await auth();
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/job/employee-jobs`,
+    `${process.env.NEXT_PUBLIC_API_URL}/job/employee-jobs?order=${order}&sort=${sort}`,
     {
       method: "GET",
       headers: {
