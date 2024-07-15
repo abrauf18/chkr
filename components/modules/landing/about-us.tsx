@@ -1,9 +1,15 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import AboutIcon from "@/assets/icons/about-icon";
 import TeamIcon from "@/assets/icons/team-icon";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AboutUs = () => {
+  useEffect(() => {
+    AOS.init({});
+  });
   return (
     <div id="aboutUs" className="bg-white pt-10 mb-24">
       <div className="flex flex-col w-3/4 xl:w-[55%] xl:mx-24 mx-4 md:mx-10 justify-start gap-10">
@@ -55,6 +61,9 @@ const AboutUs = () => {
           height={500}
           alt="About"
           className="w-2/3"
+          data-aos="fade-right"
+          data-aos-delay="300"
+          data-aos-easing="ease-in"
         />
         <Image
           src="/images/AboutUsImg1.png"
@@ -62,6 +71,9 @@ const AboutUs = () => {
           height={500}
           alt="About"
           className="w-1/3"
+          data-aos="fade-left"
+          data-aos-delay="300"
+          data-aos-easing="ease-in"
         />
       </div>
     </div>
