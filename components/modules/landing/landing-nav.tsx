@@ -14,17 +14,21 @@ const LandingPageNavbar: React.FC = () => {
 
   const getLinkClass = (path: string) => {
     return pathname === path
-      ? "block py-2 px-3 md:p-0 text-primary rounded hover:text-primary"
-      : "block py-2 px-3 md:p-0 text-[#272B30] rounded hover:text-primary";
+      ? "block py-2 px-3 lg:p-0 text-primary rounded hover:text-primary"
+      : "block py-2 px-3 lg:p-0 text-[#272B30] rounded hover:text-primary";
   };
 
   return (
     <nav className="border-gray-200 w-full my-8 navbar">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md rounded-full bg-white">
+      <div
+        className={`max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md ${
+          sidebarOpen ? "rounded-lg" : "rounded-full"
+        } bg-white`}
+      >
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
           <ChkrLogo className="h-8" />
         </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
           <Link href="/login">
             <button
               type="button"
@@ -36,9 +40,9 @@ const LandingPageNavbar: React.FC = () => {
           <button
             onClick={toggleSidebar}
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-cta"
-            aria-expanded="false"
+            aria-expanded={sidebarOpen ? "true" : "false"}
           >
             <svg
               className="w-5 h-5"
@@ -58,24 +62,36 @@ const LandingPageNavbar: React.FC = () => {
           </button>
         </div>
         <div
-          className={`md:z-10 -z-10 absolute items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+          className={`lg:flex items-center justify-between w-full lg:w-auto lg:order-1 mt-2 ${
             sidebarOpen ? "block" : "hidden"
           }`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 border-t-0 items-center rounded-lg md:space-x-8 md:flex-row md:mt-0 md:border-0 bg-white md:ml-32 mt-80 mr-10">
+          <ul className="flex flex-col font-medium p-4 lg:p-0 items-center lg:space-x-8 lg:flex-row bg-white lg:bg-transparent rounded-lg">
             <li>
-              <Link href="#home" className={getLinkClass("#home")}>
+              <Link
+                href="#home"
+                className={getLinkClass("#home")}
+                onClick={toggleSidebar}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link href="#aboutUs" className={getLinkClass("#aboutUs")}>
+              <Link
+                href="#aboutUs"
+                className={getLinkClass("#aboutUs")}
+                onClick={toggleSidebar}
+              >
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="#features" className={getLinkClass("#features")}>
+              <Link
+                href="#features"
+                className={getLinkClass("#features")}
+                onClick={toggleSidebar}
+              >
                 Features
               </Link>
             </li>
@@ -83,6 +99,7 @@ const LandingPageNavbar: React.FC = () => {
               <Link
                 href="#testimonials"
                 className={getLinkClass("#testimonials")}
+                onClick={toggleSidebar}
               >
                 Testimonials
               </Link>
@@ -91,6 +108,7 @@ const LandingPageNavbar: React.FC = () => {
               <Link
                 href="#subscription"
                 className={getLinkClass("#subscription")}
+                onClick={toggleSidebar}
               >
                 Subscription
               </Link>

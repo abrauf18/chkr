@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import bg from "@/public/images/background.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -32,12 +33,16 @@ const Hero = () => {
             Streamline your workflow and ensure accuracy effortlessly.
           </p>
           <div className="flex gap-2 ">
-            <Button className="w-[10rem] py-6 border border-white hover:bg-transparent bg-white hover:text-white text-black rounded-3xl">
-              Get Started
-            </Button>
-            <Button className="w-[10rem] py-6 border border-white text-white bg-transparent hover:bg-white hover:text-black rounded-3xl">
-              Buy Subscription
-            </Button>
+            <Link href="/login">
+              <Button className="w-[10rem] py-6 border border-white hover:bg-transparent bg-white hover:text-white text-black rounded-3xl">
+                Get Started
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button className="w-[10rem] py-6 border border-white text-white bg-transparent hover:bg-white hover:text-black rounded-3xl">
+                Buy Subscription
+              </Button>
+            </Link>
           </div>
         </div>
 
