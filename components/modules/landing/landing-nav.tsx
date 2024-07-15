@@ -25,9 +25,12 @@ const LandingPageNavbar: React.FC = () => {
           sidebarOpen ? "rounded-lg" : "rounded-full"
         } bg-white`}
       >
-        <a className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          href="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <ChkrLogo className="h-8" />
-        </a>
+        </Link>
         <div className="flex lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
           <Link href="/login">
             <button

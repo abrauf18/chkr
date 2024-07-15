@@ -189,9 +189,6 @@ const MobileNav = () => {
             id="navbar-cta"
           >
             <ul className="flex flex-col items-baseline font-medium p-4 border-t-0 rounded-xl bg-white shadow-2xl">
-              {/* <li className="mt-6 mb-10">
-                <SidebarLogo />
-              </li> */}
               {list.map((item) => (
                 <div key={item.path}>
                   <Link href={item.path}>

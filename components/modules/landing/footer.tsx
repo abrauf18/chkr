@@ -18,15 +18,19 @@ const Footer = () => {
       >
         <nav className="w-[95%] flex mobile:flex-col flex-row md:items-center justify-between md:flex-wrap md:mx-10 mx-4 my-6 md:py-2 md:px-10 rounded-3xl">
           {/* Left side content */}
-          <div className="flex items-center ">
-            <ChkrLogo className="h-auto" />
-          </div>
+          <Link href="/">
+            <div className="flex items-center ">
+              <ChkrLogo className="h-auto" />
+            </div>
+          </Link>
 
           {/* Right side content */}
           <div className="flex items-center mobile:mt-4">
             <div className="flex gap-4 lg:gap-10 md:ml-4 ml-1 text-white">
-              <a href="#home" 
-                className="text-lg mobile:text-sm hover:text-primary">
+              <a
+                href="#home"
+                className="text-lg mobile:text-sm hover:text-primary"
+              >
                 Home
               </a>
               <a
@@ -62,18 +66,21 @@ const Footer = () => {
             Revolutionizing Workforce Management, One Click at a Time; WITH CHKR
           </h1>
           <div className="flex gap-2 mt-6 ">
-            <Link href='/login'>
-            <Button 
-            className="w-[136px] py-6 border hover:border-white border-primary text-white hover:bg-transparent rounded-3xl">
-              Sign in
-            </Button>
+            <Link href="/login">
+              <Button className="w-[136px] py-6 border hover:border-white border-primary text-white hover:bg-transparent rounded-3xl">
+                Sign in
+              </Button>
             </Link>
-            <Button className="w-[160px] py-6 border hover:border-primary border-white text-white bg-transparent hover:bg-primary hover:text-white rounded-3xl">
-              Explore the Chkr
-            </Button>
+            <Link href="/login">
+              <Button className="w-[160px] py-6 border hover:border-primary border-white text-white bg-transparent hover:bg-primary hover:text-white rounded-3xl">
+                Explore the Chkr
+              </Button>
+            </Link>
           </div>
           <div className="h-[1px] w-full bg-white rounded-full my-4"></div>
-          <p className=" text-lg mobile:text-xs mb-4">CHKR. All Rights Reserved 2024. Licensing</p>
+          <p className=" text-lg mobile:text-xs mb-4">
+            CHKR. All Rights Reserved 2024. Licensing
+          </p>
         </div>
       </div>
     </div>

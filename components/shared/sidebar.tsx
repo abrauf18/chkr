@@ -164,7 +164,7 @@ const SideBar = ({
             : "w-full flex gap-x-4 justify-center py-6"
         )}
       >
-        <Link href="#">
+        <Link href="/">
           <div className="text-2xl font-bold">
             <div className="logo logo-triangle relative w-10 h-10 inline-block">
               {open ? <LogoFooter /> : <SidebarLogo width={45} />}
