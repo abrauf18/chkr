@@ -38,11 +38,13 @@ export interface OnboardingInterface {
 }
 
 export interface PlanInterface {
+  productDescription: string;
+  price: number;
+  productName: string;
   features: string[];
   timePeriod: string;
   id: number;
   plan_type: string;
-  amount: number;
 }
 
 export interface CompanyAdminInterface {

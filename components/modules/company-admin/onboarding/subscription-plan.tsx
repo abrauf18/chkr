@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { PlanInterface } from "@/lib/interfaces";
-import { PlanAction } from "@/actions/onboard/onboard-action";
+import { PlansAction } from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
 
 const SubscriptionPlan = ({
@@ -14,8 +14,6 @@ const SubscriptionPlan = ({
 }) => {
   const {
     register,
-    reset,
-    trigger,
     getValues,
     formState: { errors },
   } = useFormContext();
@@ -26,26 +24,24 @@ const SubscriptionPlan = ({
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        setIsLoading(true);
-        const response: PlanInterface[] = await PlanAction();
-        const detailedPlans = response.map((plan) => ({
-          ...plan,
-          features: [
-            "Curabitur pulvinar nunc nisl, vitae orci pellentesque.",
-            "Curabitur pulvinar nunc orci pellentesque.",
-            "Curabitur pulvinar pellentesque.",
-          ],
-          timePeriod: plan.plan_type === "monthly" ? "month" : "year",
-        }));
-        setPlans(detailedPlans);
+        const response = await PlansAction();
+        setPlans(response);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching plans:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
     fetchPlans();
   }, []);
+
+  const getTimePeriod = (productName: string) => {
+    if (productName.toLowerCase().includes("monthly")) {
+      return "month";
+    } else if (productName.toLowerCase().includes("yearly")) {
+      return "year";
+    }
+    return "";
+  };
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
@@ -70,19 +66,15 @@ const SubscriptionPlan = ({
                   {...register("plan")}
                 />
                 <PlanCard
-                  title={
-                    plan.plan_type === "monthly"
-                      ? "Monthly Plan"
-                      : "Yearly Plan"
-                  }
-                  price={plan.amount}
-                  features={plan.features}
-                  timePeriod={plan.timePeriod}
+                  title={plan.productName}
+                  price={plan.price}
+                  timePeriod={getTimePeriod(plan.productName)}
+                  features={[]}
+                  description={plan.productDescription}
                 />
               </div>
             ))}
             <p className="text-sm text-red-500">
-              {" "}
               <ErrorMessage errors={errors} name="plan" />
             </p>
           </div>
