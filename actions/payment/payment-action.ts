@@ -55,8 +55,7 @@ export const ConfirmPlanAction = async (data: any) => {
       body: JSON.stringify({ productId: data }),
     }
   );
-  const result = await response.json();
-  console.log(result);
+  const result = await response.text();
   return result;
 };
 

@@ -9,7 +9,7 @@ import {
   PlansAction,
 } from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -24,15 +24,19 @@ const SubscriptionPlan = ({
   const { onboardingData } = useOnboardingStore();
   const [plans, setPlans] = useState<PlanInterface[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPlans = async () => {
       try {
+        setIsLoading(true);
         const response = await PlansAction();
         setPlans(response);
         console.log(response);
       } catch (error) {
         console.error("Error fetching plans:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPlans();
@@ -51,9 +55,8 @@ const SubscriptionPlan = ({
     try {
       setIsLoading(true);
       const selectedPlanId = getValues("plan");
-      await ConfirmPlanAction(selectedPlanId);
-      console.log(selectedPlanId);
-      console.log("plan selected");
+      const result = await ConfirmPlanAction(selectedPlanId);
+      router.push(result);
     } catch (error) {
       console.error("Error confirming plan:", error);
     } finally {
