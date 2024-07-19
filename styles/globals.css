@@ -209,20 +209,6 @@ input:focus {
   flex-shrink: 0;
 }
 
-@media (min-width: 768px) {
-  .partner-image {
-    width: 7rem;
-    height: 7rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .partner-image {
-    width: 9rem;
-    height: 9rem;
-  }
-}
-
 @keyframes scroll {
   0% {
     transform: translateX(0);

@@ -21,93 +21,98 @@ const Partners: React.FC = () => {
           <Image
             src={icon1}
             alt="Partner 1"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon2}
             alt="Partner 2"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem"
           />
           <Image
             src={icon3}
             alt="Partner 3"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon4}
             alt="Partner 4"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon5}
             alt="Partner 5"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon6}
             alt="Partner 6"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           {/* Duplicate images for seamless scroll */}
           <Image
             src={icon1}
             alt="Partner 1"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon2}
             alt="Partner 2"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem"
           />
           <Image
             src={icon3}
             alt="Partner 3"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon4}
             alt="Partner 4"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon5}
             alt="Partner 5"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon6}
             alt="Partner 6"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon1}
             alt="Partner 1"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon2}
             alt="Partner 2"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem"
           />
           <Image
             src={icon3}
             alt="Partner 3"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon4}
             alt="Partner 4"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
           />
           <Image
             src={icon5}
             alt="Partner 5"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
           <Image
             src={icon6}
             alt="Partner 6"
-            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[3rem] h-[3rem]"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem]  w-[5rem] h-[5rem]"
+          />
+          <Image
+            src={icon6}
+            alt="Partner 6"
+            className="partner-image xl:w-[9rem] xl:h-[9rem] lg:w-[7rem] lg:h-[7rem] w-[5rem] h-[5rem]"
           />
         </div>
       </div>
