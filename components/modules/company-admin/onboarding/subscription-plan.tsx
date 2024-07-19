@@ -4,8 +4,12 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { PlanInterface } from "@/lib/interfaces";
-import { PlansAction } from "@/actions/payment/payment-action";
+import {
+  ConfirmPlanAction,
+  PlansAction,
+} from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
+import { toast } from "react-toastify";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -41,6 +45,20 @@ const SubscriptionPlan = ({
       return "year";
     }
     return "";
+  };
+
+  const handleNextClick = async () => {
+    try {
+      setIsLoading(true);
+      const selectedPlanId = getValues("plan");
+      await ConfirmPlanAction(selectedPlanId);
+      console.log(selectedPlanId);
+      console.log("plan selected");
+    } catch (error) {
+      console.error("Error confirming plan:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -91,6 +109,10 @@ const SubscriptionPlan = ({
               type="submit"
               id="onboarding-form"
               disabled={getValues("loading")}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNextClick();
+              }}
             >
               {getValues("loading") ? <Loader size={6} /> : "Next"}
             </button>
