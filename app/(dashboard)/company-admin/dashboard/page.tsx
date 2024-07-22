@@ -19,7 +19,6 @@ const page = async () => {
           session?.user?.firstName + " " + session?.user?.lastName
         }!`}
       />
-      <StripePlans />
       <Header title="Dashboard" hideFilter />
     </>
   );
