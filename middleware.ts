@@ -33,36 +33,36 @@ export default auth(async (req) => {
     ],
   };
 
-  if (isAuthenticated && role === "company-admin") {
-    const token = (req.auth as { token?: string })?.token;
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/has-company`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const result = await response.json();
-    if (result.statusCode === 200) {
-      const dashboardUrl = new URL(`/${role}/dashboard`, nextUrl);
-      if (!rolePaths[role].includes(nextUrl.pathname)) {
-        return Response.redirect(dashboardUrl);
-      }
-    } else if (result.statusCode === 401) {
-      if (nextUrl.pathname !== "/logout") {
-        const logoutUrl = new URL("/logout", nextUrl);
-        return Response.redirect(logoutUrl);
-      }
-    } else {
-      const onboardingUrl = new URL("/onboarding", nextUrl);
-      if (nextUrl.pathname !== onboardingUrl.pathname) {
-        return Response.redirect(onboardingUrl);
-      }
-    }
-  }
+  // if (isAuthenticated && role === "company-admin") {
+  //   const token = (req.auth as { token?: string })?.token;
+  //   const response = await fetch(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/user/has-company`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
+  //   const result = await response.json();
+  //   if (result.statusCode === 200) {
+  //     const dashboardUrl = new URL(`/${role}/dashboard`, nextUrl);
+  //     if (!rolePaths[role].includes(nextUrl.pathname)) {
+  //       return Response.redirect(dashboardUrl);
+  //     }
+  //   } else if (result.statusCode === 401) {
+  //     if (nextUrl.pathname !== "/logout") {
+  //       const logoutUrl = new URL("/logout", nextUrl);
+  //       return Response.redirect(logoutUrl);
+  //     }
+  //   } else {
+  //     const onboardingUrl = new URL("/onboarding", nextUrl);
+  //     if (nextUrl.pathname !== onboardingUrl.pathname) {
+  //       return Response.redirect(onboardingUrl);
+  //     }
+  //   }
+  // }
 
   if (isPublicRoute && isAuthenticated) {
     const targetUrl = new URL(`/${role}/dashboard`, nextUrl);

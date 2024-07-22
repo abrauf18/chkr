@@ -32,7 +32,6 @@ const SubscriptionPlan = ({
         setIsLoading(true);
         const response = await PlansAction();
         setPlans(response);
-        console.log(response);
       } catch (error) {
         console.error("Error fetching plans:", error);
       } finally {
@@ -51,19 +50,6 @@ const SubscriptionPlan = ({
     return "";
   };
 
-  const handleNextClick = async () => {
-    try {
-      setIsLoading(true);
-      const selectedPlanId = getValues("plan");
-      const result = await ConfirmPlanAction(selectedPlanId);
-      router.push(result);
-    } catch (error) {
-      console.error("Error confirming plan:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className="flex flex-col w-full justify-center items-center">
       {isLoading ? (
@@ -80,6 +66,7 @@ const SubscriptionPlan = ({
               >
                 <input
                   type="radio"
+                  className="cursor-pointer"
                   placeholder={plan.plan_type}
                   id={`plan-${plan.id}`}
                   value={plan.id}
@@ -112,10 +99,6 @@ const SubscriptionPlan = ({
               type="submit"
               id="onboarding-form"
               disabled={getValues("loading")}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNextClick();
-              }}
             >
               {getValues("loading") ? <Loader size={6} /> : "Next"}
             </button>

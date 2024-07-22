@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { OnboardingAction } from "@/actions/onboard/onboard-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { ConfirmPlanAction } from "@/actions/payment/payment-action";
 
 export default function OnboardingSteps() {
   const { currentStep, setCurrentStep, onboardingData, removeOnboardingData } =
@@ -61,8 +62,7 @@ export default function OnboardingSteps() {
         formData.set("firm_id", data["company-type"]),
         formData.set("phone_number", data["phone-number"]),
         formData.set("location", data.location),
-        formData.set("country", data.country),
-        formData.set("plan_id", data.plan);
+        formData.set("country", data.country);
 
       const logoFileList = data.logo;
       if (logoFileList instanceof FileList && logoFileList.length > 0) {
@@ -71,7 +71,16 @@ export default function OnboardingSteps() {
       const result = await OnboardingAction(formData);
       if (result.statusCode === 201) {
         toast.success(result.message);
-        return push("/company-admin/dashboard");
+        try {
+          const selectedPlanId = methods.getValues("plan");
+          const result = await ConfirmPlanAction(selectedPlanId);
+          return push(result);
+        } catch (error) {
+          console.error("Error confirming plan:", error);
+        } finally {
+          removeOnboardingData();
+          return toast.error(result.message);
+        }
       }
       await methods.reset();
       removeOnboardingData();

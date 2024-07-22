@@ -101,7 +101,7 @@ const CompanyInformation = ({
           <input
             type="file"
             id="fileInput"
-            accept=".jpg, .jpeg, .png, .gif"
+            accept=".jpg, .jpeg, .png"
             {...register("logo")}
             className="hidden"
           />
