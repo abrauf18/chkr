@@ -18,7 +18,6 @@ import Loader from "@/components/shared/loader";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(true);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
   const [isloading, setIsLoading] = useState(false);
   const { push } = useRouter();
   const {
@@ -205,17 +204,17 @@ export default function Signup() {
                 {...register("confirmPassword")}
                 className="bg-[#F9F8F8] !pt-4"
                 id="confirmPassword"
-                type={showConfirmPassword ? "password" : "text"}
+                type={showPassword ? "password" : "text"}
                 placeholder="**************"
               />
               <button
                 type="button"
                 onClick={() => {
-                  setShowConfirmPassword((prev) => !prev);
+                  setShowPassword((prev) => !prev);
                 }}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
               >
-                {showConfirmPassword ? <EyeOff /> : <Eye />}
+                {showPassword ? <EyeOff /> : <Eye />}
               </button>
             </div>
             <p className="text-sm text-red-500 mt-1">

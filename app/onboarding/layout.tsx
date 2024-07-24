@@ -8,7 +8,12 @@ export default async function RootLayout({
 }) {
   const session: any = await auth();
   const role = session?.user?.role;
+  console.log("current", session.user.company_id);
+
   if (role === "company-admin") {
+    if (session?.user?.company_id) {
+      return redirect(`/${role}/dashboard`);
+    }
     return <main>{children}</main>;
   }
   if (role === "admin" || role === "super-admin") {

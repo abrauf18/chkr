@@ -19,6 +19,7 @@ const SubscriptionPlan = ({
   const {
     register,
     getValues,
+    setValue,
     formState: { errors },
   } = useFormContext();
   const { onboardingData } = useOnboardingStore();
@@ -31,6 +32,9 @@ const SubscriptionPlan = ({
       try {
         setIsLoading(true);
         const response = await PlansAction();
+        if (response.length > 0) {
+          setValue("plan", response[0].id.toString());
+        }
         setPlans(response);
       } catch (error) {
         console.error("Error fetching plans:", error);

@@ -56,7 +56,7 @@ const AboutUs = () => {
       </div>
       <div className="flex mt-20 md:mx-10 xl:mx-24 mx-4 gap-4">
         <Image
-          src="/images/AboutUsImg.png"
+          src="/images/AboutUsImg.svg"
           width={500}
           height={500}
           alt="About"

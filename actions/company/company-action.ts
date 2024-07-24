@@ -65,3 +65,23 @@ export const DeleteCompanyAction = async (id: number) => {
   return result;
 };
 
+export const GetUserCompanyAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/company/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        // @ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+

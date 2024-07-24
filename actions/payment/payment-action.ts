@@ -42,6 +42,7 @@ export const PlansAction = async () => {
 // };
 
 export const ConfirmPlanAction = async (data: any) => {
+  console.log(data);
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/payment/checkout`,
@@ -52,7 +53,7 @@ export const ConfirmPlanAction = async (data: any) => {
         //@ts-ignore
         Authorization: `Bearer ${session?.token}`,
       },
-      body: JSON.stringify({ productId: data }),
+      body: JSON.stringify(data),
     }
   );
   const result = await response.text();

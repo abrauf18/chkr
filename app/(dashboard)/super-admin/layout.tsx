@@ -7,6 +7,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session: any = await auth();
+  if (!session) {
+    return redirect("/login");
+  }
   const role = session?.user?.role;
   if (role === "super-admin") {
     return <main>{children}</main>;
