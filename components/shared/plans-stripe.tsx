@@ -26,6 +26,7 @@ import { useSession } from "next-auth/react";
 export default function StripePlans() {
   const [plans, setPlans] = useState<PlanInterface[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
   const pathname = usePathname();
   const session: any = useSession();
   const { push } = useRouter();
@@ -71,12 +72,18 @@ export default function StripePlans() {
   };
 
   const onSubmit = async (data: any) => {
-    console.log(session.data.user.companyId);
-    const url = await ConfirmPlanAction({
-      productId: data.plan,
-      companyId: session.data.user.company_id,
-    });
-    return push(url);
+    try {
+      setButtonLoader(true);
+      const url = await ConfirmPlanAction({
+        productId: data.plan,
+        companyId: session.data.user.company_id,
+      });
+      return push(url);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setButtonLoader(false);
+    }
   };
 
   return (
@@ -140,7 +147,7 @@ export default function StripePlans() {
                         className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
                         type="submit"
                       >
-                        Submit
+                        {buttonLoader ? <Loader size={6} /> : "Submit"}
                       </button>
                     </div>
                   </>

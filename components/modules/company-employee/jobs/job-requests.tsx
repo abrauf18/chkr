@@ -52,7 +52,7 @@ const JobRequests: React.FC<JobRequestsProps> = ({ jobs, isDashboard }) => {
   return (
     <div>
       {filteredJobs.length === 0 ? (
-        <p className="text-center mt-12">No jobs to display</p>
+        <p className="text-center mt-12">No jobs to show</p>
       ) : (
         <>
           <div className="flex flex-col gap-6">

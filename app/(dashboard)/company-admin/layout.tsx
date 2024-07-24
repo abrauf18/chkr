@@ -30,8 +30,8 @@ export default async function RootLayout({
     }
 
     if (session?.user?.company_plan !== "paid") {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       const result = await GetUserCompanyAction(session.user.company_id || "");
-      console.log(result);
       if (result.statusCode === 200 && result?.data?.company_plan === "paid") {
         return <UpdateSession company_plan={result.data.company_plan} />;
       }

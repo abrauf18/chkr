@@ -256,7 +256,7 @@ export default function JobDetails({
             </form>
             <div className="mt-6">
               {comments.length === 0 ? (
-                <p className="text-center">No messages to display</p>
+                <p className="text-center">No messages to show</p>
               ) : (
                 comments.map((comment, index) => (
                   <Comment
