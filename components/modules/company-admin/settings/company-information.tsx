@@ -317,7 +317,7 @@ export default function CompanyInformation({
         <div className="flex w-full justify-between mt-4 gap-4">
           <button
             type="button"
-            className="py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl text-sm mobile:w-1/2 w-36 "
+            className="mobile:w-1/2  w-36 py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out"
             onClick={() => reset(defaultValues)}
           >
             Discard

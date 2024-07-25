@@ -58,6 +58,7 @@ export interface CompanyAdminInterface {
   phone_number: string;
   location: string;
   country: string;
+  stripe_connect_account_id: string | null;
 }
 
 export interface EditCompanyAdminInterface {

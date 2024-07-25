@@ -95,7 +95,7 @@ const PersonalInformation = ({
         action("userInfo");
         //update user session
         if (!changedFields.password) {
-          const value = await update({
+          await update({
             ...session,
             token: result.token,
             user: {

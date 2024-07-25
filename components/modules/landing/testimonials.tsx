@@ -4,13 +4,12 @@ import Image from "next/image";
 import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 
 const Testimonials = async () => {
-  const feedbacks = await GetAllFeedbacksAction();
+  let feedbacks = await GetAllFeedbacksAction();
   return (
     <div id="testimonials" className="rounded-2xl relative -z-10">
       <div className="absolute top-0 right-0 z-50">
         <Image
           src="/images/testimonial-header.svg"
-          objectFit="cover"
           alt="testimonial-header"
           className="lg:w-56 lg:h-60 md:w-40 md:h-40 h-32 w-32"
           width={0}

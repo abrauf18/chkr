@@ -9,7 +9,7 @@ import {
   PlansAction,
 } from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -19,20 +19,27 @@ const SubscriptionPlan = ({
   const {
     register,
     getValues,
+    setValue,
     formState: { errors },
   } = useFormContext();
   const { onboardingData } = useOnboardingStore();
   const [plans, setPlans] = useState<PlanInterface[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPlans = async () => {
       try {
+        setIsLoading(true);
         const response = await PlansAction();
+        if (response.length > 0) {
+          setValue("plan", response[0].id.toString());
+        }
         setPlans(response);
-        console.log(response);
       } catch (error) {
         console.error("Error fetching plans:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPlans();
@@ -45,20 +52,6 @@ const SubscriptionPlan = ({
       return "year";
     }
     return "";
-  };
-
-  const handleNextClick = async () => {
-    try {
-      setIsLoading(true);
-      const selectedPlanId = getValues("plan");
-      await ConfirmPlanAction(selectedPlanId);
-      console.log(selectedPlanId);
-      console.log("plan selected");
-    } catch (error) {
-      console.error("Error confirming plan:", error);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
@@ -77,6 +70,7 @@ const SubscriptionPlan = ({
               >
                 <input
                   type="radio"
+                  className="cursor-pointer"
                   placeholder={plan.plan_type}
                   id={`plan-${plan.id}`}
                   value={plan.id}
@@ -109,10 +103,6 @@ const SubscriptionPlan = ({
               type="submit"
               id="onboarding-form"
               disabled={getValues("loading")}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNextClick();
-              }}
             >
               {getValues("loading") ? <Loader size={6} /> : "Next"}
             </button>

@@ -12,7 +12,7 @@ interface CompanyDetailsProps {
   phone_number: string;
   country: string;
   location: string;
-  plan_type: string;
+  // plan_type: string;
   price: number;
   firm_name: string;
   subscriptionPlan: string;
@@ -24,7 +24,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
   company_logo,
   country,
   firm_name,
-  plan_type,
+  // plan_type,
   location,
   phone_number,
   subscriptionPlan,
@@ -92,7 +92,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
               {location}
             </div>
           </div>
-          <div className="flex flex-col text-sm lg:whitespace-nowrap">
+          {/* <div className="flex flex-col text-sm lg:whitespace-nowrap">
             <span className="font-bold md:text-lg mobile:text-left">
               Subscription Plan:
             </span>
@@ -102,7 +102,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({
                 " " +
                 subscriptionPlan}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

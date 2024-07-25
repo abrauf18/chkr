@@ -274,3 +274,6 @@ export const MessageSchema = z.object({
     .max(150, { message: "Message can have a maximum of 150 characters" }),
 });
 
+export const stripePlanySchema = z.object({
+  plan: z.string().min(1, { message: "Plan must not be empty" }),
+});

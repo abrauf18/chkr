@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import PlanCard from "./plan-card";
 import clsx from "clsx";
+import Link from "next/link";
 
 // Define enum for plans
 enum Plan {
@@ -55,16 +56,22 @@ const Subscriptions = () => {
         </div>
       </div>
       <div className="grid lg:grid-cols-2 md:grid-cols-1 md:mx-24 xl:mx-36 gap-6 my-16">
-        <PlanCard
-          monthlyHeading="Monthly Plan"
-          monthlyPrice="$ 9.99/Per Month"
-          buttonText={`Buy ${Plan.Monthly} Subscription Plan`} // Use enum value
-        />
-        <PlanCard
-          monthlyHeading="Yearly Plan"
-          monthlyPrice="$ 99.99/Per Year"
-          buttonText={`Buy ${Plan.Annually} Subscription Plan`} // Use enum value
-        />
+        <Link href="/login">
+          <PlanCard
+            monthlyHeading="Standard Plan"
+            monthlyPrice="$99.99 per month"
+            buttonText="Buy Standard Subscription Plan"
+            description="Maximum of 10 users in a company"
+          />
+        </Link>
+        <Link href="/login">
+          <PlanCard
+            monthlyHeading="Premium Plan"
+            monthlyPrice="$124.99 per month"
+            buttonText="Buy Premium Subscription Plan"
+            description="Unlimited users in a company"
+          />
+        </Link>
       </div>
     </div>
   );

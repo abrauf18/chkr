@@ -30,7 +30,7 @@ const Companies: React.FC = () => {
     <>
       <Header title="List of Companies Onboarded" hideFilter />
       {data?.length == 0 ? (
-        <div className="text-center mt-16">No companies to display</div>
+        <div className="text-center mt-16">No companies to show</div>
       ) : (
         <div className="flex flex-col gap-4 my-8">
           <h1>Recently added</h1>

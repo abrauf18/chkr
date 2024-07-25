@@ -120,7 +120,7 @@ const Feedback: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center mt-12">No feedback to display</div>
+        <div className="text-center mt-12">No feedback to show</div>
       )}
     </>
   );

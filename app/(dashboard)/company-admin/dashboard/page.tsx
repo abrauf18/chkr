@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import DashboardHeader from "@/components/shared/dashboard-header";
 import Header from "@/components/shared/header";
 import { auth } from "@/auth";
+import StripePlans from "@/components/shared/plans-stripe";
 
 export const metadata: Metadata = {
   title: "Dashboard",

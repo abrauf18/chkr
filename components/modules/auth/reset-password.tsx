@@ -147,6 +147,7 @@ export default function ResetPassword() {
             <button
               className="w-full bg-primary text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
+              disabled={isloading}
             >
               {isloading ? <Loader size={6} /> : "Reset Password"}
             </button>

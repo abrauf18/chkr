@@ -13,11 +13,14 @@ import clsx from "clsx";
 import { OnboardingAction } from "@/actions/onboard/onboard-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { ConfirmPlanAction } from "@/actions/payment/payment-action";
+import { useSession } from "next-auth/react";
 
 export default function OnboardingSteps() {
   const { currentStep, setCurrentStep, onboardingData, removeOnboardingData } =
     useOnboardingStore();
   const { push } = useRouter();
+  const { data: session, update } = useSession();
 
   const handleNextStep = () => {
     switch (currentStep) {
@@ -61,8 +64,7 @@ export default function OnboardingSteps() {
         formData.set("firm_id", data["company-type"]),
         formData.set("phone_number", data["phone-number"]),
         formData.set("location", data.location),
-        formData.set("country", data.country),
-        formData.set("plan_id", data.plan);
+        formData.set("country", data.country);
 
       const logoFileList = data.logo;
       if (logoFileList instanceof FileList && logoFileList.length > 0) {
@@ -71,11 +73,31 @@ export default function OnboardingSteps() {
       const result = await OnboardingAction(formData);
       if (result.statusCode === 201) {
         toast.success(result.message);
-        return push("/company-admin/dashboard");
+        await update({
+          ...session,
+          user: {
+            ...session?.user,
+            company_id: result.companyId,
+          },
+        });
+        try {
+          const selectedPlanId = methods.getValues("plan");
+          const url = await ConfirmPlanAction({
+            productId: selectedPlanId,
+            companyId: result?.companyId,
+          });
+          return push(url);
+        } catch (error) {
+          console.error("Error confirming plan:", error);
+        } finally {
+          await methods.reset();
+          removeOnboardingData();
+        }
+      } else {
+        await methods.reset();
+        removeOnboardingData();
+        return toast.error(result.message);
       }
-      await methods.reset();
-      removeOnboardingData();
-      return toast.error(result.message);
     } catch (error) {
       console.error("Error storing company information:", error);
     }

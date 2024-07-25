@@ -49,7 +49,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   session: {
-    maxAge: 7 * 24 * 60 * 60, // 7 days
+    maxAge: 8 * 60 * 60, //  8 hours
   },
   secret: process.env.AUTH_SECRET as string,
 });

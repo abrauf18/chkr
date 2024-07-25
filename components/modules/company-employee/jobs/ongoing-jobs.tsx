@@ -60,7 +60,7 @@ const OngoingJobs: React.FC<JobsProps> = ({ jobs }) => {
   return (
     <>
       {filteredJobs.length === 0 ? (
-        <div className="text-center mt-12">No jobs to display</div>
+        <div className="text-center mt-12">No jobs to show</div>
       ) : (
         <div className="flex flex-col mx-auto gap-4">
           {paginatedData.map((job) => (

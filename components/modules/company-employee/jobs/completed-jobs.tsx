@@ -47,7 +47,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
   return (
     <>
       {filteredJobs.length === 0 ? (
-        <div className="text-center mt-12">No jobs to display</div>
+        <div className="text-center mt-12">No jobs to show</div>
       ) : (
         <div>
           {paginatedData.map((job) => (

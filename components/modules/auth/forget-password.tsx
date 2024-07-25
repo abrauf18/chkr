@@ -79,6 +79,7 @@ export default function ForgetPassword() {
             <button
               className="w-full bg-primary hover:bg-primaryHover text-white font-medium py-2 px-4 rounded-2xl"
               type="submit"
+              disabled={isloading}
             >
               {isloading ? <Loader size={6} /> : "Send Password"}
             </button>
@@ -87,9 +88,5 @@ export default function ForgetPassword() {
       </div>
     </div>
   );
-}
-
-function push(arg0: string): unknown {
-  throw new Error("Function not implemented.");
 }
 
