@@ -146,6 +146,7 @@ export default function StripePlans() {
                       <button
                         className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
                         type="submit"
+                        disabled={buttonLoader}
                       >
                         {buttonLoader ? <Loader size={6} /> : "Submit"}
                       </button>

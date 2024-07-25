@@ -58,16 +58,18 @@ const Subscriptions = () => {
       <div className="grid lg:grid-cols-2 md:grid-cols-1 md:mx-24 xl:mx-36 gap-6 my-16">
         <Link href="/login">
           <PlanCard
-            monthlyHeading="Monthly Plan"
-            monthlyPrice="$ 9.99/Per Month"
-            buttonText={`Buy ${Plan.Monthly} Subscription Plan`} // Use enum value
+            monthlyHeading="Standard Plan"
+            monthlyPrice="$99.99 per month"
+            buttonText="Buy Standard Subscription Plan"
+            description="Maximum of 10 users in a company"
           />
         </Link>
         <Link href="/login">
           <PlanCard
-            monthlyHeading="Yearly Plan"
-            monthlyPrice="$ 99.99/Per Year"
-            buttonText={`Buy ${Plan.Annually} Subscription Plan`} // Use enum value
+            monthlyHeading="Premium Plan"
+            monthlyPrice="$124.99 per month"
+            buttonText="Buy Premium Subscription Plan"
+            description="Unlimited users in a company"
           />
         </Link>
       </div>

@@ -226,6 +226,7 @@ export default function Signup() {
             <button
               className="w-full bg-primary hover:bg-primaryHover text-white font-bold py-2 px-4 rounded-3xl"
               type="submit"
+              disabled={isloading}
             >
               {isloading ? <Loader size={6} /> : "Sign Up"}
             </button>

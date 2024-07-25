@@ -1,22 +1,16 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-export default async function RootLayout({
+export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session: any = await auth();
   if (!session) {
-    return redirect("/login");
-  }
-  const role = session?.user?.role;
-  if (role === "company-admin") {
-    if (session?.user?.company_id) {
-      return redirect(`/${role}/dashboard`);
-    }
     return <main>{children}</main>;
   }
+  const role = session?.user?.role;
   if (role === "admin" || role === "super-admin") {
     return redirect(`/${role}/subscription`);
   }
