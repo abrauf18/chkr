@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({
         <input
           id="fileInput"
           type="file"
-          accept="image/png, image/jpeg, image/jpg, image/gif"
+          accept="image/png, image/jpeg, image/jpg,"
           className="hidden"
           onChange={handleFileChange}
         />

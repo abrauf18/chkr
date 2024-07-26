@@ -19,11 +19,11 @@ export default async function DashboardHeader({ title }: DashboardHeaderProps) {
           {/* <div className="flex justify-center items-center bg-white rounded-full h-14 w-14">
             <Bell />
           </div> */}
-          {session.user && (
+          {session?.user && (
             <UserOptions
-              name={session.user.firstName}
-              role={session.user.role}
-              picture={session.user.picture}
+              name={session?.user?.firstName}
+              role={session?.user?.role}
+              picture={session?.user?.picture}
             />
           )}
         </div>

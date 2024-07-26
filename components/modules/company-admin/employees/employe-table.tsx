@@ -70,7 +70,7 @@ const EmployeeTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {currentEmployees.map((employee, index) => (
+          {currentEmployees?.map((employee, index) => (
             <TableRow
               key={employee.email}
               className={index % 2 === 1 ? "bg-white" : "bg-gray-100"}
@@ -95,7 +95,7 @@ const EmployeeTable = ({
           <TableRow></TableRow>
         </TableBody>
       </Table>
-      {employees.length > ITEMS_PER_PAGE && (
+      {employees?.length > ITEMS_PER_PAGE && (
         <Pagination className="flex w-full justify-center items-center mt-4">
           <PaginationContent>
             <PaginationItem>

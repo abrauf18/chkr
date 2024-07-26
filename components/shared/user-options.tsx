@@ -40,10 +40,10 @@ export default function UserOptions({
             <Image
               key={picture + Math.random()}
               src={picture}
-              height={100}
-              width={100}
+              height={33}
+              width={33}
               alt="user"
-              className="rounded-full max-w-12 max-h-12"
+              className="rounded-full w-24 h-24 max-w-12 max-h-12"
             />
           </div>
           <div className="flex flex-col mx-3 text-left">
