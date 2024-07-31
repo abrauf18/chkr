@@ -27,7 +27,7 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
   return result;
 };
 
-export const GetAllFeedbacksAction = async (order: string, sort: string) => {
+export const GetAllFeedbacksAction = async (order = "newest", sort = "a-z") => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}`,
     {

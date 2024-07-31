@@ -282,3 +282,27 @@ export const CreateMessageAction = async (data: MessageInterface) => {
   return result;
 };
 
+export const GetJobsSummary = async () => {
+  const session = await auth();
+  const id = session?.user?.id;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/job/get-user-job-details?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["getjobssummary"],
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+

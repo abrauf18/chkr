@@ -12,6 +12,7 @@ interface CompletedJobCardProps {
   service: string;
   price: number;
   description?: string;
+  payment_status: string;
 }
 
 const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
@@ -22,6 +23,7 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
   date_time,
   service,
   price,
+  payment_status,
 }) => {
   return (
     <div className="mt-4 bg-white rounded-3xl py-10 px-4">
@@ -60,7 +62,8 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
             <span className="font-bold md:text-lg">Payment:</span>
             <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base flex items-center">
               <div className="bg-green-500 rounded-full h-2 w-2 mr-2"></div>
-              Pending
+              {payment_status?.charAt(0).toUpperCase() +
+                payment_status?.slice(1)}
             </span>
           </div>
         </div>

@@ -3,17 +3,21 @@ import UsersSummaryCard from "./users-summary-card";
 import CompaniesSummaryCard from "./companies-summary-card";
 import SubscriptionList from "./subscription-list";
 import Header from "@/components/shared/header";
-import Stripe from "@/components/shared/stripe";
+import { GetCompanyDetails } from "@/actions/company/company-action";
 
-export default function Subscription() {
+export default async function Subscription() {
+  const data = await GetCompanyDetails();
   const userSummaryData = [
-    { period: "Monthly", amount: 24.97 },
-    { period: "Yearly", amount: 1234777.56 }, // No amount provided
+    { period: "Standard", amount: data?.companystats[0]?.Standard || 0 },
+    { period: "Premium", amount: data?.companystats[0]?.Premium || 0 },
   ];
 
   const companySummaryData = [
-    { title: "Total Companies", companyCount: 45 },
-    { title: "Active Companies", companyCount: 8 },
+    {
+      title: "Total Companies",
+      companyCount: data?.companystats[0]?.total_Company || 0,
+    },
+    { title: "Disable Companies", companyCount: data?.disableCount || 0 },
   ];
 
   return (
@@ -33,7 +37,7 @@ export default function Subscription() {
           </div>
         </div>
         <Header title="Transaction Summary" hideFilter />
-        <SubscriptionList />
+        <SubscriptionList plans={data?.plans} />
       </div>
     </>
   );

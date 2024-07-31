@@ -1,13 +1,10 @@
-import Summary from "@/components/modules/company-employee/dashboard/summary";
+import { GetJobsSummary } from "@/actions/jobs/job-action";
+import DashboardSummary from "@/components/modules/company-admin/dashboard/dashboard-summary";
 import React from "react";
 
-const AnalyticsPage = () => {
-  return (
-    <div className="mb-6">
-      <h1 className="text-xl font-semibold my-4">Jobs & Earning Summary</h1>
-      <Summary />
-    </div>
-  );
+const AnalyticsPage = async () => {
+  const jobsSummary = await GetJobsSummary();
+  return <DashboardSummary jobsSummary={jobsSummary} />;
 };
 
 export default AnalyticsPage;

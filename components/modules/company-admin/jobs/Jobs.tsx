@@ -99,11 +99,11 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
           ))}
         </div>
       )}
-      {activeTabData.length === 0 ? (
+      {activeTabData?.length === 0 ? (
         <p className="text-center text-gray-700 mt-6">No jobs to show</p>
       ) : (
         <div>
-          {paginatedData.map((job, index) => (
+          {paginatedData?.map((job, index) => (
             <AssignedJobCard
               key={index}
               id={job.id}
@@ -121,6 +121,7 @@ const Jobs: React.FC<JobsProps> = ({ jobs, isDashboard }) => {
                 })
               )}
               currentTab={tabData[activeTab - 1].text.toLowerCase()}
+              payment_status={job?.payment_status}
             />
           ))}
         </div>
