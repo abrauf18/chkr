@@ -54,15 +54,18 @@ const CompanyCard: React.FC<CompanyInterface> = ({
       </div>
       <p className="text-gray-600 mobile:text-xs text-sm mb-4">{location}</p>
       <div className=" flex flex-wrap gap-2">
-        {/* <div className="flex items-center gap-2 py-2 px-5 rounded-xl bg-gray-100">
+        <div className="flex items-center gap-2 py-2 px-5 rounded-xl bg-gray-100">
           <div className="rounded-full bg-green-500 h-3 w-3"></div>
           <p className="whitespace-nowrap text-xs">
-            {plan.plan_type.charAt(0).toUpperCase() +
-              plan.plan_type?.slice(1) +
-              " " +
-              "subscription"}
+            {plan?.plan_type
+              ? plan?.plan_type.charAt(0).toUpperCase() +
+                plan?.plan_type?.slice(1) +
+                " " +
+                "subscription"
+              : "No plan subscribed"}
           </p>
-        </div> */}
+        </div>
+
         <div className="flex items-center bg-gray-100 py-2 px-5 rounded-xl gap-2">
           <MapPinned className="w-4 h-4" color="gray" />
           <span className="whitespace-nowrap text-xs">{country}</span>

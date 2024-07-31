@@ -132,8 +132,6 @@ export default function StripePlans() {
                           <PlanCard
                             title={plan.productName}
                             price={plan.price}
-                            timePeriod={getTimePeriod(plan.productName)}
-                            features={[]}
                             description={plan.productDescription}
                           />
                         </div>

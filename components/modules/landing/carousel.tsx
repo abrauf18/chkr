@@ -19,17 +19,16 @@ import React, { useEffect, useState } from "react";
 import TestimonialsCard from "./testimonials-card";
 
 function Carousel({ feedbacks }: { feedbacks: Feedbacks[] }) {
-  const totalSlides = 3; // Total number of slides
-  const dots = Array.from({ length: 3 }); // Array of dots
-  const [transitioning, setTransitioning] = useState(false); // State to control transition
-
+  const slidesToShow = feedbacks.length > 6 ? 3 : 2;
+  const totalSlides = Math.ceil(feedbacks.length / slidesToShow);
+  const dots = Array.from({ length: totalSlides });
+  const [transitioning, setTransitioning] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [shuffledSlides, setShuffledSlides] = useState<Feedbacks[]>([]);
 
   useEffect(() => {
-    // Shuffle the slides array to get random testimonials
-    setShuffledSlides(feedbacks.sort(() => Math.random() - 0.5));
-  }, []);
+    setShuffledSlides([...feedbacks].sort(() => Math.random() - 0.5));
+  }, [feedbacks]);
 
   const nextSlide = () => {
     if (!transitioning) {
@@ -52,18 +51,19 @@ function Carousel({ feedbacks }: { feedbacks: Feedbacks[] }) {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    const intervalId = setInterval(nextSlide, 5000);
     return () => clearInterval(intervalId);
-  }, [currentIndex]);
+  }, [currentIndex, totalSlides]);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex top-4 justify-center py-2">
-        <div className="lg:flex lg:h-[50vh] gap-12 items-center justify-center lg:mx-2 mx-5 testimonial-container">
+        <div className="gap-12 items-center justify-center lg:mx-2 mx-5 testimonial-container">
           {shuffledSlides
-            .slice(currentIndex, currentIndex + 2)
+            .slice(
+              currentIndex * slidesToShow,
+              currentIndex * slidesToShow + slidesToShow
+            )
             .map((slide, index) => (
               <div
                 key={index}
@@ -75,9 +75,7 @@ function Carousel({ feedbacks }: { feedbacks: Feedbacks[] }) {
                 }}
               >
                 <TestimonialsCard
-                  authorName={
-                    slide.user.first_name + " " + slide.user.last_name
-                  }
+                  authorName={`${slide.user.first_name} ${slide.user.last_name}`}
                   feedback={slide.comment}
                   companyName={slide.user.company.company_name}
                   picture={slide.user.picture}

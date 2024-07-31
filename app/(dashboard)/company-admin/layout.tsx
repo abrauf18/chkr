@@ -52,7 +52,7 @@ export default async function RootLayout({
           />
         );
       }
-      return <Stripe />;
+      return <Stripe open />;
     }
 
     return <main>{children}</main>;

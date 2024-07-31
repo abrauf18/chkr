@@ -4,10 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import useOnboardingStore from "@/store/onboarding-store";
 import { PlanInterface } from "@/lib/interfaces";
-import {
-  ConfirmPlanAction,
-  PlansAction,
-} from "@/actions/payment/payment-action";
+import { PlansAction } from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
 import { useRouter } from "next/navigation";
 
@@ -45,15 +42,6 @@ const SubscriptionPlan = ({
     fetchPlans();
   }, []);
 
-  const getTimePeriod = (productName: string) => {
-    if (productName.toLowerCase().includes("monthly")) {
-      return "month";
-    } else if (productName.toLowerCase().includes("yearly")) {
-      return "year";
-    }
-    return "";
-  };
-
   return (
     <div className="flex flex-col w-full justify-center items-center">
       {isLoading ? (
@@ -80,8 +68,6 @@ const SubscriptionPlan = ({
                 <PlanCard
                   title={plan.productName}
                   price={plan.price}
-                  timePeriod={getTimePeriod(plan.productName)}
-                  features={[]}
                   description={plan.productDescription}
                 />
               </div>

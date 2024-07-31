@@ -13,7 +13,13 @@ import JobDetails from "./job-details";
 import { CircleArrowRight, Eye } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export default function ShowJobDetails({ jobId }: { jobId: number }) {
+export default function ShowJobDetails({
+  jobId,
+  isCompleted,
+}: {
+  jobId: number;
+  isCompleted?: boolean;
+}) {
   const pathname = usePathname();
 
   return (
@@ -39,7 +45,7 @@ export default function ShowJobDetails({ jobId }: { jobId: number }) {
           </DialogTitle>
           <DialogDescription>
             {pathname === "/company-employee/jobs" && (
-              <JobDetails jobId={jobId} />
+              <JobDetails jobId={jobId} isCompleted />
             )}
             {pathname === "/company-admin/jobs" && (
               <JobDetails jobId={jobId} isAdmin />

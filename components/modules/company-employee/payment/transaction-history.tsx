@@ -1,14 +1,12 @@
-"use client"
+"use client";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
   Pagination,
   PaginationContent,
@@ -17,73 +15,15 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
-import { ArrowDown } from "lucide-react"
-import { SetStateAction, useState } from "react";
-
-const transactions = [
-
-  {
-    ID: "#AD1456",
-    Date: "8/2/19",
-    Amount: "$928.41",
-    Status: "Cash in"
-  },
-  {
-    ID: "#AD1456",
-    Date: "8/21/15",
-    Amount: "-$202.87",
-    Status: "Cash out"
-  },
-  {
-    ID: "#AD1456",
-    Date: "5/30/14",
-    Amount: "$576.28",
-    Status: "Cash in"
-  },
-  {
-    ID: "#AD1456",
-    Date: "5/30/14",
-    Amount: "$576.28",
-    Status: "Cash in"
-  },
-  {
-    ID: "#AD1456",
-    Date: "8/21/15",
-    Amount: "-$202.87",
-    Status: "Cash out"
-  },
-  {
-    ID: "#AD1456",
-    Date: "5/30/14",
-    Amount: "$576.28",
-    Status: "Cash in"
-  },
-
-  {
-    ID: "#AD1456",
-    Date: "5/30/14",
-    Amount: "$576.28",
-    Status: "Cash in"
-  },
-  {
-    ID: "#AD1456",
-    Date: "8/2/19",
-    Amount: "$928.41",
-    Status: "Cash in"
-  },
-  {
-    ID: "#AD1456",
-    Date: "8/21/15",
-    Amount: "-$202.87",
-    Status: "Cash out"
-  },
-]
+import { ArrowDown } from "lucide-react";
+import { useState } from "react";
+import { fromUnixTime, format } from "date-fns";
 
 const ITEMS_PER_PAGE = 6;
 
-export function TransactionHistory() {
+export function TransactionHistory({ transactions }: { transactions: any }) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const paginatedTransactions = transactions.slice(
@@ -143,38 +83,60 @@ export function TransactionHistory() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {paginatedTransactions.map((transaction, index) => (
+          {paginatedTransactions.map((transaction: any, index: number) => (
             <TableRow key={index} className={index % 2 === 1 ? "bg-white" : ""}>
-              <TableCell className="font-medium">{transaction.ID}</TableCell>
-              <TableCell>{transaction.Date}</TableCell>
-              <TableCell>{transaction.Amount}</TableCell>
+              <TableCell className="font-medium">{transaction.id}</TableCell>
               <TableCell>
-                <div className={`flex items-center justify-center border rounded-lg gap-1 w-[6rem] p-1 ${transaction.Status === "Cash in" ? "bg-green-100" : "bg-red-100"}`}>
-                  <div className={`rounded-full w-2 h-2 ${transaction.Status === "Cash in" ? "bg-green-500" : "bg-red-500"}`}></div>
-                  <span>{transaction.Status}</span>
+                {format(
+                  fromUnixTime(transaction?.created),
+                  "dd MMMM yyyy, h:mm a"
+                )}
+              </TableCell>
+              <TableCell>{transaction.amount}</TableCell>
+              <TableCell>
+                <div
+                  className={`flex items-center justify-center border rounded-lg gap-1 w-[6rem] p-1 ${
+                    transaction.type === "payment"
+                      ? "bg-green-100"
+                      : "bg-red-100"
+                  }`}
+                >
+                  <div
+                    className={`rounded-full w-2 h-2 ${
+                      transaction.type === "payout"
+                        ? "bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  ></div>
+                  <span>
+                    {transaction.type === "payment" ? "Cash In" : "Cash Out"}
+                  </span>
                 </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Pagination className="bg-white my-6 rounded-xl p-4">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious onClick={handlePreviousPage} />
-          </PaginationItem>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <PaginationItem key={i + 1}>
-              <PaginationLink onClick={() => handlePageChange(i + 1)}>
-                {i + 1}
-              </PaginationLink>
+      {transactions?.length > ITEMS_PER_PAGE && (
+        <Pagination className="bg-white my-6 rounded-xl p-4">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={handlePreviousPage} />
             </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext onClick={handleNextPage} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i + 1}>
+                <PaginationLink onClick={() => handlePageChange(i + 1)}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext onClick={handleNextPage} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </>
   );
 }
+

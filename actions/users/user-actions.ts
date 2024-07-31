@@ -71,7 +71,6 @@ export const SearchUserAction = async (search: string) => {
     }
   );
   const result = await response.json();
-  console.log(result);
   if (result.statusCode === 401) {
     redirect("/logout");
   }

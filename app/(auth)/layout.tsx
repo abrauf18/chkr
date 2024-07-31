@@ -7,7 +7,7 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const session: any = await auth();
-  if (!session) {
+  if (!session?.user?.role) {
     return <main>{children}</main>;
   }
   const role = session?.user?.role;

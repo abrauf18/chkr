@@ -13,7 +13,13 @@ import { ConnectStripeAccount } from "@/actions/payment/payment-action";
 import { useRouter } from "next/navigation";
 import Loader from "./loader";
 
-export default function stripe() {
+export default function stripe({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen?: (value: boolean) => void;
+}) {
   const { push } = useRouter();
   const [loading, setLoading] = React.useState(false);
 
@@ -31,7 +37,7 @@ export default function stripe() {
     }
   };
   return (
-    <Dialog open={true}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="bg-white md:max-w-[35%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
         <DialogHeader className="flex flex-col gap-3 items-center justify-center">
           <DialogTitle>Connect with Stripe</DialogTitle>

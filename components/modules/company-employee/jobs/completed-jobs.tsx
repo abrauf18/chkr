@@ -53,6 +53,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
           {paginatedData.map((job) => (
             <CompletedJobCard
               key={job.job.id}
+              id={job.job.id}
               customer_name={job.job.customer_name}
               location={job.job.location.name}
               description={job.job.description}

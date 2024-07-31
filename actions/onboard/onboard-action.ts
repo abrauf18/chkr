@@ -53,20 +53,3 @@ export const OnboardingAction = async (data: FormData) => {
   return result;
 };
 
-export const PlanAction = async () => {
-  const session = await auth();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/plans`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //@ts-ignore
-      Authorization: `Bearer ${session?.token}`,
-    },
-  });
-  const result = await response.json();
-  if (result.statusCode === 401) {
-    redirect("/logout");
-  }
-  return result;
-};
-

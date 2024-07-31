@@ -1,8 +1,10 @@
 import React from "react";
 import Location from "@/assets/icons/location-icon";
 import { format } from "date-fns";
+import ShowJobDetails from "@/components/shared/show-job-details";
 
 interface CompletedJobCardProps {
+  id: number;
   customer_name: string;
   location: string;
   status: string;
@@ -13,6 +15,7 @@ interface CompletedJobCardProps {
 }
 
 const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
+  id,
   customer_name,
   location,
   status,
@@ -64,6 +67,9 @@ const CompletedJobCard: React.FC<CompletedJobCardProps> = ({
         <span className="font-bold text-3xl mt-3 whitespace-nowrap">
           $ {price} USD
         </span>
+      </div>
+      <div className="flex justify-end items-center whitespace-nowrap mr-4 mt-1 gap-2">
+        <ShowJobDetails jobId={id} isCompleted />
       </div>
     </div>
   );

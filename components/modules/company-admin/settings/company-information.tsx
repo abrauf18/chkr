@@ -21,10 +21,12 @@ import Loader from "@/components/shared/loader";
 import clsx from "clsx";
 import action from "@/app/action";
 import { camelToSnakeCase } from "@/lib/utils";
+import DeleteModal from "@/components/shared/delete-modal";
 
 export default function CompanyInformation({
   companyinfo,
   currentImage,
+  hideDeleteButton,
 }: {
   companyinfo: {
     id: number;
@@ -37,6 +39,7 @@ export default function CompanyInformation({
     company_admin?: any;
   };
   currentImage: string;
+  hideDeleteButton?: boolean;
 }) {
   const [defaultValues, setDefaultValues] = useState<SettingsCompany | null>(
     null
@@ -314,29 +317,40 @@ export default function CompanyInformation({
           </p>
         </div>
 
-        <div className="flex w-full justify-between mt-4 gap-4">
-          <button
-            type="button"
-            className="mobile:w-1/2  w-36 py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out"
-            onClick={() => reset(defaultValues)}
+        <div className="flex w-full justify-between mt-4 gap-4 mobile:flex-col">
+          {!hideDeleteButton && (
+            <DeleteModal userId={0} companyId={companyinfo?.id} />
+          )}
+          <div
+            className={clsx("flex items-center gap-2", {
+              "w-full justify-between": hideDeleteButton,
+            })}
           >
-            Discard
-          </button>
-          <button
-            type="submit"
-            className={clsx(
-              "mobile:w-1/2 w-36 py-2 px-4 rounded-3xl text-sm cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
-              {
-                "bg-primary text-white":
-                  hasChanges || currentImage !== companyinfo.company_logo,
-                "bg-gray-100 text-gray-700":
-                  !hasChanges || currentImage === companyinfo.company_logo,
+            <button
+              type="button"
+              className="mobile:w-1/2 w-36 py-2 px-4 bg-gray-200 text-gray-700 rounded-3xl hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out"
+              onClick={() => reset(defaultValues)}
+            >
+              Discard
+            </button>
+            <button
+              type="submit"
+              className={clsx(
+                "mobile:w-1/2 w-36 py-2 px-4 rounded-3xl cursor-pointer hover:bg-primaryHover hover:text-white transition duration-300 ease-in-out",
+                {
+                  "bg-primary text-white":
+                    hasChanges || currentImage !== companyinfo.company_logo,
+                  "bg-gray-100 text-gray-700":
+                    !hasChanges || currentImage === companyinfo.company_logo,
+                }
+              )}
+              disabled={
+                currentImage === companyinfo.company_logo && !hasChanges
               }
-            )}
-            disabled={currentImage === companyinfo.company_logo && !hasChanges}
-          >
-            {isloading ? <Loader size={6} /> : "Save"}
-          </button>
+            >
+              {isloading ? <Loader size={6} /> : "Save"}
+            </button>
+          </div>
         </div>
       </div>
     </form>

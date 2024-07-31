@@ -27,9 +27,11 @@ import { format } from "date-fns";
 export default function JobDetails({
   jobId,
   isAdmin,
+  isCompleted,
 }: {
   jobId: number;
   isAdmin?: boolean;
+  isCompleted?: boolean;
 }) {
   const {
     register,
@@ -163,14 +165,16 @@ export default function JobDetails({
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
-              {pathname === "/company-employee/jobs" && (
-                <Select jobLocation={UserJobDetails?.job?.location} />
-              )}
-              {pathname === "/company-employee/jobs" && (
-                <MarkAsComplete jobID={UserJobDetails?.job?.id} />
-              )}
-            </div>
+            {!isCompleted && (
+              <div className="flex flex-col gap-2 h-3/4 mt-4 lg:mt-0">
+                {pathname === "/company-employee/jobs" && (
+                  <Select jobLocation={UserJobDetails?.job?.location} />
+                )}
+                {pathname === "/company-employee/jobs" && (
+                  <MarkAsComplete jobID={UserJobDetails?.job?.id} />
+                )}
+              </div>
+            )}
           </div>
           <div className="flex flex-col gap-1 mobile:text-left">
             <span className="font-bold text-lg">Description:</span>
@@ -189,7 +193,10 @@ export default function JobDetails({
               )}
               {!isAdmin && (
                 <span className="bg-gray-100 rounded-2xl py-3 px-6 mt-2 md:text-base">
-                  {new Date(UserJobDetails?.job.date_time).toLocaleString()}
+                  {format(
+                    UserJobDetails?.job?.date_time,
+                    "dd MMMM yyyy, h:mm a"
+                  )}
                 </span>
               )}
             </div>

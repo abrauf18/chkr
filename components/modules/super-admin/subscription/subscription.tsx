@@ -32,7 +32,7 @@ export default function Subscription() {
             <CompaniesSummaryCard {...companySummaryData[1]} />
           </div>
         </div>
-        <Header title="Transaction Summary" />
+        <Header title="Transaction Summary" hideFilter />
         <SubscriptionList />
       </div>
     </>

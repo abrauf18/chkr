@@ -6,10 +6,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import { ChevronDown, ChevronUp, CircleUserRound, LogOut } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  CircleUserRound,
+  LogOut,
+  HandCoins,
+} from "lucide-react";
 import Image from "next/image";
 import Feedback from "./feedback";
 import Link from "next/link";
+import Stripe from "@/components/shared/stripe";
+import { Dialog, DialogTrigger } from "../ui/dialog";
 
 export default function UserOptions({
   name,
@@ -21,6 +29,7 @@ export default function UserOptions({
   picture: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [openStripe, setOpenStrip] = useState(false);
   const capitalize = (str: string) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -62,7 +71,23 @@ export default function UserOptions({
           </div>
         </Link>
         {(role === "company-admin" || role === "company-employee") && (
-          <Feedback />
+          <>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div
+                  onClick={() => {
+                    setOpenStrip(!openStripe);
+                  }}
+                  className="flex items-center p-2 gap-2 hover:bg-gray-100 "
+                >
+                  <HandCoins className="w-5 h-5" color="black" />
+                  <span className="text-[#292D32]"> Connect with stripe</span>
+                </div>
+              </DialogTrigger>
+            </Dialog>
+            {openStripe && <Stripe open={openStripe} setOpen={setOpenStrip} />}
+            <Feedback />
+          </>
         )}
         <div
           className="flex items-center p-2 gap-2 hover:bg-gray-100 cursor-pointer"

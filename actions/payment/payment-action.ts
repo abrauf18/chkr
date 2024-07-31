@@ -63,3 +63,44 @@ export const ConnectStripeAccount = async () => {
   return result;
 };
 
+export const ChargeAndTransfer = async (jobId: number) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/payment/charge-and-transfer`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify({ jobId }),
+    }
+  );
+  const result = await response.json();
+  return result;
+};
+
+export const AccountDetails = async () => {
+  const session: any = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/payment/account-details?accountId=${session?.user?.stripe_connect_account_id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      next: {
+        tags: ["accountDetails"],
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+

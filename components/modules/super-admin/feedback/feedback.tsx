@@ -16,6 +16,7 @@ import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 import { FeedbackInterface } from "@/lib/interfaces";
 import action from "@/app/action";
 import Loader from "@/components/shared/loader";
+import { format } from "date-fns";
 
 const Feedback: React.FC = () => {
   const [feedback, setFeedback] = useState<FeedbackInterface[]>([]);
@@ -74,7 +75,7 @@ const Feedback: React.FC = () => {
                 key={review.id}
                 name={`${review.user.first_name} ${review.user.last_name}`}
                 url={review.user.picture}
-                time={new Date(review.createdAt).toLocaleDateString()}
+                time={format(review.createdAt, "dd MMMM yyyy, h:mm a")}
                 review={review.comment}
                 rating={review.rating}
               />

@@ -44,6 +44,7 @@ const EditCompanyProfile: React.FC<EditCompanyProfileProps> = ({
                 company_logo: companyData.company_logo,
                 company_admin: companyData.company_admin,
               }}
+              hideDeleteButton
             />
           )}
         </div>
