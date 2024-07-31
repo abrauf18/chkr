@@ -7,6 +7,10 @@ import DeleteModal from "../../../shared/delete-modal";
 import CreateJob from "../jobs/create-job";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { format } from "date-fns";
+import { Wallet } from "lucide-react";
+import { ChargeAndTransfer } from "@/actions/payment/payment-action";
+import { toast } from "react-toastify";
+import Loader from "@/components/shared/loader";
 
 interface AssignedJobCardProps {
   id: number;
@@ -43,8 +47,24 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   currentTab,
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleClick = async () => {
+    try {
+      setIsLoading(true);
+      const response: any = await ChargeAndTransfer(id);
+      if (response?.statusCode === 200) {
+        return toast.success(response?.message);
+      }
+      return toast.error(response?.message);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const displayEmployeeName = () => {
@@ -119,7 +139,24 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
             </span>
           </div>
         </div>
-        <div className="flex gap-2 h-3/4 mt-4 lg:mt-0">
+
+        <div className="flex gap-2 h-3/4 mt-4 lg:mt-0 flex-wrap">
+          {status === "completed" && (
+            <div
+              className="flex items-center justify-center bg-primary hover:bg-red-600 rounded-xl px-3 text-white cursor-pointer w-32"
+              onClick={handleClick}
+              aria-disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader size={6} />
+              ) : (
+                <>
+                  <Wallet size={16} className="mr-2" />
+                  Pay Now
+                </>
+              )}
+            </div>
+          )}
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
             <span>{status?.charAt(0).toUpperCase() + status?.slice(1)}</span>
           </div>
