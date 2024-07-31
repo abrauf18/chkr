@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -29,6 +29,7 @@ export default function DeleteModal({
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { push } = useRouter();
   const handleDelete = async () => {
     try {
       let data;
@@ -41,9 +42,18 @@ export default function DeleteModal({
       } else if (pathname.startsWith("/company-admin/jobs")) {
         data = await DeleteJobAction(jobId || 0);
         action("getJobs");
-      } else if (pathname.startsWith("/super-admin/companies")) {
+      } else if (
+        pathname.startsWith("/super-admin/companies") ||
+        pathname.startsWith("/company-admin/settings")
+      ) {
         data = await DeleteCompanyAction(companyId || 0);
         toast.success(data.message);
+        if (
+          pathname.startsWith("/company-admin/settings") &&
+          data.statusCode === 200
+        ) {
+          return push("/logout");
+        }
         location.reload();
       }
       setOpen(false);
@@ -64,8 +74,9 @@ export default function DeleteModal({
         pathname === "/super-admin/admins" ||
         pathname === "/company-admin/employees" ? (
           <DeleteIcon />
-        ) : pathname === "/super-admin/companies" ? (
-          <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
+        ) : pathname === "/super-admin/companies" ||
+          pathname === "/company-admin/settings" ? (
+          <div className="flex items-center p-2 gap-2 hover:bg-gray-100 rounded-3xl">
             <Trash2 className="w-4 h-4" color="gray" />
             <span className="text-gray-600">Delete Company</span>
           </div>
