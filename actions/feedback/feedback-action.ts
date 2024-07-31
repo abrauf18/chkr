@@ -27,15 +27,18 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
   return result;
 };
 
-export const GetAllFeedbacksAction = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    next: {
-      tags: ["getFeedbacks"],
-    },
-  });
+export const GetAllFeedbacksAction = async (order: string, sort: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["getFeedbacks"],
+      },
+    }
+  );
   const result = await response.json();
   return result;
 };

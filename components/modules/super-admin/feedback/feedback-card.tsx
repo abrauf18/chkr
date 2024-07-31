@@ -4,6 +4,7 @@ import Image from "next/image";
 
 interface ReviewCardProps {
   name: string;
+  email: string;
   url: string;
   rating: number;
   time: string;
@@ -12,6 +13,7 @@ interface ReviewCardProps {
 
 const FeedbackCard: React.FC<ReviewCardProps> = ({
   name,
+  email,
   url,
   rating,
   time,
@@ -27,9 +29,11 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
         className="w-12 h-12 rounded-full"
       />
       <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">{name}</h3>
-          <span className="text-gray-500 text-sm">{time}</span>
+        <div className="flex items-center justify-between flex-wrap">
+          <h3 className="text-lg font-semibold">
+            {name} <span className="text-sm">({email})</span>
+          </h3>
+          <span className="text-gray-500 sm:text-sm text-xs">{time}</span>
         </div>
         <div className="flex items-center gap-1 mt-2">
           {[...Array(5)].map((_, i) => (

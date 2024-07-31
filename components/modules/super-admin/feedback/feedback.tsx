@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FeedbackCard from "./feedback-card";
 import RatingSummary from "./feedback-summary";
 import Header from "@/components/shared/header";
@@ -12,32 +12,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 import { FeedbackInterface } from "@/lib/interfaces";
-import action from "@/app/action";
 import Loader from "@/components/shared/loader";
 import { format } from "date-fns";
 
-const Feedback: React.FC = () => {
-  const [feedback, setFeedback] = useState<FeedbackInterface[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      try {
-        setIsLoading(true);
-        const response: FeedbackInterface[] = await GetAllFeedbacksAction();
-        setFeedback(response);
-        action("getFeedbacks");
-      } catch (error) {
-        console.error("Error fetching feedback:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchFeedback();
-  }, []);
-
+const Feedback = ({ feedback }: { feedback: FeedbackInterface[] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 3;
 
@@ -62,18 +41,15 @@ const Feedback: React.FC = () => {
 
   return (
     <>
-      <Header title="Manage Customer Feedback" hideFilter />
-      {isLoading ? (
-        <div className="flex items-center justify-center h-96">
-          <Loader />
-        </div>
-      ) : feedback.length > 0 ? (
+      <Header title="Manage Customer Feedback" />
+      {feedback.length > 0 ? (
         <div className="flex mobile:flex-col-reverse md:flex-row gap-4 mt-3">
           <div className="space-y-4 md:w-[60%]">
             {currentReviews.map((review) => (
               <FeedbackCard
                 key={review.id}
                 name={`${review.user.first_name} ${review.user.last_name}`}
+                email={review.user.email}
                 url={review.user.picture}
                 time={format(review.createdAt, "dd MMMM yyyy, h:mm a")}
                 review={review.comment}
