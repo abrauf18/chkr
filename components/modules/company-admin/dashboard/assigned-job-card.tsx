@@ -32,6 +32,7 @@ interface AssignedJobCardProps {
     request_status: string;
   }>;
   currentTab: string;
+  payment_status?: string;
 }
 
 const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
@@ -45,6 +46,7 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
   price,
   assignedUsers,
   currentTab,
+  payment_status,
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -141,22 +143,27 @@ const AssignedJobCard: React.FC<AssignedJobCardProps> = ({
         </div>
 
         <div className="flex gap-2 h-3/4 mt-4 lg:mt-0 flex-wrap">
-          {status === "completed" && (
-            <div
-              className="flex items-center justify-center bg-primary hover:bg-red-600 rounded-xl px-3 text-white cursor-pointer w-32"
-              onClick={handleClick}
-              aria-disabled={isLoading}
-            >
-              {isLoading ? (
-                <Loader size={6} />
-              ) : (
-                <>
-                  <Wallet size={16} className="mr-2" />
-                  Pay Now
-                </>
-              )}
-            </div>
-          )}
+          {status === "completed" &&
+            (payment_status === "paid" ? (
+              <div className="flex items-center justify-center bg-primary rounded-xl px-3 text-white w-32">
+                Paid
+              </div>
+            ) : (
+              <div
+                className="flex items-center justify-center bg-primary hover:bg-red-600 rounded-xl px-3 text-white cursor-pointer w-32"
+                onClick={handleClick}
+                aria-disabled={isLoading}
+              >
+                {isLoading ? (
+                  <Loader size={6} />
+                ) : (
+                  <>
+                    <Wallet size={16} className="mr-2" />
+                    Pay Now
+                  </>
+                )}
+              </div>
+            ))}
           <div className="flex items-center bg-gray-100 rounded-xl px-3">
             <span>{status?.charAt(0).toUpperCase() + status?.slice(1)}</span>
           </div>

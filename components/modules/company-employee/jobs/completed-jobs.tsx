@@ -15,6 +15,7 @@ interface JobsProps {
   jobs: any[];
 }
 const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
+  console.log(jobs);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
@@ -61,6 +62,7 @@ const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
               date_time={job.job.date_time}
               service={job.job.service.service_name}
               price={job.price}
+              payment_status={job?.job?.payment_status}
             />
           ))}
           {paginatedData?.length > itemsPerPage && (

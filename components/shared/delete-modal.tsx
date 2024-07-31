@@ -22,10 +22,12 @@ export default function DeleteModal({
   userId,
   jobId,
   companyId,
+  feedbackId,
 }: {
   userId: number;
   jobId?: number;
   companyId?: number;
+  feedbackId?: number;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -72,7 +74,8 @@ export default function DeleteModal({
       <DialogTrigger onClick={() => setOpen(true)}>
         {pathname === "/company-admin/jobs" ||
         pathname === "/super-admin/admins" ||
-        pathname === "/company-admin/employees" ? (
+        pathname === "/company-admin/employees" ||
+        pathname === "/super-admin/feedback" ? (
           <DeleteIcon />
         ) : pathname === "/super-admin/companies" ||
           pathname === "/company-admin/settings" ? (

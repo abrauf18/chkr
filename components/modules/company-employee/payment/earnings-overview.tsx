@@ -38,15 +38,6 @@ export default function EarningsOverview({
             </p>
           </div>
         </div>
-        {/* <div className="flex">
-          <div className="flex items-center gap-1 text-green-500">
-            <MoveUpRight className="h-4 w-4" />
-            <span className="text-xs xl:text-sm font-bold">1.20%</span>
-            <span className="text-gray-400 ml-2 whitespace-nowrap lg:text-sm text-base">
-              since last month
-            </span>
-          </div>
-        </div> */}
       </div>
       <div className="flex flex-col w-full bg-white rounded-3xl py-8 px-6 gap-6">
         <div className="flex items-center xl:gap-9 gap-2 w-full">

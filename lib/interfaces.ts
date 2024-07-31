@@ -154,6 +154,7 @@ export interface FeedbackInterface {
     first_name: string;
     last_name: string;
     picture: string;
+    email: string;
   };
   createdAt: string;
 }
