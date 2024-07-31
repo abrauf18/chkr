@@ -33,7 +33,7 @@ const config = {
       },
       colors: {
         primary: "#FF2600",
-        primaryHover: "#FF2600",
+        primaryHover: "#FF5733",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
