@@ -32,8 +32,6 @@ export default function stripe({
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
   return (

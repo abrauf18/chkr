@@ -42,7 +42,7 @@ const OngoingJobCard: React.FC<CardProps> = ({
             <span className="font-semibold md:text-lg text-gray-700">
               {location?.name}
               <Link
-                href={`https://www.google.com/maps?q=${location}`}
+                href={`https://www.google.com/maps?q=${location.name}`}
                 target="_blank"
                 className="text-primary text-sm md:text-base font-semibold ml-2"
               >

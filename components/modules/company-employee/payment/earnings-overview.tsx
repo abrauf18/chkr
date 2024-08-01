@@ -47,7 +47,7 @@ export default function EarningsOverview({
           <div className="flex flex-col w-[40%]">
             <div className="flex items-baseline gap-2">
               <h1 className="font-bold text-2xl xl:text-3xl text-gray-700">
-                ${totalWithdrawn}
+                ${Math.abs(totalWithdrawn)}
               </h1>
               <p className="font-bold">USD</p>
             </div>

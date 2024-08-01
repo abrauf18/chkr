@@ -40,7 +40,7 @@ export default async function RootLayout({
       if (result.statusCode === 200 && result?.data?.company_plan === "paid") {
         return <UpdateSession company_plan={result?.data?.company_plan} />;
       }
-      return <StripePlans />;
+      return <StripePlans open />;
     }
     if (session?.user?.stripe_connect_account_id === null) {
       await new Promise((resolve) => setTimeout(resolve, 3000));

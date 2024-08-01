@@ -12,12 +12,14 @@ import {
   CircleUserRound,
   LogOut,
   HandCoins,
+  DollarSign,
 } from "lucide-react";
 import Image from "next/image";
 import Feedback from "./feedback";
 import Link from "next/link";
 import Stripe from "@/components/shared/stripe";
 import { Dialog, DialogTrigger } from "../ui/dialog";
+import StripePlans from "./plans-stripe";
 
 export default function UserOptions({
   name,
@@ -30,6 +32,7 @@ export default function UserOptions({
 }) {
   const [open, setOpen] = useState(false);
   const [openStripe, setOpenStrip] = useState(false);
+  const [openPlanModal, setOpenPlanModal] = useState(false);
   const capitalize = (str: string) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -72,6 +75,32 @@ export default function UserOptions({
         </Link>
         {(role === "company-admin" || role === "company-employee") && (
           <>
+            {role === "company-admin" && (
+              <>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div
+                      onClick={() => {
+                        setOpenPlanModal(!openPlanModal);
+                      }}
+                      className="flex items-center p-2 gap-2 hover:bg-gray-100 "
+                    >
+                      <DollarSign className="w-5 h-5" color="black" />
+                      <span className="text-[#292D32]">
+                        Change Subscription
+                      </span>
+                    </div>
+                  </DialogTrigger>
+                </Dialog>
+                {openPlanModal && (
+                  <StripePlans
+                    open={openPlanModal}
+                    setOpen={setOpenPlanModal}
+                    isView
+                  />
+                )}
+              </>
+            )}
             <Dialog>
               <DialogTrigger asChild>
                 <div
@@ -81,7 +110,7 @@ export default function UserOptions({
                   className="flex items-center p-2 gap-2 hover:bg-gray-100 "
                 >
                   <HandCoins className="w-5 h-5" color="black" />
-                  <span className="text-[#292D32]"> Connect with stripe</span>
+                  <span className="text-[#292D32]">Connect with stripe</span>
                 </div>
               </DialogTrigger>
             </Dialog>

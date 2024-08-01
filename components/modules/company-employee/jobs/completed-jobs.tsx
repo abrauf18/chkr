@@ -15,7 +15,6 @@ interface JobsProps {
   jobs: any[];
 }
 const CompletedJobs: React.FC<JobsProps> = ({ jobs }) => {
-  console.log(jobs);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 

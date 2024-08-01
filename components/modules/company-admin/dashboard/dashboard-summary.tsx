@@ -20,7 +20,7 @@ const DashboardSummary = ({ jobsSummary }: { jobsSummary: any }) => {
             </div>
             <div className="flex flex-col w-[40%]">
               <h1 className="font-bold text-3xl lg:text-2xl text-gray-700 whitespace-nowrap">
-                {jobsSummary?.pending[0]?.All_Jobs || 0}
+                {jobsSummary?.all_jobs || 0}
               </h1>
               <p className="text-gray-400 text-xl whitespace-nowrap">
                 Total Jobs
@@ -35,7 +35,7 @@ const DashboardSummary = ({ jobsSummary }: { jobsSummary: any }) => {
             </div>
             <div className="flex flex-col w-[40%]">
               <h1 className="font-bold text-2xl xl:text-3xl text-gray-700">
-                {jobsSummary?.pending[0]?.Completed || 0}
+                {jobsSummary?.completed_jobs || 0}
               </h1>
               <p className="text-gray-400 text-xl xl:whitespace-nowrap mobile:whitespace-nowrap">
                 Completed Jobs
@@ -50,7 +50,7 @@ const DashboardSummary = ({ jobsSummary }: { jobsSummary: any }) => {
             </div>
             <div className="flex flex-col w-[40%]">
               <h1 className="font-bold text-3xl text-gray-700">
-                {jobsSummary?.pending[0]?.Pending || 0}
+                {jobsSummary?.pending_jobs || 0}
               </h1>
               <p className="text-gray-400 text-xl xl:whitespace-nowrap mobile:whitespace-nowrap">
                 New Requests
@@ -62,7 +62,9 @@ const DashboardSummary = ({ jobsSummary }: { jobsSummary: any }) => {
       {jobsSummary?.completedJobsPerMonth.length > 0 ? (
         <div className="mb-6">
           <div className="flex justify-between items-center my-3">
-            <h1 className="text-xl font-semibold my-4">Jobs Summary</h1>
+            <h1 className="text-xl font-semibold my-4">
+              Completed Jobs Summary
+            </h1>
             <select
               className="select-wrapper"
               onChange={handleChange}

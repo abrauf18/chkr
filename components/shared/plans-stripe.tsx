@@ -22,8 +22,17 @@ import {
 import { ErrorMessage } from "@hookform/error-message";
 import { stripePlanySchema } from "@/lib/types";
 import { useSession } from "next-auth/react";
+import clsx from "clsx";
 
-export default function StripePlans() {
+export default function StripePlans({
+  open,
+  setOpen,
+  isView,
+}: {
+  open: boolean;
+  setOpen?: (value: boolean) => void;
+  isView?: boolean;
+}) {
   const [plans, setPlans] = useState<PlanInterface[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(false);
@@ -62,15 +71,6 @@ export default function StripePlans() {
     fetchPlans();
   }, [setValue]);
 
-  const getTimePeriod = (productName: string) => {
-    if (productName.toLowerCase().includes("monthly")) {
-      return "month";
-    } else if (productName.toLowerCase().includes("yearly")) {
-      return "year";
-    }
-    return "";
-  };
-
   const onSubmit = async (data: any) => {
     try {
       setButtonLoader(true);
@@ -87,19 +87,29 @@ export default function StripePlans() {
   };
 
   return (
-    <Dialog open={true}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="bg-white md:max-w-[80%] lg:max-w-[65%] mobile:max-w-[90%] max-h-[80vh] overflow-y-auto overflow-x-hidden rounded-3xl">
-        <DialogHeader className="flex flex-col gap-3 items-center justify-center">
+        <DialogHeader className="flex flex-col gap-2 items-center justify-center">
           <DialogTitle>
             {pathname.startsWith("/company-admin") ? (
-              <p>Connect with Stripe</p>
+              isView ? (
+                <p>Current Plan: Standard Plan</p>
+              ) : (
+                <p>Connect with Stripe</p>
+              )
             ) : (
               <></>
             )}
           </DialogTitle>
           <DialogDescription>
             {pathname.startsWith("/company-admin") ? (
-              <p>Please complete your payment process to onboard.</p>
+              <>
+                {isView ? (
+                  <p>You can upgrade/downgrade, and cancel subscription</p>
+                ) : (
+                  <p>Please complete your payment process to onboard.</p>
+                )}
+              </>
             ) : (
               <></>
             )}
@@ -116,7 +126,7 @@ export default function StripePlans() {
                 ) : (
                   <>
                     <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-2 gap-6">
-                      {plans.map((plan) => (
+                      {plans?.map((plan) => (
                         <div
                           key={plan.id}
                           className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary"
@@ -140,13 +150,38 @@ export default function StripePlans() {
                         <ErrorMessage errors={errors} name="plan" />
                       </p>
                     </div>
-                    <div className="flex items-center justify-center mt-4">
+                    <div
+                      className={clsx("flex items-center w-full mt-4 gap-2", {
+                        "justify-center": !isView,
+                        "justify-between": isView,
+                      })}
+                    >
+                      {isView && (
+                        <button
+                          className="w-full lg:w-1/3 bg-gray-200 text-black font-medium py-3 px-10 rounded-3xl"
+                          type="button"
+                        >
+                          Cancel Subscription
+                        </button>
+                      )}
                       <button
-                        className="w-full lg:w-[10rem] bg-primary text-white font-medium py-3 px-10 rounded-3xl"
+                        className={clsx(
+                          "bg-primary text-white font-medium py-3 px-10 rounded-3xl",
+                          {
+                            "w-full lg:w-1/3": isView,
+                            "w-[10rem]": !isView,
+                          }
+                        )}
                         type="submit"
                         disabled={buttonLoader}
                       >
-                        {buttonLoader ? <Loader size={6} /> : "Submit"}
+                        {buttonLoader ? (
+                          <Loader size={6} />
+                        ) : isView ? (
+                          "Upgrade/Downgrade"
+                        ) : (
+                          "Submit"
+                        )}
                       </button>
                     </div>
                   </>
