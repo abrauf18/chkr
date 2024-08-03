@@ -3,22 +3,24 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-export const PlansAction = async () => {
-  const session = await auth();
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/payment/products`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        //@ts-ignore
-        Authorization: `Bearer ${session?.token}`,
-      },
-      next: {
-        tags: ["allPlans"],
-      },
-    }
-  );
+export const PlansAction = async (isView?: boolean) => {
+  const session: any = await auth();
+  const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/payment/products`);
+  if (isView) {
+    url.searchParams.append("id", session?.user?.company_id);
+  }
+  console.log(url.toString());
+  const response = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      //@ts-ignore
+      Authorization: `Bearer ${session?.token}`,
+    },
+    next: {
+      tags: ["allPlans"],
+    },
+  });
   const result = await response.json();
   if (result.statusCode === 401) {
     redirect("/logout");
@@ -101,6 +103,46 @@ export const AccountDetails = async () => {
   if (result.statusCode === 401) {
     redirect("/logout");
   }
+  return result;
+};
+
+export const CancelSubscription = async () => {
+  const session: any = await auth();
+  console.log(session?.user?.email);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/payment/cancel-subscription?email=${session?.user?.email}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+
+export const UpdateSubscription = async (planId: string, planType: string) => {
+  const session = await auth();
+  const email = session?.user?.email;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/payment/update-plan`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify({ email, planId, planType }),
+    }
+  );
+  const result = await response.json();
   return result;
 };
 

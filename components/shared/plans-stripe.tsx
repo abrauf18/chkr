@@ -16,13 +16,16 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlanInterface } from "@/lib/interfaces";
 import {
+  CancelSubscription,
   ConfirmPlanAction,
   PlansAction,
+  UpdateSubscription,
 } from "@/actions/payment/payment-action";
 import { ErrorMessage } from "@hookform/error-message";
 import { stripePlanySchema } from "@/lib/types";
 import { useSession } from "next-auth/react";
 import clsx from "clsx";
+import { toast } from "react-toastify";
 
 export default function StripePlans({
   open,
@@ -33,7 +36,7 @@ export default function StripePlans({
   setOpen?: (value: boolean) => void;
   isView?: boolean;
 }) {
-  const [plans, setPlans] = useState<PlanInterface[]>([]);
+  const [plans, setPlans] = useState<PlanInterface>();
   const [isLoading, setIsLoading] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(false);
   const pathname = usePathname();
@@ -57,10 +60,10 @@ export default function StripePlans({
     const fetchPlans = async () => {
       try {
         setIsLoading(true);
-        const response = await PlansAction();
+        const response = await PlansAction(isView);
         setPlans(response);
-        if (response.length > 0) {
-          setValue("plan", response[0].id.toString()); // Set default value
+        if (response.plans.length > 0) {
+          setValue("plan", response.plans[0].id.toString()); // Set default value
         }
       } catch (error) {
         console.error("Error fetching plans:", error);
@@ -74,16 +77,37 @@ export default function StripePlans({
   const onSubmit = async (data: any) => {
     try {
       setButtonLoader(true);
-      const url = await ConfirmPlanAction({
-        productId: data.plan,
-        companyId: session.data.user.company_id,
-      });
-      return push(url);
+      if (isView) {
+        const planType = plans?.plans.find((plan) => plan.id === data?.plan);
+        const result = await UpdateSubscription(
+          data?.plan,
+          planType?.productName || ""
+        );
+        if (result?.statusCode === 200) {
+          setOpen && setOpen(false);
+          return toast.success(result?.message);
+        }
+      } else {
+        const url = await ConfirmPlanAction({
+          productId: data.plan,
+          companyId: session.data.user.company_id,
+        });
+        return push(url);
+      }
     } catch (err) {
       console.error(err);
     } finally {
       setButtonLoader(false);
     }
+  };
+
+  const handleCancelSubscription = async () => {
+    const result = await CancelSubscription();
+    if (result?.statusCode === 200) {
+      toast.success(result?.message);
+      return push("/logout");
+    }
+    return toast.error(result?.message);
   };
 
   return (
@@ -93,7 +117,10 @@ export default function StripePlans({
           <DialogTitle>
             {pathname.startsWith("/company-admin") ? (
               isView ? (
-                <p>Current Plan: Standard Plan</p>
+                <p>
+                  Current Plan:{" "}
+                  {plans ? plans?.company["plan.plan_type"] : "loading..."}
+                </p>
               ) : (
                 <p>Connect with Stripe</p>
               )
@@ -126,7 +153,7 @@ export default function StripePlans({
                 ) : (
                   <>
                     <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-2 gap-6">
-                      {plans?.map((plan) => (
+                      {plans?.plans?.map((plan: any) => (
                         <div
                           key={plan.id}
                           className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary"
@@ -160,6 +187,7 @@ export default function StripePlans({
                         <button
                           className="w-full lg:w-1/3 bg-gray-200 text-black font-medium py-3 px-10 rounded-3xl"
                           type="button"
+                          onClick={handleCancelSubscription}
                         >
                           Cancel Subscription
                         </button>

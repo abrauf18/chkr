@@ -6,7 +6,6 @@ import useOnboardingStore from "@/store/onboarding-store";
 import { PlanInterface } from "@/lib/interfaces";
 import { PlansAction } from "@/actions/payment/payment-action";
 import Loader from "@/components/shared/loader";
-import { useRouter } from "next/navigation";
 
 const SubscriptionPlan = ({
   handlePreviousStep,
@@ -20,15 +19,17 @@ const SubscriptionPlan = ({
     formState: { errors },
   } = useFormContext();
   const { onboardingData } = useOnboardingStore();
-  const [plans, setPlans] = useState<PlanInterface[]>([]);
+  const [plans, setPlans] = useState<PlanInterface>();
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+
+  console.log(onboardingData);
 
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setIsLoading(true);
         const response = await PlansAction();
+        console.log(response);
         if (response.length > 0) {
           setValue("plan", response[0].id.toString());
         }
@@ -51,7 +52,7 @@ const SubscriptionPlan = ({
       ) : (
         <>
           <div className="bg-white w-full shadow-md rounded-3xl px-8 pt-2 pb-8 my-10 gap-6">
-            {plans.map((plan) => (
+            {plans?.plans?.map((plan: any) => (
               <div
                 key={plan.id}
                 className="flex items-baseline hover:border-2 p-2 hover:rounded-3xl hover:border-primary focus:border-2 focus:border-primary"
@@ -62,7 +63,7 @@ const SubscriptionPlan = ({
                   placeholder={plan.plan_type}
                   id={`plan-${plan.id}`}
                   value={plan.id}
-                  defaultChecked={onboardingData.plan === plan.plan_type}
+                  defaultChecked={onboardingData.plan === plan.productName}
                   {...register("plan")}
                 />
                 <PlanCard

@@ -37,7 +37,7 @@ export interface OnboardingInterface {
   plan_id: number;
 }
 
-export interface PlanInterface {
+export interface Plans {
   productDescription: string;
   price: number;
   productName: string;
@@ -45,6 +45,10 @@ export interface PlanInterface {
   timePeriod: string;
   id: number;
   plan_type: string;
+}
+export interface PlanInterface {
+  plans: Plans[];
+  company?: any;
 }
 
 export interface CompanyAdminInterface {
