@@ -43,3 +43,23 @@ export const GetAllFeedbacksAction = async (order = "newest", sort = "a-z") => {
   return result;
 };
 
+export const deleteFeedbackAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/feedback/delete/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
+

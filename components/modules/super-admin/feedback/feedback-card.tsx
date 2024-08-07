@@ -50,15 +50,15 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
             </div>
             <p className="text-gray-600 mt-2 text-sm">{review}</p>
           </div>
-          {/* <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <div
               className="p-2 bg-orange-200 rounded-lg cursor-pointer"
-              onClick={handleArchive}
+              // onClick={handleArchive}
             >
               <Archive color="orange" />
             </div>
             <DeleteModal userId={0} feedbackId={0} />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
