@@ -48,6 +48,7 @@ const Feedback = ({ feedback }: { feedback: FeedbackInterface[] }) => {
             {currentReviews.map((review) => (
               <FeedbackCard
                 key={review.id}
+                reviewId={review.id}
                 name={`${review.user.first_name} ${review.user.last_name}`}
                 email={review.user.email}
                 url={review.user.picture}

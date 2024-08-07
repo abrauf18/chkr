@@ -5,6 +5,7 @@ import DeleteModal from "@/components/shared/delete-modal";
 import { Archive, ArchiveRestore } from "lucide-react";
 
 interface ReviewCardProps {
+  reviewId: number;
   name: string;
   email: string;
   url: string;
@@ -14,6 +15,7 @@ interface ReviewCardProps {
 }
 
 const FeedbackCard: React.FC<ReviewCardProps> = ({
+  reviewId,
   name,
   email,
   url,
@@ -57,7 +59,7 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
             >
               <Archive color="orange" />
             </div>
-            <DeleteModal userId={0} feedbackId={0} />
+            <DeleteModal userId={0} feedbackId={reviewId} />
           </div>
         </div>
       </div>
