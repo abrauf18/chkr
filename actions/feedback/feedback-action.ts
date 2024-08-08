@@ -63,3 +63,22 @@ export const deleteFeedbackAction = async (id: number) => {
   return result;
 };
 
+export const UpdateFeedbackStatusAction = async (id: number, isArchive: boolean) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/feedback/updateFeedbackArchiveStatus/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify({
+        isArchive: isArchive
+      }),
+    }
+  );
+  const result = await response.json();
+  return result;
+};

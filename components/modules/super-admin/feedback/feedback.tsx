@@ -55,6 +55,7 @@ const Feedback = ({ feedback }: { feedback: FeedbackInterface[] }) => {
                 time={format(review.createdAt, "dd MMMM yyyy, h:mm a")}
                 review={review.comment}
                 rating={review.rating}
+                isArchive={review.isArchive}
               />
             ))}
             {feedback.length > reviewsPerPage && (

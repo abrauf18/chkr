@@ -3,6 +3,8 @@ import ReviewStar from "@/assets/icons/star";
 import Image from "next/image";
 import DeleteModal from "@/components/shared/delete-modal";
 import { Archive, ArchiveRestore } from "lucide-react";
+import { UpdateFeedbackStatusAction } from "@/actions/feedback/feedback-action";
+import action from "@/app/action";
 
 interface ReviewCardProps {
   reviewId: number;
@@ -12,6 +14,7 @@ interface ReviewCardProps {
   rating: number;
   time: string;
   review: string;
+  isArchive: boolean;
 }
 
 const FeedbackCard: React.FC<ReviewCardProps> = ({
@@ -22,7 +25,19 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
   rating,
   time,
   review,
+  isArchive,
 }) => {
+
+  const handleFeedbackStatus = () => {
+    try {
+      UpdateFeedbackStatusAction(reviewId, !isArchive);
+      action("getFeedbacks");
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      // Optionally, you can show an error message to the user here
+    }
+  }
+
   return (
     <div className="p-4 border rounded-lg shadow-md flex space-x-4 bg-white">
       <Image
@@ -54,10 +69,10 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
           </div>
           <div className="flex items-center justify-center gap-2">
             <div
-              className="p-2 bg-orange-200 rounded-lg cursor-pointer"
-              // onClick={handleArchive}
+              className={`p-2 ${isArchive ? `bg-orange-200` : `bg-green-200`} rounded-lg cursor-pointer`}
+              onClick={handleFeedbackStatus}
             >
-              <Archive color="orange" />
+              {isArchive ? <Archive color="orange" /> : <ArchiveRestore color="green" />}
             </div>
             <DeleteModal userId={0} feedbackId={reviewId} />
           </div>

@@ -161,6 +161,7 @@ export interface FeedbackInterface {
     email: string;
   };
   createdAt: string;
+  isArchive: boolean;
 }
 
 export interface DisableCompanyInterface {
