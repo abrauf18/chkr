@@ -4,7 +4,7 @@ import Image from "next/image";
 import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
 
 const Testimonials = async () => {
-  let feedbacks = await GetAllFeedbacksAction();
+  let feedbacks = await GetAllFeedbacksAction("newest", "a-z", true);
   return (
     <div id="testimonials" className="rounded-2xl relative -z-10">
       <div className="absolute top-0 right-0 z-50">

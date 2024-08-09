@@ -18,7 +18,8 @@ export default async function FeedbackPage({
   const { order, sort } = searchParams;
   const feedbacks: FeedbackInterface[] = await GetAllFeedbacksAction(
     order,
-    sort
+    sort,
+    false
   );
   return (
     <>

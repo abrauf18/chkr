@@ -27,9 +27,13 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
   return result;
 };
 
-export const GetAllFeedbacksAction = async (order = "newest", sort = "a-z") => {
+export const GetAllFeedbacksAction = async (
+  order = "newest",
+  sort = "a-z",
+  isLanding: boolean
+) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}&isLanding=${isLanding}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +67,10 @@ export const deleteFeedbackAction = async (id: number) => {
   return result;
 };
 
-export const UpdateFeedbackStatusAction = async (id: number, isArchive: boolean) => {
+export const UpdateFeedbackStatusAction = async (
+  id: number,
+  isArchive: boolean
+) => {
   const session = await auth();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/feedback/updateFeedbackArchiveStatus/${id}`,
@@ -75,10 +82,11 @@ export const UpdateFeedbackStatusAction = async (id: number, isArchive: boolean)
         Authorization: `Bearer ${session?.token}`,
       },
       body: JSON.stringify({
-        isArchive: isArchive
+        isArchive: isArchive,
       }),
     }
   );
   const result = await response.json();
   return result;
 };
+
