@@ -3,24 +3,40 @@ import ReviewStar from "@/assets/icons/star";
 import Image from "next/image";
 import DeleteModal from "@/components/shared/delete-modal";
 import { Archive, ArchiveRestore } from "lucide-react";
+import { UpdateFeedbackStatusAction } from "@/actions/feedback/feedback-action";
+import action from "@/app/action";
 
 interface ReviewCardProps {
+  reviewId: number;
   name: string;
   email: string;
   url: string;
   rating: number;
   time: string;
   review: string;
+  isArchive: boolean;
 }
 
 const FeedbackCard: React.FC<ReviewCardProps> = ({
+  reviewId,
   name,
   email,
   url,
   rating,
   time,
   review,
+  isArchive,
 }) => {
+  const handleFeedbackStatus = () => {
+    try {
+      UpdateFeedbackStatusAction(reviewId, !isArchive);
+      action("getFeedbacks");
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      // Optionally, you can show an error message to the user here
+    }
+  };
+
   return (
     <div className="p-4 border rounded-lg shadow-md flex space-x-4 bg-white">
       <Image
@@ -50,15 +66,24 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
             </div>
             <p className="text-gray-600 mt-2 text-sm">{review}</p>
           </div>
-          {/* <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <div
-              className="p-2 bg-orange-200 rounded-lg cursor-pointer"
-              onClick={handleArchive}
+              className={`p-2 relative group ${
+                isArchive ? `bg-orange-200` : `bg-green-200`
+              } rounded-lg cursor-pointer`}
+              onClick={handleFeedbackStatus}
             >
-              <Archive color="orange" />
+              {isArchive ? (
+                <Archive color="orange" />
+              ) : (
+                <ArchiveRestore color="green" />
+              )}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-black text-white text-xs rounded-md py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {isArchive ? "Restore" : "Archive"}
+              </span>{" "}
             </div>
-            <DeleteModal userId={0} feedbackId={0} />
-          </div> */}
+            <DeleteModal userId={0} feedbackId={reviewId} />
+          </div>
         </div>
       </div>
     </div>

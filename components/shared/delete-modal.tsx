@@ -17,6 +17,7 @@ import action from "@/app/action";
 import { DeleteJobAction } from "@/actions/jobs/job-action";
 import { DeleteCompanyAction } from "@/actions/company/company-action";
 import { toast } from "react-toastify";
+import { deleteFeedbackAction } from "@/actions/feedback/feedback-action";
 
 export default function DeleteModal({
   userId,
@@ -44,6 +45,9 @@ export default function DeleteModal({
       } else if (pathname.startsWith("/company-admin/jobs")) {
         data = await DeleteJobAction(jobId || 0);
         action("getJobs");
+      } else if (pathname.startsWith("/super-admin/feedback")) {
+        data = await deleteFeedbackAction(feedbackId || 0);
+        await action("getFeedbacks");
       } else if (
         pathname.startsWith("/super-admin/companies") ||
         pathname.startsWith("/company-admin/settings")

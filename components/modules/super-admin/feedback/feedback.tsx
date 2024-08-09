@@ -48,12 +48,14 @@ const Feedback = ({ feedback }: { feedback: FeedbackInterface[] }) => {
             {currentReviews.map((review) => (
               <FeedbackCard
                 key={review.id}
+                reviewId={review.id}
                 name={`${review.user.first_name} ${review.user.last_name}`}
                 email={review.user.email}
                 url={review.user.picture}
                 time={format(review.createdAt, "dd MMMM yyyy, h:mm a")}
                 review={review.comment}
                 rating={review.rating}
+                isArchive={review.isArchive}
               />
             ))}
             {feedback.length > reviewsPerPage && (
