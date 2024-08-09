@@ -27,7 +27,6 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
   review,
   isArchive,
 }) => {
-
   const handleFeedbackStatus = () => {
     try {
       UpdateFeedbackStatusAction(reviewId, !isArchive);
@@ -36,7 +35,7 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
       console.error("Failed to update status:", error);
       // Optionally, you can show an error message to the user here
     }
-  }
+  };
 
   return (
     <div className="p-4 border rounded-lg shadow-md flex space-x-4 bg-white">
@@ -69,10 +68,19 @@ const FeedbackCard: React.FC<ReviewCardProps> = ({
           </div>
           <div className="flex items-center justify-center gap-2">
             <div
-              className={`p-2 ${isArchive ? `bg-orange-200` : `bg-green-200`} rounded-lg cursor-pointer`}
+              className={`p-2 relative group ${
+                isArchive ? `bg-orange-200` : `bg-green-200`
+              } rounded-lg cursor-pointer`}
               onClick={handleFeedbackStatus}
             >
-              {isArchive ? <Archive color="orange" /> : <ArchiveRestore color="green" />}
+              {isArchive ? (
+                <Archive color="orange" />
+              ) : (
+                <ArchiveRestore color="green" />
+              )}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-black text-white text-xs rounded-md py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {isArchive ? "Restore" : "Archive"}
+              </span>{" "}
             </div>
             <DeleteModal userId={0} feedbackId={reviewId} />
           </div>

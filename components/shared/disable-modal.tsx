@@ -12,6 +12,7 @@ import { Ban, CirclePlus } from "lucide-react";
 import { DisableCompanyAction } from "@/actions/company/company-action";
 import { toast } from "react-toastify";
 import Loader from "./loader";
+import action from "@/app/action";
 
 export default function DisableModal({
   isDisable,

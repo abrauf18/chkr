@@ -27,13 +27,9 @@ export const CreateFeedbackAction = async (data: FeedbackInterface) => {
   return result;
 };
 
-export const GetAllFeedbacksAction = async (
-  order = "newest",
-  sort = "a-z",
-  isLanding: boolean
-) => {
+export const GetAllFeedbacksAction = async (order = "newest", sort = "a-z") => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}&isLanding=${isLanding}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/feedback?order=${order}&sort=${sort}`,
     {
       headers: {
         "Content-Type": "application/json",

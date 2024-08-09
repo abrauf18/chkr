@@ -2,9 +2,13 @@ import React from "react";
 import Carousel from "./carousel";
 import Image from "next/image";
 import { GetAllFeedbacksAction } from "@/actions/feedback/feedback-action";
+import { FeedbackInterface } from "@/lib/interfaces";
 
 const Testimonials = async () => {
-  let feedbacks = await GetAllFeedbacksAction("newest", "a-z", true);
+  let feedbacks = await GetAllFeedbacksAction();
+  feedbacks = feedbacks.filter(
+    (feedback: FeedbackInterface) => !feedback.isArchive
+  );
   return (
     <div id="testimonials" className="rounded-2xl relative -z-10">
       <div className="absolute top-0 right-0 z-50">
