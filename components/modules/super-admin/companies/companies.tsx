@@ -5,7 +5,7 @@ import CompanyCard from "./company-card";
 import { useCompanyData } from "./companydata-context";
 import Loader from "@/components/shared/loader";
 
-const Companies: React.FC = () => {
+const Companies = ({ isSuperAdmin }: { isSuperAdmin?: boolean }) => {
   const { data, loading, error } = useCompanyData();
 
   if (loading) {
@@ -28,7 +28,11 @@ const Companies: React.FC = () => {
 
   return (
     <>
-      <Header title="List of Companies Onboarded" hideFilter />
+      <Header
+        title="List of Companies Onboarded"
+        hideFilter
+        isSuperAdmin={isSuperAdmin}
+      />
       {data?.length == 0 ? (
         <div className="text-center mt-16">No companies to show</div>
       ) : (

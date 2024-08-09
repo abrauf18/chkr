@@ -1,14 +1,18 @@
 import React from "react";
-import { CalendarDays, ChevronDown } from "lucide-react";
-import { Button } from "../ui/button";
 import Filter from "./filter";
+import CreateCompanyModal from "../modules/super-admin/companies/create-company-modal";
 
 interface HeaderProps {
   title: string;
   hideFilter?: boolean;
+  isSuperAdmin?: boolean;
 }
 
-export default function Header({ title, hideFilter }: HeaderProps) {
+export default function Header({
+  title,
+  hideFilter,
+  isSuperAdmin,
+}: HeaderProps) {
   return (
     <>
       <div className="flex mobile:flex-col justify-between items-center mt-3">
@@ -16,6 +20,11 @@ export default function Header({ title, hideFilter }: HeaderProps) {
         {!hideFilter && (
           <div className="flex items-center gap-2 mobile:mt-2 md:mt-2 lg:mt-0 justify-end mobile:justify-start w-full ">
             <Filter />
+          </div>
+        )}
+        {isSuperAdmin && (
+          <div className="flex items-center gap-2 mobile:mt-2 md:mt-2 lg:mt-0 justify-end mobile:justify-start w-full ">
+            <CreateCompanyModal />
           </div>
         )}
       </div>

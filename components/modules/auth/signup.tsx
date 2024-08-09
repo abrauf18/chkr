@@ -16,13 +16,14 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/shared/loader";
 
-export default function Signup() {
+export default function Signup({ isSuperAdmin }: { isSuperAdmin?: boolean }) {
   const [showPassword, setShowPassword] = useState(true);
   const [isloading, setIsLoading] = useState(false);
   const { push } = useRouter();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(SignUpSchema),
@@ -43,6 +44,10 @@ export default function Signup() {
       });
       if (result.statusCode === 201) {
         toast.success(result.message);
+        if (isSuperAdmin) {
+          reset();
+          return;
+        }
         return push("/login");
       }
       return toast.error(result.message);
@@ -66,7 +71,7 @@ export default function Signup() {
           onSubmit={onSubmit}
         >
           <h2 className="text-center md:text-2xl text-xl md:font-medium font-bold	mb-6">
-            Create an account
+            {isSuperAdmin ? "Register Company Admin" : "Create an account"}
           </h2>
           {/* <p className="md:w-full text-center mb-6 text-sm ">
             Continue with one of the following services:
@@ -228,7 +233,13 @@ export default function Signup() {
               type="submit"
               disabled={isloading}
             >
-              {isloading ? <Loader size={6} /> : "Sign Up"}
+              {isloading ? (
+                <Loader size={6} />
+              ) : isSuperAdmin ? (
+                "Register"
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </div>
         </form>

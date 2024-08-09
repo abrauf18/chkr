@@ -13,7 +13,7 @@ export default function CompaniesPage() {
   return (
     <>
       <DashboardHeader title="Companies" />
-      <Companies />
+      <Companies isSuperAdmin />
     </>
   );
 }
