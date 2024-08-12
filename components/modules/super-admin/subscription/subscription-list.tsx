@@ -46,7 +46,7 @@ export default function SubscriptionList({ plans }: { plans: any }) {
   const paginatedData = plans.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div>
+    <>
       <Table>
         <TableHeader>
           <TableRow className="bg-white">
@@ -112,7 +112,14 @@ export default function SubscriptionList({ plans }: { plans: any }) {
               </TableRow>
             ))
           ) : (
-            <div>no Companies to show </div>
+            <TableRow>
+              <TableCell
+                className=" text-center text-gray-700 mt-6"
+                colSpan={4}
+              >
+                No Companies to show
+              </TableCell>
+            </TableRow>
           )}
         </TableBody>
       </Table>
@@ -135,7 +142,7 @@ export default function SubscriptionList({ plans }: { plans: any }) {
           </PaginationContent>
         </Pagination>
       )}
-    </div>
+    </>
   );
 }
 

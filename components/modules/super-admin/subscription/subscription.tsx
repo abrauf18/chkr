@@ -1,9 +1,12 @@
 import React from "react";
 import UsersSummaryCard from "./users-summary-card";
 import CompaniesSummaryCard from "./companies-summary-card";
-import SubscriptionList from "./subscription-list";
 import Header from "@/components/shared/header";
 import { GetCompanyDetails } from "@/actions/company/company-action";
+import dynamic from "next/dynamic";
+const SubscriptionList = dynamic(() => import("./subscription-list"), {
+  ssr: false,
+});
 
 export default async function Subscription() {
   const data = await GetCompanyDetails();
