@@ -87,7 +87,7 @@ export default function UserOptions({
                     >
                       <DollarSign className="w-5 h-5" color="black" />
                       <span className="text-[#292D32]">
-                        Change Subscription
+                        Manage Subscription
                       </span>
                     </div>
                   </DialogTrigger>

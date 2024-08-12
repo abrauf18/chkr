@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,8 +13,12 @@ import FeedbackForm from "./feedback-form";
 import { MessageSquareShare } from "lucide-react";
 
 export default function Feedback() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={toggleModal}>
       <DialogTrigger asChild>
         <div className="flex items-center p-2 gap-2 hover:bg-gray-100">
           <MessageSquareShare className="w-5 h-5" color="black" />
@@ -26,7 +32,7 @@ export default function Feedback() {
             <hr className="my-5" />
           </DialogTitle>
           <DialogDescription>
-            <FeedbackForm />
+            <FeedbackForm closeModal={toggleModal} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

@@ -8,10 +8,11 @@ import { ErrorMessage } from "@hookform/error-message";
 import { CreateFeedbackAction } from "@/actions/feedback/feedback-action";
 import { toast } from "react-toastify";
 
-export default function FeedbackForm() {
+export default function FeedbackForm({ closeModal }: { closeModal?: any }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(FeedbackSchema),
@@ -45,6 +46,8 @@ export default function FeedbackForm() {
     } catch (error) {
       console.error("Error sending feedback:", error);
       toast.error("An error occurred while creating feedback.");
+    } finally {
+      closeModal();
     }
   };
 
@@ -88,8 +91,15 @@ export default function FeedbackForm() {
         <ErrorMessage errors={errors} name="comment" />
       </p>
       <div className="flex w-full gap-6 mt-6">
-        <Button className="w-full rounded-2xl bg-gray-300 text-black">
-          Cancel
+        <Button
+          className="w-full rounded-2xl bg-gray-300 text-black"
+          type="button"
+          onClick={() => {
+            setRating(0);
+            reset();
+          }}
+        >
+          Discard
         </Button>
         <Button className="w-full rounded-2xl text-white" type="submit">
           Submit Feedback
