@@ -11,6 +11,7 @@ import {
   Building2,
   MessageSquareText,
   Receipt,
+  PackageCheck,
 } from "lucide-react";
 import SidebarLogo from "@/assets/icons/sidebar-logo";
 import LogoFooter from "@/assets/icons/footer-logo";
@@ -36,7 +37,7 @@ const SideBar = ({
     setActivePath(pathname);
   }, [pathname]);
 
-  const adminList = [
+  const companyadminList = [
     {
       title: "Dashboard",
       icon: <LayoutDashboard />,
@@ -46,6 +47,11 @@ const SideBar = ({
       title: "All Jobs",
       icon: <StickyNote />,
       path: "/company-admin/jobs",
+    },
+    {
+      title: "Services",
+      icon: <PackageCheck />,
+      path: "/company-admin/services",
     },
     {
       title: "Employees",
@@ -135,7 +141,7 @@ const SideBar = ({
   // Select the appropriate list based on the active pathname
   const getList = () => {
     if (activePath.startsWith("/company-admin")) {
-      return adminList;
+      return companyadminList;
     }
     if (activePath.startsWith("/company-employee")) {
       return employeeList;
