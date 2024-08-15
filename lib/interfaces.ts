@@ -169,3 +169,8 @@ export interface DisableCompanyInterface {
   disable: boolean | undefined;
 }
 
+export interface Services {
+  id: number;
+  service_name: string;
+}
+

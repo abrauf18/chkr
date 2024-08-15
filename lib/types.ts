@@ -277,3 +277,9 @@ export const MessageSchema = z.object({
 export const stripePlanySchema = z.object({
   plan: z.string().min(1, { message: "Plan must not be empty" }),
 });
+
+export const ServicesSchema = z.object({
+  service_name: z
+    .string()
+    .min(1, { message: "Service name must not be empty" }),
+});
