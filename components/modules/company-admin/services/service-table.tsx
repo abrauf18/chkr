@@ -84,7 +84,7 @@ const ServiceTable = ({
                     isEmployee={false}
                     currentUser={admin}
                   /> */}
-                  <DeleteModal userId={service.id} />
+                  <DeleteModal serviceId={service.id} />
                 </div>
               </TableCell>
             </TableRow>

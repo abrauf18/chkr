@@ -18,6 +18,7 @@ import { DeleteJobAction } from "@/actions/jobs/job-action";
 import { DeleteCompanyAction } from "@/actions/company/company-action";
 import { toast } from "react-toastify";
 import { deleteFeedbackAction } from "@/actions/feedback/feedback-action";
+import { DeleteServiceAction } from "@/actions/services/service-action";
 
 export default function DeleteModal({
   userId,
@@ -26,7 +27,7 @@ export default function DeleteModal({
   feedbackId,
   serviceId,
 }: {
-  userId: number;
+  userId?: number;
   jobId?: number;
   companyId?: number;
   feedbackId?: number;
@@ -42,7 +43,7 @@ export default function DeleteModal({
         pathname.startsWith("/super-admin/admins") ||
         pathname.startsWith("/company-admin/employees")
       ) {
-        data = await DeleteUserAction(userId);
+        data = await DeleteUserAction(userId || 0);
         await action("DeleteUser");
       } else if (pathname.startsWith("/company-admin/jobs")) {
         data = await DeleteJobAction(jobId || 0);
@@ -50,6 +51,10 @@ export default function DeleteModal({
       } else if (pathname.startsWith("/super-admin/feedback")) {
         data = await deleteFeedbackAction(feedbackId || 0);
         await action("getFeedbacks");
+      } else if (pathname.startsWith("/company-admin/services")) {
+        data = await DeleteServiceAction(serviceId || 0);
+        console.log(data, "service deleted");
+        await action("allServices");
       } else if (
         pathname.startsWith("/super-admin/companies") ||
         pathname.startsWith("/company-admin/settings")
