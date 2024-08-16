@@ -24,11 +24,13 @@ export default function DeleteModal({
   jobId,
   companyId,
   feedbackId,
+  serviceId,
 }: {
   userId: number;
   jobId?: number;
   companyId?: number;
   feedbackId?: number;
+  serviceId?: number;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -79,7 +81,8 @@ export default function DeleteModal({
         {pathname === "/company-admin/jobs" ||
         pathname === "/super-admin/admins" ||
         pathname === "/company-admin/employees" ||
-        pathname === "/super-admin/feedback" ? (
+        pathname === "/super-admin/feedback" ||
+        pathname === "/company-admin/services" ? (
           <DeleteIcon />
         ) : pathname === "/super-admin/companies" ||
           pathname === "/company-admin/settings" ? (
