@@ -15,7 +15,7 @@ export default async function ServicesLayout({
   return (
     <main>
       <DashboardHeader title="Services" />
-      <Header title="All Services" isSuperAdmin={false} hideFilter />
+      <Header title="All Services" isCompanyAdmin hideFilter />
       {children}
     </main>
   );
