@@ -41,3 +41,22 @@ export const GetServiceAction = async () => {
   return result.data;
 };
 
+export const DeleteServiceAction = async (id: number) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/service/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  return result;
+};
