@@ -53,7 +53,6 @@ export default function DeleteModal({
         await action("getFeedbacks");
       } else if (pathname.startsWith("/company-admin/services")) {
         data = await DeleteServiceAction(serviceId || 0);
-        console.log(data, "service deleted");
         await action("allServices");
       } else if (
         pathname.startsWith("/super-admin/companies") ||

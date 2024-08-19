@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -14,15 +14,12 @@ import {
   PaginationContent,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ArrowDown } from "lucide-react";
-import Image from "next/image";
 import DeleteModal from "../../../shared/delete-modal";
-// import EditAdmin from "./edit-admin";
-import DisableModal from "../../../shared/disable-modal";
 import { Services } from "@/lib/interfaces";
 import { ITEMS_PER_PAGE } from "@/lib/utils";
+import EditService from "./edit-service";
 
 const ServiceTable = ({
   services,
@@ -41,6 +38,7 @@ const ServiceTable = ({
     if (pageNumber < 1 || pageNumber > totalPageCount) return;
     setCurrentPage(pageNumber);
   };
+
   return (
     <div>
       <Table>
@@ -79,11 +77,7 @@ const ServiceTable = ({
               <TableCell>{service.service_name}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
-                  {/* <EditAdmin
-                    isAdmin={true}
-                    isEmployee={false}
-                    currentUser={admin}
-                  /> */}
+                  <EditService currentService={service} />{" "}
                   <DeleteModal serviceId={service.id} />
                 </div>
               </TableCell>
@@ -94,9 +88,7 @@ const ServiceTable = ({
       {services.length > ITEMS_PER_PAGE && (
         <Pagination className="flex w-full justify-center items-center mt-4 bg-white rounded-2xl p-2 my-3">
           <PaginationContent>
-            <PaginationItem
-              onClick={() => handlePagination(currentPage - 1)}
-            ></PaginationItem>
+            <PaginationItem onClick={() => handlePagination(currentPage - 1)} />
             {Array.from({ length: totalPageCount }, (_, i) => (
               <PaginationItem key={i + 1}>
                 <PaginationLink onClick={() => handlePagination(i + 1)}>
