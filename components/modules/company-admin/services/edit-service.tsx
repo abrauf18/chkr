@@ -37,7 +37,7 @@ export default function EditService({ currentService }: Editprops) {
           <DialogDescription>
             <ServiceForm
               isEdit
-              initialData={currentService} // Pass the current service data for editing
+              initialData={currentService}
               handleSetState={handleSetState}
             />
           </DialogDescription>

@@ -41,7 +41,7 @@ const AutoLocation: React.FC<Props> = ({ name }) => {
   };
 
   const handleScriptError = () => {
-    setIsLoading(false); // Stop loading if script fails to load
+    setIsLoading(false);
     console.error("Failed to load Google Maps script");
   };
 
@@ -50,8 +50,8 @@ const AutoLocation: React.FC<Props> = ({ name }) => {
       <Script
         src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zX2wfM59W4JRCgja_k7Mbup0wuUXPTw&libraries=places`}
         strategy="beforeInteractive"
-        onLoad={handleScriptLoad} // Handle successful load
-        onError={handleScriptError} // Handle load error
+        onLoad={handleScriptLoad}
+        onError={handleScriptError}
       />
       <div className="flex flex-col w-full">
         <div className="relative w-full">
