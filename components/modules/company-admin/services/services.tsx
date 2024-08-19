@@ -10,7 +10,6 @@ export default function ServicesComponent({
   services: ServicesType[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("check services", services);
   if (!Array.isArray(services) || services.length === 0) {
     return (
       <p className="text-center text-gray-700 mt-6">No services to show</p>

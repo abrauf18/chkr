@@ -64,7 +64,6 @@ export default function ServiceForm({
         if (result.statusCode === 200) {
           reset();
           handleSetState && handleSetState(false);
-          console.log("Service created:", result.data);
           toast.success(result.message);
         } else {
           toast.error(result.message);

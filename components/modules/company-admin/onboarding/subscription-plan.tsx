@@ -22,14 +22,11 @@ const SubscriptionPlan = ({
   const [plans, setPlans] = useState<PlanInterface>();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(onboardingData);
-
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setIsLoading(true);
         const response = await PlansAction();
-        console.log(response);
         if (response.length > 0) {
           setValue("plan", response[0].id.toString());
         }
