@@ -71,7 +71,7 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        setIsLoading(true); // Start loading
+        setIsLoading(true);
         const response = await ServiceAction();
         setServices(response.data);
 

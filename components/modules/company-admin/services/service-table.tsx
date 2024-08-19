@@ -60,7 +60,7 @@ const ServiceTable = ({
               </div>
             </TableHead>
             <TableHead>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 justify-center">
                 <span className="text-black font-semibold">Action</span>
                 <ArrowDown className="h-4 w-4" />
               </div>
@@ -78,7 +78,7 @@ const ServiceTable = ({
                 </div>
               </TableCell>
               <TableCell>{service.service_name}</TableCell>
-              <TableCell>
+              <TableCell className="flex items-center justify-center">
                 <div className="flex gap-2">
                   <EditService currentService={service} />{" "}
                   <DeleteModal serviceId={service.id} />
