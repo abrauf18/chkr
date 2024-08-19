@@ -53,7 +53,10 @@ export default function DeleteModal({
         await action("getFeedbacks");
       } else if (pathname.startsWith("/company-admin/services")) {
         data = await DeleteServiceAction(serviceId || 0);
-        await action("allServices");
+        if (typeof window !== "undefined" && serviceId) {
+          window.localStorage.removeItem("job-store");
+        }
+        action("allServices");
       } else if (
         pathname.startsWith("/super-admin/companies") ||
         pathname.startsWith("/company-admin/settings")
