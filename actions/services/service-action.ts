@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/auth";
-import { Services } from "@/lib/interfaces";
+import { Services, ServicesInterface } from "@/lib/interfaces";
 import { redirect } from "next/navigation";
 
 export const CreateServiceAction = async (data: Services) => {
@@ -60,3 +60,29 @@ export const DeleteServiceAction = async (id: number) => {
   }
   return result;
 };
+
+export const UpdateServiceAction = async (
+  ServiceId: number,
+  data: Services
+) => {
+  const session = await auth();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/service/${ServiceId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        //@ts-ignore
+        Authorization: `Bearer ${session?.token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  );
+  const result = await response.json();
+  if (result.statusCode === 401) {
+    redirect("/logout");
+  }
+  console.log(result);
+  return result;
+};
+
