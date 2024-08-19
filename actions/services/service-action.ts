@@ -82,7 +82,6 @@ export const UpdateServiceAction = async (
   if (result.statusCode === 401) {
     redirect("/logout");
   }
-  console.log(result);
   return result;
 };
 
