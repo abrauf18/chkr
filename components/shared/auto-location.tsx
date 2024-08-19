@@ -59,6 +59,7 @@ const AutoLocation: React.FC<Props> = ({ name }) => {
             <MapPinned className="h-5 w-5" color="#636363" />
           </span>
           <Autocomplete
+            apiKey="AIzaSyA3zX2wfM59W4JRCgja_k7Mbup0wuUXPTw"
             onPlaceSelected={onPlaceSelectedHandler}
             options={{
               types: ["geocode", "establishment"],
