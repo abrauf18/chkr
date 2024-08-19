@@ -14,6 +14,7 @@ import {
   PaginationContent,
   PaginationLink,
   PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ArrowDown } from "lucide-react";
 import DeleteModal from "../../../shared/delete-modal";
@@ -71,7 +72,9 @@ const ServiceTable = ({
             <TableRow key={service.id}>
               <TableCell>
                 <div className="flex items-center">
-                  <span className="whitespace-nowrap">{index + 1}</span>
+                  <span className="whitespace-nowrap">
+                    {index + 1 + (currentPage - 1) * ITEMS_PER_PAGE}
+                  </span>
                 </div>
               </TableCell>
               <TableCell>{service.service_name}</TableCell>
@@ -86,17 +89,21 @@ const ServiceTable = ({
         </TableBody>
       </Table>
       {services.length > ITEMS_PER_PAGE && (
-        <Pagination className="flex w-full justify-center items-center mt-4 bg-white rounded-2xl p-2 my-3">
+        <Pagination className="flex w-full justify-center items-center my-4">
           <PaginationContent>
-            <PaginationItem onClick={() => handlePagination(currentPage - 1)} />
+            <PaginationItem className=" cursor-pointer">
+              <PaginationPrevious
+                onClick={() => handlePagination(currentPage - 1)}
+              />
+            </PaginationItem>
             {Array.from({ length: totalPageCount }, (_, i) => (
-              <PaginationItem key={i + 1}>
+              <PaginationItem className=" cursor-pointer" key={i + 1}>
                 <PaginationLink onClick={() => handlePagination(i + 1)}>
                   {i + 1}
                 </PaginationLink>
               </PaginationItem>
             ))}
-            <PaginationItem>
+            <PaginationItem className=" cursor-pointer">
               <PaginationNext
                 onClick={() => handlePagination(currentPage + 1)}
               />
