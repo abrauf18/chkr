@@ -21,7 +21,7 @@ const LandingPageNavbar: React.FC = () => {
   return (
     <nav className="border-gray-200 w-full my-8 navbar">
       <div
-        className={`max-w-screen-xl flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md ${
+        className={`flex flex-wrap items-center justify-between mx-[5%] px-5 py-4 shadow-md ${
           sidebarOpen ? "rounded-lg" : "rounded-full"
         } bg-white`}
       >
