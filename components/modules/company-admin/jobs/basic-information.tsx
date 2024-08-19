@@ -13,15 +13,19 @@ import useJobStore from "@/store/job-store";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { ServiceAction } from "@/actions/jobs/job-action";
-import { ServicesInterface } from "@/lib/interfaces";
+import { Services } from "@/lib/interfaces";
 import AutoLocation from "@/components/shared/auto-location";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface Props {
   handleNextStep: () => void;
 }
 
 const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
-  const [services, setServices] = useState<ServicesInterface[]>([]);
+  const [services, setServices] = useState<Services[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
   const { setJobData } = useJobStore();
   const {
     register,
@@ -67,14 +71,24 @@ const CreateJobFirstStep = ({ handleNextStep }: Props): JSX.Element => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
+        setIsLoading(true); // Start loading
         const response = await ServiceAction();
         setServices(response.data);
+
+        if (response.data.length === 0) {
+          toast.error("Please create services first.");
+          router.push("/company-admin/services");
+        }
       } catch (error) {
         console.error("Error fetching services:", error);
+        toast.error("Failed to load services. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
+
     fetchServices();
-  }, []);
+  }, [router]);
 
   return (
     <>
